@@ -9,5 +9,7 @@ namespace AplicationCore
     public class Class1
     {
         int numero = 0;
+        int numero2 = 10000;
+
     }
 }
