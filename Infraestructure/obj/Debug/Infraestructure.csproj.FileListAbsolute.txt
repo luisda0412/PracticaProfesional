@@ -1,0 +1,6 @@
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\bin\Debug\Infraestructure.dll
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\bin\Debug\Infraestructure.pdb
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.dll
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.pdb

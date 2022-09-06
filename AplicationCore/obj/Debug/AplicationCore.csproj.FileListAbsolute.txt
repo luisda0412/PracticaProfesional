@@ -1,0 +1,9 @@
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\bin\Debug\AplicationCore.dll
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\bin\Debug\AplicationCore.pdb
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\bin\Debug\Infraestructure.dll
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\bin\Debug\Infraestructure.pdb
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.csprojAssemblyReference.cache
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.csproj.CopyComplete
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.dll
+C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.pdb

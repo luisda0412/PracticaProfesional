@@ -3,44 +3,119 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - VYCUZ</title>
+    <link rel="shortcut icon" href="~/Imagenes/Logos/iconoVYCUZ.png" type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/CSSEstiloLayout/EstiloLayout.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Tokens", "Tokens", "Account")</li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <!--@Html.ActionLink("AFK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
+
+            <a href="" class="navbar-brand"><img src="~/Imagenes/Logos/logomenu.png" alt="Beyond Technology" /></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
+                        <div class="dropdown-menu">
+                            @Html.ActionLink("Productos", "IndexMantenimiento", "Producto", null, new { @class = "dropdown-item" })
+
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            @Html.ActionLink("Productos", "ProductoCatalogo", "Reporte", null, new { @class = "dropdown-item" })
+
+                        </div>
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                    }
+        <li>@Html.ActionLink("Logout", "Logout", "Account")</li> }
                     else
                     {
-                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    }
+        <li>@Html.ActionLink("Login", "Login", "Account")</li>}
                 </ul>
+
+
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+    </nav>
+    <div>
+        <!--class="container body-content"-->
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <section class="container-fluid sec-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card desc-box">
+                                <div class="card-body">
+                                    <div class="card-title">Sobre Nosotros</div>
+                                    <div class="card-text">
+                                        Somos una empresa con gran auge en technologia actual y moderna, ubicados en 2 sucursales del pais hemos brindado una excelente atencion a nuestros clientes, y brindado productos de primera calidad entre ellos: consolas, videojuegos, componentes internos, computadoras, etc... compra con nosotros y viví la experiencia AFK.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card desc-box">
+                                <div class="card-body">
+                                    <div class="card-title">Contáctenos</div>
+                                    <div class="card-text">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/tel.png" alt="Beyond Technology" class="mb-3">
+                                                <span>2433-7070</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/ubi.png" alt="Beyond Technology" class="mb-3">
+                                                <span>City Mall</span>
+                                            </div><!--.col-->
+                                        </div><!--.row-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/ubi.png" alt="Beyond Technology" class="mb-3">
+                                                <span>Multiplaza Escazú</span>
+                                            </div><!--.col-->
+                                        </div><!--.row-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/mail.png" alt="Beyond Technology" class="mb-3">
+                                                <span>AFKtechnology@gmail.com</span>
+                                            </div><!--.col-->
+                                        </div><!--.row-->
+                                    </div><!--.card-text-->
+                                </div>
+                            </div><!--.card-->
+                        </div><!--.col-->
+                        <div class="col text-center">
+                            <br /><br />
+                            <img src="~/Imagenes/Logos/logofooter.png" alt="Beyond Technology" class="mb-3">
+                            <br class="clearfix">
+                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/facebook.png" alt="Beyond Technology" /></a>
+                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/instagram.png" alt="Beyond Technology" /></a>
+                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/telegram.png" alt="Beyond Technology" /></a>
+                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/google.png" alt="Beyond Technology" /></a>
+                        </div><!--.col-->
+                    </div><!--.row-->
+                </div>
+            </section>
         </footer>
     </div>
 
