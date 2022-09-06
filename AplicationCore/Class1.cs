@@ -10,6 +10,7 @@ namespace AplicationCore
     {
         int numero = 0;
         int numero2 = 10000;
+        string nombre = "";
 
     }
 }
