@@ -8,5 +8,6 @@ namespace AplicationCore
 {
     public class Class1
     {
+        int numero = 0;
     }
 }
