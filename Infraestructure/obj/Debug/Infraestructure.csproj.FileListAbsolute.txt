@@ -4,3 +4,15 @@ C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestruct
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.dll
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\Infraestructure\obj\Debug\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.dll.config
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.SqlServer.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.xml
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.AssemblyReference.cache
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.pdb
