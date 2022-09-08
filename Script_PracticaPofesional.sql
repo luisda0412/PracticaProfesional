@@ -214,3 +214,28 @@ ALTER TABLE Usuario ADD CONSTRAINT Usuario_Rol_FK FOREIGN KEY (rol_id) REFERENCE
 --CAJA CHICA
 ALTER TABLE Caja_Chica ADD CONSTRAINT Caja_Chica_Usuario_FK FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
 
+--ARTICULO
+
+ALTER TABLE Articulo ADD CONSTRAINT Articulo_Categoria_FK FOREIGN KEY (categoria_id) REFERENCES Categoria (id)
+
+--INSERTS
+
+--INSERT A CATEGORIA
+
+INSERT INTO Categoria VALUES('Estuche', 'Protector para celular', 1)
+INSERT INTO Categoria VALUES('Teclado', 'Teclado para computadora', 1)
+INSERT INTO Categoria VALUES('Ratón', 'Ratón para computadora', 1)
+INSERT INTO Categoria VALUES('Audífonos', 'Audífonos para escuchar música', 1)
+
+--INSERT A ARTICULO
+
+INSERT INTO Articulo VALUES('Estuche de One piece', 10000, (SELECT * FROM OPENROWSET(BULK N'C:\estuche iphone xr.jpg', SINGLE_BLOB) as T1), 2, 2, 1)
+
+--SELECTS
+
+--CATEGORIA
+SELECT * FROM Categoria
+
+--ARTICULO
+SELECT * FROM Articulo
+
