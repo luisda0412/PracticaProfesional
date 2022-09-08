@@ -183,8 +183,11 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CSSEstiloArticulos\EstiloArticulos.css" />
+    <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
+    <Content Include="Content\fondo1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -200,6 +203,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <None Include="README.md" />
+    <Content Include="Imagenes\fondos\fondo1.jpg" />
     <Content Include="Imagenes\Iconos\clock.png" />
     <Content Include="Imagenes\Iconos\facebook.png" />
     <Content Include="Imagenes\Iconos\google.png" />
@@ -211,8 +215,21 @@
     <Content Include="Imagenes\Iconos\telegram.png" />
     <Content Include="Imagenes\Iconos\ubi.png" />
     <Content Include="Imagenes\Logos\iconoVYCUZ.png" />
+    <Content Include="Imagenes\Logos\logo1.png" />
     <Content Include="Imagenes\Logos\logofooter.png" />
+    <Content Include="Imagenes\Logos\logoIcono.png" />
     <Content Include="Imagenes\Logos\logomenu.png" />
+    <Content Include="Imagenes\Visuals\wallpaper1.png" />
+    <Content Include="Imagenes\Visuals\wallpaper10.png" />
+    <Content Include="Imagenes\Visuals\wallpaper12.png" />
+    <Content Include="Imagenes\Visuals\wallpaper14.png" />
+    <Content Include="Imagenes\Visuals\wallpaper2.png" />
+    <Content Include="Imagenes\Visuals\wallpaper3.png" />
+    <Content Include="Imagenes\Visuals\wallpaper4.png" />
+    <Content Include="Imagenes\Visuals\wallpaper5.png" />
+    <Content Include="Imagenes\Visuals\wallpaper6.png" />
+    <Content Include="Imagenes\Visuals\wallpaper7.png" />
+    <Content Include="Imagenes\Visuals\wallpaper9.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -347,6 +364,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Articulo\Index.cshtml" />
     <Content Include="Views\Articulo\Create.cshtml" />
+    <Content Include="Views\Articulo\PlantillaIndexDefault.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

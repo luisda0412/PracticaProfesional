@@ -30,7 +30,7 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
-        private SelectList listaArticulos(int idArticulo= 0)
+        private SelectList listaArticulos(int idArticulo = 0)
         {
             IServiceArticulo _ServiceArticulo = new ServiceArticulo();
             IEnumerable<Articulo> listaArticulos = _ServiceArticulo.GetArticulo();
@@ -44,6 +44,25 @@ namespace MvcApplication.Controllers
             return new SelectList(listaCategoria, "id", "nombre", idCat);
         }
 
+        public ActionResult buscarArticuloxNombre(string filtro)
+        {
+            IEnumerable<Articulo> lista = null;
+            IServiceArticulo _ServiceArticulo= new ServiceArticulo();
+
+            // Error porque viene en blanco 
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceArticulo.GetArticulo();
+            }
+            else
+            {
+                lista = _ServiceArticulo.GetArticuloByNombre(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewMantenimiento", lista);
+        }
         public ActionResult Save(Articulo art, string[] categoria, HttpPostedFileBase ImageFile)
         {
             MemoryStream target = new MemoryStream();

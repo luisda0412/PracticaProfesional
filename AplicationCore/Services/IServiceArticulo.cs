@@ -11,6 +11,7 @@ namespace AplicationCore.Services
     {
         IEnumerable<Articulo> GetArticulo();
         Articulo GetArticuloByID(int id);
+        IEnumerable<Articulo> GetArticuloByNombre(String nombre);
         void Save(Articulo articulo);
     }
 }

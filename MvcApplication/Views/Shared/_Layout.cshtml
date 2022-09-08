@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - VYCUZ</title>
@@ -10,11 +11,11 @@
     <link rel="stylesheet" href="~/Content/CSSEstiloLayout/EstiloLayout.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark badge-primary">
         <div class="container-fluid">
             <!--@Html.ActionLink("AFK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
 
-            <a href="" class="navbar-brand"><img src="~/Imagenes/Logos/logomenu.png" alt="Beyond Technology" /></a>
+            <a href="" class="navbar-brand"><img src="~/Imagenes/Logos/logoIcono.png" alt="Beyond Technology" /></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -23,12 +24,12 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                         <div class="dropdown-menu">
-                            @Html.ActionLink("Productos", "IndexMantenimiento", "Producto", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Articulos", "Index", "Articulo", null, new { @class = "dropdown-item" })
 
                         </div>
                     </li>
@@ -40,13 +41,15 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <ul class=navbar-nav me-auto">
                     @if (User.Identity.IsAuthenticated)
                     {
-        <li>@Html.ActionLink("Logout", "Logout", "Account")</li> }
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+ }
                     else
                     {
-        <li>@Html.ActionLink("Login", "Login", "Account")</li>}
+                        <li class="log">@Html.ActionLink("Login", "Login", "Account")</li>
+}
                 </ul>
 
 
@@ -122,5 +125,11 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(@ViewBag.NotificationMessage);
+        </script>
+    }
 </body>
 </html>

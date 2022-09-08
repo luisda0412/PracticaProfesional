@@ -49,6 +49,18 @@ namespace Infraestructure.Repository
             return oArticulo;
         }
 
+        public IEnumerable<Articulo> GetProductoByNombre(string nombre)
+        {
+            IEnumerable<Articulo> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Articulo.ToList().
+                    FindAll(l => l.nombre.ToLower().Contains(nombre.ToLower()));
+            }
+            return lista;
+        }
+
         public void Save(Articulo articulo)
         {
             
