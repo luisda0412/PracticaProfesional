@@ -7,3 +7,17 @@ C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCo
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.csproj.CopyComplete
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.dll
 C:\Users\Usuario\Desktop\Practica\Proyecto Programado\ProyectoVYCUZ\AplicationCore\obj\Debug\AplicationCore.pdb
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\AplicationCore.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\AplicationCore.pdb
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\log4net.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\EntityFramework.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.dll.config
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\log4net.xml
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Debug\EntityFramework.xml
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.AssemblyReference.cache
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.CoreCompileInputs.cache
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.CopyComplete
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.pdb

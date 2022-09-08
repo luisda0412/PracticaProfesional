@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IServiceArticulo.cs" />
+    <Compile Include="Services\IServiceCategoria.cs" />
+    <Compile Include="Services\ServiceArticulo.cs" />
+    <Compile Include="Services\ServiceCategoria.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj">
@@ -52,8 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />
-    <Folder Include="Services\" />
-    <Folder Include="Utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

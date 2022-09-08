@@ -16,3 +16,5 @@ D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestru
 D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
 D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\log4net.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Debug\log4net.xml

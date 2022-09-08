@@ -37,11 +37,16 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,107 +55,102 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Models\Articulo.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Caja_Chica.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Categoria.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detalle_Ingreso.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detalle_Venta.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Empresa.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturas.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ingreso.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyContext.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyContext.cs" />
-    <Compile Include="Models\MyModel.Context.cs">
+    <Compile Include="Models\MyContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyModel.Context.tt</DependentUpon>
+      <DependentUpon>MyContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\MyModel.cs">
+    <Compile Include="Models\MyContext1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\MyModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MyModel.edmx</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedor.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reparaciones.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reportes_Tecnicos.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Resena.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Rol.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Servicio_Reparacion.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Venta.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
+      <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IRepositoryArticulo.cs" />
+    <Compile Include="Repository\IRepositoryCategoria.cs" />
+    <Compile Include="Repository\RepositoryArticulo.cs" />
+    <Compile Include="Repository\RepositoryCategoria.cs" />
+    <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\MyModel.edmx">
+    <EntityDeploy Include="Models\MyContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MyContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="Models\MyModel.edmx.diagram">
-      <DependentUpon>MyModel.edmx</DependentUpon>
+    <None Include="Models\MyContext.edmx.diagram">
+      <DependentUpon>MyContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Models\MyModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyModel.Context.cs</LastGenOutput>
-      <DependentUpon>MyModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\MyModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MyModel.edmx</DependentUpon>
-      <LastGenOutput>MyModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Repository\" />
-    <Folder Include="Utils\" />
+    <Content Include="Models\MyContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyContext.edmx</DependentUpon>
+      <LastGenOutput>MyContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\MyContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MyContext.edmx</DependentUpon>
+      <LastGenOutput>MyContext1.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

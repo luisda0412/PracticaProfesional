@@ -1,0 +1,1173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Registro_Inventario_VYCUZModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="precio" Type="float" />
+          <Property Name="imagen" Type="varbinary(max)" />
+          <Property Name="categoria_id" Type="int" />
+          <Property Name="stock" Type="int" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Caja_Chica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="efectivo_total" Type="float" />
+          <Property Name="billetes" Type="float" />
+          <Property Name="monedas" Type="float" />
+          <Property Name="usuario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Detalle_Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ingreso_id" Type="int" />
+          <Property Name="articulo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Detalle_Venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="producto_id" Type="int" />
+          <Property Name="venta_id" Type="int" />
+          <Property Name="precio" Type="float" />
+          <Property Name="descuento" Type="float" />
+          <Property Name="cantidad" Type="int" />
+          <Property Name="tipo_venta" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detalle_venta_id" Type="int" />
+          <Property Name="empresa_id" Type="int" />
+          <Property Name="tipoFactura" Type="bit" />
+        </EntityType>
+        <EntityType Name="Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="proveedor_id" Type="int" />
+          <Property Name="tipo_comprobante" Type="nvarchar" MaxLength="50" />
+          <Property Name="num_comprobante" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="monto_total" Type="float" />
+          <Property Name="impuesto" Type="float" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="costo" Type="float" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Reparaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_id" Type="int" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="categoria_producto_id" Type="int" />
+          <Property Name="servicio_reparacion_id" Type="int" />
+          <Property Name="descripcion_articulo" Type="nvarchar" MaxLength="50" />
+          <Property Name="descripcion_problema" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="monto_total" Type="float" />
+        </EntityType>
+        <EntityType Name="Reportes_Tecnicos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reparacion_id" Type="int" />
+          <Property Name="reporte" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Resena">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comentario" Type="nvarchar(max)" />
+          <Property Name="articulo_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Servicio_Reparacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="costo" Type="float" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="clave" Type="nvarchar(max)" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" />
+          <Property Name="correo_electronico" Type="nvarchar(max)" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="rol_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+          <Property Name="nombre_cliente" Type="nvarchar" MaxLength="50" />
+          <Property Name="tipo_comprobante" Type="nvarchar" MaxLength="50" />
+          <Property Name="num_comprobante" Type="nvarchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+          <Property Name="monto_total" Type="float" />
+          <Property Name="impuesto" Type="float" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <Association Name="Articulo_Categoria_FK">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Caja_Chica_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Caja_Chica" Type="Self.Caja_Chica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Caja_Chica">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Ingreso_Articulo_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Ingreso" Type="Self.Detalle_Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Ingreso">
+              <PropertyRef Name="articulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Ingreso_Ingreso_FK">
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="0..1" />
+          <End Role="Detalle_Ingreso" Type="Self.Detalle_Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingreso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Ingreso">
+              <PropertyRef Name="ingreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Venta_Producto_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Venta_Venta_FK">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="venta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Detalle_Venta_FK">
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detalle_Venta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="detalle_venta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Empresa_FK">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Fisica_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ingreso_Proveedor_FK">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ingreso_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Articulo_FK">
+          <End Role="Servicio_Reparacion" Type="Self.Servicio_Reparacion" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio_Reparacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="servicio_reparacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Categoria_FK">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="categoria_producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Cliente_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reportes_Tecnicos_Reparacion_FK">
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="0..1" />
+          <End Role="Reportes_Tecnicos" Type="Self.Reportes_Tecnicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reportes_Tecnicos">
+              <PropertyRef Name="reparacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Resena_Articulo_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Resena" Type="Self.Resena" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Resena">
+              <PropertyRef Name="articulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Usuario_Rol_FK">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Registro_Inventario_VYCUZModelStoreContainer">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Ingreso" EntityType="Self.Detalle_Ingreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resena" EntityType="Self.Resena" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Servicio_Reparacion" EntityType="Self.Servicio_Reparacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Articulo_Categoria_FK" Association="Self.Articulo_Categoria_FK">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="Caja_Chica_Usuario_FK" Association="Self.Caja_Chica_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Caja_Chica" EntitySet="Caja_Chica" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Ingreso_Articulo_FK" Association="Self.Detalle_Ingreso_Articulo_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Ingreso_Ingreso_FK" Association="Self.Detalle_Ingreso_Ingreso_FK">
+            <End Role="Ingreso" EntitySet="Ingreso" />
+            <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Venta_Producto_FK" Association="Self.Detalle_Venta_Producto_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Venta_Venta_FK" Association="Self.Detalle_Venta_Venta_FK">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Detalle_Venta_FK" Association="Self.Facturas_Detalle_Venta_FK">
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Empresa_FK" Association="Self.Facturas_Empresa_FK">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Articulo_FK" Association="Self.Reparaciones_Articulo_FK">
+            <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Categoria_FK" Association="Self.Reparaciones_Categoria_FK">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Cliente_FK" Association="Self.Reparaciones_Cliente_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Reportes_Tecnicos_Reparacion_FK" Association="Self.Reportes_Tecnicos_Reparacion_FK">
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+            <End Role="Reportes_Tecnicos" EntitySet="Reportes_Tecnicos" />
+          </AssociationSet>
+          <AssociationSet Name="Resena_Articulo_FK" Association="Self.Resena_Articulo_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Resena" EntitySet="Resena" />
+          </AssociationSet>
+          <AssociationSet Name="Usuario_Rol_FK" Association="Self.Usuario_Rol_FK">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Registro_Inventario_VYCUZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="categoria_id" Type="Int32" />
+          <Property Name="stock" Type="Int32" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Categoria" Relationship="Self.Articulo_Categoria_FK" FromRole="Articulo" ToRole="Categoria" />
+          <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Articulo_FK" FromRole="Articulo" ToRole="Detalle_Ingreso" />
+          <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Producto_FK" FromRole="Articulo" ToRole="Detalle_Venta" />
+          <NavigationProperty Name="Resena" Relationship="Self.Resena_Articulo_FK" FromRole="Articulo" ToRole="Resena" />
+        </EntityType>
+        <EntityType Name="Caja_Chica">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="efectivo_total" Type="Double" />
+          <Property Name="billetes" Type="Double" />
+          <Property Name="monedas" Type="Double" />
+          <Property Name="usuario_id" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Caja_Chica" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Articulo" Relationship="Self.Articulo_Categoria_FK" FromRole="Categoria" ToRole="Articulo" />
+          <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Categoria_FK" FromRole="Categoria" ToRole="Reparaciones" />
+        </EntityType>
+        <EntityType Name="Detalle_Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ingreso_id" Type="Int32" />
+          <Property Name="articulo_id" Type="Int32" />
+          <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Ingreso_Articulo_FK" FromRole="Detalle_Ingreso" ToRole="Articulo" />
+          <NavigationProperty Name="Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Detalle_Ingreso" ToRole="Ingreso" />
+        </EntityType>
+        <EntityType Name="Detalle_Venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="producto_id" Type="Int32" />
+          <Property Name="venta_id" Type="Int32" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="descuento" Type="Double" />
+          <Property Name="cantidad" Type="Int32" />
+          <Property Name="tipo_venta" Type="Boolean" />
+          <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Venta_Producto_FK" FromRole="Detalle_Venta" ToRole="Articulo" />
+          <NavigationProperty Name="Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Detalle_Venta" ToRole="Venta" />
+          <NavigationProperty Name="Facturas" Relationship="Self.Facturas_Detalle_Venta_FK" FromRole="Detalle_Venta" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Facturas" Relationship="Self.Facturas_Empresa_FK" FromRole="Empresa" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detalle_venta_id" Type="Int32" />
+          <Property Name="empresa_id" Type="Int32" />
+          <Property Name="tipoFactura" Type="Boolean" />
+          <NavigationProperty Name="Detalle_Venta" Relationship="Self.Facturas_Detalle_Venta_FK" FromRole="Facturas" ToRole="Detalle_Venta" />
+          <NavigationProperty Name="Empresa" Relationship="Self.Facturas_Empresa_FK" FromRole="Facturas" ToRole="Empresa" />
+        </EntityType>
+        <EntityType Name="Ingreso">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="proveedor_id" Type="Int32" />
+          <Property Name="tipo_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="num_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="monto_total" Type="Double" />
+          <Property Name="impuesto" Type="Double" />
+          <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Ingreso" ToRole="Detalle_Ingreso" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Ingreso" ToRole="Proveedor" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Ingreso_Usuario_FK" FromRole="Ingreso" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="costo" Type="Double" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Proveedor" ToRole="Ingreso" />
+        </EntityType>
+        <EntityType Name="Reparaciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_id" Type="Int32" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="categoria_producto_id" Type="Int32" />
+          <Property Name="servicio_reparacion_id" Type="Int32" />
+          <Property Name="descripcion_articulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_problema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="monto_total" Type="Double" />
+          <NavigationProperty Name="Categoria" Relationship="Self.Reparaciones_Categoria_FK" FromRole="Reparaciones" ToRole="Categoria" />
+          <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Cliente_FK" FromRole="Reparaciones" ToRole="Usuario" />
+          <NavigationProperty Name="Reportes_Tecnicos" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reparaciones" ToRole="Reportes_Tecnicos" />
+        </EntityType>
+        <EntityType Name="Reportes_Tecnicos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reparacion_id" Type="Int32" />
+          <Property Name="reporte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Reparaciones" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reportes_Tecnicos" ToRole="Reparaciones" />
+        </EntityType>
+        <EntityType Name="Resena">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="articulo_id" Type="Int32" />
+          <NavigationProperty Name="Articulo" Relationship="Self.Resena_Articulo_FK" FromRole="Resena" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Usuario_Rol_FK" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Servicio_Reparacion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="costo" Type="Double" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Servicio_Reparacion" ToRole="Reparaciones" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="correo_electronico" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="rol_id" Type="Int32" />
+          <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
+          <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
+          <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Cliente_FK" FromRole="Usuario" ToRole="Reparaciones" />
+          <NavigationProperty Name="Rol" Relationship="Self.Usuario_Rol_FK" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Venta" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Usuario" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" />
+          <Property Name="nombre_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="tipo_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="num_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+          <Property Name="monto_total" Type="Double" />
+          <Property Name="impuesto" Type="Double" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Venta" ToRole="Detalle_Venta" />
+          <NavigationProperty Name="Usuario" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Venta" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="Articulo_Categoria_FK">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Articulo">
+              <PropertyRef Name="categoria_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Ingreso_Articulo_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Ingreso" Type="Self.Detalle_Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Ingreso">
+              <PropertyRef Name="articulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Venta_Producto_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Resena_Articulo_FK">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+          <End Role="Resena" Type="Self.Resena" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Resena">
+              <PropertyRef Name="articulo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Caja_Chica_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Caja_Chica" Type="Self.Caja_Chica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Caja_Chica">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Categoria_FK">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="categoria_producto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Ingreso_Ingreso_FK">
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="0..1" />
+          <End Role="Detalle_Ingreso" Type="Self.Detalle_Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ingreso">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Ingreso">
+              <PropertyRef Name="ingreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Detalle_Venta_Venta_FK">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Detalle_Venta">
+              <PropertyRef Name="venta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Detalle_Venta_FK">
+          <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detalle_Venta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="detalle_venta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Empresa_FK">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="0..1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ingreso_Proveedor_FK">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Ingreso_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ingreso">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Articulo_FK">
+          <End Role="Servicio_Reparacion" Type="Self.Servicio_Reparacion" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servicio_Reparacion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="servicio_reparacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reparaciones_Cliente_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reparaciones">
+              <PropertyRef Name="cliente_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reportes_Tecnicos_Reparacion_FK">
+          <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="0..1" />
+          <End Role="Reportes_Tecnicos" Type="Self.Reportes_Tecnicos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reparaciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reportes_Tecnicos">
+              <PropertyRef Name="reparacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Usuario_Rol_FK">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Facturas_Fisica_Usuario_FK">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Registro_Inventario_VYCUZEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Detalle_Ingreso" EntityType="Self.Detalle_Ingreso" />
+          <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" />
+          <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" />
+          <EntitySet Name="Resena" EntityType="Self.Resena" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Servicio_Reparacion" EntityType="Self.Servicio_Reparacion" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" />
+          <AssociationSet Name="Articulo_Categoria_FK" Association="Self.Articulo_Categoria_FK">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Articulo" EntitySet="Articulo" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Ingreso_Articulo_FK" Association="Self.Detalle_Ingreso_Articulo_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Venta_Producto_FK" Association="Self.Detalle_Venta_Producto_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="Resena_Articulo_FK" Association="Self.Resena_Articulo_FK">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="Resena" EntitySet="Resena" />
+          </AssociationSet>
+          <AssociationSet Name="Caja_Chica_Usuario_FK" Association="Self.Caja_Chica_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Caja_Chica" EntitySet="Caja_Chica" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Categoria_FK" Association="Self.Reparaciones_Categoria_FK">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Ingreso_Ingreso_FK" Association="Self.Detalle_Ingreso_Ingreso_FK">
+            <End Role="Ingreso" EntitySet="Ingreso" />
+            <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Detalle_Venta_Venta_FK" Association="Self.Detalle_Venta_Venta_FK">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Detalle_Venta_FK" Association="Self.Facturas_Detalle_Venta_FK">
+            <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Empresa_FK" Association="Self.Facturas_Empresa_FK">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Articulo_FK" Association="Self.Reparaciones_Articulo_FK">
+            <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Reparaciones_Cliente_FK" Association="Self.Reparaciones_Cliente_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+          </AssociationSet>
+          <AssociationSet Name="Reportes_Tecnicos_Reparacion_FK" Association="Self.Reportes_Tecnicos_Reparacion_FK">
+            <End Role="Reparaciones" EntitySet="Reparaciones" />
+            <End Role="Reportes_Tecnicos" EntitySet="Reportes_Tecnicos" />
+          </AssociationSet>
+          <AssociationSet Name="Usuario_Rol_FK" Association="Self.Usuario_Rol_FK">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Registro_Inventario_VYCUZModelStoreContainer" CdmEntityContainer="Registro_Inventario_VYCUZEntities">
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+                <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Caja_Chica">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Caja_Chica">
+              <MappingFragment StoreEntitySet="Caja_Chica">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="efectivo_total" ColumnName="efectivo_total" />
+                <ScalarProperty Name="billetes" ColumnName="billetes" />
+                <ScalarProperty Name="monedas" ColumnName="monedas" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Ingreso">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Detalle_Ingreso">
+              <MappingFragment StoreEntitySet="Detalle_Ingreso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ingreso_id" ColumnName="ingreso_id" />
+                <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detalle_Venta">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Detalle_Venta">
+              <MappingFragment StoreEntitySet="Detalle_Venta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="producto_id" ColumnName="producto_id" />
+                <ScalarProperty Name="venta_id" ColumnName="venta_id" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresa">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="detalle_venta_id" ColumnName="detalle_venta_id" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="tipoFactura" ColumnName="tipoFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingreso">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Ingreso">
+              <MappingFragment StoreEntitySet="Ingreso">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="tipo_comprobante" ColumnName="tipo_comprobante" />
+                <ScalarProperty Name="num_comprobante" ColumnName="num_comprobante" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+                <ScalarProperty Name="impuesto" ColumnName="impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparaciones">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Reparaciones">
+              <MappingFragment StoreEntitySet="Reparaciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="categoria_producto_id" ColumnName="categoria_producto_id" />
+                <ScalarProperty Name="servicio_reparacion_id" ColumnName="servicio_reparacion_id" />
+                <ScalarProperty Name="descripcion_articulo" ColumnName="descripcion_articulo" />
+                <ScalarProperty Name="descripcion_problema" ColumnName="descripcion_problema" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reportes_Tecnicos">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Reportes_Tecnicos">
+              <MappingFragment StoreEntitySet="Reportes_Tecnicos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="reparacion_id" ColumnName="reparacion_id" />
+                <ScalarProperty Name="reporte" ColumnName="reporte" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resena">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Resena">
+              <MappingFragment StoreEntitySet="Resena">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Servicio_Reparacion">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Servicio_Reparacion">
+              <MappingFragment StoreEntitySet="Servicio_Reparacion">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="clave" ColumnName="clave" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
+                <ScalarProperty Name="tipo_comprobante" ColumnName="tipo_comprobante" />
+                <ScalarProperty Name="num_comprobante" ColumnName="num_comprobante" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+                <ScalarProperty Name="impuesto" ColumnName="impuesto" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

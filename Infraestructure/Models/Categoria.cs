@@ -17,6 +17,7 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Categoria()
         {
+            this.Articulo = new HashSet<Articulo>();
             this.Reparaciones = new HashSet<Reparaciones>();
         }
     
@@ -25,6 +26,8 @@ namespace Infraestructure.Models
         public string descripcion { get; set; }
         public Nullable<bool> estado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Articulo> Articulo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reparaciones> Reparaciones { get; set; }
     }
