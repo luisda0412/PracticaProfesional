@@ -123,9 +123,11 @@
     <Compile Include="Repository\IRepositoryArticulo.cs" />
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
+    <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryArticulo.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
+    <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
