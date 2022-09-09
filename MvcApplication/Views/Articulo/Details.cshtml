@@ -1,62 +1,63 @@
 ﻿@model Infraestructure.Models.Articulo
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
-<h2>Details</h2>
+<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloDetalleArticulo.css">
 
-<div>
-    <h4>Articulo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Categoria.descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Categoria.descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.stock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.stock)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-        <div class="ladoderecho">
-            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img" alt="Producto @Html.DisplayNameFor(model => model.nombre)">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Detalle del producto
+            </h2>
         </div>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="tarjeta">
+            <div class="ladoizquierdo">
+                <center>
+                    <h3>@Html.DisplayFor(model => model.nombre)</h3>
+                </center>
+                <div class="texto">
+                    <p class="">
+                        <b>Precio:</b> &cent; @Html.DisplayFor(model => model.precio)<br />
+                        <b>@Html.DisplayNameFor(model => model.stock):</b> @Html.DisplayFor(model => model.stock)<br />
+                        <b>@Html.DisplayNameFor(model => model.Categoria.descripcion):</b> @Html.DisplayFor(model => model.Categoria.descripcion)<br />
+                        <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
+                    </p>
+                </div>
+            </div>
+            <div class="ladoderecho">
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img" alt="Producto @Html.DisplayNameFor(model => model.nombre)">
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="botones_producto">
+                <button class="boton1">@Html.ActionLink("Editar Articulo", "Edit", new { id = Model.id })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo")</button>
+            </div>
+        </center>
+    </section>
+</main>

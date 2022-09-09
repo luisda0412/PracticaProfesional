@@ -184,6 +184,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloArticulos.css" />
+    <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
@@ -367,6 +368,7 @@
     <Content Include="Views\Articulo\PlantillaIndexDefault.cshtml" />
     <Content Include="Views\Articulo\Details.cshtml" />
     <Content Include="Views\Articulo\Edit.cshtml" />
+    <Content Include="Views\Articulo\_PartialViewVistaxNombre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

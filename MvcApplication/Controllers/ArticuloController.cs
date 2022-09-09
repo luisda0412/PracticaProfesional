@@ -61,7 +61,7 @@ namespace MvcApplication.Controllers
 
 
             // Retorna un Partial View
-            return PartialView("_PartialViewMantenimiento", lista);
+            return PartialView("_PartialViewVistaxNombre", lista);
         }
         public ActionResult Save(Articulo art, string[] categoria, HttpPostedFileBase ImageFile)
         {
