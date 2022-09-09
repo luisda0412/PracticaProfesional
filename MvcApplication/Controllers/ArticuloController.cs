@@ -87,5 +87,72 @@ namespace MvcApplication.Controllers
             ViewBag.categoria_id = listaCategoria();
             return View();
         }
+
+        public ActionResult Details(int? id)
+        {
+            ServiceArticulo _ServiceArticulo = new ServiceArticulo();
+            Articulo articulo = null;
+
+            try
+            {
+                if (id ==null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                articulo= _ServiceArticulo.GetArticuloByID(id.Value);
+
+                if (articulo==null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(articulo);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ServiceArticulo _ServiceArticulo = new ServiceArticulo();
+            Articulo articulo = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                articulo = _ServiceArticulo.GetArticuloByID(id.Value);
+
+                if (articulo == null)
+                {
+                    TempData["Message"] = "No existe el articulo solicitado";
+                    TempData["Redirect"] = "Articulo";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                ViewBag.categoria_id = listaCategoria();
+                return View(articulo);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Articulo";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+            
     }
 }

@@ -1,0 +1,14 @@
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\AplicationCore.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\AplicationCore.pdb
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\log4net.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\EntityFramework.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\Infraestructure.dll.config
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\log4net.xml
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\bin\Release\EntityFramework.xml
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Release\AplicationCore.csproj.AssemblyReference.cache
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Release\AplicationCore.csproj.CoreCompileInputs.cache
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Release\AplicationCore.csproj.CopyComplete
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Release\AplicationCore.dll
+D:\Universidad\Practica\PracticaProfesional\AplicationCore\obj\Release\AplicationCore.pdb

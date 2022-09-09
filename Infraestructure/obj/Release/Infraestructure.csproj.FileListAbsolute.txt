@@ -1,0 +1,14 @@
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\Infraestructure.dll.config
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\Infraestructure.pdb
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\EntityFramework.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\EntityFramework.SqlServer.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\log4net.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\EntityFramework.xml
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\EntityFramework.SqlServer.xml
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\bin\Release\log4net.xml
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Release\Infraestructure.csproj.AssemblyReference.cache
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Release\Infraestructure.csproj.CoreCompileInputs.cache
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Release\Infraestructure.csproj.CopyComplete
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Release\Infraestructure.dll
+D:\Universidad\Practica\PracticaProfesional\Infraestructure\obj\Release\Infraestructure.pdb
