@@ -44,7 +44,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oArticulo = ctx.Articulo.Where(a => a.id == id).Include(x => x.Categoria).FirstOrDefault();
+                oArticulo = ctx.Articulo.Where(a => a.id == id).Include(x => x.Proveedor).Include(x => x.Categoria).FirstOrDefault();
             }
             return oArticulo;
         }
@@ -55,7 +55,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Articulo.ToList().
+                lista = ctx.Articulo.Include(x => x.Categoria).ToList().
                     FindAll(l => l.nombre.ToLower().Contains(nombre.ToLower()));
             }
             return lista;

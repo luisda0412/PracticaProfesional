@@ -97,7 +97,8 @@
         <MappingFragment StoreEntitySet="Proveedor">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="costo" ColumnName="costo" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -184,5 +185,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="Proveedor_Articulo" TypeName="Registro_Inventario_VYCUZModel.Proveedor_Articulo" StoreEntitySet="Proveedor_Articulo">
+      <EndProperty Name="Proveedor">
+        <ScalarProperty Name="id" ColumnName="idProveedor" />
+      </EndProperty>
+      <EndProperty Name="Articulo">
+        <ScalarProperty Name="id" ColumnName="idArticulo" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -20,6 +20,7 @@ namespace Infraestructure.Models
             this.Detalle_Ingreso = new HashSet<Detalle_Ingreso>();
             this.Detalle_Venta = new HashSet<Detalle_Venta>();
             this.Resena = new HashSet<Resena>();
+            this.Proveedor = new HashSet<Proveedor>();
         }
     
         public int id { get; set; }
@@ -37,5 +38,7 @@ namespace Infraestructure.Models
         public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Resena> Resena { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proveedor> Proveedor { get; set; }
     }
 }

@@ -18,14 +18,18 @@ namespace Infraestructure.Models
         public Proveedor()
         {
             this.Ingreso = new HashSet<Ingreso>();
+            this.Articulo = new HashSet<Articulo>();
         }
     
         public int id { get; set; }
         public string descripcion { get; set; }
-        public Nullable<double> costo { get; set; }
+        public string direccion { get; set; }
+        public string telefono { get; set; }
         public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingreso> Ingreso { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Articulo> Articulo { get; set; }
     }
 }
