@@ -12,6 +12,7 @@ namespace Infraestructure.Repository
 {
     public class RepositoryArticulo : IRepositoryArticulo
     {
+        IRepositoryProveedor repoP = new RepositoryProveedor();
         public IEnumerable<Articulo> GetArticulo()
         {
             try
@@ -61,10 +62,11 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public void Save(Articulo articulo)
+        public void Save(Articulo articulo, string[] proveedor)
         {
             
-                Articulo articuloExist = GetArticuloByID(articulo.id);
+            Articulo articuloExist = GetArticuloByID(articulo.id);
+            Proveedor oPoveedor;
 
                 using (MyContext cdt = new MyContext())
                 {
@@ -74,15 +76,23 @@ namespace Infraestructure.Repository
                     {
                         if (articuloExist == null)
                         {
+
+                            oPoveedor = repoP.GetProveedorByID(int.Parse(proveedor[0]));
+                            cdt.Proveedor.Attach(oPoveedor);
+                            articulo.Proveedor.Add(oPoveedor);
                             articulo.estado = true;
-
                             cdt.Articulo.Add(articulo);
-
                             cdt.SaveChanges();
                         }
                         else
                         {
                             cdt.Articulo.Add(articulo);
+                            cdt.Entry(articulo).State = EntityState.Modified;
+
+                            var proveedoresLista = new HashSet<string>(proveedor);
+                            cdt.Entry(articulo).Collection(p => p.Proveedor).Load();
+                            var nuevoProveedorLista = cdt.Proveedor.Where(x => proveedoresLista.Contains(x.id.ToString())).ToList();
+                            articulo.Proveedor = nuevoProveedorLista;
                             cdt.Entry(articulo).State = EntityState.Modified;
                             cdt.SaveChanges();
 
@@ -96,6 +106,6 @@ namespace Infraestructure.Repository
                     }
                 }
 
-            }
+        }
     }
 }

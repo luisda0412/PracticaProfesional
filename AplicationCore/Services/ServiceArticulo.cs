@@ -28,10 +28,10 @@ namespace AplicationCore.Services
             return repository.GetProductoByNombre(nombre);
         }
 
-        public void Save(Articulo articulo)
+        public void Save(Articulo articulo, string[] proveedor)
         {
             IRepositoryArticulo repository = new RepositoryArticulo();
-            repository.Save(articulo);
+            repository.Save(articulo, proveedor);
         }
     }
 }
