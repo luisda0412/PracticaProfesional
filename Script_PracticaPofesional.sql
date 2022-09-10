@@ -151,7 +151,8 @@ nombre nvarchar(50),
 apellidos nvarchar(50),
 correo_electronico nvarchar(max),
 telefono nvarchar(50),
-rol_id int
+rol_id int,
+estado bit
 
 CONSTRAINT Usuario_PK PRIMARY KEY (id)
 );
@@ -263,6 +264,15 @@ INSERT INTO Articulo VALUES('Aro de Luz', 8000, (SELECT * FROM OPENROWSET(BULK N
 INSERT INTO Proveedor_Articulo VALUES(1,1)
 INSERT INTO Proveedor_Articulo VALUES(2,2)
 
+--INSERT A ROL
+
+INSERT INTO Rol VALUES('Administrador', 1)
+INSERT INTO Rol VALUES('Cliente', 1)
+
+--INSERT A USUARIO
+
+INSERT INTO Usuario VALUES(1, '123456', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1)
+
 --SELECTS
 
 --CATEGORIA
@@ -273,3 +283,10 @@ SELECT * FROM Articulo
 
 SELECT * FROM Proveedor_Articulo
 
+--ROL
+
+SELECT * FROM Rol
+
+--USUARIO
+
+SELECT * FROM Usuario
