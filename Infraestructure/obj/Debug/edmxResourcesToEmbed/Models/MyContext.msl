@@ -167,6 +167,7 @@
           <ScalarProperty Name="correo_electronico" ColumnName="correo_electronico" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

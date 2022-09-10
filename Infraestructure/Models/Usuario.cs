@@ -30,6 +30,7 @@ namespace Infraestructure.Models
         public string correo_electronico { get; set; }
         public string telefono { get; set; }
         public Nullable<int> rol_id { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Caja_Chica> Caja_Chica { get; set; }

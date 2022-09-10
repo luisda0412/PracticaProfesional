@@ -161,6 +161,7 @@
     <Property Name="correo_electronico" Type="nvarchar(max)" />
     <Property Name="telefono" Type="nvarchar" MaxLength="50" />
     <Property Name="rol_id" Type="int" />
+    <Property Name="estado" Type="bit" />
   </EntityType>
   <EntityType Name="Venta">
     <Key>
