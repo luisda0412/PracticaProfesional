@@ -180,11 +180,13 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-simplex.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloArticulos.css" />
+    <Content Include="Content\CSSEstiloArticulos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />

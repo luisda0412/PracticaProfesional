@@ -1,0 +1,181 @@
+﻿main {
+    background-color: white;
+    margin:auto;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 380px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 18%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        height: 270px;
+        width: 500px;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+/*Cuerpo------------------------------------------------------------------------*/
+.secciones {
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+    box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
+    border-radius: 10px;
+   
+}
+#titulo {
+    background-color: #1a8623;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 32px;
+    font-weight: bold;
+    width: 30%;
+    border-radius: 10px;
+}
+
+/*Cuerpo izquierdo------------------------------------------------*/
+.cuerpoleft {
+    width: 45%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.cuerpoleft .form-group{
+    margin-top:5%;
+    display:flex;
+    justify-content:space-around;
+    text-align:justify;
+
+}
+
+.cuerpoleft .form-group .col-md-2{
+    width:45%;
+    font-family: 'Agency FB';
+    font-size: 25px;
+}
+
+.cuerpoleft .form-group .col-md-10{
+    width:40%;
+}
+
+/*Cuerpo derecho--------------------------------------------------------*/
+.cuerporight {
+    width: 45%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.cuerporight .form-group{
+    margin-top:5%;
+    display:flex;
+    justify-content:space-around;
+    text-align:justify;
+}
+
+.cuerporight .form-group .col-md-2{
+    
+    font-family: 'Agency FB';
+    font-size: 25px;
+}
+
+.cuerporight .form-group .col-md-10 {
+    width: 40%;
+     font-family:'Cambria Math';
+    font-size: 21px;
+}
+
+.cuerporight .form-group2{
+    font-family:  'Agency FB';
+    font-size: 25px;
+}
+
+.cuerporight .form-group2 .col-md-10 {
+     font-family:'Cambria Math';
+    font-size: 21px;
+}
+
+    .cuerporight .btn-default {
+        padding: 10px;
+        background-color: #1a8623;
+        border-radius: 6px;
+        border: 2px solid #000000;
+        height: 50px;
+        box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 22px;
+        color: white;
+    }
+
+.cuerporight .btn-default:hover{
+    background-color: #272626;
+}
+
+.cuerporight .boton1{
+    padding: 10px;
+    background-color: #c70505;
+    border-radius: 6px;
+    border: 2px solid #000000;
+    height: 50px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+}
+.boton1 a {
+    text-decoration: none;
+    font-family: 'Cambria Math';
+    font-weight: 600;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.boton1:hover {
+    background-color: #272626;
+}

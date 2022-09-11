@@ -30,6 +30,7 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+
         private SelectList listaArticulos(int idArticulo = 0)
         {
             IServiceArticulo _ServiceArticulo = new ServiceArticulo();
@@ -37,6 +38,7 @@ namespace MvcApplication.Controllers
             return new SelectList(listaArticulos, "id", "nombre", idArticulo);
         }
 
+        //Listas para los combos de cada articulo que se edite
         private SelectList listaCategoria(long idCat = 0)
         {
             IServiceCategoria _ServiceCategoria = new ServiceCategoria();
@@ -146,8 +148,8 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                ViewBag.categoria_id = listaCategoria();
-                ViewBag.idProveedor = listaProveedor();
+                ViewBag.idCategoria = listaCategoria((long)articulo.categoria_id);
+                ViewBag.idProveedor = listaProveedor(articulo.id);
                 return View(articulo);
             }
             catch (Exception ex)
@@ -161,6 +163,9 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
-            
+
+        
+       
+
     }
 }
