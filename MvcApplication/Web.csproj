@@ -191,6 +191,7 @@
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
+    <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -211,6 +212,7 @@
     <Content Include="Imagenes\Iconos\clock.png" />
     <Content Include="Imagenes\Iconos\facebook.png" />
     <Content Include="Imagenes\Iconos\google.png" />
+    <Content Include="Imagenes\Iconos\google1.png" />
     <Content Include="Imagenes\Iconos\instagram.png" />
     <Content Include="Imagenes\Iconos\mail.png" />
     <Content Include="Imagenes\Iconos\net.png" />
@@ -378,6 +380,7 @@
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
+    <Content Include="Views\Home\Loguearse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

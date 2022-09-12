@@ -23,8 +23,8 @@
 
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item" style="margin-top:3.5%">
-                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <li class="nav-item">
+                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })                     
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
@@ -39,6 +39,9 @@
                             @Html.ActionLink("Productos", "ProductoCatalogo", "Reporte", null, new { @class = "dropdown-item" })
 
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
                 </ul>
                 <ul class=navbar-nav me-auto">
@@ -103,7 +106,7 @@
                         </div><!--.col-->
                         <div class="col text-center">
                             <br /><br />
-                            <img src="~/Imagenes/Logos/logofooter.png" alt="Beyond Technology" class="mb-3">
+                            <img src="~/Imagenes/Logos/logomenu.png" alt="Beyond Technology" class="mb-3">
                             <br class="clearfix">
                             <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/facebook.png" alt="Beyond Technology" /></a>
                             <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/instagram.png" alt="Beyond Technology" /></a>

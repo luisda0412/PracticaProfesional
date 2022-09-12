@@ -1,0 +1,83 @@
+﻿@model Infraestructure.Models.Usuario
+@{
+    ViewBag.Title = "Inicio Sesión";
+}
+<link rel="stylesheet" href="~/Content/CSSEstiloLogin/EstiloLogin.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Pantalla de Inicio de Sesión...
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper12.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+
+@using (Html.BeginForm("Login", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <main>
+        <br />
+        <center>
+            <div class="formulario">
+                <br />
+                <h2>Bienvenido</h2>
+                <h4>Por favor digíte sus datos</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.correo_electronico, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email Adress" } })
+                        @Html.ValidationMessageFor(model => model.correo_electronico, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Password" })
+                        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Continuar" class="btn btn-default" />
+                    </div>
+                </div>
+                <br />
+                <h4>No posee una cuenta? <a style="color: deepskyblue">Registrese acá</a></h4>
+                <br />
+                <h4>______________OR______________</h4>
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input onclick="https://accounts.google.com/o/oauth2/auth/identifier?login_hint&response_type=code&redirect_uri=https%3A%2F%2Flogin.us.auth0.com%2Flogin%2Fcallback&scope=email%20profile&state=Fe26.2**f70a68da730b4d9bbf9e8b581f755571f744596d76eca9968b8fa8dbf858f3ab*RNw1V6YP8LCrts3WDYDvVg*vzz8maKHuMGCtjHZEOra70uNdhiRjA8ibCyU9InDN-o**d5a591a1b1905eecce921bdecc2c331dc2368f390e15ef883ab2e1dd805e4dff*94jZtPED4EjN6vDrkRiNd1bfWcRRlI_U1zf0icPeZ8Y&client_id=135034099850-p02kdnahdqi4b1rtd59babpvrgfgpb4o.apps.googleusercontent.com&flowName=GeneralOAuthFlow" value="Continue con Google" class="btn btn-default2" />
+                    </div>
+                </div>
+                <br />
+            </div>
+        </center>
+        <br />
+        <br />
+    </main>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

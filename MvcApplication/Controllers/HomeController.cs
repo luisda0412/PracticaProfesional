@@ -8,5 +8,10 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult Loguearse()
+        {
+            return View();
+        }
     }
 }

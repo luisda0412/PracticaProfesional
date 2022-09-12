@@ -1,0 +1,126 @@
+﻿/*Header----------------------------------------------------------------*/
+
+.section_header {
+    height: 350px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 390px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    color: white;
+    margin-left: 14%;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        height: 250px;
+        width: 90%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+/*Login---------------------------------------*/
+
+main{
+    background-color:white;
+    width:100%;
+
+}
+
+.formulario {
+    width: 30%;
+    margin: auto;
+    background-color: whitesmoke;
+    box-shadow: 0px 15px 18px 2px rgba(120,112,120,1);
+    border-radius: 10px 10px 10px 10px;
+
+}
+
+.formulario h2{
+     font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+
+    .formulario h4 {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18px;
+    }
+
+.form-group .col-md-2 {
+    width: 45%;
+    font-family: 'Agency FB';
+    font-size: 32px;
+}
+
+.form-group .col-md-10 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+}
+
+.btn-default {
+    padding: 10px;
+    background-color: #00cbd8;
+    border-radius: 6px;
+    height: 50px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    font-size: 18px;
+    color: white;
+    width:100%;
+}
+
+.btn-default2 {
+    padding: 10px;
+    border-radius: 6px;
+    height: 50px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    font-size: 18px;
+    width: 100%;
+    background-color:white
+}
+.btn-default:hover{
+    background-color:  #2acf5b;
+    color:white;
+    
+}
+
+
