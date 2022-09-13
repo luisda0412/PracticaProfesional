@@ -1,6 +1,6 @@
 ﻿main {
     background-color: white;
-    margin:auto;
+    margin: auto;
 }
 
 .desarrollo {
@@ -39,10 +39,9 @@
     text-align: justify;
 }
 
-.izquieroHeader img {
+    .izquieroHeader img {
         justify-content: center;
-  
-}
+    }
 
 
 .logo {
@@ -75,15 +74,15 @@
 
 /*Desarrollo-----------------------------------------------------------*/
 
-.elementos1{
-    display:flex;
-    justify-content:space-evenly;
-    width:95%;
+.elementos1 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 95%;
 }
 
-.elementos1 .elementoizquierdo{
-    width:50%;  
-}
+    .elementos1 .elementoizquierdo {
+        width: 50%;
+    }
 
 .titulo {
     background-color: #1a8623;
@@ -92,9 +91,10 @@
     font-size: 36px;
     font-weight: bold;
     border-radius: 10px;
-    margin-top:3%;  
-    text-align:center;
+    margin-top: 3%;
+    text-align: center;
 }
+
 .boton1 {
     padding: 10px;
     background-color: #272626;
@@ -105,16 +105,16 @@
     margin-top: 6%;
 }
 
-.boton1 a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
-    color: #ffffff;
-}
+    .boton1 a {
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 20px;
+        color: #ffffff;
+    }
 
-.boton1:hover {
-    background-color: #1a8623;
-}
+    .boton1:hover {
+        background-color: #1a8623;
+    }
 
 /*TABLA---------------------------------------------------------------------*/
 
@@ -123,12 +123,11 @@
     box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
     text-align: center;
     border-radius: 8px;
-    
 }
 
-.table td{
-       font-weight:500;
-}
+    .table td {
+        font-weight: 500;
+    }
 
 .columnabotones {
     display: flex;
@@ -136,26 +135,25 @@
 }
 
 .boton2 {
-   
-    padding-left:5px;
-    padding-right:5px;
+    padding-left: 5px;
+    padding-right: 5px;
     background-color: #1a8623;
     border-radius: 6px;
-    border: unset;
+    border:unset;
     height: 39px;
     box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
 }
 
-.boton2 a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-}
+    .boton2 a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        color: #ffffff;
+    }
 
-.boton2:hover {
-    background-color: #272626;
-}
+    .boton2:hover {
+        background-color: #272626;
+    }
 
 /*Tarjeta de buscar*/
 .card-header {
@@ -170,7 +168,6 @@
 
 .boton3 {
     font-family: 'Agency FB';
-   
     background-color: #1a8623;
     border-radius: 0px;
     border: 2px solid #000000;
@@ -181,6 +178,6 @@
     width: 30%;
 }
 
-.boton3:hover{
-    background-color:orangered;
-}
+    .boton3:hover {
+        background-color: orangered;
+    }

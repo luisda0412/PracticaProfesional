@@ -166,6 +166,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ServicioReparacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +193,7 @@
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
+    <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -381,6 +383,7 @@
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
     <Content Include="Views\Home\Loguearse.cshtml" />
+    <Content Include="Views\ServicioReparacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
