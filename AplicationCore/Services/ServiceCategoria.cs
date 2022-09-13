@@ -21,5 +21,11 @@ namespace AplicationCore.Services
             IRepositoryCategoria repository = new RepositoryCategoria();
             return repository.GetCategoriaByID(id);
         }
+
+        public Categoria Save(Categoria categoria)
+        {
+            IRepositoryCategoria repository = new RepositoryCategoria();
+            return repository.Save(categoria);
+        }
     }
 }

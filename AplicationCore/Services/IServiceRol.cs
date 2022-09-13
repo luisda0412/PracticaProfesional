@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace AplicationCore.Services
 {
-    public interface IServiceCategoria
+    public interface IServiceRol
     {
-        IEnumerable<Categoria> GetCategoria();
-        Categoria GetCategoriaByID(long id);
-        Categoria Save(Categoria categoria);
+        IEnumerable<Rol> GetRol();
+        Rol GetRolByID(long id);
+        Rol Save(Rol rol);
     }
 }

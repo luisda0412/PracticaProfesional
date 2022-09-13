@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repository
 {
-    public interface IRepositoryCategoria
+    public interface IRepositoryRol
     {
-        IEnumerable<Categoria> GetCategoria();
-        Categoria GetCategoriaByID(long id);
-        Categoria Save(Categoria categoria);
+        IEnumerable<Rol> GetRol();
+        Rol GetRolByID(long id);
+        Rol Save(Rol rol);
     }
 }

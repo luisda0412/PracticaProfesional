@@ -45,11 +45,13 @@
     <Compile Include="Services\IServiceArticulo.cs" />
     <Compile Include="Services\IServiceCategoria.cs" />
     <Compile Include="Services\IServiceProveedor.cs" />
+    <Compile Include="Services\IServiceRol.cs" />
     <Compile Include="Services\IServiceServicio.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceArticulo.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
+    <Compile Include="Services\ServiceRol.cs" />
     <Compile Include="Services\ServiceServicio.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
     <Compile Include="Utils\Cryptography.cs" />

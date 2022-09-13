@@ -123,21 +123,23 @@
     <Compile Include="Repository\IRepositoryArticulo.cs" />
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
+    <Compile Include="Repository\IRepositoryRol.cs" />
     <Compile Include="Repository\IRepositoryServicio.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryArticulo.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
+    <Compile Include="Repository\RepositoryRol.cs" />
     <Compile Include="Repository\RepositoryServicio.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Models\MyContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Models\MyContext.edmx.diagram">
       <DependentUpon>MyContext.edmx</DependentUpon>
     </None>
