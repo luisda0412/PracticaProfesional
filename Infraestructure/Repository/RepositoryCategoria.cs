@@ -51,6 +51,18 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<Categoria> GetCategoriaByNombre(string nombre)
+        {
+            IEnumerable<Categoria> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Categoria.ToList().
+                    FindAll(l => l.nombre.ToLower().Contains(nombre.ToLower()));
+            }
+            return lista;
+        }
+
         public Categoria Save(Categoria categoria)
         {
             int retorno = 0;

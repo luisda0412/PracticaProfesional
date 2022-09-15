@@ -192,9 +192,11 @@
     <Content Include="Content\CSSEstiloArticulos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
+    <Content Include="Content\CSSEstiloCategoria\EstiloListaCategorias.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
+    <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="favicon.ico" />
@@ -376,7 +378,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Articulo\Index.cshtml" />
     <Content Include="Views\Articulo\Create.cshtml" />
-    <Content Include="Views\Articulo\PlantillaIndexDefault.cshtml" />
     <Content Include="Views\Articulo\Details.cshtml" />
     <Content Include="Views\Articulo\Edit.cshtml" />
     <Content Include="Views\Articulo\_PartialViewVistaxNombre.cshtml" />
@@ -390,6 +391,7 @@
     <Content Include="Views\Categoria\Create.cshtml" />
     <Content Include="Views\Categoria\Edit.cshtml" />
     <Content Include="Views\Rol\Index.cshtml" />
+    <Content Include="Views\Categoria\_PartialViewVistaxNombre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

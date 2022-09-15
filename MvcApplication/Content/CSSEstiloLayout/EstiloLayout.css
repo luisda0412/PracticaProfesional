@@ -22,6 +22,11 @@ nav li{
 .log{
     color: white;
 }
+
+.dropdown-item:hover{
+    background-color: #1a8623;
+    color:white;
+}
 /*Footer--------------------------------------------------*/
 .numero {
     color: white;

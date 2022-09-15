@@ -92,5 +92,25 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        public ActionResult buscarCategoriaxNombre(string filtro)
+        {
+            IEnumerable<Categoria> lista = null;
+            IServiceCategoria _ServiceCategoria = new ServiceCategoria();
+
+            // Error porque viene en blanco 
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceCategoria.GetCategoria();
+            }
+            else
+            {
+                lista = _ServiceCategoria.GetCategoriaByNombre(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxNombre", lista);
+        }
     }
 }

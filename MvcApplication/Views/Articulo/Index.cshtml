@@ -67,8 +67,22 @@
             <br />
             <br />
             <center>
-                <div id="ajaxLoader" class="center-block" alt="Cargando ..." style="height:100px;width:100px; display:none">
-                    <img src="~/IMG/loading.gif" />
+                <div id="ajaxLoader" class="loader"; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle"; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader"; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
                 </div>
                 <table class="table">
                     <thead>
@@ -107,7 +121,7 @@
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Delete", "Delete", new { id = item.id })</button>
+                                    <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
                                 </td>
                             </tr>
                         }

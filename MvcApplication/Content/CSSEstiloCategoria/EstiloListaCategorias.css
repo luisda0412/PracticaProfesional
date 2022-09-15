@@ -137,21 +137,13 @@
 
 .boton2 {
    
-padding-left:5px;
-padding-right:5px;
-background-color: #1a8623;
-border-radius: 6px;
-border: unset;
-height: 39px;
-box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
- border: unset;
- z-index: 1;
- position: relative;
- font-weight: 1000;
- font-size: 17px;
- -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms;
- overflow: hidden;
+    padding-left:5px;
+    padding-right:5px;
+    background-color: #1a8623;
+    border-radius: 6px;
+    border: unset;
+    height: 39px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
 }
 
 .boton2 a {
@@ -161,29 +153,37 @@ box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
     color: #ffffff;
 }
 
-    .boton2::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 0;
-        border-radius: 6px;
-        background-color: orange;
-        z-index: -1;
-        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-        transition: all 250ms
-    }
-
 .boton2:hover {
-    color: orangered;
+    background-color: #272626;
 }
 
-    .boton2:hover::before {
-        width: 100%;
-    }
+/*Tarjeta de buscar*/
+.card-header {
+    font-family: 'Agency FB';
+    font-size: 30px;
+    font-weight: bold;
+}
 
+.my-4 {
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+}
+
+.boton3 {
+    font-family: 'Agency FB';
+   
+    background-color: #1a8623;
+    border-radius: 0px;
+    border: 2px solid #000000;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff;
+    width: 30%;
+}
+
+.boton3:hover{
+    background-color:orangered;
+}
 /*-----------Loader-------------*/
 
 /* From uiverse.io by @mobinkakei */
@@ -340,31 +340,3 @@ box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
 }
 
  
-
-/*Tarjeta de buscar*/
-.card-header {
-    font-family: 'Agency FB';
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.my-4 {
-    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-}
-
-.boton3 {
-    font-family: 'Agency FB';
-   
-    background-color: #1a8623;
-    border-radius: 0px;
-    border: 2px solid #000000;
-    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffffff;
-    width: 30%;
-}
-
-.boton3:hover{
-    background-color:orangered;
-}

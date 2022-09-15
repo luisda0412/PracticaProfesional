@@ -1,39 +1,80 @@
 ﻿@model IEnumerable<Infraestructure.Models.Rol>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista Roles";
 }
 
-<h2>Index</h2>
+<link rel="stylesheet" href="~/Content/CSSEstiloRol/EstiloListaRol.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tipo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Lista de roles...
+            </h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper10.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="elementos1">
+            <h2 class="titulo">Roles del sistema</h2>
+            <button class="boton1"><p>@Html.ActionLink("Crear un nuevo rol", "Create")</p></button>
+        </div>
+        <br />
+        <center>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tipo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.estado)
+                    </th>
+                    <th>
+                        Opciones
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.estado)
+                        </td>
+                        <td>
+                            <button class="boton2"> @Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+                            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
+                            <button class="boton3">@Html.ActionLink("Habilitar/Inabilitar", "Delete", new { id = item.id })</button>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </center>
+    </section>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
 }
-
-</table>

@@ -12,5 +12,6 @@ namespace AplicationCore.Services
         IEnumerable<Categoria> GetCategoria();
         Categoria GetCategoriaByID(long id);
         Categoria Save(Categoria categoria);
+        IEnumerable<Categoria> GetCategoriaByNombre(String nombre);
     }
 }

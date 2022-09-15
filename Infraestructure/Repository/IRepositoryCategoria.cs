@@ -12,5 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<Categoria> GetCategoria();
         Categoria GetCategoriaByID(long id);
         Categoria Save(Categoria categoria);
+
+        IEnumerable<Categoria> GetCategoriaByNombre(String nombre);
     }
 }
