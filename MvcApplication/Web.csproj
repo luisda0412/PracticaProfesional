@@ -392,6 +392,7 @@
     <Content Include="Views\Categoria\Edit.cshtml" />
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Categoria\_PartialViewVistaxNombre.cshtml" />
+    <Content Include="Views\Rol\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

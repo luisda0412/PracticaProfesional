@@ -18,12 +18,14 @@ namespace AplicationCore.Services
 
         public Rol GetRolByID(long id)
         {
-            throw new NotImplementedException();
+            IRepositoryRol repository = new RepositoryRol();
+            return repository.GetRolByID(id);
         }
 
         public Rol Save(Rol rol)
         {
-            throw new NotImplementedException();
+            IRepositoryRol repository = new RepositoryRol();
+            return repository.Save(rol);
         }
     }
 }
