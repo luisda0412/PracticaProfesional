@@ -244,7 +244,6 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Sys
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\System.Web.Optimization.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\System.Web.Razor.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\System.Web.WebPages.xml
-C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\System.Web.WebPages.Razor.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\log4net.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\obj\Debug\Web.csprojAssemblyReference.cache
