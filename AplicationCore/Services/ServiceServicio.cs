@@ -22,6 +22,12 @@ namespace AplicationCore.Services
             return repository.GetServicioByID(id);
         }
 
+        public IEnumerable<Servicio_Reparacion> GetServicioByDescripcion(string nombre)
+        {
+            IRepositoryServicio repository = new RepositoryServicio();
+            return repository.GetServicioByDescripcion(nombre);
+        }
+
         public void Save(Servicio_Reparacion service)
         {
             IRepositoryServicio repository = new RepositoryServicio();

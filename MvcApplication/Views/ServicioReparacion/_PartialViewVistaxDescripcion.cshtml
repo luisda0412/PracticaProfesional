@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Infraestructure.Models.Servicio_Reparacion>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion)
+        </td>
+        <td>
+            &cent; @Html.DisplayFor(modelItem => item.costo)
+        </td>
+        <td class="columnabotones">
+            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
+            <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
+        </td>
+    </tr>
+}

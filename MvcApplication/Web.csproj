@@ -197,6 +197,7 @@
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
+    <Content Include="Content\CSSEstiloServicios\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="favicon.ico" />
@@ -393,6 +394,8 @@
     <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Categoria\_PartialViewVistaxNombre.cshtml" />
     <Content Include="Views\Rol\Create.cshtml" />
+    <Content Include="Views\ServicioReparacion\Create.cshtml" />
+    <Content Include="Views\ServicioReparacion\_PartialViewVistaxDescripcion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

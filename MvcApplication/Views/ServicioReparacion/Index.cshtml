@@ -44,7 +44,7 @@
                 <div class="col-md-4">
                     <div class="card my-4">
                         <h5 class="card-header">Buscar servicio por nombre</h5>
-                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
+                        @using (Ajax.BeginForm("buscarServicioxDescripcion", "ServicioReparacion", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -54,7 +54,7 @@
                         {
                             <div class="card-body">
                                 <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "aun no sirve" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "descripción" })
 
                                     <button type="submit" class="boton3">Buscar</button>
 

@@ -49,11 +49,23 @@ namespace Infraestructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
             }
-        }   
+        }
 
-        public void  Save(Servicio_Reparacion service)
+        public IEnumerable<Servicio_Reparacion> GetServicioByDescripcion(string nombre)
         {
-            Servicio_Reparacion servicioexist = GetServicioByID(service.id);
+            IEnumerable<Servicio_Reparacion> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Servicio_Reparacion.ToList().
+                    FindAll(l => l.descripcion.ToLower().Contains(nombre.ToLower()));
+            }
+            return lista;
+        }
+
+        public void Save(Servicio_Reparacion serv)
+        {
+            Servicio_Reparacion provExist = GetServicioByID(serv.id);
 
             using (MyContext cdt = new MyContext())
             {
@@ -61,23 +73,22 @@ namespace Infraestructure.Repository
 
                 try
                 {
-                    if (servicioexist == null)
+                    if (provExist == null)
                     {
-                        service.estado = true;
-                        cdt.Servicio_Reparacion.Add(service);
+                        serv.estado = true;
+                        cdt.Servicio_Reparacion.Add(serv);
                         cdt.SaveChanges();
                     }
                     else
                     {
-                        cdt.Servicio_Reparacion.Add(service);
-                        cdt.Entry(service).State = EntityState.Modified;    
+                        cdt.Servicio_Reparacion.Add(serv);
+                        cdt.Entry(serv).State = EntityState.Modified;
                         cdt.SaveChanges();
-
                     }
                 }
                 catch (Exception e)
                 {
-                    string mensaje = "Error" + e.Message;
+                    string mensaje = "";
                     Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                     throw;
                 }

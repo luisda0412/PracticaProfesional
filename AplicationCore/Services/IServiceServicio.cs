@@ -14,5 +14,7 @@ namespace AplicationCore.Services
         void Save(Servicio_Reparacion service);
 
         Servicio_Reparacion GetServicioByID(int id);
+        IEnumerable<Servicio_Reparacion> GetServicioByDescripcion(String nombre);
+
     }
 }
