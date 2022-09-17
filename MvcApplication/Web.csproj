@@ -396,6 +396,7 @@
     <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\ServicioReparacion\Create.cshtml" />
     <Content Include="Views\ServicioReparacion\_PartialViewVistaxDescripcion.cshtml" />
+    <Content Include="Views\Rol\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
