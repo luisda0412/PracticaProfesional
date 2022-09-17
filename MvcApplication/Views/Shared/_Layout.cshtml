@@ -24,12 +24,12 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                            @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })                     
+                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                         <div class="dropdown-menu">
-                            @Html.ActionLink("Artículos", "Index", "Articulo", null, new { @class = "dropdown-item"})
+                            @Html.ActionLink("Artículos", "Index", "Articulo", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Servicios", "Index", "ServicioReparacion", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Categorías", "Index", "Categoria", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Roles", "Index", "Rol", null, new { @class = "dropdown-item" })
@@ -44,6 +44,9 @@
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Tokens", "Tokens", "Account", new { area = "" }, new { @class = "nav-link" })
                     </li>
                 </ul>
                 <ul class=navbar-nav me-auto">

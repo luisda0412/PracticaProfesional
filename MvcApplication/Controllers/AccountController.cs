@@ -32,6 +32,11 @@ namespace MvcApplication.Controllers
 
             ViewBag.IdToken = claimsIdentity?.FindFirst(c => c.Type == "id_token")?.Value;
 
+            ViewBag.email = User.Identity.Name;
+
+            ViewBag.EmailAddress = claimsIdentity.FindFirst(c => c.Type == "email")?.Value;
+            ViewBag.ProfileImage = claimsIdentity.FindFirst(c => c.Type == "picture")?.Value;
+
             return View();
         }
 
