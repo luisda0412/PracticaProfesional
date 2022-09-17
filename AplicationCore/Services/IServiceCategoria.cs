@@ -10,8 +10,8 @@ namespace AplicationCore.Services
     public interface IServiceCategoria
     {
         IEnumerable<Categoria> GetCategoria();
-        Categoria GetCategoriaByID(long id);
-        Categoria Save(Categoria categoria);
+        Categoria GetCategoriaByID(int id);
+        void Save(Categoria categoria);
         IEnumerable<Categoria> GetCategoriaByNombre(String nombre);
     }
 }

@@ -16,16 +16,16 @@ namespace AplicationCore.Services
             return repository.GetRol();
         }
 
-        public Rol GetRolByID(long id)
+        public Rol GetRolByID(int id)
         {
             IRepositoryRol repository = new RepositoryRol();
             return repository.GetRolByID(id);
         }
 
-        public Rol Save(Rol rol)
+        public void Save(Rol rol)
         {
             IRepositoryRol repository = new RepositoryRol();
-            return repository.Save(rol);
+            repository.Save(rol);
         }
     }
 }

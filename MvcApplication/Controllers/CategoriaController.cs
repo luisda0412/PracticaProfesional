@@ -36,7 +36,7 @@ namespace MvcApplication.Controllers
             try
             {
 
-                Categoria oCategoria = _ServiceCategoria.Save(cat);
+                _ServiceCategoria.Save(cat);
 
                 return RedirectToAction("Index");
             }

@@ -23,7 +23,7 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public Categoria GetCategoriaByID(long id)
+        public Categoria GetCategoriaByID(int id)
         {
             Categoria prod = null;
             try
@@ -63,35 +63,37 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public Categoria Save(Categoria categoria)
+        public void Save(Categoria categoria)
         {
-            int retorno = 0;
-            Categoria oCat = null;
+            Categoria catExiste = GetCategoriaByID(categoria.id);
 
-            using (MyContext ctx = new MyContext())
+            using (MyContext cdt = new MyContext())
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oCat = GetCategoriaByID((int)categoria.id);
+                cdt.Configuration.LazyLoadingEnabled = false;
 
-                if (oCat == null)
+                try
                 {
-                    categoria.estado = true;
-                    ctx.Categoria.Add(categoria);
-                    retorno = ctx.SaveChanges();
+                    if (catExiste == null)
+                    {
+                        categoria.estado = true;
+                        cdt.Categoria.Add(categoria);
+                        cdt.SaveChanges();
+                    }
+                    else
+                    {
+                        cdt.Categoria.Add(categoria);
+                        cdt.Entry(categoria).State = EntityState.Modified;
+                        cdt.SaveChanges();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    ctx.Categoria.Add(categoria);
-                    ctx.Entry(categoria).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
                 }
             }
-
-            if (retorno >= 0)
-                oCat = GetCategoriaByID((int)categoria.id);
-
-            return oCat;
         }
     }
-    }
+}
 

@@ -10,7 +10,7 @@ namespace AplicationCore.Services
     public interface IServiceRol
     {
         IEnumerable<Rol> GetRol();
-        Rol GetRolByID(long id);
-        Rol Save(Rol rol);
+        Rol GetRolByID(int id);
+        void Save(Rol rol);
     }
 }

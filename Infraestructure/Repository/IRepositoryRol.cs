@@ -10,7 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoryRol
     {
         IEnumerable<Rol> GetRol();
-        Rol GetRolByID(long id);
-        Rol Save(Rol rol);
+        Rol GetRolByID(int id);
+        void Save(Rol rol);
     }
 }

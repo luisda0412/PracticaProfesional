@@ -36,7 +36,7 @@ namespace MvcApplication.Controllers
             try
             {
 
-                Rol oRol= _ServiceRol.Save(rol);
+                _ServiceRol.Save(rol);
 
                 return RedirectToAction("Index");
             }
@@ -55,6 +55,43 @@ namespace MvcApplication.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ServiceRol _ServiceRol = new ServiceRol();
+            Rol rol = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                rol = _ServiceRol.GetRolByID(id.Value);
+
+                if (rol == null)
+                {
+                    TempData["Message"] = "No existe el rol solicitado";
+                    TempData["Redirect"] = "Rol";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View(rol);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Rol";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
         }
     }
 }

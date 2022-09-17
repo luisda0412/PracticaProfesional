@@ -23,7 +23,7 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public Rol GetRolByID(long id)
+        public Rol GetRolByID(int id)
         {
             Rol rol = null;
             try
@@ -51,34 +51,36 @@ namespace Infraestructure.Repository
             }
         }
 
-        public Rol Save(Rol rol)
+        public void Save(Rol rol)
         {
-            int retorno = 0;
-            Rol oRol = null;
+            Rol rolExiste = GetRolByID(rol.id);
 
-            using (MyContext ctx = new MyContext())
+            using (MyContext cdt = new MyContext())
             {
-                ctx.Configuration.LazyLoadingEnabled = false;
-                oRol = GetRolByID((int)rol.id);
+                cdt.Configuration.LazyLoadingEnabled = false;
 
-                if (oRol == null)
+                try
                 {
-                    rol.estado = true;
-                    ctx.Rol.Add(rol);
-                    retorno = ctx.SaveChanges();
+                    if (rolExiste == null)
+                    {
+                        rol.estado = true;
+                        cdt.Rol.Add(rol);
+                        cdt.SaveChanges();
+                    }
+                    else
+                    {
+                        cdt.Rol.Add(rol);
+                        cdt.Entry(rol).State = EntityState.Modified;
+                        cdt.SaveChanges();
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    ctx.Rol.Add(rol);
-                    ctx.Entry(rol).State = EntityState.Modified;
-                    retorno = ctx.SaveChanges();
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
                 }
             }
-
-            if (retorno >= 0)
-                oRol = GetRolByID((int)rol.id);
-
-            return oRol;
         }
     }
 }

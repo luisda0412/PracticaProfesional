@@ -16,7 +16,7 @@ namespace AplicationCore.Services
             return repository.GetCategoria();
         }
 
-        public Categoria GetCategoriaByID(long id)
+        public Categoria GetCategoriaByID(int id)
         {
             IRepositoryCategoria repository = new RepositoryCategoria();
             return repository.GetCategoriaByID(id);
@@ -28,10 +28,10 @@ namespace AplicationCore.Services
             return repository.GetCategoriaByNombre(nombre);
         }
 
-        public Categoria Save(Categoria categoria)
+        public void Save(Categoria categoria)
         {
             IRepositoryCategoria repository = new RepositoryCategoria();
-            return repository.Save(categoria);
+            repository.Save(categoria);
         }
     }
 }
