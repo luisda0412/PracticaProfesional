@@ -282,6 +282,10 @@ INSERT INTO Servicio_Reparacion VALUES('Reparación de puerto de carga',20000,1)
 INSERT INTO Servicio_Reparacion VALUES('Cambio de batería',30000,1)
 INSERT INTO Servicio_Reparacion VALUES('Reparación de placa base',35000,1)
 
+--INSERT A EMPRESA
+
+INSERT INTO Empresa VALUES(1, 'VYCUZ', 'City Mall, Alajuela', 88888888)
+
 --SELECTS
 
 --CATEGORIA
