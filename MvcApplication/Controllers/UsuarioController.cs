@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -129,6 +130,33 @@ namespace MvcApplication.Controllers
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             IEnumerable<Rol> listaTipo = _ServiceUsuario.GetRol();
             return new SelectList(listaTipo, "id", "tipo", idRol);
+        }
+
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Usuario usu = cdt.Usuario.Where(x => x.id == id).FirstOrDefault();
+                    usu.estado = !usu.estado;
+                    cdt.Usuario.Add(usu);
+
+                    cdt.Entry(usu).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+
+
         }
     }
 }

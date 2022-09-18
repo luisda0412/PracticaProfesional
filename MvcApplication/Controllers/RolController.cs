@@ -19,8 +19,8 @@ namespace MvcApplication.Controllers
             IEnumerable<Rol> lista = null;
             try
             {
-                IServiceRol _ServiceCategoria = new ServiceRol();
-                lista = _ServiceCategoria.GetRol();
+                IServiceRol _ServiceRol = new ServiceRol();
+                lista = _ServiceRol.GetRol();
             }
             catch (Exception e)
             {

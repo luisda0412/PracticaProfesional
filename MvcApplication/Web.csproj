@@ -166,6 +166,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioReparacionController.cs" />
@@ -397,6 +398,7 @@
     <Content Include="Views\ServicioReparacion\Create.cshtml" />
     <Content Include="Views\ServicioReparacion\_PartialViewVistaxDescripcion.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
+    <Content Include="Views\Empresa\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
