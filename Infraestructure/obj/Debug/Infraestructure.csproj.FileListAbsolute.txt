@@ -27,7 +27,6 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\bin\De
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\bin\Debug\log4net.xml
-C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
