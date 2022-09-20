@@ -9,6 +9,7 @@ namespace AplicationCore.Services
 {
     public interface IServiceUsuario
     {
+        Usuario LogIn(String correo, String clave);
         IEnumerable<Usuario> GetUsuario();
         Usuario GetUsuarioByID(int id);
         Usuario Save(Usuario user);

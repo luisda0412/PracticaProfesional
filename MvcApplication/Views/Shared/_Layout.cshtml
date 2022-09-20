@@ -49,6 +49,49 @@
                     <li class="nav-item">
                         @Html.ActionLink("Tokens", "Tokens", "Account", new { area = "" }, new { @class = "nav-link" })
                     </li>
+
+                    <!--Para el Login VYCUZ-->
+                    @{
+                        string nombre = "";
+                        string email = "Perfil";
+                        Infraestructure.Models.Usuario oUsuario;
+                        //Validar si existe en la sesión
+                        if (Session["User"] != null)
+                        {
+                            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                            if (oUsuario != null)
+                            {
+                                nombre = $"{oUsuario.nombre}";
+                                email = oUsuario.correo_electronico;
+                            }
+                        }
+                    }
+                    <li class="nav-item dropdown ">
+                        <a class=" btn btn-primary nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+
+                        <div class="dropdown-menu">
+                            @if (Session["User"] != null)
+                            {
+                                <div class="dropdown-item">
+                                    @* Nombre Usuario *@
+                                    Usuario: @nombre
+                                </div>
+                            }
+
+                            <div class="dropdown-divider"></div>
+                            @if (Session["User"] == null)
+                            {
+                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", null, new { @class = "dropdown-item" })
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "dropdown-item " })
+                            }
+
+                        </div>
+                    </li>
+                    <!--Para el Login VYCUZ-->
                 </ul>
                 <ul class=navbar-nav me-auto">
                     @if (User.Identity.IsAuthenticated)

@@ -13,5 +13,6 @@ namespace Infraestructure.Repository
         Usuario GetUsuarioByID(int id);
         Usuario Save(Usuario user);
         IEnumerable<Rol> GetRol();
+        Usuario logIn(String correo, String clave);
     }
 }

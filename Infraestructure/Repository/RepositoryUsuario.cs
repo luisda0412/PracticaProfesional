@@ -10,6 +10,16 @@ namespace Infraestructure.Repository
 {
     public class RepositoryUsuario : IRepositoryUsuario
     {
+        public Usuario logIn(string correo, string clave)
+        {
+            Usuario user = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                user = ctx.Usuario.Where(u => u.correo_electronico == correo && u.clave == clave && u.estado == true).FirstOrDefault<Usuario>();
+            }
+            return user;
+        }
         public IEnumerable<Rol> GetRol()
         {
             IEnumerable<Rol> lista = null;

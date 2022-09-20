@@ -40,12 +40,12 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Arques registrados por el momento</h2>
+                    <h2 class="titulo">Arqueos registrados por el momento</h2>
                     <button class="boton1"><p>@Html.ActionLink("Crear un nuevo arqueo", "Create")</p></button>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
-                        <h5 class="card-header">Buscar artículo por nombre</h5>
+                        <h5 class="card-header">Buscar caja por fecha guardada</h5>
                         @using (Ajax.BeginForm("buscarCajaxFecha", "CajaChica", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
@@ -112,7 +112,7 @@
                                     @Html.DisplayFor(modelItem => item.Usuario.nombre)
                                 </td>
                                 <td>
-                                    &cent; @Html.DisplayFor(modelItem => item.efectivo_total)
+                                    &cent;@Html.DisplayFor(modelItem => item.efectivo_total)
                                 </td>
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>

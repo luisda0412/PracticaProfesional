@@ -31,3 +31,4 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\De
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.pdb
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
