@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepositoryArticulo.cs" />
+    <Compile Include="Repository\IRepositoryCajaChica.cs" />
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryEmpresa.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Repository\IRepositoryServicio.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryArticulo.cs" />
+    <Compile Include="Repository\RepositoryCajaChica.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryEmpresa.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />

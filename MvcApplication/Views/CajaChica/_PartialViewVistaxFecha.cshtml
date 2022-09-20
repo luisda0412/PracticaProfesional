@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Infraestructure.Models.Caja_Chica>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+        </td>
+        <td>
+            &cent; @Html.DisplayFor(modelItem => item.efectivo_total)
+        </td>
+        <td class="columnabotones">
+            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
+            <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
+
+        </td>
+    </tr>
+}

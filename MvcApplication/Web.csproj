@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\CajaChicaController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,6 +194,7 @@
     <Content Include="Content\CSSEstiloArticulos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
+    <Content Include="Content\CSSEstiloCaja\EstiloListaCaja.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloListaCategorias.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
@@ -399,6 +401,8 @@
     <Content Include="Views\ServicioReparacion\_PartialViewVistaxDescripcion.cshtml" />
     <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\CajaChica\Index.cshtml" />
+    <Content Include="Views\CajaChica\_PartialViewVistaxFecha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
