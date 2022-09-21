@@ -12,16 +12,16 @@ using Web.Utils;
 
 namespace MvcApplication.Controllers
 {
-    public class RolController : Controller
+    public class ProveedorController : Controller
     {
-        // GET: Rol
+        // GET: Proveedor
         public ActionResult Index()
         {
-            IEnumerable<Rol> lista = null;
+            IEnumerable<Proveedor> lista = null;
             try
             {
-                IServiceRol _ServiceRol = new ServiceRol();
-                lista = _ServiceRol.GetRol();
+                IServiceProveedor _ServiceProveedor = new ServiceProveedor();
+                lista = _ServiceProveedor.GetProveedor();
             }
             catch (Exception e)
             {
@@ -30,14 +30,14 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
-        public ActionResult Save(Rol rol)
+        public ActionResult Save(Proveedor prov)
         {
             MemoryStream target = new MemoryStream();
-            IServiceRol _ServiceRol = new ServiceRol();
+            IServiceProveedor _ServiceProveedor = new ServiceProveedor();
             try
             {
 
-                _ServiceRol.Save(rol);
+                _ServiceProveedor.Save(prov);
 
                 return RedirectToAction("Index");
             }
@@ -46,7 +46,7 @@ namespace MvcApplication.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Rol";
+                TempData["Redirect"] = "Proveedor";
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -60,8 +60,8 @@ namespace MvcApplication.Controllers
 
         public ActionResult Edit(int? id)
         {
-            ServiceRol _ServiceRol = new ServiceRol();
-            Rol rol = null;
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor prov= null;
 
             try
             {
@@ -70,18 +70,18 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Index");
                 }
 
-                rol = _ServiceRol.GetRolByID(id.Value);
+                prov = _ServiceProveedor.GetProveedorByID(id.Value);
 
-                if (rol == null)
+                if (prov == null)
                 {
-                    TempData["Message"] = "No existe el rol solicitado";
-                    TempData["Redirect"] = "Rol";
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
                     TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
 
-                return View(rol);
+                return View(prov);
             }
             catch (Exception ex)
             {
@@ -97,8 +97,8 @@ namespace MvcApplication.Controllers
 
         public ActionResult Details(int? id)
         {
-            ServiceRol _ServiceRol = new ServiceRol();
-            Rol rol = null;
+            ServiceProveedor _ServiceProveedor = new ServiceProveedor();
+            Proveedor prov = null;
 
             try
             {
@@ -107,13 +107,13 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Index");
                 }
 
-                rol = _ServiceRol.GetRolByID(id.Value);
+                prov = _ServiceProveedor.GetProveedorByID(id.Value);
 
-                if (rol == null)
+                if (prov == null)
                 {
                     return RedirectToAction("Index");
                 }
-                return View(rol);
+                return View(prov);
 
             }
             catch (Exception e)
@@ -131,11 +131,11 @@ namespace MvcApplication.Controllers
 
                 try
                 {
-                    Rol rol= cdt.Rol.Where(x => x.id == id).FirstOrDefault();
-                    rol.estado = !rol.estado;
-                    cdt.Rol.Add(rol);
+                    Proveedor pro= cdt.Proveedor.Where(x => x.id == id).FirstOrDefault();
+                    pro.estado = !pro.estado;
+                    cdt.Proveedor.Add(pro);
 
-                    cdt.Entry(rol).State = EntityState.Modified;
+                    cdt.Entry(pro).State = EntityState.Modified;
                     cdt.SaveChanges();
 
                 }

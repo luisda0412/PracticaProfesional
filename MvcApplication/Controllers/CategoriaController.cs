@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -111,6 +112,59 @@ namespace MvcApplication.Controllers
 
             // Retorna un Partial View
             return PartialView("_PartialViewVistaxNombre", lista);
+        }
+
+        public ActionResult Details(int? id)
+        {
+            ServiceCategoria _ServiceCategoria = new ServiceCategoria();
+            Categoria cat= null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                cat = _ServiceCategoria.GetCategoriaByID(id.Value);
+
+                if (cat == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(cat);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("IndexAdmin");
+            }
+        }
+
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Categoria cat = cdt.Categoria.Where(x => x.id == id).FirstOrDefault();
+                    cat.estado = !cat.estado;
+                    cdt.Categoria.Add(cat);
+
+                    cdt.Entry(cat).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
         }
     }
 }

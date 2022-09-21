@@ -72,7 +72,7 @@ namespace MvcApplication.Controllers
             // Retorna un Partial View
             return PartialView("_PartialViewVistaxNombre", lista);
         }
-        public ActionResult Save(Articulo art, string[] categoria, string[] prov, HttpPostedFileBase ImageFile)
+        public ActionResult Save(Articulo art, string[] categoria, string[] proveedor, HttpPostedFileBase ImageFile)
         {
             MemoryStream target = new MemoryStream();
 
@@ -88,7 +88,7 @@ namespace MvcApplication.Controllers
 
             }
             art.categoria_id = int.Parse(categoria[0]);
-            _ServiceArticulo.Save(art, prov);
+            _ServiceArticulo.Save(art, proveedor);
             return RedirectToAction("Index");
         }
         public ActionResult Create()

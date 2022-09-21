@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Web.Utils;
 
 namespace Infraestructure.Repository
 {
@@ -39,7 +40,34 @@ namespace Infraestructure.Repository
 
         public void Save(Proveedor prov)
         {
-            throw new NotImplementedException();
+            Proveedor proveedorExiste = GetProveedorByID(prov.id);
+
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    if (proveedorExiste == null)
+                    {
+                        prov.estado = true;
+                        cdt.Proveedor.Add(prov);
+                        cdt.SaveChanges();
+                    }
+                    else
+                    {
+                        cdt.Proveedor.Add(prov);
+                        cdt.Entry(prov).State = EntityState.Modified;
+                        cdt.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
         }
     }
 }

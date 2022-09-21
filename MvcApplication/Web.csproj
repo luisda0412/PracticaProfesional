@@ -172,6 +172,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioReparacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -410,6 +411,14 @@
     <Content Include="Views\Empresa\Index.cshtml" />
     <Content Include="Views\CajaChica\Index.cshtml" />
     <Content Include="Views\CajaChica\_PartialViewVistaxFecha.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
+    <Content Include="Views\Proveedor\Index.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
+    <Content Include="Views\Proveedor\Details.cshtml" />
+    <Content Include="Views\Rol\Details.cshtml" />
+    <Content Include="Views\Categoria\Details.cshtml" />
+    <Content Include="Views\ServicioReparacion\Details.cshtml" />
+    <Content Include="Views\ServicioReparacion\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

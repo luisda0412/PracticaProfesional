@@ -155,8 +155,6 @@ namespace MvcApplication.Controllers
                     throw;
                 }
             }
-
-
         }
     }
 }

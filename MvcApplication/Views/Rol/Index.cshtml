@@ -47,9 +47,6 @@
                         @Html.DisplayNameFor(model => model.tipo)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.estado)
-                    </th>
-                    <th>
                         Opciones
                     </th>
                 </tr>
@@ -61,12 +58,9 @@
                             @Html.DisplayFor(modelItem => item.tipo)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.estado)
-                        </td>
-                        <td>
                             <button class="boton2"> @Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                             <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                            <button class="boton3">@Html.ActionLink("Habilitar/Inabilitar", "Delete", new { id = item.id })</button>
+                            @Html.ActionLink("Habilitar/Desabilitar rol", "desabilitar", "Rol", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
                         </td>
                     </tr>
                 }

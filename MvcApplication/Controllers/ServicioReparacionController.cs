@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -72,6 +73,96 @@ namespace MvcApplication.Controllers
 
             // Retorna un Partial View
             return PartialView("_PartialViewVistaxDescripcion", lista);
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ServiceServicio _ServiceServicio = new ServiceServicio();
+            Servicio_Reparacion servicio = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                servicio = _ServiceServicio.GetServicioByID(id.Value);
+
+                if (servicio == null)
+                {
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View(servicio);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Rol";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        public ActionResult Details(int? id)
+        {
+            ServiceServicio _ServiceServicio = new ServiceServicio();
+            Servicio_Reparacion servicio = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                servicio = _ServiceServicio.GetServicioByID(id.Value);
+
+                if (servicio == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(servicio);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("IndexAdmin");
+            }
+        }
+
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Servicio_Reparacion servicio= cdt.Servicio_Reparacion.Where(x => x.id == id).FirstOrDefault();
+                    servicio.estado = !servicio.estado;
+                    cdt.Servicio_Reparacion.Add(servicio);
+
+                    cdt.Entry(servicio).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
         }
 
     }

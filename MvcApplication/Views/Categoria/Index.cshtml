@@ -94,9 +94,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.descripcion)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.estado)
-                            </th>
                             <th><p>Opciones</p></th>
                         </tr>
                     </thead>
@@ -110,13 +107,10 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.descripcion)
                                 </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.estado)
-                                </td>
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Delete", "Delete", new { id = item.id })</button>
+                                    @Html.ActionLink("Habilitar/Desabilitar categoria", "desabilitar", "Categoria", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
                                 </td>
                             </tr>
                         }

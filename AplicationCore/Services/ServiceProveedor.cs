@@ -29,7 +29,8 @@ namespace AplicationCore.Services
 
         public void Save(Proveedor prov)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            repository.Save(prov);
         }
     }
 }
