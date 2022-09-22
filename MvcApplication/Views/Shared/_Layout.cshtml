@@ -38,12 +38,8 @@
                             @Html.ActionLink("Ventas", "Index", "Venta", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes</a>
-                        <div class="dropdown-menu">
-                            @Html.ActionLink("Productos", "ProductoCatalogo", "Reporte", null, new { @class = "dropdown-item" })
-
-                        </div>
+                    <li class="nav-item">
+                        @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { area = "" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", new { area = "" }, new { @class = "nav-link" })

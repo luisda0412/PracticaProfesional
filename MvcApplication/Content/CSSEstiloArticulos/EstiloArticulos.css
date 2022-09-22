@@ -6,7 +6,7 @@
 /*Header------------------------------------*/
 .section_header {
     height: 380px;
-    background-image: url(fondo1.jpg);
+    background-image: url(../fondo1.jpg);
     background-size: cover;
     background-attachment: fixed;
     position: relative;
@@ -23,7 +23,7 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
-    height: 300px;
+    height: 380px;
 }
 
 .izquieroHeader {
@@ -41,16 +41,10 @@
     display: flex;
 }
 
-.izquieroHeader > h3 {
-    font-family: fantasy;
-    font-size: 27px;
-    color: white;
-    margin-left: 14%;
-}
-
 .izquieroHeader > h2 {
     font-family: 'Agency FB';
     font-size: 29px;
+    margin-left: 18%;
     color: white;
 }
 
@@ -59,8 +53,9 @@
 }
 
     .derechoHeader img {
-        height: 240px;
-        width: 480px;
+        margin-top: 10%;
+        height: 210px;
+        width: 90%;
         transition: .3s ease-in-out;
     }
 
@@ -68,7 +63,6 @@
             -webkit-transform: scale(0.9);
             transform: scale(0.9);
         }
-
 /*Cuerpo---------------------------------------------*/
 .cuerpo {
     background-color: white;
@@ -92,7 +86,7 @@
         font-family: 'Agency FB';
         font-size: 28px;
         font-weight: bold;
-        background-color: #D13210;
+        background-color: #191919;
         color: white;
         width: 85%;
         border-radius: 5px;
@@ -109,6 +103,52 @@
         box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
     }
 
+/*Estilo para la lista de proveedores--------------------------------*/
+
+.list-group-item {
+    --color: #560bad;
+    font-family: inherit;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: color .5s;
+    z-index: 1;
+    font-size: 24px;
+    font-weight: 500;
+    color: black;
+}
+
+    .list-group-item:before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background-color: #1a8623;
+        height: 150px;
+        width: 100%;
+        border-radius: 50%;
+    }
+
+.list-group-item:hover {
+    color: #fff;
+}
+
+    .list-group-item:before {
+        top: 100%;
+        left: 100%;
+        transition: all .7s;
+    }
+
+    .list-group-item:hover:before {
+        top: -30px;
+        left: -30px;
+    }
+
+    .list-group-item:active:before {
+        background: #3a0ca3;
+        transition: background 0s;
+    }
+
+    /*Cuerpo derecho---------------------------------------------*/
 .cuerpoderecho {
     width: 75%;
     border-left: solid;

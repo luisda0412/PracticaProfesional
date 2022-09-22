@@ -13,5 +13,6 @@ namespace Infraestructure.Repository
         Articulo GetArticuloByID(int id);
         IEnumerable<Articulo> GetProductoByNombre(String nombre);
         void Save(Articulo articulo, string[] proveedor);
+        IEnumerable<Articulo> GetArticuloByProveedor(long id);
     }
 }

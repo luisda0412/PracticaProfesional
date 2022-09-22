@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Infraestructure.Models.Articulo>
+@{
+    ViewBag.Title = "Articulos";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloArticulos.css">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Productos disponibles
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper4.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<section class="cuerpo">
+    <center>
+        <div class="elementos">
+            <div class="cuerpoizquierdo">
+                <h2 class="my-4">Buscar por proveedor</h2>
+                <div class="list-group">
+                    @foreach (var proveedor in (List<Infraestructure.Models.Proveedor>)ViewBag.listaProveedores)
+                    {
+                        @Ajax.ActionLink(proveedor.descripcion, "ArticulosxProveedor", new { id = proveedor.id},//Parámetros para la acción
+                       new AjaxOptions
+                       {
+                           UpdateTargetId = "resultado",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "GET",
+                           LoadingElementId = "ajaxLoader"
+                       }, new { @class = "list-group-item" }
+                       )
+                    }
+                </div>
+                <div id="ajaxLoader" class="center-block" alt="Cargando ..." style="height:100px;width:100px; display:none">
+                    <img src="~/IMG/loading.gif" />
+                </div>
+            </div>
+            <div class="cuerpoderecho">
+                @* Listado de Productos *@
+                <div id="resultado" class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-sm-3">
+                            <div class="card">
+                                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)"
+                                     alt="Imagen @Html.DisplayFor(modelItem => item.nombre)" class="img-thumbnail" />
+                                <div class="card-body">
+                                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.nombre)</h5>
+                                    <p class="card-text">   @Html.DisplayNameFor(model => model.precio):  @Html.DisplayFor(modelItem => item.precio)</p>
+                                    <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.stock): @Html.DisplayFor(modelItem => item.stock)</h6>
+                                    <div class="card-body">
+                                        @Ajax.ActionLink("Ordenar",//Texto para el usuario
+                                       "ordenarProducto",//Acción a llamar
+                                       "Encabezado_Inventario",
+                                       new
+                                       {
+                                           idProducto = item.id
+                                       },//Parámetros a enviar
+                                       new AjaxOptions
+                                       {
+                                           UpdateTargetId = "cantidadLibros",
+                                           InsertionMode = InsertionMode.Replace,
+                                           HttpMethod = "GET",
+                                       }, new { @class = "btn btn-primary" }
+                                       )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </center>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

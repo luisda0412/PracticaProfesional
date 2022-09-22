@@ -193,6 +193,36 @@ namespace MvcApplication.Controllers
         }
 
 
+        public ActionResult IndexCatalogo()
+        {
+            IEnumerable<Articulo> lista = null;
+            try
+            {
+                IServiceArticulo _ServiceArticulo = new ServiceArticulo();
+                lista = _ServiceArticulo.GetArticulo();
+
+                //enviar la lista de productos al viewBag
+                IServiceProveedor _ServiceProveedor = new ServiceProveedor();
+                ViewBag.listaProveedores = _ServiceProveedor.GetProveedor();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
+        }
+
+        public PartialViewResult ArticulosxProveedor(long? id)
+        {
+            IEnumerable<Articulo> lista = null;
+            IServiceArticulo _ServiceArticulo = new ServiceArticulo();
+
+            if (id != null)
+            {
+                lista = _ServiceArticulo.GetArticuloByProveedor((long)id);
+            }
+            return PartialView("_PartialViewArticulo", lista);
+        }
 
 
     }

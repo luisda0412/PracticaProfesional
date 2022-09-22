@@ -13,5 +13,6 @@ namespace AplicationCore.Services
         Articulo GetArticuloByID(int id);
         IEnumerable<Articulo> GetArticuloByNombre(String nombre);
         void Save(Articulo articulo, string[] proveedor);
+        IEnumerable<Articulo> GetArticuloByProveedor(long id);
     }
 }

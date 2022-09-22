@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Infraestructure.Models.Articulo>
+@foreach (var item in Model)
+{
+    <div class="col-sm-3">
+        <div class="card">
+            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)"
+                 alt="Imagen @Html.DisplayFor(modelItem => item.nombre)" class="img-thumbnail" />
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.nombre)</h5>
+                <p class="card-text">   @Html.DisplayNameFor(model => model.precio):  @Html.DisplayFor(modelItem => item.precio)</p>
+                <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.stock): @Html.DisplayFor(modelItem => item.stock)</h6>
+                <div class="card-body">
+                    @Ajax.ActionLink("Ordenar",//Texto para el usuario
+                                     "ordenarProducto",//Acción a llamar
+                                     "Encabezado_Inventario",
+                                     new
+                                     {
+                                         idProducto = item.id
+                                     },//Parámetros a enviar
+                                     new AjaxOptions
+                                     {
+                                         UpdateTargetId = "cantidadLibros",
+                                         InsertionMode = InsertionMode.Replace,
+                                         HttpMethod = "GET",
+                                     }, new { @class = "btn btn-primary" }
+                                     )
+                </div>
+            </div>
+        </div>
+    </div>
+}

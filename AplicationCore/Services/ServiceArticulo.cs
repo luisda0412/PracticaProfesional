@@ -28,6 +28,12 @@ namespace AplicationCore.Services
             return repository.GetProductoByNombre(nombre);
         }
 
+        public IEnumerable<Articulo> GetArticuloByProveedor(long id)
+        {
+            IRepositoryArticulo repository = new RepositoryArticulo();
+            return repository.GetArticuloByProveedor(id);
+        }
+
         public void Save(Articulo articulo, string[] proveedor)
         {
             IRepositoryArticulo repository = new RepositoryArticulo();

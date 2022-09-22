@@ -422,6 +422,8 @@
     <Content Include="Views\ServicioReparacion\Details.cshtml" />
     <Content Include="Views\ServicioReparacion\Edit.cshtml" />
     <Content Include="Views\Venta\Index.cshtml" />
+    <Content Include="Views\Articulo\IndexCatalogo.cshtml" />
+    <Content Include="Views\Articulo\_PartialViewArticulo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

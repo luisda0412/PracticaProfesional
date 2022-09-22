@@ -50,6 +50,19 @@ namespace Infraestructure.Repository
             return oArticulo;
         }
 
+        public IEnumerable<Articulo> GetArticuloByProveedor(long id)
+        {
+            IEnumerable<Articulo> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Articulo.Include(p => p.Proveedor).
+                Where(p => p.Proveedor.Any(o => o.id == id))
+                .ToList();
+            }
+            return lista;
+        }
+
         public IEnumerable<Articulo> GetProductoByNombre(string nombre)
         {
             IEnumerable<Articulo> lista = null;
