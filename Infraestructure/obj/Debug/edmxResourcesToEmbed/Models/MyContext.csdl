@@ -52,18 +52,16 @@
   </EntityType>
   <EntityType Name="Detalle_Venta">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="venta_id" />
+      <PropertyRef Name="articulo_id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="producto_id" Type="Int32" />
-    <Property Name="venta_id" Type="Int32" />
+    <Property Name="venta_id" Type="Int32" Nullable="false" />
+    <Property Name="articulo_id" Type="Int32" Nullable="false" />
     <Property Name="precio" Type="Double" />
     <Property Name="descuento" Type="Double" />
     <Property Name="cantidad" Type="Int32" />
-    <Property Name="tipo_venta" Type="Boolean" />
     <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Venta_Producto_FK" FromRole="Detalle_Venta" ToRole="Articulo" />
     <NavigationProperty Name="Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Detalle_Venta" ToRole="Venta" />
-    <NavigationProperty Name="Facturas" Relationship="Self.Facturas_Detalle_Venta_FK" FromRole="Detalle_Venta" ToRole="Facturas" />
   </EntityType>
   <EntityType Name="Empresa">
     <Key>
@@ -80,11 +78,11 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="detalle_venta_id" Type="Int32" />
+    <Property Name="venta_id" Type="Int32" />
     <Property Name="empresa_id" Type="Int32" />
     <Property Name="tipoFactura" Type="Boolean" />
-    <NavigationProperty Name="Detalle_Venta" Relationship="Self.Facturas_Detalle_Venta_FK" FromRole="Facturas" ToRole="Detalle_Venta" />
     <NavigationProperty Name="Empresa" Relationship="Self.Facturas_Empresa_FK" FromRole="Facturas" ToRole="Empresa" />
+    <NavigationProperty Name="Venta" Relationship="Self.Facturas__Venta_FK" FromRole="Facturas" ToRole="Venta" />
   </EntityType>
   <EntityType Name="Ingreso">
     <Key>
@@ -175,7 +173,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -196,13 +194,13 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="usuario_id" Type="Int32" />
     <Property Name="nombre_cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="tipo_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="num_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
     <Property Name="impuesto" Type="Double" />
+    <Property Name="tipoventa" Type="Boolean" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Venta" ToRole="Detalle_Venta" />
+    <NavigationProperty Name="Facturas" Relationship="Self.Facturas__Venta_FK" FromRole="Venta" ToRole="Facturas" />
     <NavigationProperty Name="Usuario" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Venta" ToRole="Usuario" />
   </EntityType>
   <Association Name="Articulo_Categoria_FK">
@@ -230,14 +228,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Detalle_Venta_Producto_FK">
-    <End Role="Articulo" Type="Self.Articulo" Multiplicity="0..1" />
+    <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
     <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Articulo">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Detalle_Venta">
-        <PropertyRef Name="producto_id" />
+        <PropertyRef Name="articulo_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -290,7 +288,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Detalle_Venta_Venta_FK">
-    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
     <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Venta">
@@ -298,18 +296,6 @@
       </Principal>
       <Dependent Role="Detalle_Venta">
         <PropertyRef Name="venta_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Facturas_Detalle_Venta_FK">
-    <End Role="Detalle_Venta" Type="Self.Detalle_Venta" Multiplicity="0..1" />
-    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Detalle_Venta">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Facturas">
-        <PropertyRef Name="detalle_venta_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -322,6 +308,18 @@
       </Principal>
       <Dependent Role="Facturas">
         <PropertyRef Name="empresa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Facturas__Venta_FK">
+    <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+    <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venta">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Facturas">
+        <PropertyRef Name="venta_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -462,12 +460,12 @@
       <End Role="Venta" EntitySet="Venta" />
       <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
     </AssociationSet>
-    <AssociationSet Name="Facturas_Detalle_Venta_FK" Association="Self.Facturas_Detalle_Venta_FK">
-      <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
-      <End Role="Facturas" EntitySet="Facturas" />
-    </AssociationSet>
     <AssociationSet Name="Facturas_Empresa_FK" Association="Self.Facturas_Empresa_FK">
       <End Role="Empresa" EntitySet="Empresa" />
+      <End Role="Facturas" EntitySet="Facturas" />
+    </AssociationSet>
+    <AssociationSet Name="Facturas__Venta_FK" Association="Self.Facturas__Venta_FK">
+      <End Role="Venta" EntitySet="Venta" />
       <End Role="Facturas" EntitySet="Facturas" />
     </AssociationSet>
     <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">

@@ -15,11 +15,11 @@ namespace Infraestructure.Models
     public partial class Facturas
     {
         public int id { get; set; }
-        public Nullable<int> detalle_venta_id { get; set; }
+        public Nullable<int> venta_id { get; set; }
         public Nullable<int> empresa_id { get; set; }
         public Nullable<bool> tipoFactura { get; set; }
     
-        public virtual Detalle_Venta Detalle_Venta { get; set; }
         public virtual Empresa Empresa { get; set; }
+        public virtual Venta Venta { get; set; }
     }
 }

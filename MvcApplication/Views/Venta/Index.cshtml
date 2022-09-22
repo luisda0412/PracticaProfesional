@@ -1,0 +1,138 @@
+﻿@model IEnumerable<Infraestructure.Models.Venta>
+
+@{
+    ViewBag.Title = "Lista de Ventas";
+}
+
+
+<link rel="stylesheet" href="~/Content/CSSEstiloVentas/EstiloListaVentas.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Lista de ventas realizadas
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper6.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <center>
+        <section class="desarrollo">
+            <div class="elementos1">
+                <div class="elementoizquierdo">
+                    <h2 class="titulo">Ventas registradas en el local</h2>
+                    <button class="boton1"><p>@Html.ActionLink("Crear nueva venta", "Create")</p></button>
+                </div>
+                <div class="col-md-4">
+                    <div class="card my-4">
+                        <h5 class="card-header">Buscar por nombre cliente</h5>
+                        @using (Ajax.BeginForm("buscarVentaxNombre", "Venta", new AjaxOptions
+                        {
+                            UpdateTargetId = "resultado",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            LoadingElementId = "ajaxLoader"
+                        }))
+                        {
+                            <div class="card-body">
+                                <div class="input-group">
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre Cliente" })
+
+                                    <button type="submit" class="boton3">Buscar</button>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle" ; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombre_cliente)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.fecha)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.monto_total)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.tipoventa)
+                            </th>
+                            <th><p>Opciones</p></th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nombre_cliente)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fecha)
+                                </td>
+                                <td>
+                                    &cent;@Html.DisplayFor(modelItem => item.monto_total)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tipoventa)
+                                </td>
+                                <td class="columnabotones">
+                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
+                                    <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </center>
+        </section>
+    </center>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

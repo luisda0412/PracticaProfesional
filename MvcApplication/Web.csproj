@@ -176,6 +176,7 @@
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioReparacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\VentaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +210,7 @@
     <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
+    <Content Include="Content\CSSEstiloVentas\EstiloListaVentas.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="favicon.ico" />
@@ -419,6 +421,7 @@
     <Content Include="Views\Categoria\Details.cshtml" />
     <Content Include="Views\ServicioReparacion\Details.cshtml" />
     <Content Include="Views\ServicioReparacion\Edit.cshtml" />
+    <Content Include="Views\Venta\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

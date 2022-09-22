@@ -48,13 +48,11 @@
     <EntitySetMapping Name="Detalle_Venta">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Detalle_Venta">
         <MappingFragment StoreEntitySet="Detalle_Venta">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="producto_id" ColumnName="producto_id" />
           <ScalarProperty Name="venta_id" ColumnName="venta_id" />
+          <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="descuento" ColumnName="descuento" />
           <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-          <ScalarProperty Name="tipo_venta" ColumnName="tipo_venta" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -72,7 +70,7 @@
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Facturas">
         <MappingFragment StoreEntitySet="Facturas">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="detalle_venta_id" ColumnName="detalle_venta_id" />
+          <ScalarProperty Name="venta_id" ColumnName="venta_id" />
           <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
           <ScalarProperty Name="tipoFactura" ColumnName="tipoFactura" />
         </MappingFragment>
@@ -177,11 +175,10 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
           <ScalarProperty Name="nombre_cliente" ColumnName="nombre_cliente" />
-          <ScalarProperty Name="tipo_comprobante" ColumnName="tipo_comprobante" />
-          <ScalarProperty Name="num_comprobante" ColumnName="num_comprobante" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="monto_total" ColumnName="monto_total" />
           <ScalarProperty Name="impuesto" ColumnName="impuesto" />
+          <ScalarProperty Name="tipoventa" ColumnName="tipoventa" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>

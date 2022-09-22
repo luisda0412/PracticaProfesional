@@ -14,23 +14,13 @@ namespace Infraestructure.Models
     
     public partial class Detalle_Venta
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Detalle_Venta()
-        {
-            this.Facturas = new HashSet<Facturas>();
-        }
-    
-        public int id { get; set; }
-        public Nullable<int> producto_id { get; set; }
-        public Nullable<int> venta_id { get; set; }
+        public int venta_id { get; set; }
+        public int articulo_id { get; set; }
         public Nullable<double> precio { get; set; }
         public Nullable<double> descuento { get; set; }
         public Nullable<int> cantidad { get; set; }
-        public Nullable<bool> tipo_venta { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual Venta Venta { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Facturas> Facturas { get; set; }
     }
 }

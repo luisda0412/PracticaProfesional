@@ -18,20 +18,22 @@ namespace Infraestructure.Models
         public Venta()
         {
             this.Detalle_Venta = new HashSet<Detalle_Venta>();
+            this.Facturas = new HashSet<Facturas>();
         }
     
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
         public string nombre_cliente { get; set; }
-        public string tipo_comprobante { get; set; }
-        public string num_comprobante { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
         public Nullable<double> impuesto { get; set; }
+        public Nullable<bool> tipoventa { get; set; }
         public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Facturas> Facturas { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

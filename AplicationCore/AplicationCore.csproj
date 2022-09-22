@@ -50,6 +50,7 @@
     <Compile Include="Services\IServiceRol.cs" />
     <Compile Include="Services\IServiceServicio.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
+    <Compile Include="Services\IServiceVenta.cs" />
     <Compile Include="Services\ServiceArticulo.cs" />
     <Compile Include="Services\ServiceCajaChica.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Services\ServiceRol.cs" />
     <Compile Include="Services\ServiceServicio.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
+    <Compile Include="Services\ServiceVenta.cs" />
     <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
