@@ -49,8 +49,10 @@ CONSTRAINT Proveedor_ArticuloPK PRIMARY KEY (idProveedor, idArticulo)
 
 CREATE TABLE Resena(
 id int Identity(1,1) NOT NULL,
+encabezado nvarchar(50),
 comentario nvarchar(max),
-articulo_id int
+articulo_id int,
+usuario_id int
 
 CONSTRAINT Resena_PK PRIMARY KEY (id)
 );
@@ -194,6 +196,7 @@ ALTER TABLE Ingreso ADD CONSTRAINT Ingreso_Proveedor_FK FOREIGN KEY (proveedor_i
 
 --RESENA
 ALTER TABLE Resena ADD CONSTRAINT Resena_Articulo_FK FOREIGN KEY (articulo_id) REFERENCES Articulo (id)
+ALTER TABLE Resena ADD CONSTRAINT Resena_Usuario_FK FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
 
 --REPARACIONES
 ALTER TABLE Reparaciones ADD CONSTRAINT Reparaciones_Cliente_FK FOREIGN KEY (cliente_id) REFERENCES Usuario (id)
@@ -270,6 +273,8 @@ INSERT INTO Rol VALUES('Cliente', 1)
 
 INSERT INTO Usuario VALUES('123456', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1)
 INSERT INTO Usuario VALUES('12345', 'Keneth', 'Miranda Chaves', 'keneth@gmail.com', 85878912, 2, 1)
+INSERT INTO Usuario VALUES('12345', 'Luis David', 'Cordero Valverde', 'luisda@gmail.com', 87529425, 2, 1)
+
 
 --INSERT A SERVICIO REPARACION
 
@@ -301,6 +306,9 @@ INSERT INTO Detalle_Venta VALUES(2,2,16000,0,2)
 INSERT INTO Detalle_Venta VALUES(3,1,10000,0,1)
 INSERT INTO Detalle_Venta VALUES(3,2,8000,0,1)
 
+--INSERT A RESENA
+INSERT INTO Resena VALUES('Luces perfectas', 'Las luces funcionan excelente y alumbran bastante',2,3)
+
 
 --SELECTS
 
@@ -323,3 +331,6 @@ SELECT * FROM Usuario
 
 --Caja Chica
 Select * FROM Caja_Chica
+
+--RESENA 
+SELECT * FROM Resena
