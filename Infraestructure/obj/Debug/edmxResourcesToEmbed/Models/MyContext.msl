@@ -131,8 +131,10 @@
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Resena">
         <MappingFragment StoreEntitySet="Resena">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="encabezado" ColumnName="encabezado" />
           <ScalarProperty Name="comentario" ColumnName="comentario" />
           <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

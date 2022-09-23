@@ -129,8 +129,10 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="encabezado" Type="nvarchar" MaxLength="50" />
     <Property Name="comentario" Type="nvarchar(max)" />
     <Property Name="articulo_id" Type="int" />
+    <Property Name="usuario_id" Type="int" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -391,6 +393,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Resena_Usuario_FK">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Resena" Type="Self.Resena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Resena">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Usuario_Rol_FK">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -491,6 +505,10 @@
     </AssociationSet>
     <AssociationSet Name="Resena_Articulo_FK" Association="Self.Resena_Articulo_FK">
       <End Role="Articulo" EntitySet="Articulo" />
+      <End Role="Resena" EntitySet="Resena" />
+    </AssociationSet>
+    <AssociationSet Name="Resena_Usuario_FK" Association="Self.Resena_Usuario_FK">
+      <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Resena" EntitySet="Resena" />
     </AssociationSet>
     <AssociationSet Name="Usuario_Rol_FK" Association="Self.Usuario_Rol_FK">

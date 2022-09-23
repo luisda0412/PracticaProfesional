@@ -146,9 +146,12 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="encabezado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="articulo_id" Type="Int32" />
+    <Property Name="usuario_id" Type="Int32" />
     <NavigationProperty Name="Articulo" Relationship="Self.Resena_Articulo_FK" FromRole="Resena" ToRole="Articulo" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Resena_Usuario_FK" FromRole="Resena" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Rol">
     <Key>
@@ -184,6 +187,7 @@
     <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Cliente_FK" FromRole="Usuario" ToRole="Reparaciones" />
+    <NavigationProperty Name="Resena" Relationship="Self.Resena_Usuario_FK" FromRole="Usuario" ToRole="Resena" />
     <NavigationProperty Name="Rol" Relationship="Self.Usuario_Rol_FK" FromRole="Usuario" ToRole="Rol" />
     <NavigationProperty Name="Venta" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Usuario" ToRole="Venta" />
   </EntityType>
@@ -383,6 +387,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="Resena_Usuario_FK">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Resena" Type="Self.Resena" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Resena">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Usuario_Rol_FK">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
@@ -487,6 +503,10 @@
     <AssociationSet Name="Reportes_Tecnicos_Reparacion_FK" Association="Self.Reportes_Tecnicos_Reparacion_FK">
       <End Role="Reparaciones" EntitySet="Reparaciones" />
       <End Role="Reportes_Tecnicos" EntitySet="Reportes_Tecnicos" />
+    </AssociationSet>
+    <AssociationSet Name="Resena_Usuario_FK" Association="Self.Resena_Usuario_FK">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Resena" EntitySet="Resena" />
     </AssociationSet>
     <AssociationSet Name="Usuario_Rol_FK" Association="Self.Usuario_Rol_FK">
       <End Role="Rol" EntitySet="Rol" />

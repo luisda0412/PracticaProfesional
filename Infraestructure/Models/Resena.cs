@@ -15,9 +15,12 @@ namespace Infraestructure.Models
     public partial class Resena
     {
         public int id { get; set; }
+        public string encabezado { get; set; }
         public string comentario { get; set; }
         public Nullable<int> articulo_id { get; set; }
+        public Nullable<int> usuario_id { get; set; }
     
         public virtual Articulo Articulo { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

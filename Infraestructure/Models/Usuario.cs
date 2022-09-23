@@ -20,6 +20,7 @@ namespace Infraestructure.Models
             this.Caja_Chica = new HashSet<Caja_Chica>();
             this.Ingreso = new HashSet<Ingreso>();
             this.Reparaciones = new HashSet<Reparaciones>();
+            this.Resena = new HashSet<Resena>();
             this.Venta = new HashSet<Venta>();
         }
     
@@ -38,6 +39,8 @@ namespace Infraestructure.Models
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reparaciones> Reparaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Resena> Resena { get; set; }
         public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Venta> Venta { get; set; }
