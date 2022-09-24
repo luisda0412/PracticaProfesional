@@ -426,6 +426,7 @@
     <Content Include="Views\Articulo\IndexCatalogo.cshtml" />
     <Content Include="Views\Articulo\_PartialViewArticulo.cshtml" />
     <Content Include="Views\Resena\Index.cshtml" />
+    <Content Include="Views\Resena\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

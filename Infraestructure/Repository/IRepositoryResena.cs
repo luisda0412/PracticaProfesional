@@ -11,6 +11,6 @@ namespace Infraestructure.Repository
     {
         IEnumerable<Resena> GetResena();
         Resena GetResenaByID(int id);
-        Resena Save(Resena rol);
+        Resena Save(Resena resena);
     }
 }

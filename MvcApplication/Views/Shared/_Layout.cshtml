@@ -50,8 +50,9 @@
 
                     <!--Para el Login VYCUZ-->
                     @{
-                        string nombre = "";
+                        string nombre = "Sesión no iniciada";
                         string email = "Perfil";
+                        int id = 0;
                         Infraestructure.Models.Usuario oUsuario;
                         //Validar si existe en la sesión
                         if (Session["User"] != null)
@@ -61,6 +62,7 @@
                             {
                                 nombre = $"{oUsuario.nombre}";
                                 email = oUsuario.correo_electronico;
+                                id = oUsuario.id;
                             }
                         }
                     }

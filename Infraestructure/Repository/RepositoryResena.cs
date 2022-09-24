@@ -40,12 +40,44 @@ namespace Infraestructure.Repository
 
         public Resena GetResenaByID(int id)
         {
-            throw new NotImplementedException();
+            Resena oResena = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oResena = ctx.Resena.Where(p => p.id == id).
+                    Include(x => x.Articulo).Include(x=>x.Usuario).FirstOrDefault();
+            }
+            return oResena;
         }
 
-        public Resena Save(Resena rol)
+        public Resena Save(Resena resena)
         {
-            throw new NotImplementedException();
+            int retorno = 0;
+            Resena oResena = null;
+
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oResena = GetResenaByID((int)resena.id);
+
+                if (oResena == null)
+                {
+                    //resena.estado = true;
+                    ctx.Resena.Add(resena);
+                    retorno = ctx.SaveChanges();
+                }
+                else
+                {
+                    ctx.Resena.Add(resena);
+                    ctx.Entry(resena).State = EntityState.Modified;
+                    retorno = ctx.SaveChanges();
+                }
+            }
+
+            if (retorno >= 0)
+                oResena = GetResenaByID((int)resena.id);
+
+            return oResena;
         }
     }
 }

@@ -21,9 +21,10 @@ namespace AplicationCore.Services
             throw new NotImplementedException();
         }
 
-        public Resena Save(Resena rol)
+        public Resena Save(Resena resena)
         {
-            throw new NotImplementedException();
+            IRepositoryResena repository = new RepositoryResena();
+            return repository.Save(resena);
         }
     }
 }
