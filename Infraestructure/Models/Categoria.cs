@@ -18,7 +18,6 @@ namespace Infraestructure.Models
         public Categoria()
         {
             this.Articulo = new HashSet<Articulo>();
-            this.Reparaciones = new HashSet<Reparaciones>();
         }
     
         public int id { get; set; }
@@ -28,7 +27,5 @@ namespace Infraestructure.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Articulo> Articulo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reparaciones> Reparaciones { get; set; }
     }
 }

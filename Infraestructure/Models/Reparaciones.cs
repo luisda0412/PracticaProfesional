@@ -21,17 +21,15 @@ namespace Infraestructure.Models
         }
     
         public int id { get; set; }
+        public Nullable<int> usuario_id { get; set; }
         public Nullable<int> cliente_id { get; set; }
-        public string direccion { get; set; }
         public string telefono { get; set; }
-        public Nullable<int> categoria_producto_id { get; set; }
         public Nullable<int> servicio_reparacion_id { get; set; }
         public string descripcion_articulo { get; set; }
         public string descripcion_problema { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
     
-        public virtual Categoria Categoria { get; set; }
         public virtual Servicio_Reparacion Servicio_Reparacion { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

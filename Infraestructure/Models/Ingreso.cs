@@ -23,11 +23,8 @@ namespace Infraestructure.Models
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
         public Nullable<int> proveedor_id { get; set; }
-        public string tipo_comprobante { get; set; }
-        public string num_comprobante { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
-        public Nullable<double> impuesto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Ingreso> Detalle_Ingreso { get; set; }
