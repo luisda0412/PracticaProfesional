@@ -38,7 +38,6 @@
     <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Articulo" Relationship="Self.Articulo_Categoria_FK" FromRole="Categoria" ToRole="Articulo" />
-    <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Categoria_FK" FromRole="Categoria" ToRole="Reparaciones" />
   </EntityType>
   <EntityType Name="Detalle_Ingreso">
     <Key>
@@ -91,11 +90,8 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="usuario_id" Type="Int32" />
     <Property Name="proveedor_id" Type="Int32" />
-    <Property Name="tipo_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="num_comprobante" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
-    <Property Name="impuesto" Type="Double" />
     <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Ingreso" ToRole="Detalle_Ingreso" />
     <NavigationProperty Name="Proveedor" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Ingreso" ToRole="Proveedor" />
     <NavigationProperty Name="Usuario" Relationship="Self.Ingreso_Usuario_FK" FromRole="Ingreso" ToRole="Usuario" />
@@ -117,18 +113,16 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_id" Type="Int32" />
     <Property Name="cliente_id" Type="Int32" />
-    <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="categoria_producto_id" Type="Int32" />
     <Property Name="servicio_reparacion_id" Type="Int32" />
     <Property Name="descripcion_articulo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="descripcion_problema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
-    <NavigationProperty Name="Categoria" Relationship="Self.Reparaciones_Categoria_FK" FromRole="Reparaciones" ToRole="Categoria" />
     <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
-    <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Cliente_FK" FromRole="Reparaciones" ToRole="Usuario" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Reparaciones" ToRole="Usuario" />
     <NavigationProperty Name="Reportes_Tecnicos" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reparaciones" ToRole="Reportes_Tecnicos" />
   </EntityType>
   <EntityType Name="Reportes_Tecnicos">
@@ -139,6 +133,7 @@
     <Property Name="reparacion_id" Type="Int32" />
     <Property Name="reporte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reportes_Tecnicos" ToRole="Reparaciones" />
   </EntityType>
   <EntityType Name="Resena">
@@ -186,7 +181,7 @@
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
-    <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Cliente_FK" FromRole="Usuario" ToRole="Reparaciones" />
+    <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Usuario" ToRole="Reparaciones" />
     <NavigationProperty Name="Resena" Relationship="Self.Resena_Usuario_FK" FromRole="Usuario" ToRole="Resena" />
     <NavigationProperty Name="Rol" Relationship="Self.Usuario_Rol_FK" FromRole="Usuario" ToRole="Rol" />
     <NavigationProperty Name="Venta" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Usuario" ToRole="Venta" />
@@ -264,18 +259,6 @@
       </Principal>
       <Dependent Role="Caja_Chica">
         <PropertyRef Name="usuario_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Reparaciones_Categoria_FK">
-    <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
-    <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Reparaciones">
-        <PropertyRef Name="categoria_producto_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -363,7 +346,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Reparaciones_Cliente_FK">
+  <Association Name="Reparaciones_Usuario_FK">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
     <ReferentialConstraint>
@@ -371,7 +354,7 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Reparaciones">
-        <PropertyRef Name="cliente_id" />
+        <PropertyRef Name="usuario_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -464,10 +447,6 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Caja_Chica" EntitySet="Caja_Chica" />
     </AssociationSet>
-    <AssociationSet Name="Reparaciones_Categoria_FK" Association="Self.Reparaciones_Categoria_FK">
-      <End Role="Categoria" EntitySet="Categoria" />
-      <End Role="Reparaciones" EntitySet="Reparaciones" />
-    </AssociationSet>
     <AssociationSet Name="Detalle_Ingreso_Ingreso_FK" Association="Self.Detalle_Ingreso_Ingreso_FK">
       <End Role="Ingreso" EntitySet="Ingreso" />
       <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
@@ -496,7 +475,7 @@
       <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
       <End Role="Reparaciones" EntitySet="Reparaciones" />
     </AssociationSet>
-    <AssociationSet Name="Reparaciones_Cliente_FK" Association="Self.Reparaciones_Cliente_FK">
+    <AssociationSet Name="Reparaciones_Usuario_FK" Association="Self.Reparaciones_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Reparaciones" EntitySet="Reparaciones" />
     </AssociationSet>

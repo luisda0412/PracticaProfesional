@@ -82,11 +82,8 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
           <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
-          <ScalarProperty Name="tipo_comprobante" ColumnName="tipo_comprobante" />
-          <ScalarProperty Name="num_comprobante" ColumnName="num_comprobante" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="monto_total" ColumnName="monto_total" />
-          <ScalarProperty Name="impuesto" ColumnName="impuesto" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -105,10 +102,9 @@
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Reparaciones">
         <MappingFragment StoreEntitySet="Reparaciones">
           <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
           <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
-          <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
-          <ScalarProperty Name="categoria_producto_id" ColumnName="categoria_producto_id" />
           <ScalarProperty Name="servicio_reparacion_id" ColumnName="servicio_reparacion_id" />
           <ScalarProperty Name="descripcion_articulo" ColumnName="descripcion_articulo" />
           <ScalarProperty Name="descripcion_problema" ColumnName="descripcion_problema" />
@@ -124,6 +120,7 @@
           <ScalarProperty Name="reparacion_id" ColumnName="reparacion_id" />
           <ScalarProperty Name="reporte" ColumnName="reporte" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="entregaestimada" ColumnName="entregaestimada" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

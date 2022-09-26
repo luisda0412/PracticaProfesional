@@ -76,11 +76,8 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="usuario_id" Type="int" />
     <Property Name="proveedor_id" Type="int" />
-    <Property Name="tipo_comprobante" Type="nvarchar" MaxLength="50" />
-    <Property Name="num_comprobante" Type="nvarchar" MaxLength="50" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="monto_total" Type="float" />
-    <Property Name="impuesto" Type="float" />
   </EntityType>
   <EntityType Name="Proveedor">
     <Key>
@@ -105,10 +102,9 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario_id" Type="int" />
     <Property Name="cliente_id" Type="int" />
-    <Property Name="direccion" Type="nvarchar" MaxLength="50" />
     <Property Name="telefono" Type="nvarchar" MaxLength="50" />
-    <Property Name="categoria_producto_id" Type="int" />
     <Property Name="servicio_reparacion_id" Type="int" />
     <Property Name="descripcion_articulo" Type="nvarchar" MaxLength="50" />
     <Property Name="descripcion_problema" Type="nvarchar" MaxLength="50" />
@@ -123,6 +119,7 @@
     <Property Name="reparacion_id" Type="int" />
     <Property Name="reporte" Type="nvarchar" MaxLength="50" />
     <Property Name="fecha" Type="datetime" />
+    <Property Name="entregaestimada" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Resena">
     <Key>
@@ -345,19 +342,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Reparaciones_Categoria_FK">
-    <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
-    <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categoria">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Reparaciones">
-        <PropertyRef Name="categoria_producto_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Reparaciones_Cliente_FK">
+  <Association Name="Reparaciones_Usuario_FK">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
     <ReferentialConstraint>
@@ -365,7 +350,7 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Reparaciones">
-        <PropertyRef Name="cliente_id" />
+        <PropertyRef Name="usuario_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -491,11 +476,7 @@
       <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
       <End Role="Reparaciones" EntitySet="Reparaciones" />
     </AssociationSet>
-    <AssociationSet Name="Reparaciones_Categoria_FK" Association="Self.Reparaciones_Categoria_FK">
-      <End Role="Categoria" EntitySet="Categoria" />
-      <End Role="Reparaciones" EntitySet="Reparaciones" />
-    </AssociationSet>
-    <AssociationSet Name="Reparaciones_Cliente_FK" Association="Self.Reparaciones_Cliente_FK">
+    <AssociationSet Name="Reparaciones_Usuario_FK" Association="Self.Reparaciones_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Reparaciones" EntitySet="Reparaciones" />
     </AssociationSet>
