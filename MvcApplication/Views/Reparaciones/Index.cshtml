@@ -116,11 +116,14 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.fecha)
+                                    @*.fecha.ToString("dd/MM/yyyy")*@
                                 </td>
                                 <td class="columnabotones">
+                                    <button class="boton2">@Html.ActionLink("Reportes", "ReportesTecnicos", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
+
 
                                 </td>
                             </tr>

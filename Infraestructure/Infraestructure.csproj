@@ -128,6 +128,7 @@
     <Compile Include="Repository\IRepositoryReparaciones.cs" />
     <Compile Include="Repository\IRepositoryResena.cs" />
     <Compile Include="Repository\IRepositoryRol.cs" />
+    <Compile Include="Repository\IRepositoryRTecnico.cs" />
     <Compile Include="Repository\IRepositoryServicio.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\IRepositoryVenta.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Repository\RepositoryReparaciones.cs" />
     <Compile Include="Repository\RepositoryResena.cs" />
     <Compile Include="Repository\RepositoryRol.cs" />
+    <Compile Include="Repository\RepositoryRTecnico.cs" />
     <Compile Include="Repository\RepositoryServicio.cs" />
     <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryVenta.cs" />

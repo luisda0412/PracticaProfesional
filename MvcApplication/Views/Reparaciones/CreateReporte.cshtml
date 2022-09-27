@@ -1,0 +1,84 @@
+﻿@using Syncfusion.EJ2
+@model Infraestructure.Models.Reportes_Tecnicos
+@{
+    ViewBag.Title = "Agregar Reporte";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloRTecnicos/EstiloCreate.css">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Agregar un nuevo estado
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper12.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+
+<main>
+    <center>
+        @using (Html.BeginForm("SaveReporte", "Reparacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 id="titulo">Información del nuevo servicio</h4>
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="secciones">
+                <div class="seccion1">
+                    <section class="cuerpoleft">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.reporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.reporte, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.reporte, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </section>
+                    <section class="cuerporight">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.(model => model.fecha, new { htmlAttributes = new { @class = "datepicker" } })
+                                @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="seccion2">
+                    <div class="form-group2">
+                        <input type="submit" value="Guardar Servicio" class="btn btn-default" />
+                        <button class="boton1">@Html.ActionLink("Volver Atrás", "ReportesTecnicos")</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+        <br />
+        <br />
+    </center>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

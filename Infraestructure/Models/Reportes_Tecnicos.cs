@@ -18,7 +18,6 @@ namespace Infraestructure.Models
         public Nullable<int> reparacion_id { get; set; }
         public string reporte { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public string entregaestimada { get; set; }
     
         public virtual Reparaciones Reparaciones { get; set; }
     }

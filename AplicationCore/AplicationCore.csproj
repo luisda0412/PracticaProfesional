@@ -50,6 +50,7 @@
     <Compile Include="Services\IServiceReparaciones.cs" />
     <Compile Include="Services\IServiceResena.cs" />
     <Compile Include="Services\IServiceRol.cs" />
+    <Compile Include="Services\IServiceRTecnico.cs" />
     <Compile Include="Services\IServiceServicio.cs" />
     <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\IServiceVenta.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Services\ServiceReparaciones.cs" />
     <Compile Include="Services\ServiceResena.cs" />
     <Compile Include="Services\ServiceRol.cs" />
+    <Compile Include="Services\ServiceRTecnico.cs" />
     <Compile Include="Services\ServiceServicio.cs" />
     <Compile Include="Services\ServiceUsuario.cs" />
     <Compile Include="Services\ServiceVenta.cs" />
