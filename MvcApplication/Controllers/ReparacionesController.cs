@@ -62,6 +62,7 @@ namespace MvcApplication.Controllers
 
         public ActionResult CreateReporte()
         {
+            
             return View();
         }
 

@@ -1,4 +1,4 @@
-﻿@using Syncfusion.EJ2
+﻿
 @model Infraestructure.Models.Reportes_Tecnicos
 @{
     ViewBag.Title = "Agregar Reporte";
@@ -34,7 +34,7 @@
 
 <main>
     <center>
-        @using (Html.BeginForm("SaveReporte", "Reparacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("SaveReporte", "Reparaciones", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.(model => model.fecha, new { htmlAttributes = new { @class = "datepicker" } })
+                                @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @class = "datefield", type = "date" } })
                                 @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
                             </div>
                         </div>

@@ -121,6 +121,7 @@
     <Property Name="descripcion_problema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
+    <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
     <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Reparaciones" ToRole="Usuario" />
     <NavigationProperty Name="Reportes_Tecnicos" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reparaciones" ToRole="Reportes_Tecnicos" />
@@ -133,7 +134,6 @@
     <Property Name="reparacion_id" Type="Int32" />
     <Property Name="reporte" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
-    <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reportes_Tecnicos" ToRole="Reparaciones" />
   </EntityType>
   <EntityType Name="Resena">

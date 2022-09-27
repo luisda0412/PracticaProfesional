@@ -110,6 +110,7 @@
     <Property Name="descripcion_problema" Type="nvarchar" MaxLength="50" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="monto_total" Type="float" />
+    <Property Name="entregaestimada" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Reportes_Tecnicos">
     <Key>
@@ -119,7 +120,6 @@
     <Property Name="reparacion_id" Type="int" />
     <Property Name="reporte" Type="nvarchar" MaxLength="50" />
     <Property Name="fecha" Type="datetime" />
-    <Property Name="entregaestimada" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="Resena">
     <Key>
