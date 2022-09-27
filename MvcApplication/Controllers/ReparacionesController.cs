@@ -19,6 +19,7 @@ namespace MvcApplication.Controllers
     {
         //Para guardadr la reparacion que se clickee
         int? codigo = 0;
+        
 
         //private MyContext db = new MyContext();
 
