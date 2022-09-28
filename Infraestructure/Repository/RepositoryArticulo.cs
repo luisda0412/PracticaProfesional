@@ -19,13 +19,10 @@ namespace Infraestructure.Repository
             using (MyContext cdt = new MyContext())
             {
                 cdt.Configuration.LazyLoadingEnabled = false;
-                //Proveedor oPoveedor;
                 try
                 {
 
                     Articulo art = cdt.Articulo.Where(a => a.id == id).Include(x => x.Proveedor).Include(x => x.Categoria).FirstOrDefault();
-                    //oPoveedor = (Proveedor)art.Proveedor;
-                    //cdt.Proveedor.Remove(oPoveedor);
                     art.Proveedor.Clear();
                     cdt.Articulo.Remove(art);                 
                     cdt.SaveChanges();
