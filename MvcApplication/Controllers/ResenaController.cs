@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -14,6 +15,7 @@ namespace MvcApplication.Controllers
     public class ResenaController : Controller
     {
         // GET: Resena
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Resena> lista = null;
@@ -29,6 +31,8 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Resena resena)
         {
             MemoryStream target = new MemoryStream();
@@ -52,6 +56,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();

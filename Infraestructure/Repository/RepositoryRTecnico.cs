@@ -49,7 +49,23 @@ namespace Infraestructure.Repository
 
         public void Save(Reportes_Tecnicos reportes)
         {
-            throw new NotImplementedException();
+
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                        cdt.Reportes_Tecnicos.Add(reportes);
+                        cdt.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
         }
     }
 }

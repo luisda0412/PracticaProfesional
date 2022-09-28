@@ -56,6 +56,7 @@
 
                 @foreach (var item in Model)
                 {
+                    
                     <tr>
                          <td>
                             @Html.DisplayFor(modelItem => item.reparacion_id)
@@ -70,6 +71,8 @@
                             <button class="boton2"> @Html.ActionLink("Eliminar", "EliminarReporte", new { id = item.id })</button>
                         </td>
                     </tr>
+
+                    TempData["idReporte"] = item.reparacion_id;
                 }
 
             </table>

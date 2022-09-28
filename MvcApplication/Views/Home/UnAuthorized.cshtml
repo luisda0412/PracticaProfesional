@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Acceso Denegado";
+}
+
+<link rel="stylesheet" href="~/Content/EstiloNoAutorizado.css">
+<center>
+    <section class="cuerpo">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h2>Usted no está autorizado!, porfavor inicie su sesión o revise sus credenciales</h2>
+        <br>
+        <br>
+        <input type="button" value="Regresar" class="btn btn-warning" onclick="goBack()" />
+
+    </section>
+</center>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+

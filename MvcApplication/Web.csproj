@@ -178,10 +178,13 @@
     <Compile Include="Controllers\ServicioReparacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VentaController.cs" />
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CustomAuthenticationFilter.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Support\SameSiteCookieManager.cs" />
     <Compile Include="Support\SameSiteSupport.cs" />
@@ -433,6 +436,8 @@
     <Content Include="Views\Reparaciones\Index.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicos.cshtml" />
     <Content Include="Views\Reparaciones\CreateReporte.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Home\UnAuthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

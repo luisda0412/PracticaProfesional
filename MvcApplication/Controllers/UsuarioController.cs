@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -15,6 +16,7 @@ namespace MvcApplication.Controllers
     public class UsuarioController : Controller
     {
         // GET: Usuario
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Usuario> lista = null;
@@ -30,6 +32,8 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Usuario user, string[] rol)
         {
             MemoryStream target = new MemoryStream();
@@ -54,12 +58,14 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.idRol = listaRol();
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceUsuario _ServiceProducto = new ServiceUsuario();
@@ -97,6 +103,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Details(int? id)
         {
             ServiceUsuario _ServiceUsuario = new ServiceUsuario();

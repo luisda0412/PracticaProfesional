@@ -19,7 +19,6 @@ namespace MvcApplication.Controllers
     {
         //Para guardadr la reparacion que se clickee
         int? codigo = 0;
-        
 
         //private MyContext db = new MyContext();
 
@@ -73,7 +72,7 @@ namespace MvcApplication.Controllers
             IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
             try
             {
-                repo.reparacion_id = codigo;
+                repo.reparacion_id = (Convert.ToInt32(TempData["idReporte"])); 
                 _ServiceRTecnico.Save(repo);
 
                 return RedirectToAction("Index");

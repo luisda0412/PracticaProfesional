@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -16,6 +17,7 @@ namespace MvcApplication.Controllers
     {
         IServiceServicio _ServiceServicio = new ServiceServicio();
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Servicio_Reparacion> lista = null;
@@ -30,6 +32,9 @@ namespace MvcApplication.Controllers
             }
             return View(lista);
         }
+
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Servicio_Reparacion ser)
         {
             MemoryStream target = new MemoryStream();
@@ -51,6 +56,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
@@ -75,6 +81,7 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewVistaxDescripcion", lista);
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceServicio _ServiceServicio = new ServiceServicio();
@@ -112,6 +119,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Details(int? id)
         {
             ServiceServicio _ServiceServicio = new ServiceServicio();

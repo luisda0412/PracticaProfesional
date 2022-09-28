@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - AFK</title>
+    <link rel="shortcut icon" href="~/IMG/logo5.png" type="image/x-icon">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/EstiloLayout.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand">Librería</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+
+
+                <li class="nav-item">
+                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link" })
+
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <main>
+
+        <div class="container">
+
+            @RenderBody()
+        </div>
+    </main>
+    <footer class="footer mt-auto py-3">
+        <hr />
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year - ISW-711 III-2020</p>
+        </div>
+    </footer>
+
+
+    @RenderSection("scripts", required: false)
+    @if (ViewBag.NotificationMessage != null)
+    {
+        <script>
+            @Html.Raw(@ViewBag.NotificationMessage);
+        </script>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>

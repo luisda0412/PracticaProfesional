@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -15,6 +16,7 @@ namespace MvcApplication.Controllers
     public class ProveedorController : Controller
     {
         // GET: Proveedor
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Proveedor> lista = null;
@@ -30,6 +32,8 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Proveedor prov)
         {
             MemoryStream target = new MemoryStream();
@@ -53,11 +57,13 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();
@@ -95,6 +101,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Details(int? id)
         {
             ServiceProveedor _ServiceProveedor = new ServiceProveedor();

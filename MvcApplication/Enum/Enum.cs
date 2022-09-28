@@ -1,0 +1,1 @@
+﻿public enum Roles { Administrador = 1, Procesos = 2, Reportes = 3 }

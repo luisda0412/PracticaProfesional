@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -13,6 +14,8 @@ namespace MvcApplication.Controllers
     public class VentaController: Controller
     {
         IServiceVenta _Serviceventa = new ServiceVenta();
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Venta> lista = null;

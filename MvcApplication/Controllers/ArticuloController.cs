@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
@@ -16,6 +17,7 @@ namespace MvcApplication.Controllers
     {
         IServiceArticulo _ServiceArticulo = new ServiceArticulo();
         // GET: Articulo
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
         {
             IEnumerable<Articulo> lista = null;
@@ -72,6 +74,9 @@ namespace MvcApplication.Controllers
             // Retorna un Partial View
             return PartialView("_PartialViewVistaxNombre", lista);
         }
+
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Articulo art, string[] categoria, string[] proveedor, HttpPostedFileBase ImageFile)
         {
             MemoryStream target = new MemoryStream();
@@ -91,6 +96,8 @@ namespace MvcApplication.Controllers
             _ServiceArticulo.Save(art, proveedor);
             return RedirectToAction("Index");
         }
+
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             ViewBag.categoria_id = listaCategoria();
@@ -98,6 +105,7 @@ namespace MvcApplication.Controllers
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Details(int? id)
         {
             ServiceArticulo _ServiceArticulo = new ServiceArticulo();
@@ -126,6 +134,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceArticulo _ServiceArticulo = new ServiceArticulo();

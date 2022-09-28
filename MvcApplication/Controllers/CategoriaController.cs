@@ -8,10 +8,12 @@ using System.Linq;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace MvcApplication.Controllers
 {
+    [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
     public class CategoriaController : Controller
     {
         // GET: Categoria
@@ -30,6 +32,8 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Categoria cat)
         {
             MemoryStream target = new MemoryStream();
@@ -53,11 +57,13 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {
             ServiceCategoria _ServiceCategoria = new ServiceCategoria();
@@ -114,6 +120,7 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewVistaxNombre", lista);
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Details(int? id)
         {
             ServiceCategoria _ServiceCategoria = new ServiceCategoria();
