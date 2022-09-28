@@ -13,6 +13,31 @@ namespace Infraestructure.Repository
     public class RepositoryArticulo : IRepositoryArticulo
     {
         IRepositoryProveedor repoP = new RepositoryProveedor();
+
+        public void Eliminar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+
+
+                    Articulo art = cdt.Articulo.Find(id);
+                    cdt.Articulo.Remove(art);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
         public IEnumerable<Articulo> GetArticulo()
         {
             try

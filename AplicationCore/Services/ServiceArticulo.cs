@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceArticulo : IServiceArticulo
     {
+        public void Eliminar(long id)
+        {
+            IRepositoryArticulo repository = new RepositoryArticulo();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Articulo> GetArticulo()
         {
             IRepositoryArticulo repository = new RepositoryArticulo();

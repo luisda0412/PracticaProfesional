@@ -110,7 +110,7 @@
                                     @Html.DisplayFor(modelItem => item.nombre)
                                 </td>
                                 <td>
-                                    &cent; @Html.DisplayFor(modelItem => item.precio)
+                                    &cent;@Html.DisplayFor(modelItem => item.precio)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Categoria.descripcion)
@@ -121,7 +121,8 @@
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    @Html.ActionLink("Habilitar/Desabilitar usuario", "desabilitar", "Articulo", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
+                                    <button class="boton2">@Html.ActionLink("Eliminar", "EliminarArticulo", new { id = item.id })</button>
+                           
                                 </td>
                             </tr>
                         }
