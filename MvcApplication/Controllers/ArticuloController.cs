@@ -175,8 +175,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-        [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult EliminarArticulo(int? id)
+        /*public ActionResult EliminarArticulo(int? id)
         {
             MemoryStream target = new MemoryStream();
             IServiceArticulo _ServiceArticulo = new ServiceArticulo();
@@ -196,7 +195,7 @@ namespace MvcApplication.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
-        }
+        }*/
 
 
         public ActionResult IndexCatalogo()
@@ -230,7 +229,7 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewArticulo", lista);
         }
 
-        public void desabilitar(long id)
+        public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -243,6 +242,7 @@ namespace MvcApplication.Controllers
                     cdt.Articulo.Add(art);
                     cdt.Entry(art).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    return View("Index");
 
                 }
                 catch (Exception e)

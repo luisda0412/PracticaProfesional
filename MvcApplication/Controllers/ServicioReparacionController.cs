@@ -174,7 +174,7 @@ namespace MvcApplication.Controllers
         */
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public void desabilitar(long id)
+        public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -188,6 +188,7 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(serv).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    return View("Index");
 
                 }
                 catch (Exception e)

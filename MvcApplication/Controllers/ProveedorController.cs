@@ -152,7 +152,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public void desabilitar(long id)
+        public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -165,6 +165,7 @@ namespace MvcApplication.Controllers
                     cdt.Proveedor.Add(pro);
                     cdt.Entry(pro).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    return View("Index");
 
                 }
                 catch (Exception e)

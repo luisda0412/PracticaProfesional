@@ -149,7 +149,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public ActionResult EliminarCategoria(int? id)
+        /*public ActionResult EliminarCategoria(int? id)
         {
             MemoryStream target = new MemoryStream();
             IServiceCategoria _ServiceCategoria = new ServiceCategoria();
@@ -169,9 +169,9 @@ namespace MvcApplication.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
-        }
+        }*/
 
-        public void desabilitar(long id)
+        public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -185,6 +185,7 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(cat).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    return View("Index");
 
                 }
                 catch (Exception e)

@@ -73,12 +73,12 @@
     padding-bottom: 3%;
 }
 .tarjeta {
-    border: ridge;
+  
     border-color: #dddddd;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
+    box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
     -webkit-transform: scale(1);
     transform: scale(1);
     -webkit-transition: .3s ease-in-out;

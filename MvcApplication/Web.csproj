@@ -265,6 +265,7 @@
     <Content Include="Imagenes\Logos\logoIcono.png" />
     <Content Include="Imagenes\Logos\logomenu.png" />
     <Content Include="Imagenes\Visuals\caja-chica.jpg" />
+    <Content Include="Imagenes\Visuals\categorias.jpg" />
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />
     <Content Include="Imagenes\Visuals\wallpaper12.png" />

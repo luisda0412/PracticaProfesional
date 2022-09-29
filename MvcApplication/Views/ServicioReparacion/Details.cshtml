@@ -1,6 +1,73 @@
 ﻿@model Infraestructure.Models.Servicio_Reparacion
 
 @{
+    ViewBag.Title = "Detalles";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloServicios/EstiloDetalleServicios.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Detalle del Servicio
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="tarjeta">
+            <div class="ladoizquierdo">
+                <center>
+                    <h3>Servicio de reparación</h3>
+                </center>
+                <div class="texto">
+                    <p class="">
+                        <b>@Html.DisplayNameFor(model => model.descripcion):</b> @Html.DisplayFor(model => model.descripcion)<br />
+                        <b>@Html.DisplayNameFor(model => model.costo):</b>@Html.DisplayFor(model => model.costo)<br />
+                        <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
+                    </p>
+                </div>
+            </div>
+            <div class="ladoderecho">
+                <center><img alt="Servicios de Reparación" src="~/Imagenes/Visuals/categorias.jpg" /></center>
+
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="botones">
+                <button class="boton1">@Html.ActionLink("Editar servicio", "Edit", new { id = Model.id })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
+            </div>
+        </center>
+    </section>
+</main>
+
+
+
+
+
+
+@{
     ViewBag.Title = "Details";
 }
 

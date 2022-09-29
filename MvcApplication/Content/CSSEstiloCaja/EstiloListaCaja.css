@@ -136,30 +136,29 @@
 }
 
 .boton2 {
-   
-padding-left:5px;
-padding-right:5px;
-background-color: #1a8623;
-border-radius: 6px;
-border: unset;
-height: 39px;
-box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
- border: unset;
- z-index: 1;
- position: relative;
- font-weight: 1000;
- font-size: 17px;
- -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms;
- overflow: hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #1a8623;
+    border-radius: 6px;
+    border: unset;
+    height: 39px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    border: unset;
+    z-index: 1;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
 }
 
-.boton2 a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
-    color: #ffffff;
-}
+    .boton2 a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        color: #ffffff;
+    }
 
     .boton2::before {
         content: "";
@@ -169,20 +168,20 @@ box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
         height: 100%;
         width: 0;
         border-radius: 6px;
-        background-color: orange;
+        background-color: #111111;
         z-index: -1;
         -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
         box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
         transition: all 250ms
     }
 
-.boton2:hover {
-    color: orangered;
-}
-
-    .boton2:hover::before {
-        width: 100%;
+    .boton2:hover {
+        color: #0a0a0a;
     }
+
+        .boton2:hover::before {
+            width: 100%;
+        }
 
 /*-----------Loader-------------*/
 
@@ -365,6 +364,7 @@ box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
     width: 30%;
 }
 
-.boton3:hover{
-    background-color:orangered;
-}
+    .boton3:hover {
+        background-color: white;
+        color: black
+    }

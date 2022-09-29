@@ -139,7 +139,7 @@ namespace MvcApplication.Controllers
             return new SelectList(listaTipo, "id", "tipo", idRol);
         }
 
-        public void desabilitar(long id)
+        public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -153,6 +153,7 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(usu).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    return View("Index");
 
                 }
                 catch (Exception e)
