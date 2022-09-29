@@ -79,6 +79,7 @@
     <Compile Include="Models\Ingreso.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\MyContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
