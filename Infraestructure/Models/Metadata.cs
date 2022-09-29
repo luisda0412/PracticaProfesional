@@ -23,9 +23,6 @@ namespace Infraestructure.Models
         public Nullable<int> stock { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
-
-        [DisplayFormat(ApplyFormatInEditMode =true)]
-        public virtual ICollection<Proveedor> Proveedor { get; set; }
     }
 
     internal partial class Caja_ChicaMetadata
