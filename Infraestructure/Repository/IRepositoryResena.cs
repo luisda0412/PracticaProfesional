@@ -12,5 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<Resena> GetResena();
         Resena GetResenaByID(int id);
         Resena Save(Resena resena);
+
+        void Eliminar(long id);
     }
 }

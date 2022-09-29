@@ -12,6 +12,28 @@ namespace Infraestructure.Repository
 {
     public class RepositoryResena : IRepositoryResena
     {
+        public void Eliminar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Resena res = cdt.Resena.Find(id);
+                    cdt.Resena.Remove(res);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
         public IEnumerable<Resena> GetResena()
         {
             try

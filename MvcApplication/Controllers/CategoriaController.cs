@@ -170,5 +170,30 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Categoria cat = cdt.Categoria.Where(x => x.id == id).FirstOrDefault();
+                    cat.estado = !cat.estado;
+                    cdt.Categoria.Add(cat);
+
+                    cdt.Entry(cat).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
     }
 }

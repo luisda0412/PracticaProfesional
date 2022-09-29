@@ -61,5 +61,28 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
+
+
+        public ActionResult Eliminar(int? id)
+        {
+            MemoryStream target = new MemoryStream();
+            IServiceResena _ServiceResena = new ServiceResena();
+            try
+            {
+
+                _ServiceResena.Eliminar((long)id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
     }
 }

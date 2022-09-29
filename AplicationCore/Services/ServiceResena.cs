@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceResena : IServiceResena
     {
+        public void Eliminar(long id)
+        {
+            IRepositoryResena repository = new RepositoryResena();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Resena> GetResena()
         {
             IRepositoryResena repository = new RepositoryResena();

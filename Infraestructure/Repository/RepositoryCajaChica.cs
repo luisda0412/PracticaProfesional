@@ -25,6 +25,27 @@ namespace Infraestructure.Repository
             return lista;
         }
 
+        public void Eliminar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Caja_Chica caja = cdt.Caja_Chica.Find(id);
+                    cdt.Caja_Chica.Remove(caja);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
         public IEnumerable<Caja_Chica> GetCajaChica()
         {
             try

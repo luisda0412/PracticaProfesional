@@ -13,5 +13,7 @@ namespace Infraestructure.Repository
         Caja_Chica GetCajaChicaByID(int id);
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);
         void Save(Caja_Chica caja, string[] usuario);
+        void Eliminar(int id);
+
     }
 }

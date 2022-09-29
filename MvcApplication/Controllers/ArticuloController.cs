@@ -230,6 +230,30 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewArticulo", lista);
         }
 
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Articulo art = cdt.Articulo.Where(x => x.id == id).FirstOrDefault();
+                    art.estado = !art.estado;
+                    cdt.Articulo.Add(art);
+                    cdt.Entry(art).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
 
     }
 }

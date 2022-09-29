@@ -148,6 +148,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        /*
         public ActionResult EliminarServicio(int? id)
         {
             MemoryStream target = new MemoryStream();
@@ -167,6 +168,34 @@ namespace MvcApplication.Controllers
                 TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
+            }
+        }
+
+        */
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Servicio_Reparacion serv = cdt.Servicio_Reparacion.Where(x => x.id == id).FirstOrDefault();
+                    serv.estado = !serv.estado;
+                    cdt.Servicio_Reparacion.Add(serv);
+
+                    cdt.Entry(serv).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
             }
         }
 

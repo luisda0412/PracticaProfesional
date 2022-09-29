@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceCajaChica : IServiceCajaChica
     {
+        public void Eliminar(int id)
+        {
+            IRepositoryCajaChica repository = new RepositoryCajaChica();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha)
         {
             IRepositoryCajaChica repository = new RepositoryCajaChica();

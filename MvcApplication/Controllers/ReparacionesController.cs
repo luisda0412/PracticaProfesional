@@ -111,7 +111,32 @@ namespace MvcApplication.Controllers
             }
         }
 
- 
+        public void desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Reparaciones repa = cdt.Reparaciones.Where(x => x.id == id).FirstOrDefault();
+                    repa.estado = !repa.estado;
+                    cdt.Reparaciones.Add(repa);
+
+                    cdt.Entry(repa).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
+
 
 
     }
