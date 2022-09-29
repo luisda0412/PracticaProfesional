@@ -41,6 +41,7 @@
             <h4 id="titulo">Modificar el registro</h4>
             <br />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id)
 
             <div class="secciones">
                 <div class="seccion1">
@@ -106,7 +107,6 @@
                 }
                 <div class="seccion2">
                     <div class="form-group2">
-
                         <input type="submit" value="Guardar Registro" class="btn" />
                         <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index")</button>
                     </div>
