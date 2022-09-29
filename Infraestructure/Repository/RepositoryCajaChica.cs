@@ -83,7 +83,7 @@ namespace Infraestructure.Repository
             return oCaja;
         }
 
-        public void Save(Caja_Chica caja, string[] usuario)
+        public void Save(Caja_Chica caja)
         {
             Caja_Chica cajaexist = GetCajaChicaByID(caja.id);
 

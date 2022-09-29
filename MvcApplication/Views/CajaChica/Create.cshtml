@@ -1,0 +1,127 @@
+﻿@model Infraestructure.Models.Caja_Chica
+
+@{
+    ViewBag.Title = "Agregar Caja";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloCaja/EstiloCreate.css">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Agregar un nuevo arqueo
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper12.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+
+<main>
+    <center>
+        @using (Html.BeginForm("Save", "CajaChica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 id="titulo">Información del registro de caja</h4>
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="secciones">
+        <div class="seccion1">
+            <section class="cuerpoleft">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.monedas, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.monedas, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.monedas, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.billetes, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.billetes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.billetes, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </section>
+            <section class="cuerporight">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.efectivo_total, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.efectivo_total, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.efectivo_total, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tipo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.RadioButtonFor(model => model.tipo, true, new { id = "married-true" })
+                        @Html.Label("married-true", "Apertura")
+                        @Html.RadioButtonFor(model => model.tipo, false, new { id = "married-false" })
+                        @Html.Label("married-true", "Cierre")
+                        @Html.ValidationMessageFor(model => model.tipo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </section>
+        </div>
+        @{
+            string nombre = "Sesión no iniciada";
+            string email = "Perfil";
+            int id = 0;
+            Infraestructure.Models.Usuario oUsuario;
+            //Validar si existe en la sesión
+            if (Session["User"] != null)
+            {
+                oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                if (oUsuario != null)
+                {
+                    nombre = $"{oUsuario.nombre}";
+                    email = oUsuario.correo_electronico;
+                    id = oUsuario.id;
+                    ViewBag.idUser = id;
+
+                    TempData["idUser"] = id;
+
+                }
+            }
+        }
+        <div class="seccion2">
+            <div class="form-group2">
+
+                <input type="submit" value="Guardar Registro" class="btn" />
+                <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index")</button>
+            </div>
+        </div>
+        <br />
+    </div>
+        }
+        <br />
+        <br />
+    </center>
+</main>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

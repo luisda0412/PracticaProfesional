@@ -12,7 +12,7 @@ namespace AplicationCore.Services
         IEnumerable<Caja_Chica> GetCajaChica();
         Caja_Chica GetCajaChicaByID(int id);
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);
-        void Save(Caja_Chica caja, string[] usuario);
+        void Save(Caja_Chica caja);
 
         void Eliminar(int id);
     }

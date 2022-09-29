@@ -121,10 +121,10 @@
 }
 
 /*BOTONES----------------------------------------------------------------------*/
-.botones_producto {
+.botones {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width:80%;
 }
 
 .boton1 a {
@@ -132,7 +132,7 @@
     color: black;
 }
 
-.boton1 {
+.boton1{
     text-decoration: none;
     padding: 15px 25px;
     border: unset;

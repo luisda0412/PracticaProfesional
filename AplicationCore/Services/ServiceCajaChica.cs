@@ -34,10 +34,10 @@ namespace AplicationCore.Services
             return repository.GetCajaChicaByID(id);
         }
 
-        public void Save(Caja_Chica caja, string[] usuario)
+        public void Save(Caja_Chica caja)
         {
             IRepositoryCajaChica repository = new RepositoryCajaChica();
-            repository.Save(caja, usuario);
+            repository.Save(caja);
         }
     }
 }

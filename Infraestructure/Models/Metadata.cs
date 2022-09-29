@@ -31,14 +31,16 @@ namespace Infraestructure.Models
         public int id { get; set; }
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
-        [Display(Name = "Total de efectivo")]
+        [Display(Name = "Monto Efectivo")]
         public Nullable<double> efectivo_total { get; set; }
-        [Display(Name = "Total de billetes")]
+        [Display(Name = "Monto Billetes")]
         public Nullable<double> billetes { get; set; }
-        [Display(Name = "Total monedas")]
+        [Display(Name = "Monto Monedas")]
         public Nullable<double> monedas { get; set; }
         [Display(Name = "Usuario")]
         public Nullable<int> usuario_id { get; set; }
+        [Display(Name = "Tipo de arqueo")]
+        public Nullable<bool> tipo { get; set; }
 
         public virtual Usuario Usuario { get; set; }
     }

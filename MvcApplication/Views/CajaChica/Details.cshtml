@@ -1,0 +1,67 @@
+﻿@model Infraestructure.Models.Caja_Chica
+
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloCaja/EstiloDetalleCaja.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Detalle del registro
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="tarjeta">
+            <div class="ladoizquierdo">
+                <center>
+                    <h3>Registro de caja</h3>
+                </center>
+                <div class="texto">
+                    <p class="">
+                        <b>@Html.DisplayNameFor(model => model.tipo):</b>@Html.DisplayFor(model => model.tipo)<br />
+                        <b>@Html.DisplayNameFor(model => model.monedas):</b> @Html.DisplayFor(model => model.monedas)<br />
+                        <b>@Html.DisplayNameFor(model => model.billetes):</b> @Html.DisplayFor(model => model.billetes)<br />
+                        <b>@Html.DisplayNameFor(model => model.efectivo_total):</b> @Html.DisplayFor(model => model.efectivo_total)<br />
+                        <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
+                        <b>@Html.DisplayNameFor(model => model.Usuario):</b> @Html.DisplayFor(model => model.Usuario.nombre)<br />
+                    </p>
+                </div>
+            </div>
+            <div class="ladoderecho">
+                <center><img alt="Cierre o Apertura de caja" src="~/Imagenes/Visuals/caja-chica.jpg" /></center>
+                
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="botones">
+                <button class="boton1">@Html.ActionLink("Editar arqueo", "Edit", new { id = Model.id })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
+            </div>
+        </center>
+    </section>
+</main>

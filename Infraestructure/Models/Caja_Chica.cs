@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(Caja_ChicaMetadata))]
     public partial class Caja_Chica
     {
         public int id { get; set; }

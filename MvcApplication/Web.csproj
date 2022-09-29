@@ -206,6 +206,8 @@
     <Content Include="Content\CSSEstiloArticulos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloListaArticulos.css" />
+    <Content Include="Content\CSSEstiloCaja\EstiloCreate.css" />
+    <Content Include="Content\CSSEstiloCaja\EstiloDetalleCaja.css" />
     <Content Include="Content\CSSEstiloCaja\EstiloListaCaja.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloListaCategorias.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
@@ -252,6 +254,7 @@
     <Content Include="Imagenes\Logos\logofooter.png" />
     <Content Include="Imagenes\Logos\logoIcono.png" />
     <Content Include="Imagenes\Logos\logomenu.png" />
+    <Content Include="Imagenes\Visuals\caja-chica.jpg" />
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />
     <Content Include="Imagenes\Visuals\wallpaper12.png" />
@@ -438,6 +441,9 @@
     <Content Include="Views\Reparaciones\CreateReporte.cshtml" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
+    <Content Include="Views\CajaChica\Create.cshtml" />
+    <Content Include="Views\CajaChica\Edit.cshtml" />
+    <Content Include="Views\CajaChica\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
