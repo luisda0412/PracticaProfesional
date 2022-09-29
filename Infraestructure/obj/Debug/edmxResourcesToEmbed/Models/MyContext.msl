@@ -23,6 +23,8 @@
           <ScalarProperty Name="billetes" ColumnName="billetes" />
           <ScalarProperty Name="monedas" ColumnName="monedas" />
           <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="tipo" ColumnName="tipo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -111,6 +113,7 @@
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="monto_total" ColumnName="monto_total" />
           <ScalarProperty Name="entregaestimada" ColumnName="entregaestimada" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

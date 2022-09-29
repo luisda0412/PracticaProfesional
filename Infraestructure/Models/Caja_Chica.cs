@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(Caja_ChicaMetadata))]
+    
     public partial class Caja_Chica
     {
         public int id { get; set; }
@@ -22,6 +20,8 @@ namespace Infraestructure.Models
         public Nullable<double> billetes { get; set; }
         public Nullable<double> monedas { get; set; }
         public Nullable<int> usuario_id { get; set; }
+        public Nullable<bool> tipo { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         public virtual Usuario Usuario { get; set; }
     }

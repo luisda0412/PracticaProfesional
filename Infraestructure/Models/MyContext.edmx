@@ -27,6 +27,8 @@
           <Property Name="billetes" Type="float" />
           <Property Name="monedas" Type="float" />
           <Property Name="usuario_id" Type="int" />
+          <Property Name="tipo" Type="bit" />
+          <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="Categoria">
           <Key>
@@ -116,6 +118,7 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="monto_total" Type="float" />
           <Property Name="entregaestimada" Type="nvarchar" MaxLength="30" />
+          <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="Reportes_Tecnicos">
           <Key>
@@ -534,6 +537,8 @@
           <Property Name="billetes" Type="Double" />
           <Property Name="monedas" Type="Double" />
           <Property Name="usuario_id" Type="Int32" />
+          <Property Name="tipo" Type="Boolean" />
+          <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Usuario" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Caja_Chica" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Categoria">
@@ -629,6 +634,7 @@
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="monto_total" Type="Double" />
           <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Reparaciones" ToRole="Usuario" />
           <NavigationProperty Name="Reportes_Tecnicos" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reparaciones" ToRole="Reportes_Tecnicos" />
@@ -1035,6 +1041,8 @@
                 <ScalarProperty Name="billetes" ColumnName="billetes" />
                 <ScalarProperty Name="monedas" ColumnName="monedas" />
                 <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1123,6 +1131,7 @@
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
                 <ScalarProperty Name="entregaestimada" ColumnName="entregaestimada" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

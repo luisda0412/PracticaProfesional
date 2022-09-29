@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(ReparacionesMetadata))]
+    
     public partial class Reparaciones
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,6 +30,7 @@ namespace Infraestructure.Models
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
         public string entregaestimada { get; set; }
+        public Nullable<bool> estado { get; set; }
     
         public virtual Servicio_Reparacion Servicio_Reparacion { get; set; }
         public virtual Usuario Usuario { get; set; }

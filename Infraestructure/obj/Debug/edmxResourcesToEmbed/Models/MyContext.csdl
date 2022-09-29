@@ -27,6 +27,8 @@
     <Property Name="billetes" Type="Double" />
     <Property Name="monedas" Type="Double" />
     <Property Name="usuario_id" Type="Int32" />
+    <Property Name="tipo" Type="Boolean" />
+    <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Usuario" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Caja_Chica" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Categoria">
@@ -122,6 +124,7 @@
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
     <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
     <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Reparaciones" ToRole="Usuario" />
     <NavigationProperty Name="Reportes_Tecnicos" Relationship="Self.Reportes_Tecnicos_Reparacion_FK" FromRole="Reparaciones" ToRole="Reportes_Tecnicos" />
