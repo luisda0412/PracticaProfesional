@@ -37,7 +37,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
             @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Habilitar/Desabilitar proveedor", "desabilitar", "Proveedor", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
+            @Html.ActionLink("Habilitar/Desabilitar proveedor", "EliminarProveedor", "Proveedor", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
         </td>
     </tr>
 }

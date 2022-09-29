@@ -13,5 +13,6 @@ namespace AplicationCore.Services
         Articulo GetReparacionByID(int id);
         IEnumerable<Reparaciones> GetReparacionByNombre(String nombre);
         void Save(Reparaciones reparacion);
+        void Eliminar(int id);
     }
 }

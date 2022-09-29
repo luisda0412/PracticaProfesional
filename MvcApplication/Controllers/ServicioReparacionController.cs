@@ -148,28 +148,25 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public void desabilitar(long id)
+        public ActionResult EliminarServicio(int? id)
         {
-            using (MyContext cdt = new MyContext())
+            MemoryStream target = new MemoryStream();
+            IServiceServicio _ServiceServicio = new ServiceServicio();
+            try
             {
-                cdt.Configuration.LazyLoadingEnabled = false;
 
-                try
-                {
-                    Servicio_Reparacion servicio= cdt.Servicio_Reparacion.Where(x => x.id == id).FirstOrDefault();
-                    servicio.estado = !servicio.estado;
-                    cdt.Servicio_Reparacion.Add(servicio);
-
-                    cdt.Entry(servicio).State = EntityState.Modified;
-                    cdt.SaveChanges();
-
-                }
-                catch (Exception e)
-                {
-                    string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                    throw;
-                }
+                _ServiceServicio.Eliminar((int)id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Servicio_Reparacion";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
 

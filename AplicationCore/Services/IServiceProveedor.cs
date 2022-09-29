@@ -13,5 +13,6 @@ namespace AplicationCore.Services
         Proveedor GetProveedorByID(long id);
         IEnumerable<Proveedor> GetProveedorByNombre(String nombre);
         void Save(Proveedor prov);
+        void Eliminar(int id);
     }
 }

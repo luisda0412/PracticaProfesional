@@ -33,5 +33,11 @@ namespace AplicationCore.Services
             IRepositoryServicio repository = new RepositoryServicio();
             repository.Save(service);
         }
+
+        public void Eliminar(int id)
+        {
+            IRepositoryServicio repository = new RepositoryServicio();
+            repository.Eliminar(id);
+        }
     }
 }

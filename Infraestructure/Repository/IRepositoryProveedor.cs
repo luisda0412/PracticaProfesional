@@ -13,5 +13,6 @@ namespace Infraestructure.Repository
         Proveedor GetProveedorByID(long id);
         void Save(Proveedor prov);
         IEnumerable<Proveedor> GetProveedorByNombre(String nombre);
+        void Eliminar(int id);
     }
 }

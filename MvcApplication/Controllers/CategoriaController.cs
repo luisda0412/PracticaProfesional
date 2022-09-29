@@ -149,28 +149,25 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public void desabilitar(long id)
+        public ActionResult EliminarCategoria(int? id)
         {
-            using (MyContext cdt = new MyContext())
+            MemoryStream target = new MemoryStream();
+            IServiceCategoria _ServiceCategoria = new ServiceCategoria();
+            try
             {
-                cdt.Configuration.LazyLoadingEnabled = false;
 
-                try
-                {
-                    Categoria cat = cdt.Categoria.Where(x => x.id == id).FirstOrDefault();
-                    cat.estado = !cat.estado;
-                    cdt.Categoria.Add(cat);
-
-                    cdt.Entry(cat).State = EntityState.Modified;
-                    cdt.SaveChanges();
-
-                }
-                catch (Exception e)
-                {
-                    string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                    throw;
-                }
+                _ServiceCategoria.Eliminar((int)id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
             }
         }
     }

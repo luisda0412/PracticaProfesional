@@ -12,6 +12,28 @@ namespace Infraestructure.Repository
 {
     public class RepositoryCategoria : IRepositoryCategoria
     {
+        public void Eliminar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+
+                    Categoria cat = cdt.Categoria.Where(a => a.id == id).FirstOrDefault();
+                    cdt.Categoria.Remove(cat);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
         public IEnumerable<Categoria> GetCategoria()
         {
             IEnumerable<Categoria> lista = null;

@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceProveedor : IServiceProveedor
     {
+        public void Eliminar(int id)
+        {
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Proveedor> GetProveedor()
         {
             IRepositoryProveedor repository = new RepositoryProveedor();

@@ -12,6 +12,11 @@ namespace Infraestructure.Repository
 {
     public class RepositoryReparaciones : IRepositoryReparaciones
     {
+        public void Eliminar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Reparaciones> GetReparacion()
         {
             try

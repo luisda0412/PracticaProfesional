@@ -110,7 +110,7 @@
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    @Html.ActionLink("Habilitar/Desabilitar categoria", "desabilitar", "Categoria", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
+                                    @Html.ActionLink("Habilitar/Desabilitar categoria", "EliminarCategoria", "Categoria", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
                                 </td>
                             </tr>
                         }

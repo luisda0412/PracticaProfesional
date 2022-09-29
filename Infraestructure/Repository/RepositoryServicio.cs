@@ -94,5 +94,27 @@ namespace Infraestructure.Repository
                 }
             }
         }
+
+        public void Eliminar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+
+                    Servicio_Reparacion serv = cdt.Servicio_Reparacion.Where(a => a.id == id).FirstOrDefault();
+                    cdt.Servicio_Reparacion.Remove(serv);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
     }
 }

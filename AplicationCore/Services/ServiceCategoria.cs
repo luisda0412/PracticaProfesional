@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceCategoria : IServiceCategoria
     {
+        public void Eliminar(int id)
+        {
+            IRepositoryCategoria repository = new RepositoryCategoria();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Categoria> GetCategoria()
         {
             IRepositoryCategoria repository = new RepositoryCategoria();

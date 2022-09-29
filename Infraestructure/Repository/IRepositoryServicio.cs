@@ -16,5 +16,6 @@ namespace Infraestructure.Repository
         Servicio_Reparacion GetServicioByID(int id);
 
         IEnumerable<Servicio_Reparacion> GetServicioByDescripcion(String nombre);
+        void Eliminar(int id);
     }
 }

@@ -13,5 +13,6 @@ namespace AplicationCore.Services
         Categoria GetCategoriaByID(int id);
         void Save(Categoria categoria);
         IEnumerable<Categoria> GetCategoriaByNombre(String nombre);
+        void Eliminar(int id);
     }
 }

@@ -11,6 +11,28 @@ namespace Infraestructure.Repository
 {
     public class RepositoryProveedor : IRepositoryProveedor
     {
+        public void Eliminar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+
+                    Proveedor prov= cdt.Proveedor.Where(a => a.id == id).FirstOrDefault();
+                    cdt.Proveedor.Remove(prov);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
         public IEnumerable<Proveedor> GetProveedor()
         {
             IEnumerable<Proveedor> lista = null;
