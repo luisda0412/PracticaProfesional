@@ -139,9 +139,17 @@
     padding-right: 5px;
     background-color: #1a8623;
     border-radius: 6px;
-    border:unset;
+    border: unset;
     height: 39px;
     box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    border: unset;
+    z-index: 1;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
 }
 
     .boton2 a {
@@ -151,10 +159,28 @@
         color: #ffffff;
     }
 
-    .boton2:hover {
-        background-color: #272626;
+    .boton2::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 6px;
+        background-color: #111111;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
     }
 
+    .boton2:hover {
+        color: #0a0a0a;
+    }
+
+        .boton2:hover::before {
+            width: 100%;
+        }
 /*Tarjeta de buscar*/
 .card-header {
     font-family: 'Agency FB';
@@ -179,7 +205,8 @@
 }
 
     .boton3:hover {
-        background-color: orangered;
+        background-color: white;
+        color: black
     }
 
 /*-----------Loader-------------*/

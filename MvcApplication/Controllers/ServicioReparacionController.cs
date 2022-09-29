@@ -188,7 +188,7 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(serv).State = EntityState.Modified;
                     cdt.SaveChanges();
-                    return View("Index");
+                    return RedirectToAction("Index");
 
                 }
                 catch (Exception e)

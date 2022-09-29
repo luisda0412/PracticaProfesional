@@ -42,13 +42,13 @@
                 <div class="texto">
                     <p class="">
                         <b>@Html.DisplayNameFor(model => model.descripcion):</b> @Html.DisplayFor(model => model.descripcion)<br />
-                        <b>@Html.DisplayNameFor(model => model.costo):</b>@Html.DisplayFor(model => model.costo)<br />
+                        <b>@Html.DisplayNameFor(model => model.costo):</b> &cent;@Html.DisplayFor(model => model.costo)<br />
                         <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
                     </p>
                 </div>
             </div>
             <div class="ladoderecho">
-                <center><img alt="Servicios de Reparación" src="~/Imagenes/Visuals/categorias.jpg" /></center>
+                <center><img alt="Servicios de Reparación" src="~/Imagenes/Visuals/servicios.jpg"/></center>
 
             </div>
         </div>
@@ -61,49 +61,3 @@
         </center>
     </section>
 </main>
-
-
-
-
-
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>Servicio_Reparacion</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.costo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.costo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

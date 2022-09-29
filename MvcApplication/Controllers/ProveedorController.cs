@@ -165,7 +165,7 @@ namespace MvcApplication.Controllers
                     cdt.Proveedor.Add(pro);
                     cdt.Entry(pro).State = EntityState.Modified;
                     cdt.SaveChanges();
-                    return View("Index");
+                    return RedirectToAction("Index");
 
                 }
                 catch (Exception e)

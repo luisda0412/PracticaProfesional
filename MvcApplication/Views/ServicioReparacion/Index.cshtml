@@ -17,7 +17,7 @@
             </div>
             <br />
             <h2>
-                Lista de servicios...
+                Lista de servicios
             </h2>
 
         </div>
@@ -38,13 +38,13 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Servicios Disponibles</h2>
+                    <h2 class="titulo">Servicios de reparación disponibles</h2>
                     <button class="boton1"><p>@Html.ActionLink("Crear un nuevo servicio", "Create")</p></button>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
                         <h5 class="card-header">Buscar servicio por nombre</h5>
-                        @using (Ajax.BeginForm("buscarServicioxDescripcion", "ServicioReparacion", new AjaxOptions
+                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -54,7 +54,7 @@
                         {
                             <div class="card-body">
                                 <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "descripción" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
 
                                     <button type="submit" class="boton3">Buscar</button>
 
@@ -107,16 +107,15 @@
                                     @Html.DisplayFor(modelItem => item.descripcion)
                                 </td>
                                 <td>
-                                    &cent; @Html.DisplayFor(modelItem => item.costo)
+                                    &cent;@Html.DisplayFor(modelItem => item.costo)
                                 </td>
                                 <td>
-                                @Html.DisplayNameFor(model => model.estado)
+                                    @Html.DisplayFor(modelItem => item.estado)
                                 </td>
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
                                     <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id })</button>
-                                    @Html.ActionLink("Habilitar/Desabilitar", "desabilitar", "ServicioReparacion", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
                                 </td>
                             </tr>
                         }
@@ -129,4 +128,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryajax")
 }
-

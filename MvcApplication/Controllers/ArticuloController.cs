@@ -242,7 +242,8 @@ namespace MvcApplication.Controllers
                     cdt.Articulo.Add(art);
                     cdt.Entry(art).State = EntityState.Modified;
                     cdt.SaveChanges();
-                    return View("Index");
+                    return RedirectToAction("Index");
+
 
                 }
                 catch (Exception e)
