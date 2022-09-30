@@ -12,5 +12,7 @@ namespace AplicationCore.Services
     {
         IEnumerable<Empresa> GetEmpresa();
         void Save(Empresa empresa);
+
+        Empresa GetEmpresaByID(int id);
     }
 }

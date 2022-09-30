@@ -1,0 +1,370 @@
+﻿main {
+    background-color: white;
+    margin:auto;
+}
+
+.desarrollo {
+    width: 85%;
+    margin: auto;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 380px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 380px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+.izquieroHeader img {
+        justify-content: center;
+  
+}
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 18%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        margin-top: 10%;
+        height: 240px;
+        width: 100%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+/*Desarrollo-----------------------------------------------------------*/
+
+.elementos1{
+
+    margin:auto;
+    width:50%;
+}
+
+.elementos1 .elementoizquierdo{
+    width:50%;  
+}
+
+.titulo {
+    background-color: #1a8623;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top:3%;  
+    text-align:center;
+}
+.boton1 {
+    padding: 10px;
+    background-color: #272626;
+    border-radius: 6px;
+    border: 2px solid #000000;
+    height: 50px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    margin-top: 6%;
+}
+
+.boton1 a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.boton1:hover {
+    background-color: #1a8623;
+}
+
+/*TABLA---------------------------------------------------------------------*/
+
+.table {
+    width: 75%;
+    box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
+    text-align: center;
+    border-radius: 8px;
+    
+}
+
+.table td{
+       font-weight:500;
+}
+
+.columnabotones {
+    display: flex;
+    justify-content: space-around;
+}
+
+.boton2 {
+   
+padding-left:5px;
+padding-right:5px;
+background-color: #1a8623;
+border-radius: 6px;
+border: unset;
+height: 39px;
+box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+ border: unset;
+ z-index: 1;
+ position: relative;
+ font-weight: 1000;
+ font-size: 17px;
+ -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+ transition: all 250ms;
+ overflow: hidden;
+}
+
+.boton2 a {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+    .boton2::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 6px;
+        background-color: #111111;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+.boton2:hover {
+    color: #0a0a0a;
+
+}
+
+    .boton2:hover::before {
+        width: 100%;
+    }
+/*Tarjeta de buscar*/
+.card-header {
+    font-family: 'Agency FB';
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.my-4 {
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+}
+
+.boton3 {
+    font-family: 'Agency FB';
+   
+    background-color: #1a8623;
+    border-radius: 0px;
+    border: 2px solid #000000;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    font-weight: bold;
+    font-size: 20px;
+    color: #ffffff;
+    width: 30%;
+}
+
+.boton3:hover{
+    background-color:white;
+    color:black
+}
+/*-----------Loader-------------*/
+
+/* From uiverse.io by @mobinkakei */
+.loader {
+    --path: #2f3545;
+    --dot: #05e217;
+    --duration: 3s;
+    width: 44px;
+    height: 44px;
+    position: relative;
+}
+
+    .loader:before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        position: absolute;
+        display: block;
+        background: var(--dot);
+        top: 37px;
+        left: 19px;
+        transform: translate(-18px, -18px);
+        animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+    }
+
+    .loader svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+        .loader svg rect, .loader svg polygon, .loader svg circle {
+            fill: none;
+            stroke: var(--path);
+            stroke-width: 10px;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+        }
+
+        .loader svg polygon {
+            stroke-dasharray: 145 76 145 76;
+            stroke-dashoffset: 0;
+            animation: pathTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg rect {
+            stroke-dasharray: 192 64 192 64;
+            stroke-dashoffset: 0;
+            animation: pathRect 3s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+        .loader svg circle {
+            stroke-dasharray: 150 50 150 50;
+            stroke-dashoffset: 75;
+            animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+    .loader.triangle {
+        width: 48px;
+    }
+
+        .loader.triangle:before {
+            left: 21px;
+            transform: translate(-10px, -18px);
+            animation: dotTriangle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
+        }
+
+@keyframes pathTriangle {
+    33% {
+        stroke-dashoffset: 74;
+    }
+
+    66% {
+        stroke-dashoffset: 147;
+    }
+
+    100% {
+        stroke-dashoffset: 221;
+    }
+}
+
+@keyframes dotTriangle {
+    33% {
+        transform: translate(0, 0);
+    }
+
+    66% {
+        transform: translate(10px, -18px);
+    }
+
+    100% {
+        transform: translate(-10px, -18px);
+    }
+}
+
+@keyframes pathRect {
+    25% {
+        stroke-dashoffset: 64;
+    }
+
+    50% {
+        stroke-dashoffset: 128;
+    }
+
+    75% {
+        stroke-dashoffset: 192;
+    }
+
+    100% {
+        stroke-dashoffset: 256;
+    }
+}
+
+@keyframes dotRect {
+    25% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(18px, -18px);
+    }
+
+    75% {
+        transform: translate(0, -36px);
+    }
+
+    100% {
+        transform: translate(-18px, -18px);
+    }
+}
+
+@keyframes pathCircle {
+    25% {
+        stroke-dashoffset: 125;
+    }
+
+    50% {
+        stroke-dashoffset: 175;
+    }
+
+    75% {
+        stroke-dashoffset: 225;
+    }
+
+    100% {
+        stroke-dashoffset: 275;
+    }
+}
+
+.loader {
+    display: inline-block;
+    margin: 0 16px;
+}
+
+ 

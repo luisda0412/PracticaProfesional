@@ -11,7 +11,7 @@ using System.Web.Mvc;
 using Infraestructure.Models;
 using Web.Utils;
 using System.IO;
-
+using Web.Security;
 
 namespace MvcApplication.Controllers
 {
@@ -37,7 +37,131 @@ namespace MvcApplication.Controllers
             }
             return View(lista);
         }
-        
+
+        [HttpPost]
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Save(Reparaciones repa)
+        {
+            MemoryStream target = new MemoryStream();
+            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
+            try
+            {
+
+                _ServiceReparaciones.Save(repa);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Proveedor";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult Edit(int? id)
+        {
+            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
+            Reparaciones prov = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                prov = _ServiceReparaciones.GetReparacionByID(id.Value);
+
+                if (prov == null)
+                {
+                    TempData["Message"] = "No existe el proveedor solicitado";
+                    TempData["Redirect"] = "Proveedor";
+                    TempData["Redirect-Action"] = "Index";
+                    // Redireccion a la captura del Error
+                    return RedirectToAction("Default", "Error");
+                }
+
+                return View(prov);
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Rol";
+                TempData["Redirect-Action"] = "Index";
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult Details(int? id)
+        {
+            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
+            Reparaciones repa = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                repa = _ServiceReparaciones.GetReparacionByID(id.Value);
+
+                if (repa == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(repa);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("IndexAdmin");
+            }
+        }
+
+        public ActionResult desabilitar(long id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Reparaciones repa = cdt.Reparaciones.Where(x => x.id == id).FirstOrDefault();
+                    repa.estado = !repa.estado;
+                    cdt.Reparaciones.Add(repa);
+                    cdt.Entry(repa).State = EntityState.Modified;
+                    cdt.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
+
 
 
         //Reportes Tecnicos--------------------------------------------------

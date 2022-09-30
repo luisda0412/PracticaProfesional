@@ -16,9 +16,16 @@ namespace AplicationCore.Services
             return repository.GetEmpresa();
         }
 
+        public Empresa GetEmpresaByID(int id)
+        {
+            IRepositoryEmpresa repository = new RepositoryEmpresa();
+            return repository.GetEmpresaByID(id);
+        }
+
         public void Save(Empresa empresa)
         {
-            throw new NotImplementedException();
+            IRepositoryEmpresa repository = new RepositoryEmpresa();
+            repository.Save(empresa);
         }
     }
 }

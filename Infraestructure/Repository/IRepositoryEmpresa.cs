@@ -11,5 +11,8 @@ namespace Infraestructure.Repository
     {
         IEnumerable<Empresa> GetEmpresa();
         void Save(Empresa empresa);
+        Empresa GetEmpresaByID(int id);
+   
+
     }
 }

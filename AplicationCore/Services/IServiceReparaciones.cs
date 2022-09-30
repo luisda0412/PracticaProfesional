@@ -10,7 +10,7 @@ namespace AplicationCore.Services
     public interface IServiceReparaciones
     {
         IEnumerable<Reparaciones> GetReparacion();
-        Articulo GetReparacionByID(int id);
+        Reparaciones GetReparacionByID(int id);
         IEnumerable<Reparaciones> GetReparacionByNombre(String nombre);
         void Save(Reparaciones reparacion);
         void Eliminar(int id);

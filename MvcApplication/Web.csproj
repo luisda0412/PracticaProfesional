@@ -212,11 +212,15 @@
     <Content Include="Content\CSSEstiloCategoria\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloDetalleCategoria.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloListaCategorias.css" />
+    <Content Include="Content\CSSEstiloEmpresa\EstiloCreate.css" />
+    <Content Include="Content\CSSEstiloEmpresa\EstiloDetalleEmpresa.css" />
+    <Content Include="Content\CSSEstiloEmpresa\EstiloListaEmpresa.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloDetalleProveedores.css" />
+    <Content Include="Content\CSSEstiloProveedores\EstiloListaproveedores.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloDetalleReparaciones.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloListaReparaciones.css" />
@@ -264,8 +268,10 @@
     <Content Include="Imagenes\Logos\logofooter.png" />
     <Content Include="Imagenes\Logos\logoIcono.png" />
     <Content Include="Imagenes\Logos\logomenu.png" />
+    <Content Include="Imagenes\Logos\logoPestaña.png" />
     <Content Include="Imagenes\Visuals\caja-chica.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
+    <Content Include="Imagenes\Visuals\proveedores.jpg" />
     <Content Include="Imagenes\Visuals\servicios.jpg" />
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />
@@ -456,6 +462,8 @@
     <Content Include="Views\CajaChica\Create.cshtml" />
     <Content Include="Views\CajaChica\Edit.cshtml" />
     <Content Include="Views\CajaChica\Details.cshtml" />
+    <Content Include="Views\Empresa\Details.cshtml" />
+    <Content Include="Views\Empresa\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

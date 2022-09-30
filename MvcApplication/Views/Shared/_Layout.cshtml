@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - VYCUZ</title>
-    <link rel="shortcut icon" href="~/Imagenes/Logos/iconoVYCUZ.png" type="image/x-icon">
+    <link rel="shortcut icon" href="~/Imagenes/Logos/logoPestaña.png" type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/CSSEstiloLayout/EstiloLayout.css">
@@ -30,23 +30,19 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                         <div class="dropdown-menu">
                             @Html.ActionLink("Artículos", "Index", "Articulo", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Reseñas", "Index", "Resenas", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Servicios", "Index", "ServicioReparacion", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Categorías", "Index", "Categoria", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Reparaciones", "Index", "Reparaciones", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Proveedores", "Index", "Proveedor", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Caja Chica", "Index", "CajaChica", null, new { @class = "dropdown-item" })
-                            @Html.ActionLink("Ventas", "Index", "Venta", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Empresa", "Index", "Empresa", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { area = "" }, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", new { area = "" }, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Tokens", "Tokens", "Account", new { area = "" }, new { @class = "nav-link" })
-                    </li>
+
 
                     <!--Para el Login VYCUZ-->
                     @{
@@ -66,13 +62,13 @@
                             }
                         }
                     }
-                    <li class="nav-item dropdown ">
-                        <a class=" btn btn-primary nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+                    <li class="nav-item dropdown" id="login">
+                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
 
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" id="login">
                             @if (Session["User"] != null)
                             {
-                                <div class="dropdown-item">
+                                <div class="login">
                                     @* Nombre Usuario *@
                                     Usuario: @nombre
                                 </div>
@@ -121,7 +117,10 @@
                                 <div class="card-body">
                                     <div class="card-title">Sobre Nosotros</div>
                                     <div class="card-text">
-                                        Somos una empresa con gran auge en technologia actual y moderna, ubicados en 2 sucursales del pais hemos brindado una excelente atencion a nuestros clientes, y brindado productos de primera calidad entre ellos: consolas, videojuegos, componentes internos, computadoras, etc... compra con nosotros y viví la experiencia AFK.
+                                        Somos una empresa con gran auge en ventas de dispositivos electrónicos, 
+                                        ubicados en el Cuty Mall de Alajuela hemos brindado una excelente atencion a nuestros clientes,
+                                        y brindado productos de primera calidad entre ellos: consolas, videojuegos, componentes internos, computadoras, luces, accesorios, etc... 
+                                        compra con nosotros y viví la experiencia VYCUZ.
                                     </div>
                                 </div>
                             </div>

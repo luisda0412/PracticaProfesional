@@ -1,10 +1,10 @@
-﻿@model Infraestructure.Models.Proveedor
+﻿@model Infraestructure.Models.Empresa
 
 @{
     ViewBag.Title = "Detalles";
 }
 
-<link rel="stylesheet" href="~/Content/CSSEstiloProveedores/EstiloDetalleProveedores.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloEmpresa/EstiloDetalleEmpresa.css">
 
 <section class="section_header">
     <br />
@@ -17,7 +17,7 @@
             </div>
             <br />
             <h2>
-                Detalle del proveedor
+                Detalles de la empresa
             </h2>
         </div>
         <div class="derechoHeader">
@@ -37,29 +37,27 @@
         <div class="tarjeta">
             <div class="ladoizquierdo">
                 <center>
-                    <h3>Proveedor</h3>
+                    <h3>Empresa VYCUZ</h3>
                 </center>
                 <div class="texto">
                     <p class="">
-                        <b>@Html.DisplayNameFor(model => model.descripcion):</b>@Html.DisplayFor(model => model.descripcion)<br />
+                        <b>@Html.DisplayNameFor(model => model.nombre):</b> @Html.DisplayFor(model => model.nombre)<br />
                         <b>@Html.DisplayNameFor(model => model.telefono):</b> @Html.DisplayFor(model => model.telefono)<br />
                         <b>@Html.DisplayNameFor(model => model.direccion):</b> @Html.DisplayFor(model => model.direccion)<br />
-                        <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
-
                     </p>
                 </div>
             </div>
             <div class="ladoderecho">
-                <center><img alt="Cierre o Apertura de caja" src="~/Imagenes/Visuals/proveedores.jpg" /></center>
+                <center><img alt="Empresa VYCUZ" src="~/Imagenes/Logos/logo1.png" /></center>
+
             </div>
         </div>
         <br />
         <center>
             <div class="botones">
-                <button class="boton1">@Html.ActionLink("Editar proveedor", "Edit", new { id = Model.id })</button>
-                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
+                <button class="boton1">@Html.ActionLink("Editar datos", "Edit", new { id = Model.id })</button>
+                <button class="boton1">@Html.ActionLink("Volver atrás", "Index")</button>
             </div>
         </center>
     </section>
 </main>
-

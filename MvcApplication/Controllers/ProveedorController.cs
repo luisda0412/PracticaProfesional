@@ -130,28 +130,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public ActionResult EliminarProveedor(int? id)
-        {
-            MemoryStream target = new MemoryStream();
-            IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-            try
-            {
-
-                _ServiceProveedor.Eliminar((int)id);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Proveedor";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-
+       
         public ActionResult desabilitar(long id)
         {
             using (MyContext cdt = new MyContext())

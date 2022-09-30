@@ -22,9 +22,10 @@ namespace AplicationCore.Services
             return repository.GetReparacion();
         }
 
-        public Articulo GetReparacionByID(int id)
+        public Reparaciones GetReparacionByID(int id)
         {
-            throw new NotImplementedException();
+            IRepositoryReparaciones repository = new RepositoryReparaciones();
+            return repository.GetReparacionByID(id);
         }
 
         public IEnumerable<Reparaciones> GetReparacionByNombre(string nombre)
@@ -34,7 +35,8 @@ namespace AplicationCore.Services
 
         public void Save(Reparaciones reparacion)
         {
-            throw new NotImplementedException();
+            IRepositoryReparaciones repository = new RepositoryReparaciones();
+            repository.Save(reparacion);
         }
     }
 }
