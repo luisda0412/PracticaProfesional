@@ -1,51 +1,97 @@
-﻿@model IEnumerable<Infraestructure.Models.Resena>
+﻿
+
+@model IEnumerable<Infraestructure.Models.Resena>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reseñas registradas";
 }
 
-<h2>Index</h2>
+<link rel="stylesheet" href="~/Content/CSSEstiloResenas/EstiloListaResenas.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.encabezado)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.comentario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Articulo.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Usuario.nombre)
-        </th>
-        <th></th>
-    </tr>
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <br />
+            <h2>
+                Reseñas del artículo
+            </h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.encabezado)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comentario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Articulo.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Eliminar", new { id=item.id })
-        </td>
-    </tr>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper9.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="elementos1">
+            <h2 class="titulo">Reseñas registradas sobre el artículo</h2>
+            <button class="boton1"><p>@Html.ActionLink("Agregar Reseña", "Create")</p></button>
+        </div>
+        <br />
+        <center>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.encabezado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.comentario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Articulo.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usuario.nombre)
+                    </th>
+                    <th>Opciones</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.encabezado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.comentario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Articulo.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                        </td>
+                        <td>
+
+
+                            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+                            <button class="boton2">@Html.ActionLink("Eliminar", "Eliminar", new { id = item.id })</button>
+
+                        </td>
+                    </tr>
+
+                    TempData["idArticulo"] = item.articulo_id;
+                }
+
+            </table>
+        </center>
+    </section>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
 }
 
-</table>
+

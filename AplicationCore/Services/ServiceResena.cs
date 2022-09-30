@@ -27,6 +27,12 @@ namespace AplicationCore.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Resena> GetResenaByIDArticulo(long id)
+        {
+            IRepositoryResena repository = new RepositoryResena();
+            return repository.GetResenaByIDArticulo(id);
+        }
+
         public Resena Save(Resena resena)
         {
             IRepositoryResena repository = new RepositoryResena();

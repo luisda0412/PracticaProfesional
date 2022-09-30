@@ -72,6 +72,18 @@ namespace Infraestructure.Repository
             return oResena;
         }
 
+        public IEnumerable<Resena> GetResenaByIDArticulo(long id)
+        {
+            IEnumerable<Resena> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Resena.
+                    Where(p => p.articulo_id == id).Include(p => p.Articulo).Include(p => p.Usuario).ToList();
+            }
+            return lista;
+        }
+
         public Resena Save(Resena resena)
         {
             int retorno = 0;

@@ -13,5 +13,7 @@ namespace AplicationCore.Services
         Resena GetResenaByID(int id);
         Resena Save(Resena resena);
         void Eliminar(long id);
+
+        IEnumerable<Resena> GetResenaByIDArticulo(long id);
     }
 }

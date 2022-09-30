@@ -224,6 +224,9 @@
     <Content Include="Content\CSSEstiloReparaciones\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloDetalleReparaciones.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloListaReparaciones.css" />
+    <Content Include="Content\CSSEstiloResenas\EstiloCreate.css" />
+    <Content Include="Content\CSSEstiloResenas\EstiloDetalleResenas.css" />
+    <Content Include="Content\CSSEstiloResenas\EstiloListaResenas.css" />
     <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloDetalleRTecnicos.css" />
@@ -468,6 +471,7 @@
     <Content Include="Views\Reparaciones\Details.cshtml" />
     <Content Include="Views\Reparaciones\Edit.cshtml" />
     <Content Include="Views\Reparaciones\Create.cshtml" />
+    <Content Include="Views\Resena\IndexArticulos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

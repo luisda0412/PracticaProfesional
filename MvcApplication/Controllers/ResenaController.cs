@@ -16,13 +16,13 @@ namespace MvcApplication.Controllers
     {
         // GET: Resena
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             IEnumerable<Resena> lista = null;
             try
             {
                 IServiceResena _ServiceResena = new ServiceResena();
-                lista = _ServiceResena.GetResena();
+                lista = _ServiceResena.GetResenaByIDArticulo((long)id);
             }
             catch (Exception e)
             {
@@ -40,6 +40,7 @@ namespace MvcApplication.Controllers
             try
             {
                 resena.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                resena.articulo_id = Convert.ToInt32(TempData["idArticulo"]);
                 Resena oResena = _ServiceResena.Save(resena);
 
                 return RedirectToAction("Index");
@@ -84,5 +85,22 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("Default", "Error");
             }
         }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult IndexArticulos()
+        {
+            IEnumerable<Articulo> lista = null;
+            try
+            {
+                IServiceArticulo _ServiceArticulo = new ServiceArticulo();
+                lista = _ServiceArticulo.GetArticulo();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
+        }
+
     }
 }
