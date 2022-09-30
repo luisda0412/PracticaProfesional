@@ -66,7 +66,7 @@
 /*Cuerpo------------------------------------------------------------------------*/
 .secciones {
     width: 60%;
-    box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
+    box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
     border-radius: 10px;
 }
 

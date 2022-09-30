@@ -142,9 +142,9 @@ namespace Infraestructure.Models
         public string telefono { get; set; }
         [Display(Name = "Servicio de reparación")]
         public Nullable<int> servicio_reparacion_id { get; set; }
-        [Display(Name = "Descripción del artículo")]
+        [Display(Name = "Artículo recibido")]
         public string descripcion_articulo { get; set; }
-        [Display(Name = "Descripción del problema")]
+        [Display(Name = "Problema")]
         public string descripcion_problema { get; set; }
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }

@@ -65,13 +65,13 @@
         }
 /*Cuerpo------------------------------------------------------------------------*/
 .secciones {
-    width: 60%;
-    box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
+    width: 80%;
+    box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
     border-radius: 10px;
 }
 
 .seccion1 {
-    width:90%;
+    width:100%;
     display:flex;
     justify-content:space-evenly;
 }
@@ -117,7 +117,7 @@
     .cuerpoleft .form-group .col-md-10 {
         width: 50%;
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size: 21px;
+        font-size: 16px;
     }
 
 
@@ -146,7 +146,7 @@
     .cuerporight .form-group .col-md-10 {
         width: 60%;
         font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-size: 21px;
+        font-size: 17px;
     }
 
 

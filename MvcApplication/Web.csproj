@@ -272,6 +272,7 @@
     <Content Include="Imagenes\Visuals\caja-chica.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
     <Content Include="Imagenes\Visuals\proveedores.jpg" />
+    <Content Include="Imagenes\Visuals\reparaciones.jpg" />
     <Content Include="Imagenes\Visuals\servicios.jpg" />
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />

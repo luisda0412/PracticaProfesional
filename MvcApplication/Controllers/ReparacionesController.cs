@@ -82,7 +82,7 @@ namespace MvcApplication.Controllers
         public ActionResult Edit(int? id)
         {
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
-            Reparaciones prov = null;
+            Reparaciones repa = null;
 
             try
             {
@@ -91,9 +91,9 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Index");
                 }
 
-                prov = _ServiceReparaciones.GetReparacionByID(id.Value);
+                repa = _ServiceReparaciones.GetReparacionByID(id.Value);
 
-                if (prov == null)
+                if (repa == null)
                 {
                     TempData["Message"] = "No existe el proveedor solicitado";
                     TempData["Redirect"] = "Proveedor";
@@ -102,7 +102,8 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                return View(prov);
+                ViewBag.idServicio = listaServicios((long)repa.servicio_reparacion_id);
+                return View(repa);
             }
             catch (Exception ex)
             {
@@ -114,6 +115,7 @@ namespace MvcApplication.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+
         }
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]

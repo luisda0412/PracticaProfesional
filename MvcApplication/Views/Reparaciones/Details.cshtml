@@ -1,6 +1,6 @@
 ﻿@model Infraestructure.Models.Reparaciones
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
 }
 
 <link rel="stylesheet" href="~/Content/CSSEstiloReparaciones/EstiloDetalleReparaciones.css">
@@ -47,7 +47,7 @@
                         <b>@Html.DisplayNameFor(model => model.descripcion_articulo):</b> @Html.DisplayFor(model => model.descripcion_articulo)<br />
                         <b>@Html.DisplayNameFor(model => model.descripcion_problema):</b> @Html.DisplayFor(model => model.descripcion_problema)<br />
                         <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
-                        <b>@Html.DisplayNameFor(model => model.monto_total):</b> @Html.DisplayFor(model => model.monto_total)<br />
+                        <b>@Html.DisplayNameFor(model => model.monto_total):</b> &cent;@Html.DisplayFor(model => model.monto_total)<br />
                         <b>@Html.DisplayNameFor(model => model.entregaestimada):</b> @Html.DisplayFor(model => model.entregaestimada)<br />
                         <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
                         <b>@Html.DisplayNameFor(model => model.Reportes_Tecnicos):</b>
@@ -61,14 +61,14 @@
                 </div>
             </div>
             <div class="ladoderecho">
-                <center><img alt="Reparaciones" src="~/Imagenes/Visuals/servicios.jpg" /></center>
+                <center><img alt="Reparaciones" src="~/Imagenes/Visuals/reparaciones.jpg" /></center>
             </div>
         </div>
         <br />
         <center>
             <div class="botones">
                 <button class="boton1">@Html.ActionLink("Editar Reparación", "Edit", new { id = Model.id })</button>
-                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo")</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
             </div>
         </center>
     </section>
