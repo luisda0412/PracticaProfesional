@@ -1,0 +1,147 @@
+﻿@model Infraestructure.Models.Reparaciones
+@{
+    ViewBag.Title = "Crear Reparación";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloReparaciones/EstiloCreate.css">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Agregar una nueva reparación
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper12.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+
+<main>
+    <center>
+        @using (Html.BeginForm("Save", "Reparaciones", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 id="titulo">Información de la nueva reparación</h4>
+            <br />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="secciones">
+                <div class="seccion1">
+                    <section class="cuerpoleft">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.cliente_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.cliente_id, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.cliente_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Servicio_Reparacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("servicio_reparacion",
+                               (SelectList)ViewBag.servicio_reparacion_id,
+                               "Seleccione acá",
+                               new { htmlAttributes = new { @class = "combo" } })
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.descripcion_articulo, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.descripcion_articulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.descripcion_articulo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </section>
+                    <section class="cuerporight">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.entregaestimada, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.entregaestimada, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.entregaestimada, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.monto_total, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.monto_total, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.monto_total, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.descripcion_problema, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.descripcion_problema, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.descripcion_problema, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </section>
+                    @{
+                        string nombre = "Sesión no iniciada";
+                        string email = "Perfil";
+                        int id = 0;
+                        Infraestructure.Models.Usuario oUsuario;
+                        //Validar si existe en la sesión
+                        if (Session["User"] != null)
+                        {
+                            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                            if (oUsuario != null)
+                            {
+                                nombre = $"{oUsuario.nombre}";
+                                email = oUsuario.correo_electronico;
+                                id = oUsuario.id;
+                                ViewBag.idUser = id;
+
+                                TempData["idUser"] = id;
+
+                            }
+                        }
+                    }
+                </div>
+                <div class="seccion2">
+                    <div class="form-group2">
+
+                        <input type="submit" value="Guardar Reparación" class="btn" />
+                        <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index")</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+        }
+        <br />
+        <br />
+    </center>
+</main>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

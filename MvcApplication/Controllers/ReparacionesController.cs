@@ -21,6 +21,13 @@ namespace MvcApplication.Controllers
         int? codigo = 0;
 
         //private MyContext db = new MyContext();
+        private SelectList listaServicios(long idSer = 0)
+        {
+            IServiceServicio _ServiceServicio = new ServiceServicio();
+            IEnumerable<Servicio_Reparacion> listaServicios = _ServiceServicio.GetServicio();
+            return new SelectList(listaServicios, "id", "descripcion", idSer);
+        }
+
 
         // GET: Reparaciones
         public ActionResult Index()
@@ -46,7 +53,8 @@ namespace MvcApplication.Controllers
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
             try
             {
-
+                repa.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                repa.fecha = DateTime.Now;
                 _ServiceReparaciones.Save(repa);
 
                 return RedirectToAction("Index");
@@ -66,6 +74,7 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
+            ViewBag.servicio_reparacion_id = listaServicios();
             return View();
         }
 
@@ -235,31 +244,6 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public ActionResult desabilitar(long id)
-        {
-            using (MyContext cdt = new MyContext())
-            {
-                cdt.Configuration.LazyLoadingEnabled = false;
-
-                try
-                {
-                    Reparaciones repa = cdt.Reparaciones.Where(x => x.id == id).FirstOrDefault();
-                    repa.estado = !repa.estado;
-                    cdt.Reparaciones.Add(repa);
-
-                    cdt.Entry(repa).State = EntityState.Modified;
-                    cdt.SaveChanges();
-                    return RedirectToAction("Index");
-
-                }
-                catch (Exception e)
-                {
-                    string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                    throw;
-                }
-            }
-        }
 
 
 

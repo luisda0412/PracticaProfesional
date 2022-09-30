@@ -45,12 +45,25 @@ namespace Infraestructure.Repository
 
         public Reparaciones GetReparacionByID(int id)
         {
-            throw new NotImplementedException();
+            Reparaciones oReparacion = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oReparacion = ctx.Reparaciones.Where(a => a.id == id).Include(x => x.Reportes_Tecnicos).FirstOrDefault();
+            }
+            return oReparacion;
         }
 
         public IEnumerable<Reparaciones> GetReparacionByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IEnumerable<Reparaciones> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Reparaciones.Include(x => x.Reportes_Tecnicos).ToList().
+                    FindAll(l => l.cliente_id.Equals(nombre));
+            }
+            return lista;
         }
 
         public void Save(Reparaciones reparacion)

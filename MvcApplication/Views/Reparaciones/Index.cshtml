@@ -42,8 +42,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
-                        <h5 class="card-header">Buscar por código</h5>
-                        @using (Ajax.BeginForm("buscarVentaxNombre", "Venta", new AjaxOptions
+                        <h5 class="card-header">Buscar por cédula de cliente</h5>
+                        @using (Ajax.BeginForm("buscarReparacionxCedula", "Reparaciones", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -53,7 +53,7 @@
                         {
                             <div class="card-body">
                                 <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Codigo Unico" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Digíte la cédula" })
 
                                     <button type="submit" class="boton3">Buscar</button>
 

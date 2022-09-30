@@ -1,0 +1,76 @@
+﻿@model Infraestructure.Models.Reparaciones
+@{
+    ViewBag.Title = "Details";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloReparaciones/EstiloDetalleReparaciones.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Detalle de la reparación
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="tarjeta">
+            <div class="ladoizquierdo">
+                <center>
+                    <h3>Reparación</h3>
+                </center>
+                <div class="texto">
+                    <p class="">
+                        <b>@Html.DisplayNameFor(model => model.Usuario):</b> @Html.DisplayFor(model => model.Usuario.nombre)<br />
+                        <b>@Html.DisplayNameFor(model => model.cliente_id):</b> @Html.DisplayFor(model => model.cliente_id)<br />
+                        <b>@Html.DisplayNameFor(model => model.telefono):</b> @Html.DisplayFor(model => model.telefono)<br />
+                        <b>@Html.DisplayNameFor(model => model.Servicio_Reparacion):</b> @Html.DisplayFor(model => model.Servicio_Reparacion.descripcion)<br />
+                        <b>@Html.DisplayNameFor(model => model.descripcion_articulo):</b> @Html.DisplayFor(model => model.descripcion_articulo)<br />
+                        <b>@Html.DisplayNameFor(model => model.descripcion_problema):</b> @Html.DisplayFor(model => model.descripcion_problema)<br />
+                        <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
+                        <b>@Html.DisplayNameFor(model => model.monto_total):</b> @Html.DisplayFor(model => model.monto_total)<br />
+                        <b>@Html.DisplayNameFor(model => model.entregaestimada):</b> @Html.DisplayFor(model => model.entregaestimada)<br />
+                        <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
+                        <b>@Html.DisplayNameFor(model => model.Reportes_Tecnicos):</b>
+                        <ul>
+                            @foreach (var c in Model.Reportes_Tecnicos)
+                            {
+                                <li>@c.reporte</li>
+                            }
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="ladoderecho">
+                <center><img alt="Reparaciones" src="~/Imagenes/Visuals/servicios.jpg" /></center>
+            </div>
+        </div>
+        <br />
+        <center>
+            <div class="botones">
+                <button class="boton1">@Html.ActionLink("Editar Reparación", "Edit", new { id = Model.id })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo")</button>
+            </div>
+        </center>
+    </section>
+</main>
+

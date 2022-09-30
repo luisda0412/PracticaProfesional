@@ -464,6 +464,9 @@
     <Content Include="Views\CajaChica\Details.cshtml" />
     <Content Include="Views\Empresa\Details.cshtml" />
     <Content Include="Views\Empresa\Edit.cshtml" />
+    <Content Include="Views\Reparaciones\Details.cshtml" />
+    <Content Include="Views\Reparaciones\Edit.cshtml" />
+    <Content Include="Views\Reparaciones\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
