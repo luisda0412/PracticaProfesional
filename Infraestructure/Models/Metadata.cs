@@ -12,14 +12,19 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Precio")]
+        [Required(ErrorMessage = "*El precio es un campo obligatorio")]
         public Nullable<double> precio { get; set; }
         [Display(Name = "Imágen")]
+        [Required(ErrorMessage = "*La imagen es un campo obligatorio")]
         public byte[] imagen { get; set; }
         [Display(Name = "Categoría")]
+        [Required(ErrorMessage = "*La categoría es un campo obligatorio")]
         public Nullable<int> categoria_id { get; set; }
         [Display(Name = "Stock")]
+        [Required(ErrorMessage = "*El stock es un campo obligatorio")]
         public Nullable<int> stock { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -30,16 +35,22 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Fecha")]
+        [Required(ErrorMessage = "*La fecha es un campo obligatorio")]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto Efectivo")]
+        [Required(ErrorMessage = "*El monto efectivo es un campo obligatorio")]
         public Nullable<double> efectivo_total { get; set; }
         [Display(Name = "Monto Billetes")]
+        [Required(ErrorMessage = "*El monto en billetes es un campo obligatorio")]
         public Nullable<double> billetes { get; set; }
         [Display(Name = "Monto Monedas")]
+        [Required(ErrorMessage = "*El monto en monedas es un campo obligatorio")]
         public Nullable<double> monedas { get; set; }
         [Display(Name = "Usuario")]
+        [Required(ErrorMessage = "*El usuario es un campo obligatorio")]
         public Nullable<int> usuario_id { get; set; }
         [Display(Name = "Tipo de arqueo")]
+        [Required(ErrorMessage = "*El tipo de arqueo es un campo obligatorio")]
         public Nullable<bool> tipo { get; set; }
 
         public virtual Usuario Usuario { get; set; }
@@ -50,8 +61,10 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "*La descripción es un campo obligatorio")]
         public string descripcion { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -84,10 +97,13 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "*La dirección es un campo obligatorio")]
         public string direccion { get; set; }
         [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
         public string telefono { get; set; }
     }
 
@@ -119,10 +135,15 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "*La descripción es un campo obligatorio")]
         public string descripcion { get; set; }
         [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "*La dirección es un campo obligatorio")]
         public string direccion { get; set; }
         [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
+        [MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        [MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
         public string telefono { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -177,8 +198,10 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Encabezado")]
+        [Required(ErrorMessage = "*El encabezado es un campo obligatorio")]
         public string encabezado { get; set; }
         [Display(Name = "Comentario")]
+        [Required(ErrorMessage = "*El comentario es un campo obligatorio")]
         public string comentario { get; set; }
         [Display(Name = "Artículo")]
         public Nullable<int> articulo_id { get; set; }
@@ -205,8 +228,10 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "*La descripción es un campo obligatorio")]
         public string descripcion { get; set; }
         [Display(Name = "Costo")]
+        [Required(ErrorMessage = "*El costo es un campo obligatorio")]
         public Nullable<double> costo { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -218,14 +243,23 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
+        //[RegularExpression("", ErrorMessage = "El peso debe ser un valor numérico.")]
         public string clave { get; set; }
         [Display(Name = "Nombre")]
+        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Apellidos")]
+        [Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
         public string apellidos { get; set; }
         [Display(Name = "Correo Electrónico")]
+        [Required(ErrorMessage = "*El correo electrónico es un campo obligatorio")]
+        [EmailAddress(ErrorMessage = "*El formato del correo no es el correcto.")]
         public string correo_electronico { get; set; }
         [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
+        [MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        [MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
         public string telefono { get; set; }
         [Display(Name = "Tipo de rol")]
         public Nullable<int> rol_id { get; set; }

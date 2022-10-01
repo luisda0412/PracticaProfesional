@@ -45,8 +45,8 @@ namespace AplicationCore.Services
         public Usuario Save(Usuario user)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
-            string crytpPasswd = Cryptography.EncrypthAES(user.clave);
-            user.clave = crytpPasswd;
+           // string crytpPasswd = Cryptography.EncrypthAES(user.clave);
+            //user.clave = crytpPasswd;
             return repository.Save(user);
         }
 
