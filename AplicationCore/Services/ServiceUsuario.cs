@@ -29,6 +29,12 @@ namespace AplicationCore.Services
             return repository.GetUsuarioByID(id);
         }
 
+        public Usuario GetUsuarioByToken(string token)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.GetUsuarioByToken(token);
+        }
+
         public Usuario LogIn(string correo, string clave)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
@@ -42,6 +48,12 @@ namespace AplicationCore.Services
             string crytpPasswd = Cryptography.EncrypthAES(user.clave);
             user.clave = crytpPasswd;
             return repository.Save(user);
+        }
+
+        public Usuario VerificarUsuario(string email)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+            return repository.VerificarUsuario(email);
         }
     }
 }

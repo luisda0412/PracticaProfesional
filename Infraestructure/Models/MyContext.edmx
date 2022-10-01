@@ -168,6 +168,7 @@
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
           <Property Name="rol_id" Type="int" />
           <Property Name="estado" Type="bit" />
+          <Property Name="tokenRecuperacion" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -692,6 +693,7 @@
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="rol_id" Type="Int32" />
           <Property Name="estado" Type="Boolean" />
+          <Property Name="tokenRecuperacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
           <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
           <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Usuario" ToRole="Reparaciones" />
@@ -1186,6 +1188,7 @@
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="rol_id" ColumnName="rol_id" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tokenRecuperacion" ColumnName="tokenRecuperacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

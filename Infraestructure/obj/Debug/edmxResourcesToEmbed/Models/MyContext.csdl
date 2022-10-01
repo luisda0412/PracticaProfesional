@@ -182,6 +182,7 @@
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="rol_id" Type="Int32" />
     <Property Name="estado" Type="Boolean" />
+    <Property Name="tokenRecuperacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Usuario" ToRole="Reparaciones" />

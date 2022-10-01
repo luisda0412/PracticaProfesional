@@ -14,5 +14,7 @@ namespace AplicationCore.Services
         Usuario GetUsuarioByID(int id);
         Usuario Save(Usuario user);
         IEnumerable<Rol> GetRol();
+        Usuario VerificarUsuario(string email);
+        Usuario GetUsuarioByToken(string token);
     }
 }

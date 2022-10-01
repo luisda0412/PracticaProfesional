@@ -1,0 +1,154 @@
+﻿@model Infraestructure.Models.Usuario
+
+@{
+    ViewBag.Title = "Recuperación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <br />
+    <center><h2>Cambio de Contraseña</h2></center>
+    <hr style="border-color: #427AA1" />
+    <div class="row">
+        @if (TempData["Message"] != null)
+        {
+            string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
+            @Html.Raw(mensaje);
+
+        }
+
+        @using (Html.BeginForm("Recuperacion", "Usuario", FormMethod.Post))
+        {
+            //@Html.AntiForgeryToken()
+            <div class="form-horizontal" id="formulario" align="center">
+                @Html.HiddenFor(model => model.tokenRecuperacion)
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.clave, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col">
+                        @*Campo tipo password*@
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                @*Para la confirmación de contraseña*@
+                <div class="form-group">
+                    @Html.Label("Confirmar", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col">
+                        @Html.Password("Confirmar", "", new { @class = "form-control" })
+                        <label class="text-danger" id="mensaje"></label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <input onclick="passwordValidate()" type="submit" value="Validar" class="btn btn-success" style="margin-top:10px;" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@*<h2 align="center">Cambio de contraseña</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
+    @Html.Raw(mensaje);
+    }
+
+
+    @using (Html.BeginForm("Recuperacion", "Usuario", FormMethod.Post))
+    {
+        //@Html.AntiForgeryToken()
+
+
+        <div class="form-horizontal" id="formulario" align="center">
+            @Html.HiddenFor(model => model.TokenRecuperacion)
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    Campo tipo password
+                    @Html.PasswordFor(model => model.contrasena, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            Para la confirmación de contraseña
+            <div class="form-group">
+                @Html.Label("Confirmar", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Password("Confirmar", "", new { @class = "form-control" })
+                    <label class="text-danger" id="mensaje"></label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input onclick="passwordValidate()" type="submit" value="Entrar" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+
+
+    }*@
+
+<style>
+    body {
+        margin-top: 10%;
+    }
+
+    footer {
+        margin-top: 16.5%
+    }
+
+    .btn {
+        width: 60%
+    }
+</style>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function passwordValidate() {
+            if (document.getElementById("Confirmar").value != document.getElementById("contrasena").value) {
+                alert("Las contraseñas no coinciden");
+                event.preventDefault();
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#mensaje').hide();
+        });
+
+        var cambioDePass = function () {
+            var cont = $('#contrasena').val();
+            var cont2 = $('#Confirmar').val();
+            if (cont == cont2) {
+                $('#mensaje').hide();
+                $('#mensaje').show();
+                $('#mensaje').html("");
+            } else {
+                $('#mensaje').html("Las constraseñas no coinciden");
+                $('#mensaje').show();
+            }
+        }
+
+        $("#contrasena").on('keyup', cambioDePass);
+        $("#Confirmar").on('keyup', cambioDePass);
+
+    </script>
+}
+

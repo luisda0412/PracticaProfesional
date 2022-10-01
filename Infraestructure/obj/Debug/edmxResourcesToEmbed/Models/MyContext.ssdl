@@ -163,6 +163,7 @@
     <Property Name="telefono" Type="nvarchar" MaxLength="50" />
     <Property Name="rol_id" Type="int" />
     <Property Name="estado" Type="bit" />
+    <Property Name="tokenRecuperacion" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Venta">
     <Key>

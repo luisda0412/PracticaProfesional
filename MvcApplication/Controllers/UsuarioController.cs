@@ -10,11 +10,13 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Security;
 using Web.Utils;
+using Web.ViewModel;
 
 namespace MvcApplication.Controllers
 {
     public class UsuarioController : Controller
     {
+        private static Usuario aux;
         // GET: Usuario
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
@@ -164,5 +166,107 @@ namespace MvcApplication.Controllers
                 }
             }
         }
+
+        #region RecuperarContraseña
+        //Vista para solicitar al cliente los datos necesarios para recuperar la contraseña
+        [HttpPost]
+        public ActionResult IniciarRecuperacion(LoginViewModel empleado)
+        {
+            try
+            {
+                IServiceUsuario service = new ServiceUsuario();
+                Usuario oEmpleado = service.VerificarUsuario(empleado.Email);
+
+                if (oEmpleado != null)
+                {
+                    service.Save(oEmpleado);
+                }
+
+                return View("NotificacionCorreo");
+
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                TempData["Message"] = ex.Message;
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
+
+        public ActionResult NotificacionCorreo()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult IniciarRecuperacion()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        //Vista para solicitar al cliente la nueva contraseña
+        public ActionResult Recuperacion(string token)
+        {
+            IServiceUsuario service = new ServiceUsuario();
+            try
+            {
+                if (token == null || token.Trim().Equals(""))
+                {
+                    return View("Index");
+                }
+
+                Usuario oEmpleado = service.GetUsuarioByToken(token);
+                if (oEmpleado == null)
+                {
+                    ViewBag.Error = "Tú token ha expirado.";
+                    return View("Index");
+                }
+                aux = oEmpleado;
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                TempData["Message"] = ex.Message;
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Recuperacion(Usuario pUsuario)
+        {
+            aux.clave = pUsuario.clave;
+            IServiceUsuario service = new ServiceUsuario();
+            try
+            {
+                if (aux != null)
+                {
+                    aux.tokenRecuperacion = null;
+                    service.Save(aux);
+                }
+                return View("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                // Pasar el Error a la página que lo muestra
+                TempData["Message"] = ex.Message;
+                TempData.Keep();
+                return RedirectToAction("Default", "Error");
+            }
+        }
+        #endregion
     }
 }

@@ -2,9 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Web.Utils;
 
 namespace Infraestructure.Repository
 {
@@ -82,6 +86,105 @@ namespace Infraestructure.Repository
                 oUser = GetUsuarioByID((int)user.id);
 
             return oUser;
+        }
+
+        public Usuario VerificarUsuario(string email)
+        {
+            try
+            {
+                Usuario oUsuario = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oUsuario = ctx.Usuario.Where(p => p.correo_electronico == email).Include("Rol").FirstOrDefault();
+                }
+                if (oUsuario != null)
+                {
+                    oUsuario.tokenRecuperacion = GetSha256(Guid.NewGuid().ToString());
+                    SendEmail(email, oUsuario.tokenRecuperacion);
+
+                    return oUsuario;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
+        public Usuario GetUsuarioByToken(string token)
+        {
+            try
+            {
+                Usuario oUsuario = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    oUsuario = ctx.Usuario.Where(p => p.tokenRecuperacion == token)
+                        .Include("Rol").FirstOrDefault<Usuario>();
+                }
+                return oUsuario;
+            }
+
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+        private string GetSha256(string str)
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(str));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            return sb.ToString();
+        }
+
+        private void SendEmail(string EmailDestino, string token)
+        {
+            string urlDomain = "https://localhost:3000/";
+            string EmailOrigen = "dumbmail130@gmail.com";
+            string Contraseña = "vhowlqsgdymyxyho";
+            string url = urlDomain + "/Usuario/Recuperacion/?token=" + token;
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperación de Contraseña",
+                "<p>Estimado usuario,</br></br><hr />Ha iniciado el proceso para la recuperación de contraseña del sistema VYCUZ, a continuación se le presentará el link para que proceda a realizar el cambio de su respectiva contraseña.</p><br>" +
+                "<a href='" + url + "'>Click para recuperar la contraseña</a></br>" +
+                "<p>De no haber sido usted quién inició el proceso de recuperación, por favor comuníquelo a su administrador lo más pronto posible.</p>");
+
+            oMailMessage.IsBodyHtml = true;
+
+            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+            oSmtpClient.EnableSsl = true;
+            oSmtpClient.UseDefaultCredentials = false;
+            oSmtpClient.Port = 587;
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+
+            oSmtpClient.Send(oMailMessage);
+
+            oSmtpClient.Dispose();
         }
     }
 }
