@@ -149,7 +149,8 @@ apellidos nvarchar(50),
 correo_electronico nvarchar(max),
 telefono nvarchar(50),
 rol_id int,
-estado bit
+estado bit,
+tokenRecuperacion nvarchar(max)
 
 CONSTRAINT Usuario_PK PRIMARY KEY (id)
 );
@@ -358,9 +359,11 @@ INSERT INTO Rol VALUES('Empleado', 1)
 
 --INSERT A USUARIO
 
-INSERT INTO Usuario VALUES('123456', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1)
-INSERT INTO Usuario VALUES('12345', 'Keneth', 'Miranda Chaves', 'keneth@gmail.com', 85878912, 2, 1)
-INSERT INTO Usuario VALUES('12345', 'Luis David', 'Cordero Valverde', 'luisda@gmail.com', 87529425, 2, 1)
+INSERT INTO Usuario VALUES('123456', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1, '')
+INSERT INTO Usuario VALUES('12345', 'Keneth', 'Miranda Chaves', 'keneth@gmail.com', 85878912, 2, 1, '')
+INSERT INTO Usuario VALUES('12345', 'Luis David', 'Cordero Valverde', 'luisda@gmail.com', 87529425, 2, 1, '')
+INSERT INTO Usuario VALUES('LuisDa12$', 'Luis', 'Cordero Valverde', 'luisdacordero40@gmail.com', 87529425, 2, 1, '')
+INSERT INTO Usuario VALUES('12345678', 'Luis', 'Cordero Valverde', 'dumb@gmail.com', 87529425, 2, 1, '')
 
 
 --INSERT A SERVICIO REPARACION
