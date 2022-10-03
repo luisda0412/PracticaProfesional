@@ -43,8 +43,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
-                        <h5 class="card-header">Buscar servicio por nombre</h5>
-                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
+                        <h5 class="card-header">Buscar servicio por descripción</h5>
+                        @using (Ajax.BeginForm("buscarServicioxDescripcion", "ServicioReparacion", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -54,7 +54,7 @@
                         {
                             <div class="card-body">
                                 <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Escriba la descripción" })
 
                                     <button type="submit" class="boton3">Buscar</button>
 
@@ -113,14 +113,10 @@
                                     @Html.DisplayFor(modelItem => item.estado)
                                 </td>
                                 <td class="columnabotones">
-                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id })</button>
-
-
+                       
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
                                     <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
-                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Eliminar el servicio de reparación" })</button>
+                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar estado del servicio de reparación" })</button>
 
                                 </td>
                             </tr>

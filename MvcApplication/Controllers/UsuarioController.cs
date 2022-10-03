@@ -36,14 +36,14 @@ namespace MvcApplication.Controllers
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save(Usuario user, string[] rol)
+        public ActionResult Save(Usuario user)
         {
             MemoryStream target = new MemoryStream();
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             try
             {
 
-                user.rol_id = int.Parse(rol[0]);
+             
                 Usuario oUser = _ServiceUsuario.Save(user);
               
                 return RedirectToAction("Index");
@@ -63,7 +63,7 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
-            ViewBag.idRol = listaRol();
+            ViewBag.RolesLista = listaRol();
             return View();
         }
 
@@ -90,7 +90,7 @@ namespace MvcApplication.Controllers
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
-                ViewBag.idRol = listaRol((long)user.rol_id);
+                ViewBag.RolesLista = listaRol();
                 return View(user);
             }
             catch (Exception ex)

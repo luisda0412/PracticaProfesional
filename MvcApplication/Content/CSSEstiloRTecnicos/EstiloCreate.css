@@ -163,50 +163,52 @@
 
 /* From uiverse.io by @alexroumi */
 
-.form-group2 .btn a{
-    text-decoration:none;
-    color:black;
-}
-.form-group2 .btn {
-    text-decoration:none;
-    padding: 15px 25px;
-    border: unset;
-    border-radius: 15px;
-    color: #212121;
-    z-index: 1;
-    background: #e8e8e8;
-    position: relative;
-    font-weight: 1000;
-    font-size: 22px;
-    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    transition: all 250ms;
-    overflow: hidden;
-}
 
-    .form-group2 .btn::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 0;
+    .form-group2 .btn a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .form-group2 .btn {
+        text-decoration: none;
+        padding: 15px 25px;
+        border: unset;
         border-radius: 15px;
-        background-color: #212121;
-        z-index: -1;
+        color: #212121;
+        z-index: 1;
+        background: #e8e8e8;
+        position: relative;
+        font-weight: 1000;
+        font-size: 22px;
         -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
         box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-        transition: all 250ms
+        transition: all 250ms;
+        overflow: hidden;
     }
 
-    .form-group2 .btn:hover {
-        background-color: #1a8623;
-        color:white;
-    }
+        .form-group2 .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            border-radius: 15px;
+            background-color: #212121;
+            z-index: -1;
+            -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+            box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+            transition: all 250ms
+        }
 
-    .form-group2 .btn a:hover{
-        color:#e8e8e8;
-    }
+        .form-group2 .btn:hover {
+            background-color: #1a8623;
+            color: white;
+        }
+
+        .form-group2 .btn a:hover {
+            color: #e8e8e8;
+        }
 
         .form-group2 .btn:hover::before {
             width: 100%;

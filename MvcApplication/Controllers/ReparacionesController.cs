@@ -47,7 +47,7 @@ namespace MvcApplication.Controllers
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save(Reparaciones repa, string[] servicio)
+        public ActionResult Save(Reparaciones repa)
         {
             MemoryStream target = new MemoryStream();
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
@@ -55,7 +55,6 @@ namespace MvcApplication.Controllers
             {
                 repa.usuario_id = Convert.ToInt32(TempData["idUser"]);
                 repa.fecha = DateTime.Now;
-                repa.servicio_reparacion_id = int.Parse(servicio[0]);
                 _ServiceReparaciones.Save(repa);
 
                 return RedirectToAction("Index");
@@ -75,7 +74,7 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
-            ViewBag.servicio_reparacion_id = listaServicios();
+            ViewBag.ServiciosLista = listaServicios();
             return View();
         }
 
@@ -103,7 +102,7 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                ViewBag.idServicio = listaServicios((long)repa.servicio_reparacion_id);
+                ViewBag.ServiciosLista = listaServicios();
                 return View(repa);
             }
             catch (Exception ex)
@@ -227,7 +226,7 @@ namespace MvcApplication.Controllers
             IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
             try
             {
-                repo.reparacion_id = (Convert.ToInt32(TempData["idReporte"])); 
+                repo.reparacion_id = (Convert.ToInt32(TempData["idReparacion"])); 
                 _ServiceRTecnico.Save(repo);
 
                 return RedirectToAction("Index");

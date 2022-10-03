@@ -49,7 +49,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oReparacion = ctx.Reparaciones.Where(a => a.id == id).Include(x => x.Reportes_Tecnicos).Include(x => x.Usuario).FirstOrDefault();
+                oReparacion = ctx.Reparaciones.Where(a => a.id == id).Include(x => x.Reportes_Tecnicos).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).FirstOrDefault();
             }
             return oReparacion;
         }
@@ -60,8 +60,8 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Reparaciones.Include(x => x.Reportes_Tecnicos).ToList().
-                    FindAll(l => l.cliente_id.Equals(nombre));
+                lista = ctx.Reparaciones.Include(x => x.Reportes_Tecnicos).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).ToList().
+                    FindAll(l => l.cliente_id.Equals(Convert.ToInt32(nombre)));
             }
             return lista;
         }

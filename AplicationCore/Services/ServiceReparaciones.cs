@@ -30,7 +30,8 @@ namespace AplicationCore.Services
 
         public IEnumerable<Reparaciones> GetReparacionByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IRepositoryReparaciones repository = new RepositoryReparaciones();
+            return repository.GetReparacionByNombre(nombre);
         }
 
         public void Save(Reparaciones reparacion)

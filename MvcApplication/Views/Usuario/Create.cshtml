@@ -15,7 +15,7 @@
             </div>
             <br />
             <h2>
-                Agregar un nuevo artículo
+                Agregar un nuevo usuario
             </h2>
 
         </div>
@@ -81,10 +81,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownList("rol",
-                               (SelectList)ViewBag.idRol,
-                               "Seleccione acá",
-                               new { htmlAttributes = new { @class = "combo" } })
+                                @Html.DropDownListFor(model => model.rol_id, (SelectList)ViewBag.RolesLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
 
                             </div>
                         </div>
