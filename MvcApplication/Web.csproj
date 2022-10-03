@@ -259,6 +259,7 @@
     <None Include="packages.config" />
     <None Include="README.md" />
     <Content Include="Imagenes\fondos\fondo1.jpg" />
+    <Content Include="Imagenes\GIF\greencheck.gif" />
     <Content Include="Imagenes\Iconos\clock.png" />
     <Content Include="Imagenes\Iconos\facebook.png" />
     <Content Include="Imagenes\Iconos\google.png" />

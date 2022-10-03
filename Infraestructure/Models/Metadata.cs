@@ -176,6 +176,8 @@ namespace Infraestructure.Models
 
         public virtual Servicio_Reparacion Servicio_Reparacion { get; set; }
         public virtual Usuario Usuario { get; set; }
+
+        [Display(Name = "Reportes Técnicos")]
         public virtual ICollection<Reportes_Tecnicos> Reportes_Tecnicos { get; set; }
     }
 
@@ -243,23 +245,26 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} es un campo requerido")]
         //[Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
         //[RegularExpression("", ErrorMessage = "El peso debe ser un valor numérico.")]
         public string clave { get; set; }
         [Display(Name = "Nombre")]
-        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
+        //[Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Apellidos")]
-        [Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
+        //[Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
         public string apellidos { get; set; }
+
         [Display(Name = "Correo Electrónico")]
-       // [Required(ErrorMessage = "*El correo electrónico es un campo obligatorio")]
-        //[EmailAddress(ErrorMessage = "*El formato del correo no es el correcto.")]
+        [Required(ErrorMessage = "{0} es un campo requerido")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
         public string correo_electronico { get; set; }
+
         [Display(Name = "Teléfono")]
-        [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
-        [MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
-        [MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        //[Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
+        //[MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        //[MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
         public string telefono { get; set; }
         [Display(Name = "Tipo de rol")]
         public Nullable<int> rol_id { get; set; }

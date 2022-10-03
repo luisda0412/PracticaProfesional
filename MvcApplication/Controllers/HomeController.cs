@@ -20,6 +20,13 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
+        public ActionResult recuperar()
+        {
+            UsuarioController ctl = new UsuarioController();
+            return ctl.IniciarRecuperacion();
+           
+        }
+
 
         public ActionResult Login(Usuario usuario)
         {
