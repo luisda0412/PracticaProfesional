@@ -243,7 +243,7 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
         [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
+        //[Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
         //[RegularExpression("", ErrorMessage = "El peso debe ser un valor numérico.")]
         public string clave { get; set; }
         [Display(Name = "Nombre")]
@@ -253,8 +253,8 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
         public string apellidos { get; set; }
         [Display(Name = "Correo Electrónico")]
-        [Required(ErrorMessage = "*El correo electrónico es un campo obligatorio")]
-        [EmailAddress(ErrorMessage = "*El formato del correo no es el correcto.")]
+       // [Required(ErrorMessage = "*El correo electrónico es un campo obligatorio")]
+        //[EmailAddress(ErrorMessage = "*El formato del correo no es el correcto.")]
         public string correo_electronico { get; set; }
         [Display(Name = "Teléfono")]
         [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]

@@ -39,7 +39,7 @@
             <div class="elementos1">
                 <div class="elementoizquierdo">
                     <h2 class="titulo">Artículos existentes en la base de datos</h2>
-                    <button class="boton1"><p>@Html.ActionLink("Crear un nuevo artículo", "Create")</p></button>
+                    <button class="boton1"><p>@Html.ActionLink("Crear un nuevo artículo", "Create", new { title = "Crear un nuevo registro" })</p></button>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
@@ -119,9 +119,9 @@
                                     @Html.DisplayFor(modelItem => item.stock)
                                 </td>
                                 <td class="columnabotones">
-                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id })</button>
+                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del artículo" })</button>
                            
                                 </td>
                             </tr>

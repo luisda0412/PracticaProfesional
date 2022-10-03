@@ -32,6 +32,26 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        public ActionResult buscarProveedorxNombre(string filtro)
+        {
+            IEnumerable<Proveedor> lista = null;
+            IServiceProveedor _ServiceProveedor= new ServiceProveedor();
+
+            // Error porque viene en blanco 
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceProveedor.GetProveedor();
+            }
+            else
+            {
+                lista = _ServiceProveedor.GetProveedorByNombre(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxNombre", lista);
+        }
+
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Proveedor prov)

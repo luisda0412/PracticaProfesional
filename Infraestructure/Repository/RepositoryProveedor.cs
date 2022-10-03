@@ -57,8 +57,17 @@ namespace Infraestructure.Repository
 
         public IEnumerable<Proveedor> GetProveedorByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IEnumerable<Proveedor> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Proveedor.ToList().
+                    FindAll(l => l.descripcion.ToLower().Contains(nombre.ToLower()));
+            }
+            return lista;
         }
+
+     
 
         public void Save(Proveedor prov)
         {

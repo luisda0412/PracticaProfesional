@@ -1,0 +1,178 @@
+﻿main {
+    background-color: white;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 380px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 380px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 18%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        margin-top: 10%;
+        height: 240px;
+        width: 100%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+/*Detalles-----------------------------------------------------------*/
+.desarrollo {
+    width: 45%;
+    margin: auto;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.tarjeta {
+  
+    border-color: #dddddd;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .5s ease-in-out;
+}
+
+.tarjeta:hover{
+     -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+}
+
+/*LADO IZQUIERDO DE TARJETA-----------------------------------------------------*/
+.tarjeta .ladoizquierdo{
+    height:100%;
+    width:60%;
+    border-radius: 10px 0px 0px 10px;
+    margin-top:3%;
+}
+
+.ladoizquierdo h3 {
+    font-family: 'Agency FB';
+    font-size: 37px;
+}
+
+.ladoizquierdo .texto {
+    margin-left:15%;
+}
+
+
+/*LADO DERECHO DE TARJETA-----------------------------------------------------*/
+.tarjeta .ladoderecho{
+    width:40%;
+    background-color: #1f1f1f;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.tarjeta .ladoderecho img{
+    width:100%;
+    height:100%;
+}
+
+/*BOTONES----------------------------------------------------------------------*/
+.botones_producto {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.boton1 a {
+    text-decoration: none;
+    color: black;
+}
+
+.boton1 {
+    text-decoration: none;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 22px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .boton1::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .boton1:hover {
+        background-color: #1a8623;
+        color: white;
+    }
+
+    .boton1 a:hover {
+        color: #e8e8e8;
+    }
+
+    .boton1:hover::before {
+        width: 100%;
+    }

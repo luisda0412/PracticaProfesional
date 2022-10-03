@@ -235,6 +235,9 @@
     <Content Include="Content\CSSEstiloServicios\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloDetalleServicios.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
+    <Content Include="Content\CSSEstiloUsuarios\EstiloCreate.css" />
+    <Content Include="Content\CSSEstiloUsuarios\EstiloDetalleUsuario.css" />
+    <Content Include="Content\CSSEstiloUsuarios\EstiloListaUsuarios.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloDetalleVentas.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloListaVentas.css" />
@@ -278,6 +281,7 @@
     <Content Include="Imagenes\Visuals\proveedores.jpg" />
     <Content Include="Imagenes\Visuals\reparaciones.jpg" />
     <Content Include="Imagenes\Visuals\servicios.jpg" />
+    <Content Include="Imagenes\Visuals\usuario.png" />
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />
     <Content Include="Imagenes\Visuals\wallpaper12.png" />
@@ -476,6 +480,8 @@
     <Content Include="Views\Usuario\IniciarRecuperacion.cshtml" />
     <Content Include="Views\Usuario\NotificacionCorreo.cshtml" />
     <Content Include="Views\Usuario\Recuperacion.cshtml" />
+    <Content Include="Views\Proveedor\_PartialViewVistaxNombre.cshtml" />
+    <Content Include="Views\Reparaciones\_PartialViewVistaxCedula.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

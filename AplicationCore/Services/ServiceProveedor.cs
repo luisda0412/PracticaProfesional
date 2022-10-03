@@ -30,7 +30,8 @@ namespace AplicationCore.Services
 
         public IEnumerable<Proveedor> GetProveedorByNombre(string nombre)
         {
-            throw new NotImplementedException();
+            IRepositoryProveedor repository = new RepositoryProveedor();
+            return repository.GetProveedorByNombre(nombre);
         }
 
         public void Save(Proveedor prov)

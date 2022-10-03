@@ -35,7 +35,7 @@ namespace MvcApplication.Controllers
                     {
                         Session["User"] = oUsuario;
                         Log.Info($"Accede {oUsuario.nombre}");
-                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Bienvenido a AFK", "un gusto tenerte de vuelta", SweetAlertMessageType.success);
+                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "un gusto tenerte de vuelta", SweetAlertMessageType.success);
                         return RedirectToAction("Index");
 
                     }

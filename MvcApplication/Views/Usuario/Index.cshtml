@@ -1,63 +1,115 @@
 ﻿@model IEnumerable<Infraestructure.Models.Usuario>
 
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista Usuarios";
 }
 
-<h2>Index</h2>
+<link rel="stylesheet" href="~/Content/CSSEstiloUsuarios/EstiloListaUsuarios.css">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.clave)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo_electronico)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Rol.tipo)
-        </th>
-        <th></th>
-    </tr>
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Lista de usuarios del sistema...
+            </h2>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.clave)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidos)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo_electronico)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Rol.tipo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Habilitar/Desabilitar usuario", "desabilitar", "Usuario", new { id = item.id }, new { style = "text-decoration:none", @class = "btn-outline-success" })
-        </td>
-    </tr>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper6.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <center>
+        <section class="desarrollo">
+            <div class="elementos1">
+                    <h2 class="titulo">Usuarios registrados en la base de datos</h2>
+                    <button class="boton1"><p>@Html.ActionLink("Crear un nuevo usuario", "Create")</p></button>
+      
+            </div>
+            <br />
+            <br />
+            <center>
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle" ; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.nombre)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.correo_electronico)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Rol)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.estado)
+                            </th>
+                            <th><p>Opciones</p></th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultado">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nombre)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.correo_electronico)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Rol.tipo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.estado)
+                                </td>
+                                <td class="columnabotones">
+                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del usuario" })</button>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </center>
+        </section>
+    </center>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
 }
-
-</table>

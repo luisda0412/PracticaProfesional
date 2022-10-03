@@ -68,7 +68,38 @@ namespace Infraestructure.Repository
 
         public void Save(Reparaciones reparacion)
         {
-            throw new NotImplementedException();
+            Reparaciones reparacionExist = GetReparacionByID(reparacion.id);
+         
+
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    if (reparacionExist == null)
+                    {
+
+                       
+                        reparacion.estado = true;
+                        cdt.Reparaciones.Add(reparacion);
+                        cdt.SaveChanges();
+                    }
+                    else
+                    {
+                        cdt.Reparaciones.Add(reparacion);
+                        cdt.Entry(reparacion).State = EntityState.Modified;
+                        cdt.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "Error" + e.Message;
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+
         }
     }
 }

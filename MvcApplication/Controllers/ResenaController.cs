@@ -102,5 +102,34 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult Details(int? id)
+        {
+            IServiceResena _ServiceResenas = new ServiceResena();
+            Resena rese = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                rese = _ServiceResenas.GetResenaByID(id.Value);
+
+                if (rese == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(rese);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("IndexAdmin");
+            }
+        }
+
     }
 }

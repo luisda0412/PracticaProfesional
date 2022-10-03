@@ -47,7 +47,7 @@ namespace MvcApplication.Controllers
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save(Reparaciones repa)
+        public ActionResult Save(Reparaciones repa, string[] servicio)
         {
             MemoryStream target = new MemoryStream();
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
@@ -55,6 +55,7 @@ namespace MvcApplication.Controllers
             {
                 repa.usuario_id = Convert.ToInt32(TempData["idUser"]);
                 repa.fecha = DateTime.Now;
+                repa.servicio_reparacion_id = int.Parse(servicio[0]);
                 _ServiceReparaciones.Save(repa);
 
                 return RedirectToAction("Index");
@@ -172,6 +173,25 @@ namespace MvcApplication.Controllers
             }
         }
 
+        public ActionResult buscarReparacionxCedula(string filtro)
+        {
+            IEnumerable<Reparaciones> lista = null;
+            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
+
+            // Error porque viene en blanco 
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceReparaciones.GetReparacion();
+            }
+            else
+            {
+                lista = _ServiceReparaciones.GetReparacionByNombre(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxCedula", lista);
+        }
 
 
 

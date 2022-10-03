@@ -42,13 +42,13 @@ namespace MvcApplication.Controllers
         }
 
         //Listas para los combos de cada articulo que se edite
-        private SelectList listaCategoria(long idCat = 0)
+        private SelectList listaCategoria(int idCat = 0)
         {
             IServiceCategoria _ServiceCategoria = new ServiceCategoria();
             IEnumerable<Categoria> listaCategoria = _ServiceCategoria.GetCategoria();
             return new SelectList(listaCategoria, "id", "nombre", idCat);
         }
-        private SelectList listaProveedor(long idProv = 0)
+        private SelectList listaProveedor(int idProv = 0)
         {
             IServiceProveedor _ServiceProveedor = new ServiceProveedor();
             IEnumerable<Proveedor> listaProveedor = _ServiceProveedor.GetProveedor();
@@ -77,8 +77,8 @@ namespace MvcApplication.Controllers
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save(Articulo art, string[] categoria, string[] proveedor, HttpPostedFileBase ImageFile)
-        {
+        public ActionResult Save( Articulo art, string[] proveedor, HttpPostedFileBase ImageFile)
+         {
             MemoryStream target = new MemoryStream();
 
             if (art.imagen == null)
@@ -92,7 +92,7 @@ namespace MvcApplication.Controllers
                 }
 
             }
-            art.categoria_id = int.Parse(categoria[0]);
+
             
             _ServiceArticulo.Save(art, proveedor);
             return RedirectToAction("Index");
@@ -101,8 +101,8 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Create()
         {
-            ViewBag.categoria_id = listaCategoria();
-            ViewBag.idProveedor = listaProveedor();
+            ViewBag.CategoriaLista = listaCategoria();
+            ViewBag.ProveedorLista = listaProveedor();
             return View();
         }
 
@@ -159,8 +159,8 @@ namespace MvcApplication.Controllers
                     return RedirectToAction("Default", "Error");
                 }
 
-                ViewBag.idCategoria = listaCategoria((long)articulo.categoria_id);
-                ViewBag.idProveedor = listaProveedor(articulo.id);
+                ViewBag.CategoriaLista = listaCategoria();
+                ViewBag.ProveedorLista = listaProveedor(articulo.id);
                 return View(articulo);
             }
             catch (Exception ex)

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Infraestructure.Models.Reparaciones>
+@foreach (var item in Model)
+{
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cliente_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Servicio_Reparacion.descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td class="columnabotones">
+            <button class="boton2">@Html.ActionLink("Reportes", "ReportesTecnicos", new { id = item.id }, new { title = "Ver los estados de la reparación" })</button>
+            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+            <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Eliminar la reparación" })</button>
+
+        </td>
+    </tr>
+}

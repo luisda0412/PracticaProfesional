@@ -41,7 +41,7 @@
                 </center>
                 <div class="texto">
                     <p class="">
-                        <b>Precio:</b> &cent; @Html.DisplayFor(model => model.precio)<br />
+                        <b>Precio:</b> &cent;@Html.DisplayFor(model => model.precio)<br />
                         <b>@Html.DisplayNameFor(model => model.stock):</b> @Html.DisplayFor(model => model.stock)<br />
                         <b>@Html.DisplayNameFor(model => model.Categoria.descripcion):</b> @Html.DisplayFor(model => model.Categoria.descripcion)<br />
                         <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
@@ -62,8 +62,8 @@
         <br />
         <center>
             <div class="botones_producto">
-                <button class="boton1">@Html.ActionLink("Editar Articulo", "Edit", new { id = Model.id })</button>
-                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo")</button>
+                <button class="boton1">@Html.ActionLink("Editar Artículo", "Edit", new { id = Model.id }, new { title = "Editar la información" })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>
     </section>

@@ -46,9 +46,6 @@
                         @Html.DisplayNameFor(model => model.encabezado)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.comentario)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Articulo.nombre)
                     </th>
                     <th>
@@ -65,19 +62,15 @@
                             @Html.DisplayFor(modelItem => item.encabezado)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.comentario)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Articulo.nombre)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Usuario.nombre)
                         </td>
                         <td>
-
-
-                            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
-                            <button class="boton2">@Html.ActionLink("Eliminar", "Eliminar", new { id = item.id })</button>
+                                 
+                            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver detalles de la reseña" })</button>
+                     
 
                         </td>
                     </tr>

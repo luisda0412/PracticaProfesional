@@ -71,8 +71,9 @@
                             @Html.DisplayFor(modelItem => item.telefono)
                         </td>
                         <td>
-                            <button class="boton2"> @Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-                            <button class="boton2"> @Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
+                            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+                            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver detalles de la empresa" })</button>
+
                         </td>
                     </tr>
                 }

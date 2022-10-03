@@ -42,7 +42,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
             @Html.HiddenFor(model => model.estado)
-            @Html.HiddenFor(model => model.imagen)
+           
 
             <div class="secciones">
                 <div class="seccion1">
@@ -66,12 +66,17 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.categoria_id,(SelectList)ViewBag.idCategoria,"Seleccione acá",new { htmlAttributes = new { @class = "combo" } })
-
+                                @Html.DropDownListFor(model => model.categoria_id, (SelectList)ViewBag.CategoriaLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
+                                @Html.ValidationMessageFor(model => model.categoria_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                    </section>
-                    <section class="cuerporight">
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Proveedor, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("proveedor", (SelectList)ViewBag.ProveedorLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.stock, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -80,6 +85,8 @@
                                 @Html.ValidationMessageFor(model => model.stock, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    </section>
+                    <section class="cuerporight">
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.imagen, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -89,21 +96,23 @@
                                 <input type="file" name="ImageFile" required />
                             </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Proveedor, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.id, (SelectList)ViewBag.idProveedor, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
-                           
 
+                        <div class="form-group">
+                            @Html.Label("Imagen registrada", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <br />
+                            <br />
+                            <div class="col-md-10">
+                                <img style="max-width:150px; max-height:250px" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img" alt="Producto @Html.DisplayNameFor(model => model.nombre)">
                             </div>
                         </div>
+
                     </section>
                 </div>
                 <div class="seccion2">
                     <div class="form-group2">
 
-                        <input type="submit" value="Guardar Artículo" class="btn" />
-                        <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index")</button>
+                        <input type="submit" value="Guardar Artículo" class="btn" title="Guardar modificaciones" />
+                        <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index", new { title = "Regresar a la lista" })</button>
                     </div>
                 </div>
                 <br />

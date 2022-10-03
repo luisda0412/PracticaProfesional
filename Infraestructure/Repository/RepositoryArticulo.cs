@@ -22,7 +22,8 @@ namespace Infraestructure.Repository
                 try
                 {
 
-                    Articulo art = cdt.Articulo.Where(a => a.id == id).Include(x => x.Proveedor).Include(x => x.Categoria).FirstOrDefault();
+                    //Articulo art = cdt.Articulo.Where(a => a.id == id).Include(x => x.Proveedor).Include(x => x.Categoria).FirstOrDefault();
+                    Articulo art = cdt.Articulo.Where(a => a.id == id).Include("Proveedor").Include("Categoria").FirstOrDefault();
                     art.Proveedor.Clear();
                     cdt.Articulo.Remove(art);                 
                     cdt.SaveChanges();
