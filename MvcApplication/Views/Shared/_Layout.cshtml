@@ -24,10 +24,10 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-link" }, new { title = "Ir a la página principal" })
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los mantenimientos del sistema VYCUZ" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                         <div class="dropdown-menu">
                             @Html.ActionLink("Artículos", "Index", "Articulo", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Servicios", "Index", "ServicioReparacion", null, new { @class = "dropdown-item" })
@@ -40,7 +40,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { area = "" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                     </li>
 
 
@@ -63,7 +63,7 @@
                         }
                     }
                     <li class="nav-item dropdown" id="login">
-                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" title="Perfil Logueado" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
 
                         <div class="dropdown-menu" id="login">
                             @if (Session["User"] != null)
@@ -77,12 +77,12 @@
                             <div class="dropdown-divider"></div>
                             @if (Session["User"] == null)
                             {
-                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", new { @class = "dropdown-item" }, new { title = "Iniciar Sesión en el sistema" })
                             }
                             else
                             {
 
-                                @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "dropdown-item " })
+                                @Html.ActionLink("Logout", "Logout", "Home", new { @class = "dropdown-item " }, new { title = "Salir de la sesión actual" })
                             }
 
                         </div>
@@ -156,10 +156,10 @@
                             <br /><br />
                             <img src="~/Imagenes/Logos/logomenu.png" alt="Beyond Technology" class="mb-3">
                             <br class="clearfix">
-                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/facebook.png" alt="Beyond Technology" /></a>
-                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/instagram.png" alt="Beyond Technology" /></a>
-                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/telegram.png" alt="Beyond Technology" /></a>
-                            <a href="#" class="snip1472"><img src="~/Imagenes/Iconos/google.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al perfil de facebook" class="snip1472"><img src="~/Imagenes/Iconos/facebook.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al perfil de Instagram" class="snip1472"><img src="~/Imagenes/Iconos/instagram.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al chat de Telegram" class="snip1472"><img src="~/Imagenes/Iconos/telegram.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al buscador de Google" class="snip1472"><img src="~/Imagenes/Iconos/google.png" alt="Beyond Technology" /></a>
                         </div><!--.col-->
                     </div><!--.row-->
                 </div>

@@ -59,8 +59,8 @@
         <br />
         <center>
             <div class="botones">
-                <button class="boton1">@Html.ActionLink("Editar arqueo", "Edit", new { id = Model.id })</button>
-                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
+                <button class="boton1">@Html.ActionLink("Editar arqueo", "Edit", new { id = Model.id }, new { title = "Editar la información" })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", new { title = "Volver al listado" })</button>
             </div>
         </center>
     </section>
