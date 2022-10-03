@@ -118,7 +118,8 @@
                                     &cent;@Html.DisplayFor(modelItem => item.efectivo_total)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.tipo)
+                                    @{ string isActive = item.tipo == true ? "Apertura" : "Cierre"; }
+                                    @isActive
                                 </td>
                                 <td class="columnabotones">
 

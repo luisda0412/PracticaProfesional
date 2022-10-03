@@ -174,6 +174,7 @@ namespace Infraestructure.Models
         [Display(Name = "Entrega estimada")]
         public string entregaestimada { get; set; }
 
+        [Display(Name = "Servicio de reparación")]
         public virtual Servicio_Reparacion Servicio_Reparacion { get; set; }
         public virtual Usuario Usuario { get; set; }
 

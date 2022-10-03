@@ -110,7 +110,8 @@
                                     &cent;@Html.DisplayFor(modelItem => item.costo)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.estado)
+                                    @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+                                    @isActive
                                 </td>
                                 <td class="columnabotones">
                        

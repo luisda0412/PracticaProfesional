@@ -49,7 +49,8 @@
                         <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
                         <b>@Html.DisplayNameFor(model => model.monto_total):</b> &cent;@Html.DisplayFor(model => model.monto_total)<br />
                         <b>@Html.DisplayNameFor(model => model.entregaestimada):</b> @Html.DisplayFor(model => model.entregaestimada)<br />
-                        <b>@Html.DisplayNameFor(model => model.estado):</b> @Html.DisplayFor(model => model.estado)<br />
+                        @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
+                        <span><b>Estado:</b> @isActive</span>
                         <b>@Html.DisplayNameFor(model => model.Reportes_Tecnicos):</b>
                         <ul>
                             @foreach (var c in Model.Reportes_Tecnicos)

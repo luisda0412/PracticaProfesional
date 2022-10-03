@@ -123,7 +123,8 @@
                                     @*.fecha.ToString("dd/MM/yyyy")*@
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.estado)
+                                    @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+                                    @isActive
                                 </td>
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Reportes", "ReportesTecnicos", new { id = item.id }, new { title = "Ver los estados de la reparación" })</button>

@@ -42,7 +42,8 @@
                 </center>
                 <div class="texto">
                     <p class="">
-                        <b>@Html.DisplayNameFor(model => model.tipo):</b>@Html.DisplayFor(model => model.tipo)<br />
+                        @{ string isActive = @Model.tipo== true ? "Apertura" : "Cierre"; }
+                        <span><b>Estado:</b> @isActive</span><br />
                         <b>@Html.DisplayNameFor(model => model.monedas):</b> @Html.DisplayFor(model => model.monedas)<br />
                         <b>@Html.DisplayNameFor(model => model.billetes):</b> @Html.DisplayFor(model => model.billetes)<br />
                         <b>@Html.DisplayNameFor(model => model.efectivo_total):</b> @Html.DisplayFor(model => model.efectivo_total)<br />
