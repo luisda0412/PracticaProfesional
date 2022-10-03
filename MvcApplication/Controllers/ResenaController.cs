@@ -79,8 +79,8 @@ namespace MvcApplication.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
+                TempData["Redirect"] = "Resena";
+                TempData["Redirect-Action"] = "Index";
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
@@ -127,7 +127,7 @@ namespace MvcApplication.Controllers
             catch (Exception e)
             {
                 Log.Error(e, MethodBase.GetCurrentMethod());
-                return RedirectToAction("IndexAdmin");
+                return RedirectToAction("Index");
             }
         }
 
