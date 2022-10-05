@@ -17,7 +17,7 @@ namespace Infraestructure.Models
         [Display(Name = "Precio")]
         [Required(ErrorMessage = "*El precio es un campo obligatorio")]
         public Nullable<double> precio { get; set; }
-        [Display(Name = "Imágen")]
+        [Display(Name = "Imagen")]
         [Required(ErrorMessage = "*La imagen es un campo obligatorio")]
         public byte[] imagen { get; set; }
         [Display(Name = "Categoría")]

@@ -278,6 +278,9 @@
     <Content Include="Imagenes\Logos\logomenu.png" />
     <Content Include="Imagenes\Logos\logoPestaña.png" />
     <Content Include="Imagenes\Visuals\caja-chica.jpg" />
+    <Content Include="Imagenes\Visuals\carrusel1.jpg" />
+    <Content Include="Imagenes\Visuals\carrusel2.jpg" />
+    <Content Include="Imagenes\Visuals\carrusel3.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
     <Content Include="Imagenes\Visuals\proveedores.jpg" />
     <Content Include="Imagenes\Visuals\reparaciones.jpg" />
