@@ -1,0 +1,208 @@
+﻿main {
+    background-color: white;
+    margin:auto;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 300px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 300px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 15%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        height: 220px;
+        width: 480px;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+
+/*Cuerpo------------------------------------------------------------------------*/
+
+.secciones {
+    width: 50%;
+    box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
+    border-radius: 10px;
+}
+
+.seccion1 {
+    width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+#titulo {
+    background-color: #1a8623;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 32px;
+    font-weight: bold;
+    width: 30%;
+    border-radius: 10px;
+}
+
+/*Cuerpo izquierdo------------------------------------------------*/
+.cuerpoleft {
+    width: 45%;
+    margin-top: 3%;
+}
+
+    .cuerpoleft .form-group {
+        margin-top: 5%;
+        text-align: justify;
+    }
+
+        .cuerpoleft .form-group .col-md-2 {
+            width: 45%;
+            font-family: 'Agency FB';
+            font-size: 25px;
+        }
+
+        .cuerpoleft .form-group .col-md-10 {
+          width:100%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 19px;
+        }
+
+
+
+/*Cuerpo derecho--------------------------------------------------------*/
+.cuerporight {
+    width: 45%;
+    margin-top: 3%;
+}
+
+    .cuerporight .form-group {
+        margin-top: 5%;
+        text-align: justify;
+    }
+
+        .cuerporight .form-group .col-md-2 {
+            width: 40%;
+            font-family: 'Agency FB';
+            font-size: 25px;
+        }
+
+        .cuerporight .form-group .col-md-10 {
+            width: 100%;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 21px;
+            padding: 0%;
+        }
+
+
+
+
+
+/*Botones*/
+.form-group2 {
+    font-family: 'Agency FB';
+    font-size: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+
+/* From uiverse.io by @alexroumi */
+
+.form-group2 .btn a{
+    text-decoration:none;
+    color:black;
+}
+.form-group2 .btn {
+    text-decoration:none;
+    padding: 5px 15px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 21px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .form-group2 .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .form-group2 .btn:hover {
+        background-color: #1a8623;
+        color:white;
+    }
+
+    .form-group2 .btn a:hover{
+        color:#e8e8e8;
+    }
+
+        .form-group2 .btn:hover::before {
+            width: 100%;
+        }
+
+/*Input*/
+   

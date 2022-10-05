@@ -235,6 +235,7 @@
     <Content Include="Content\CSSEstiloServicios\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloDetalleServicios.css" />
     <Content Include="Content\CSSEstiloServicios\EstiloListaServicios.css" />
+    <Content Include="Content\CSSEstiloUsuarios\EstiloRegistro.css" />
     <Content Include="Content\CSSEstiloUsuarios\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloUsuarios\EstiloDetalleUsuario.css" />
     <Content Include="Content\CSSEstiloUsuarios\EstiloListaUsuarios.css" />
@@ -486,6 +487,7 @@
     <Content Include="Views\Usuario\Recuperacion.cshtml" />
     <Content Include="Views\Proveedor\_PartialViewVistaxNombre.cshtml" />
     <Content Include="Views\Reparaciones\_PartialViewVistaxCedula.cshtml" />
+    <Content Include="Views\Home\Registro.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

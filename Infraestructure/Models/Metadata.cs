@@ -257,7 +257,7 @@ namespace Infraestructure.Models
         //[Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
         public string apellidos { get; set; }
 
-        [Display(Name = "Correo Electrónico")]
+        [Display(Name = "Correo")]
         [Required(ErrorMessage = "{0} es un campo requerido")]
         [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
         public string correo_electronico { get; set; }

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using Web.Utils;
 using MvcApplication.Util;
+using System.IO;
 
 namespace MvcApplication.Controllers
 {
@@ -108,6 +109,36 @@ namespace MvcApplication.Controllers
                 TempData["Message"] = ex.Message;
                 TempData["Redirect"] = "Login";
                 TempData["Redirect-Action"] = "Index";
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+        //Vista para crear una nueva cuenta de usuario
+        public ActionResult Registro()
+        {
+            return View();
+        }
+
+        //Metodo para registrar la cuenta del nuevo cliente
+        public ActionResult SaveCliente(Usuario user)
+        {
+            IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+            try
+            {
+
+                user.rol_id = 2;
+                Usuario oUser = _ServiceUsuario.Save(user);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                TempData["Redirect"] = "Libro";
+                TempData["Redirect-Action"] = "IndexAdmin";
+                // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
