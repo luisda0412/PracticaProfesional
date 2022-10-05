@@ -129,7 +129,7 @@ namespace MvcApplication.Controllers
                 user.rol_id = 2;
                 Usuario oUser = _ServiceUsuario.Save(user);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Loguearse");
             }
             catch (Exception ex)
             {
