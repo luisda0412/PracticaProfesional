@@ -1,0 +1,79 @@
+﻿@model Infraestructure.Models.Articulo
+
+@{
+    ViewBag.Title = "Detalles";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloDetalleArticulo.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Detalle del producto
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="tarjeta">
+            <div class="ladoizquierdo">
+                <center>
+                    <h3>@Html.DisplayFor(model => model.nombre)</h3>
+                </center>
+                <div class="texto">
+                    <p class="">
+                        <b>Precio:</b> &cent;@Html.DisplayFor(model => model.precio)<br />
+                        <b>@Html.DisplayNameFor(model => model.stock):</b> @Html.DisplayFor(model => model.stock)<br />
+                        <b>@Html.DisplayNameFor(model => model.Categoria.descripcion):</b> @Html.DisplayFor(model => model.Categoria.descripcion)<br />
+                        @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
+                        <span><b>Estado:</b> @isActive</span><br />
+
+                        <b>@Html.DisplayNameFor(model => model.Proveedor):</b>
+                        <ul>
+                            @foreach (var c in Model.Proveedor)
+                            {
+                                <li>@c.descripcion</li>
+                            }
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="ladoderecho">
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img" alt="Producto @Html.DisplayNameFor(model => model.nombre)">
+            </div>
+        </div>
+        <br />
+
+        @Html.Partial("ResenaArticulo")
+
+        <center>
+            <div class="botones_producto">
+                <button class="boton1">@Html.ActionLink("Ordenar", "", new { id = Model.id }, new { title = "Ordenar" })</button>
+                <button class="boton1">@Html.ActionLink("Volver a lista", "Index", "Articulo", new { title = "Regresar a la lista" })</button>
+            </div>
+        </center>
+    </section>
+</main>
+
+@{
+    TempData["idArticulo"] = Model.id;
+}

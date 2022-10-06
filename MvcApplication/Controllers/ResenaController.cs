@@ -22,6 +22,7 @@ namespace MvcApplication.Controllers
             try
             {
                 IServiceResena _ServiceResena = new ServiceResena();
+                id = Convert.ToInt32(TempData["idArticulo"]);
                 lista = _ServiceResena.GetResenaByIDArticulo((long)id);
             }
             catch (Exception e)

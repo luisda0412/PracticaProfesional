@@ -135,6 +135,34 @@ namespace MvcApplication.Controllers
             }
         }
 
+        public ActionResult DetailsCliente(int? id)
+        {
+            ServiceArticulo _ServiceArticulo = new ServiceArticulo();
+            Articulo articulo = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                articulo = _ServiceArticulo.GetArticuloByID(id.Value);
+
+                if (articulo == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                return View(articulo);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+                return RedirectToAction("Index");
+            }
+        }
+
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
         {

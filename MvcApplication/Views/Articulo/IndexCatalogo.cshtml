@@ -66,20 +66,7 @@
                                     <p class="card-text">   @Html.DisplayNameFor(model => model.precio):  @Html.DisplayFor(modelItem => item.precio)</p>
                                     <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.stock): @Html.DisplayFor(modelItem => item.stock)</h6>
                                     <div class="card-body">
-                                        @Ajax.ActionLink("Ordenar",//Texto para el usuario
-                                       "ordenarProducto",//Acción a llamar
-                                       "Encabezado_Inventario",
-                                       new
-                                       {
-                                           idProducto = item.id
-                                       },//Parámetros a enviar
-                                       new AjaxOptions
-                                       {
-                                           UpdateTargetId = "cantidadLibros",
-                                           InsertionMode = InsertionMode.Replace,
-                                           HttpMethod = "GET",
-                                       }, new { @class = "btn btn-primary" }
-                                       )
+                                       <button class="boton2">@Html.ActionLink("Detalles", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
                                     </div>
                                 </div>
                             </div>

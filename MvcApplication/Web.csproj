@@ -491,6 +491,8 @@
     <Content Include="Views\Reparaciones\_PartialViewVistaxCedula.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
     <Content Include="Views\Shared\MovimientoCantidad.cshtml" />
+    <Content Include="Views\Shared\ResenaArticulo.cshtml" />
+    <Content Include="Views\Articulo\DetailsCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

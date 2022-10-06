@@ -45,6 +45,9 @@
                         @Html.DisplayNameFor(model => model.encabezado)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.comentario)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Articulo.nombre)
                     </th>
                     <th>
@@ -56,24 +59,25 @@
                 @foreach (var item in Model)
                 {
 
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.encabezado)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Articulo.nombre)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Usuario.nombre)
-                        </td>
-                        <td>
-                                 
-                            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver detalles de la reseña" })</button>    
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.encabezado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.comentario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Articulo.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.nombre)
+                </td>
+                <td>
 
-                        </td>
-                    </tr>
+                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver detalles de la reseña" })</button>
 
-                    TempData["idArticulo"] = item.articulo_id;
+                </td>
+            </tr>
                 }
 
             </table>
