@@ -1,0 +1,12 @@
+﻿@{ int cantidadLibros = Web.ViewModel.Carrito.Instancia.GetCountItems();}
+
+<a href="@Url.Action("IndexEncabezado", "Encabezado_Inventario")" class="nav-link">
+    Movimiento <span class="numero">   @cantidadLibros</span>
+</a>
+
+@if (@ViewBag.NotiCarrito != null)
+{
+    <script>
+            @Html.Raw(@ViewBag.NotiCarrito);
+    </script>
+}

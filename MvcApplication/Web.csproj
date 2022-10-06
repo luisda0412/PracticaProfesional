@@ -191,7 +191,9 @@
     <Compile Include="Utils\Log.cs" />
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
+    <Compile Include="ViewModel\Carrito.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelDetalleEncabezado.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -488,6 +490,7 @@
     <Content Include="Views\Proveedor\_PartialViewVistaxNombre.cshtml" />
     <Content Include="Views\Reparaciones\_PartialViewVistaxCedula.cshtml" />
     <Content Include="Views\Home\Registro.cshtml" />
+    <Content Include="Views\Shared\MovimientoCantidad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        @Html.ActionLink("Inicio", "Index", "Home",null, new { @class = "nav-link" })
+                        @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los mantenimientos del sistema VYCUZ" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
@@ -41,6 +41,9 @@
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item" id="cantidadLibros">
+                        @Html.Partial("MovimientoCantidad")
                     </li>
 
 
@@ -77,12 +80,12 @@
                             <div class="dropdown-divider"></div>
                             @if (Session["User"] == null)
                             {
-                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home",null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", null, new { @class = "dropdown-item" })
                             }
                             else
                             {
 
-                                @Html.ActionLink("Logout", "Logout", "Home",null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "dropdown-item" })
                             }
 
                         </div>
