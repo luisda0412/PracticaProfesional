@@ -63,17 +63,6 @@
         </div>
         <br />
 
-        @Html.Partial("ResenaArticulo")
-        
-        @{ 
-            List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
-        }
-
-        @foreach (var resena in listaResena)
-            {
-                @resena.comentario <br />
-            }
-
         <center>
             <div class="botones_producto">
                 <button class="boton1">@Html.ActionLink("Ordenar", "", new { id = Model.id }, new { title = "Ordenar" })</button>
@@ -85,4 +74,20 @@
 
 @{
     TempData["idArticulo"] = Model.id;
+}
+
+@Html.Partial("ResenaArticulo")
+
+<br />
+
+@{
+    List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
+}
+
+@foreach (var resena in listaResena)
+{
+
+    <p>@resena.Usuario.nombre </p> <p>@resena.Articulo.nombre </p> <p><b>@resena.encabezado</b></p> <p> @resena.comentario </p>
+    <br />
+    <br />
 }
