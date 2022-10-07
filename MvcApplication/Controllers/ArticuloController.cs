@@ -140,6 +140,10 @@ namespace MvcApplication.Controllers
             ServiceArticulo _ServiceArticulo = new ServiceArticulo();
             Articulo articulo = null;
 
+            IEnumerable<Resena> listaResena = null;
+            IServiceResena _ServiceResena = new ServiceResena();
+            //id = Convert.ToInt32(TempData["idArticulo"]);
+            
             try
             {
                 if (id == null)
@@ -148,11 +152,13 @@ namespace MvcApplication.Controllers
                 }
 
                 articulo = _ServiceArticulo.GetArticuloByID(id.Value);
+                listaResena = _ServiceResena.GetResenaByIDArticulo(articulo.id);
 
                 if (articulo == null)
                 {
                     return RedirectToAction("Index");
                 }
+                ViewBag.listaResena = listaResena;
                 return View(articulo);
 
             }
@@ -281,6 +287,23 @@ namespace MvcApplication.Controllers
                     throw;
                 }
             }
+        }
+
+        public ActionResult IndexResena(int? id)
+        {
+            IEnumerable<Resena> lista = null;
+            try
+            {
+                IServiceResena _ServiceResena = new ServiceResena();
+                //id = Convert.ToInt32(TempData["idArticulo"]);
+                lista = _ServiceResena.GetResenaByIDArticulo((long)id);
+                ViewBag.listaResena = lista;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
         }
 
 

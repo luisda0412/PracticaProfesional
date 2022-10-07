@@ -16,21 +16,7 @@ namespace MvcApplication.Controllers
     {
         // GET: Resena
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult Index(int? id)
-        {
-            IEnumerable<Resena> lista = null;
-            try
-            {
-                IServiceResena _ServiceResena = new ServiceResena();
-                id = Convert.ToInt32(TempData["idArticulo"]);
-                lista = _ServiceResena.GetResenaByIDArticulo((long)id);
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, MethodBase.GetCurrentMethod());
-            }
-            return View(lista);
-        }
+        
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]

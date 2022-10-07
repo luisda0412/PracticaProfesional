@@ -64,6 +64,15 @@
         <br />
 
         @Html.Partial("ResenaArticulo")
+        
+        @{ 
+            List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
+        }
+
+        @foreach (var resena in listaResena)
+            {
+                @resena.comentario <br />
+            }
 
         <center>
             <div class="botones_producto">
