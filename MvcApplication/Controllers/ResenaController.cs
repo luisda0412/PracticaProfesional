@@ -30,7 +30,7 @@ namespace MvcApplication.Controllers
                 resena.articulo_id = Convert.ToInt32(TempData["idArticulo"]);
                 Resena oResena = _ServiceResena.Save(resena);
 
-                return RedirectToAction("DetailsCliente", "Articulo");
+                return RedirectToAction("IndexCatalogo", "Articulo");
             }
             catch (Exception ex)
             {
