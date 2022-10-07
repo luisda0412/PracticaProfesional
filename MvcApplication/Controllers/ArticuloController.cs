@@ -288,24 +288,5 @@ namespace MvcApplication.Controllers
                 }
             }
         }
-
-        public ActionResult IndexResena(int? id)
-        {
-            IEnumerable<Resena> lista = null;
-            try
-            {
-                IServiceResena _ServiceResena = new ServiceResena();
-                //id = Convert.ToInt32(TempData["idArticulo"]);
-                lista = _ServiceResena.GetResenaByIDArticulo((long)id);
-                ViewBag.listaResena = lista;
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, MethodBase.GetCurrentMethod());
-            }
-            return View(lista);
-        }
-
-
     }
 }
