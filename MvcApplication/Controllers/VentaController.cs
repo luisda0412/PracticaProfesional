@@ -79,6 +79,12 @@ namespace MvcApplication.Controllers
 
         public ActionResult IndexVenta()
         {
+            if (TempData.ContainsKey("NotificationMessage"))
+            {
+                ViewBag.NotificationMessage = TempData["NotificationMessage"];
+            }
+
+            ViewBag.DetalleOrden = Carrito.Instancia.Items;
             return View();
         }
 
