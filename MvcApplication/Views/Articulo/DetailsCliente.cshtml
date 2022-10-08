@@ -65,7 +65,22 @@
 
         <center>
             <div class="botones_producto">
-                <button class="boton1">@Html.ActionLink("Ordenar", "", new { id = Model.id }, new { title = "Ordenar" })</button>
+                <button class="boton1">
+                    @Ajax.ActionLink("Ordenar",//Texto para el usuario
+                   "ordenarProducto",//Acción a llamar
+                   "Venta",
+                   new
+                   {
+                       idArtiuclo = Model.id
+                   },//Parámetros a enviar
+                   new AjaxOptions
+                   {
+                       UpdateTargetId = "cantidadLibros",
+                       InsertionMode = InsertionMode.Replace,
+                       HttpMethod = "GET",
+                   }, new { @class = "btn btn-primary" }
+                   )
+                </button>
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>

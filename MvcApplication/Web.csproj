@@ -577,6 +577,8 @@
     <Content Include="Views\Shared\ResenaArticulo.cshtml" />
     <Content Include="Views\Articulo\DetailsCliente.cshtml" />
     <Content Include="Views\Reportes\ProductosLista.cshtml" />
+    <Content Include="Views\Venta\Detalle.cshtml" />
+    <Content Include="Views\Venta\IndexVenta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

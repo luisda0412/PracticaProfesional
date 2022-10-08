@@ -1,0 +1,197 @@
+﻿@model Infraestructure.Models.Venta
+@{
+    ViewBag.Title = "Movimiento ";
+}
+<head>
+    <link rel="stylesheet" href="~/Content/CSSMovimiento/EstiloMovimiento.css">
+
+</head>
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/IMG/logo1.7.png" />
+            </div>
+            <h3>Beyond Technology</h3>
+            <br />
+            <h2>
+                Creación del movimiento
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/IMG/wallpaper9.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <br />
+    <br />
+    <section class="formulario">
+        <center>
+            <br />
+            <h2 id="titulo">Nueva Venta</h2>
+            <br />
+            @using (Html.BeginForm("Save", "Venta", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group3">
+                                <br />
+                                @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group3">
+                                <h5>Detalle del Movimiento</h5>
+                                @Html.EditorFor(x => x.Detalle_Venta)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <hr />
+                <span class="glyphicons glyphicons-hand-left"></span>
+                <div id="resultadoDetalle">
+                    @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
+                    {
+                        @Html.Partial("~/Views/Venta/Detalle.cshtml", (List<Web.ViewModel.ViewModelDetalleEncabezado>)ViewBag.DetalleOrden)
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            El movimiento no tiene Productos asignados
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+
+                </div>
+                <hr />
+
+                <section class="abajo">
+                    <!-- Submit -->
+                    <button class="boton1" id="btnOrdenar">Guardar Movimiento</button>
+                </section>
+
+            }
+        </center>
+        <br />
+    </section>
+    @section Scripts {
+
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jqueryajax")
+
+        <script type="text/javascript">
+
+            //Actualizar cantidad de libros en el carrito
+            //Cambio de cantidad en caja de texto
+            function updateCantidad(ctr) {
+                var txtCantidad = $(ctr);
+                var cantidad = txtCantidad.val();
+                var id = txtCantidad.data("productoid");
+                $.ajax({
+                    type: "GET",
+                    dataType: 'text',
+                    url: "/Encabezado_Inventario/actualizarCantidad",
+                    data: { "idProducto": id, "cantidad": cantidad },
+                    success: function (data) {
+                        $("#resultadoDetalle").html('');
+                        $("#resultadoDetalle").html(data);
+                        updateCantLibros();
+                    }, error: function (xhr, status, error) {
+                        console.log("Error: " + error + ", No Error: " + xhr.status);
+                    },
+                });
+            }
+            //Actualizar cantidad de libros en el menú
+            function updateCantLibros() {
+                $.ajax({
+                    type: "GET",
+                    dataType: 'text',
+                    url: "/Encabezado_Inventario/actualizarOrdenCantidad",
+                    success: function (data) {
+                        $("#cantidadLibros").html('');
+                        $("#cantidadLibros").html(data);
+                    }, error: function (xhr, status, error) {
+                        console.log("Error: " + error + ", No Error: " + xhr.status);
+                    },
+                });
+            }
+
+            function updateEntrada() {
+                $.ajax({
+                    type: "GET",
+                    dataType: 'text',
+                    url: "/Encabezado_Inventario/appearEntrada",
+                    success: function (data) {
+                        $("#searchResults").html('');
+                        $("#searchResults").html(data);
+                    }, error: function (xhr, status, error) {
+                        console.log("Error: " + error + ", No Error: " + xhr.status);
+                    },
+                });
+            }
+
+        </script>
+        <script type="text/javascript">
+
+            function aparecerProveedor() {
+                var seleccionado = $('#movimiento').val();
+                $("#searchResults").text(seleccionado)
+            }
+
+            $(document).ready(function () {
+                $("#movimiento").change(function () {
+                    var seleccionado = $("#movimiento Option:Selected").text();
+                    if (seleccionado == "entrada") {
+                        $ajax({
+                            type: "GET",
+                            dataType: 'text',
+                            url: "/Encabezado_Inventario/appearEntrada",
+                            success: function (data) {
+                                $("#searchResults").html('');
+                                $("#searchResults").html(data);
+                            }, error: function (xhr, status, error) {
+                                console.log("Error: " + error + ", No Error: " + xhr.status);
+                            },
+                        });
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            dataType: 'text',
+                            url: "/Encabezado_Inventario/AppearSalida",
+                            success: function (data) {
+                                $("#searchResults").html('');
+                                $("#searchResults").html(data);
+                            }, error: function (xhr, status, error) {
+                                console.log("Error: " + error + ", No Error: " + xhr.status);
+                            }
+                        });
+                    }
+
+                }
+                })
+        </script>
+    }
+
+</main>
+
