@@ -16,7 +16,7 @@
         <div class="carousel-item active">
             <img class="d-block w-100" src="~/Imagenes/Visuals/carrusel1.jpg" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Estcuhes Iphone</h5>
+                <h5>Estuches Iphone</h5>
                 <p>Estuches para cualquier modelo de iphone</p>
             </div>
         </div>
@@ -37,11 +37,11 @@
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        
+
     </a>
     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        
+
     </a>
 </div>
 
@@ -67,3 +67,10 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+@if (ViewBag.NotificationMessage != null)
+{
+    <script>
+            @Html.Raw(@ViewBag.NotificationMessage);
+    </script>
+}

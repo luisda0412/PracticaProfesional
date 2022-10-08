@@ -27,9 +27,12 @@ namespace MvcApplication
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/sweetalert").Include("~/Scripts/sweetalert.min.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      //"~/Content/bootstrap.css",
+   
                       "~/Content/bootstrap-simplex.min.css",
+                      "~/Content/sweetalert.css",
                       "~/Content/site.css"));
         }
     }
