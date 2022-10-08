@@ -42,6 +42,12 @@
                     <li class="nav-item">
                         @Html.ActionLink("Articulos", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los reportes" aria-haspopup="true" aria-expanded="false">Reportes</a>
+                        <div class="dropdown-menu">
+                            @Html.ActionLink("Artículos", "ProductosLista", "Reportes", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
                     <li class="nav-item" id="cantidadLibros">
                         @Html.Partial("MovimientoCantidad")
                     </li>
@@ -66,7 +72,7 @@
                         }
                     }
                     <li class="nav-item dropdown" id="login">
-                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@email</a>
+                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@nombre</a>
 
                         <div class="dropdown-menu" id="login">
                             @if (Session["User"] != null)
@@ -169,13 +175,15 @@
             </section>
         </footer>
     </div>
-   
+
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)
+
     @if (ViewBag.NotificationMessage != null)
     {
         <script>

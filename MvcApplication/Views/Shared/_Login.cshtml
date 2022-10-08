@@ -45,6 +45,12 @@
     </footer>
 
 
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/sweetalert")
+
     @RenderSection("scripts", required: false)
     @if (ViewBag.NotificationMessage != null)
     {
@@ -52,10 +58,5 @@
             @Html.Raw(@ViewBag.NotificationMessage);
         </script>
     }
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/sweetalert")
-
 </body>
 </html>
