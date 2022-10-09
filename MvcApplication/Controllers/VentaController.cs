@@ -58,16 +58,15 @@ namespace MvcApplication.Controllers
                             Detalle_Venta linea = new Detalle_Venta();
                             linea.articulo_id = (int)items.idArticulo;
                             linea.cantidad = items.cantidad;
-                            //linea.total_linea = items.total_linea;
-                            //factura.porcentaje_descuento = factura.porcentaje_descuento / 100;
-                            venta.monto_total = (double?)Carrito.Instancia.GetTotal();
                             venta.impuesto = 0.13;
                             venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
                             venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                            venta.estado = true;
                             linea.venta_id = venta.id;
                             linea.descuento = 0;
-                            linea.precio= (double?)Carrito.Instancia.GetTotal();
                             linea.venta_id = venta.id;
+                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto)- linea.descuento;
+                            linea.precio = venta.monto_total;
                             venta.Detalle_Venta.Add(linea);
                         }
 
@@ -108,6 +107,45 @@ namespace MvcApplication.Controllers
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idArticulo);
             return PartialView("MovimientoCantidad");
 
+        }
+
+        public ActionResult actualizarCantidad(int idArticulo, int cantidad)
+        {
+            ViewBag.DetalleOrden = Carrito.Instancia.Items;
+            TempData["NotiCarrito"] = Carrito.Instancia.SetItemCantidad(idArticulo, cantidad);
+            TempData.Keep();
+            return PartialView("Detalle", Carrito.Instancia.Items);
+
+        }
+
+        //Actualizar solo la cantidad de libros que se muestra en el menú
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+
+        public ActionResult actualizarOrdenCantidad()
+        {
+            if (TempData.ContainsKey("NotiCarrito"))
+            {
+                ViewBag.NotiCarrito = TempData["NotiCarrito"];
+            }
+            int cantidadLibros = Carrito.Instancia.Items.Count();
+            return PartialView("Detalle");
+
+        }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+
+        public ActionResult eliminarProducto(long? idArticulo)
+        {
+            try
+            {
+                ViewBag.NotificationMessage = Carrito.Instancia.EliminarItem((long)idArticulo);
+                return PartialView("Detalle", Carrito.Instancia.Items);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return PartialView("Detalle", Carrito.Instancia.Items);
         }
     }
 }

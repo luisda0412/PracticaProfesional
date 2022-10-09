@@ -111,8 +111,8 @@
                 $.ajax({
                     type: "GET",
                     dataType: 'text',
-                    url: "/Encabezado_Inventario/actualizarCantidad",
-                    data: { "idProducto": id, "cantidad": cantidad },
+                    url: "/Venta/actualizarCantidad",
+                    data: { "idArticulo": id, "cantidad": cantidad },
                     success: function (data) {
                         $("#resultadoDetalle").html('');
                         $("#resultadoDetalle").html(data);
@@ -127,7 +127,7 @@
                 $.ajax({
                     type: "GET",
                     dataType: 'text',
-                    url: "/Encabezado_Inventario/actualizarOrdenCantidad",
+                    url: "/Venta/actualizarOrdenCantidad",
                     success: function (data) {
                         $("#cantidadLibros").html('');
                         $("#cantidadLibros").html(data);
