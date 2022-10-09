@@ -28,7 +28,8 @@ namespace AplicationCore.Services
 
         public Venta Save(Venta venta)
         {
-            throw new NotImplementedException();
+            IRepositoryVenta repository = new RepositoryVenta();
+            return repository.Save(venta);
         }
     }
 }

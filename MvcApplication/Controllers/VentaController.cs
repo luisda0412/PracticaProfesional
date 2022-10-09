@@ -34,6 +34,7 @@ namespace MvcApplication.Controllers
 
         public ActionResult Save(Venta venta)
         {
+             IServiceUsuario serviceUsuario = new ServiceUsuario();
             try
             {
                 if (Carrito.Instancia.Items.Count() <= 0)
@@ -42,11 +43,15 @@ namespace MvcApplication.Controllers
                 }
                 else
                 {
+                    Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
+                    venta.nombre_cliente = user.nombre;
                     if (venta.nombre_cliente != null)
                     {
                         IServiceArticulo serviceArticulo = new ServiceArticulo();
+                       
                         Articulo articulo = new Articulo();
                         var listaLinea = Carrito.Instancia.Items;
+                        
 
                         foreach (var items in listaLinea)
                         {
@@ -55,7 +60,13 @@ namespace MvcApplication.Controllers
                             linea.cantidad = items.cantidad;
                             //linea.total_linea = items.total_linea;
                             //factura.porcentaje_descuento = factura.porcentaje_descuento / 100;
-                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() - ((double?)Carrito.Instancia.GetTotal());
+                            venta.monto_total = (double?)Carrito.Instancia.GetTotal();
+                            venta.impuesto = 0.13;
+                            venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
+                            venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                            linea.venta_id = venta.id;
+                            linea.descuento = 0;
+                            linea.precio= (double?)Carrito.Instancia.GetTotal();
                             linea.venta_id = venta.id;
                             venta.Detalle_Venta.Add(linea);
                         }
@@ -63,7 +74,7 @@ namespace MvcApplication.Controllers
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
                     }
-                    return RedirectToAction("IndexFactura");
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
