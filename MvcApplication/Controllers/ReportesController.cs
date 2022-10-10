@@ -4,10 +4,12 @@ using iText.IO.Font.Constants;
 using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,7 +65,9 @@ namespace MvcApplication.Controllers
 
                 //Initialize document
                 PdfDocument pdfDoc = new PdfDocument(writer);
-                Document doc = new Document(pdfDoc);
+                Document doc = new Document(pdfDoc, PageSize.A4, false);
+                
+
 
                 Paragraph header = new Paragraph("Catálogo de Artículos")
                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
@@ -112,22 +116,23 @@ namespace MvcApplication.Controllers
 
 
                     //AQUI SE ME CAE
+                    Paragraph p = new Paragraph("Reporte del catálogo de productos");
 
-                    doc.ShowTextAligned(new Paragraph(String.Format("pag {0} of {1}", i, numberOfPages)),
-                            559, 826, i, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+                    doc.ShowTextAligned(new Paragraph(String.Format("página {0} de {1}", i, numberOfPages)),559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 }
 
 
                 //Close document
                 doc.Close();
                 // Retorna un File
-                return File(ms.ToArray(), "application/pdf", "reporte.pdf");
+                return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
 
             }
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData.Keep();
                 // Redireccion a la captura del Error

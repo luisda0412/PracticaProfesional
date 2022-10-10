@@ -374,3 +374,9 @@ D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\System.Numerics.V
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\System.Threading.Tasks.Extensions.xml
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\System.ValueTuple.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.pdb
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.pdb
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.xml
