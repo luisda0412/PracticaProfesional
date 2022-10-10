@@ -58,12 +58,12 @@ namespace Web.ViewModel
                     nuevoItem.cantidad = 1;
                     Items.Add(nuevoItem);
                 }
-                mensaje = SweetAlertHelper.Mensaje("Movimiento con Producto", "Producto agregado a la orden", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Nueva Venta", "Artículo agregado a la orden", SweetAlertMessageType.success);
 
             }
             else
             {
-                mensaje = SweetAlertHelper.Mensaje("Movimiento con Producto", "El producto solicitado no existe", SweetAlertMessageType.warning);
+                mensaje = SweetAlertHelper.Mensaje("Nueva Venta", "El artículo solicitado no existe", SweetAlertMessageType.warning);
             }
             return mensaje;
         }

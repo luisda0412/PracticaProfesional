@@ -164,3 +164,56 @@
     box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
     margin-bottom: 10%;
 }
+
+
+/*Boton ver detalles*/
+
+.boton2 a {
+    text-decoration: none;
+    color: white;
+}
+
+.boton2 {
+    text-decoration: none;
+    padding: 5px 15px;
+    border: unset;
+    border-radius: 15px;
+    color: white;
+    z-index: 1;
+    background: #1a8623;
+    position: relative;
+    font-weight: 1000;
+    font-size: 19px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .boton2::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .boton2:hover {
+        background-color: #1a8623;
+        color: white;
+    }
+
+    .boton2 a:hover {
+        color: white;
+    }
+
+    .boton2:hover::before {
+        width: 100%;
+    }

@@ -17,7 +17,7 @@
             </div>
             <br />
             <h2>
-                Detalle del producto
+                Detalles y reseñas del producto
             </h2>
         </div>
         <div class="derechoHeader">
@@ -44,8 +44,7 @@
                         <b>Precio:</b> &cent;@Html.DisplayFor(model => model.precio)<br />
                         <b>@Html.DisplayNameFor(model => model.stock):</b> @Html.DisplayFor(model => model.stock)<br />
                         <b>@Html.DisplayNameFor(model => model.Categoria.descripcion):</b> @Html.DisplayFor(model => model.Categoria.descripcion)<br />
-                        @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
-                        <span><b>Estado:</b> @isActive</span><br />
+                      
 
                         <b>@Html.DisplayNameFor(model => model.Proveedor):</b>
                         <ul>
@@ -66,7 +65,7 @@
         <center>
             <div class="botones_producto">
                 <button class="boton1">
-                    @Ajax.ActionLink("Ordenar",//Texto para el usuario
+                    @Ajax.ActionLink("Agregar Carrito",//Texto para el usuario
                    "ordenarProducto",//Acción a llamar
                    "Venta",
                    new
@@ -78,31 +77,56 @@
                        UpdateTargetId = "cantidadLibros",
                        InsertionMode = InsertionMode.Replace,
                        HttpMethod = "GET",
-                   }, new { @class = "btn btn-primary" }
+                   }, new {  }
                    )
                 </button>
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>
     </section>
+    <section class="partebaja">
+        <center>
+            @{
+                TempData["idArticulo"] = Model.id;
+            }
+
+            <br />
+            <br />
+            <h1>Reseñas de este artículo</h1>
+            <br />
+            @Html.Partial("ResenaArticulo")
+
+
+            <div class="row">
+
+                @{
+                    List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
+                }
+
+                @foreach (var resena in listaResena)
+                {
+                    <div class="columna">
+                        <div class="left">
+                            <center>
+                                <img src="~/Imagenes/Avatares/avatar1.png" />
+                                <br />
+                                <br />
+                                <h3>@resena.Usuario.nombre</h3>
+                            </center>
+                        </div>
+                        <div class="right">
+                            <h3>@resena.Articulo.nombre</h3>
+                            <h4>@resena.encabezado</h4>
+
+                            <p>
+                                @resena.comentario
+                            </p>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </center>
+    </section>
 </main>
 
-@{
-    TempData["idArticulo"] = Model.id;
-}
-
-@Html.Partial("ResenaArticulo")
-
-<br />
-
-@{
-    List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
-}
-
-@foreach (var resena in listaResena)
-{
-
-    <p>@resena.Usuario.nombre </p> <p>@resena.Articulo.nombre </p> <p><b>@resena.encabezado</b></p> <p> @resena.comentario </p>
-    <br />
-    <br />
-}

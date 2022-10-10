@@ -324,6 +324,7 @@
     <Content Include="Content\CSSEstiloVentas\EstiloDetalleVentas.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloListaVentas.css" />
     <Content Include="Content\fondo1.jpg" />
+    <Content Include="Content\fondo2.jpg" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2.css" />
     <Content Include="favicon.ico" />
@@ -341,7 +342,10 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <None Include="README.md" />
+    <Content Include="Imagenes\Avatares\avatar1.png" />
+    <Content Include="Imagenes\Avatares\avatar2.png" />
     <Content Include="Imagenes\fondos\fondo1.jpg" />
+    <Content Include="Imagenes\fondos\fondo2.jpg" />
     <Content Include="Imagenes\GIF\greencheck.gif" />
     <Content Include="Imagenes\Iconos\clock.png" />
     <Content Include="Imagenes\Iconos\facebook.png" />

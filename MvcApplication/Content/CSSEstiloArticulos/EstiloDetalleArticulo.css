@@ -176,3 +176,83 @@
     .boton1:hover::before {
         width: 100%;
     }
+
+    /*--------------------Sección de Reseñas----------------------*/
+
+.partebaja {
+    height:500px;
+    background-color: #675d41;
+    background-image: url(../fondo2.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    margin:auto;
+}
+
+.partebaja h1 {
+    padding-top: 15px;
+    font-family: 'Agency FB';
+    font-size: 36px;
+    font-weight: 700;
+    color: white;
+}
+
+    .partebaja .agregar {
+        text-decoration:none;
+        font-family: 'Agency FB';
+        font-size: 30px;
+        font-weight: 700;
+        color: white;
+    }
+
+    .partebaja .agregar:hover{
+        color: lawngreen;
+    }
+
+
+    .partebaja .row {
+        margin: auto;
+        max-width: 90%;
+
+    }
+
+.row .columna {
+    display: flex;
+    justify-content: space-evenly;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: white;
+    border-radius: 5%;
+    width: 30%;
+    -webkit-box-shadow: 2px 9px 24px -4px rgba(255,255,255,1);
+    -moz-box-shadow: 2px 9px 24px -4px rgba(255,255,255,1);
+    box-shadow: 2px 9px 24px -4px rgba(255,255,255,1);
+    height:200px;
+}
+
+.columna .left {
+    width: 50%;
+    margin: auto;
+    font-family: 'Agency FB';
+
+}
+
+.columna .right {
+    width: 50%;
+    font-family: 'Agency FB';
+}
+
+        .columna .right h3, h4, p {    
+            margin-top:23px;
+            font-family: 'Agency FB';
+        }
+
+.row img {
+    max-height: 70px;
+    max-width: 80px;
+    background-color: black;
+    padding: 5px;
+    border-radius: 30px;
+ 
+}
