@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <!--@Html.ActionLink("AFK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
 
-            <a href="" class="navbar-brand"><img src="~/Imagenes/Logos/logoIcono.png" alt="Beyond Technology" /></a>
+            <a href="" class="navbar-brand"><img class="imagennav" src="~/Imagenes/Logos/logoIcono.png" alt="Beyond Technology" /></a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -55,7 +55,7 @@
 
                     <!--Para el Login VYCUZ-->
                     @{
-                        string nombre = "Sesión no iniciada";
+                        string nombre = "Iniciar Sesión";
                         string email = "Perfil";
                         int id = 0;
                         Infraestructure.Models.Usuario oUsuario;
@@ -72,7 +72,7 @@
                             }
                         }
                     }
-                    <li class="nav-item dropdown" id="login">
+                    <li class="nav-item dropdown me-auto" id="login">
                         <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@nombre</a>
 
                         <div class="dropdown-menu" id="login">
@@ -97,19 +97,17 @@
 
                         </div>
                     </li>
-                    <!--Para el Login VYCUZ-->
-                </ul>
-                <ul class=navbar-nav me-auto">
+
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        <li class="ml-auto">@Html.ActionLink("Logout", "Logout", "Account", new { @class = "nav-link" })</li>
                     }
                     else
                     {
-                        <li class="log">@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li class="ml-auto">@Html.ActionLink("Login GOOGLE", "Login", "Account", new { @class = "nav-link" })</li>
                     }
+                    <!--Para el Login VYCUZ-->
                 </ul>
-
 
             </div>
         </div>

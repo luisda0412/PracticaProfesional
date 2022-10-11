@@ -181,7 +181,7 @@
 
 .partebaja {
     height:500px;
-    background-color: #675d41;
+    background-color: black;
     background-image: url(../fondo2.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -213,7 +213,7 @@
     .partebaja .row {
         margin: auto;
         max-width: 90%;
-
+        word-wrap: break-word;
     }
 
 .row .columna {
