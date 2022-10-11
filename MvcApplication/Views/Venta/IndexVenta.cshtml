@@ -1,9 +1,9 @@
 ﻿@model Infraestructure.Models.Venta
 @{
-    ViewBag.Title = "Movimiento ";
+    ViewBag.Title = "Comprar";
 }
 <head>
-    <link rel="stylesheet" href="~/Content/CSSMovimiento/EstiloMovimiento.css">
+    <link rel="stylesheet" href="~/Content/CSSEstiloVentas/EstiloMovimientoVenta.css">
 
 </head>
 <section class="section_header">
@@ -12,16 +12,15 @@
         <div class="izquieroHeader">
             <br />
             <div class="logo">
-                <img src="~/IMG/logo1.7.png" />
+                <img src="~/Imagenes/Logos/logo1.png" />
             </div>
-            <h3>Beyond Technology</h3>
             <br />
             <h2>
-                Creación del movimiento
+                Carrito de compra
             </h2>
         </div>
         <div class="derechoHeader">
-            <img src="~/IMG/wallpaper9.png" />
+            <img src="~/Imagenes/Visuals/wallpaper8.png" />
         </div>
     </div>
     <div class="wave" style="height: 150px; overflow: hidden;">
@@ -59,8 +58,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group3">
-                                <h5>Detalle del Movimiento</h5>
-                                @Html.EditorFor(x => x.Detalle_Venta)
+                                <h5>Nombre del cliente</h5>
+                                @Html.EditorFor(x => x.nombre_cliente)
                             </div>
                         </div>
                     </div>
@@ -76,7 +75,7 @@
                     else
                     {
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            El movimiento no tiene Productos asignados
+                            El detalle de la venta no tiene artículos asignados
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -88,7 +87,7 @@
 
                 <section class="abajo">
                     <!-- Submit -->
-                    <button class="boton1" id="btnOrdenar">Guardar Movimiento</button>
+                    <button class="boton1" id="btnOrdenar">Crear Venta</button>
                 </section>
 
             }
@@ -188,7 +187,7 @@
                         });
                     }
 
-                }
+                },
                 })
         </script>
     }

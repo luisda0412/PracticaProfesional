@@ -1,0 +1,250 @@
+﻿/*Header----------------------------------------------------------------*/
+
+.section_header {
+    height: 350px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 390px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    color: white;
+    margin-left:25%;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        height: 230px;
+        width: 85%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+/*Desarrollo---------------------------------------*/
+
+main {
+    background-color: white;
+    width: 100%;
+}
+
+.formulario {
+    width: 80%;
+    margin: auto;
+    background-color: whitesmoke;
+    box-shadow: 0px 15px 18px 2px rgba(120,112,120,1);
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom:5%;
+    padding-left:4%;
+    padding-right:4%;
+    border: ;
+    border-color: red;
+}
+
+#titulo {
+    background-color: #161616;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 34px;
+    font-weight: bold;
+    width: 30%;
+    border-radius: 10px;
+}
+
+
+
+    .formulario h4 {
+        font-family: 'Agency FB';
+        font-size: 29px;
+    }
+
+.formulario .form-group {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 95%;
+
+}
+
+.form-group .col-md-10 {
+    width: 50%;
+}
+.form-group .col-md-11 {
+    width: 30%;
+}
+
+.form-group .col-md-12{
+     width: 50%;
+}
+.form-group .col-md-2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    width: 45%;
+}
+
+
+/*Para Fecha y Sucursal*/
+
+.formulario .form-group3 {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 79%;
+    padding-left: 2%;
+}
+.form-group3 .col-md-10 {
+    width: 50%;
+}
+
+.form-group3 .col-md-11 {
+    width: 30%;
+}
+
+.form-group3 .col-md-12 {
+    width: 50%;
+}
+
+.form-group3 .col-md-2 {
+    font-family: 'Agency FB';
+    font-size: 28px;
+    width: 45%;
+  
+}
+
+.form-group3 h5 {
+    font-family: 'Agency FB';
+    font-size: 25px;
+    width: 45%;
+   
+}
+/*----------------------------*/
+.form-group2 {
+  
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 60%;
+}
+
+    .form-group2 .col-md-3 {
+        font-family: 'Agency FB';
+        font-size: 25px;
+    }
+
+.abajo {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+
+.boton1 a {
+    text-decoration: none;
+    color: black;
+}
+
+.boton1 {
+    text-decoration: none;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #212121;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 22px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .boton1::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .boton1:hover {
+        background-color: #1a8623;
+        color: white;
+    }
+
+    .boton1 a:hover {
+        color: #e8e8e8;
+    }
+
+    .boton1:hover::before {
+        width: 100%;
+    }
+
+#boton2 {
+    padding: 5px;
+    background-color:  #1d1c1c;
+    border-radius: 6px;
+    height: 45px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    text-decoration: none;
+    font-family: 'Cambria Math';
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    margin-left: 2%;
+}
+
+    #boton2:hover {
+        background-color: #2acf5b;
+    }
+

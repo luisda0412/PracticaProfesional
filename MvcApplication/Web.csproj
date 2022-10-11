@@ -95,8 +95,8 @@
     <Reference Include="itext.svg, Version=7.1.16.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.16\lib\net45\itext.svg.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -329,6 +329,7 @@
     <Content Include="Content\CSSEstiloVentas\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloDetalleVentas.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloListaVentas.css" />
+    <Content Include="Content\CSSEstiloVentas\EstiloMovimientoVenta.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\fondo2.jpg" />
     <Content Include="Content\sweetalert.css" />
@@ -383,13 +384,16 @@
     <Content Include="Imagenes\Visuals\wallpaper1.png" />
     <Content Include="Imagenes\Visuals\wallpaper10.png" />
     <Content Include="Imagenes\Visuals\wallpaper12.png" />
+    <Content Include="Imagenes\Visuals\wallpaper13.png" />
     <Content Include="Imagenes\Visuals\wallpaper14.png" />
+    <Content Include="Imagenes\Visuals\wallpaper15.png" />
     <Content Include="Imagenes\Visuals\wallpaper2.png" />
     <Content Include="Imagenes\Visuals\wallpaper3.png" />
     <Content Include="Imagenes\Visuals\wallpaper4.png" />
     <Content Include="Imagenes\Visuals\wallpaper5.png" />
     <Content Include="Imagenes\Visuals\wallpaper6.png" />
     <Content Include="Imagenes\Visuals\wallpaper7.png" />
+    <Content Include="Imagenes\Visuals\wallpaper8.png" />
     <Content Include="Imagenes\Visuals\wallpaper9.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

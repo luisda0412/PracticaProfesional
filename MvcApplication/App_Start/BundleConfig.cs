@@ -33,6 +33,7 @@ namespace MvcApplication
    
                       "~/Content/bootstrap-simplex.min.css",
                       "~/Content/sweetalert.css",
+                      "~/Content/jquery-ui.css",
                       "~/Content/site.css"));
         }
     }
