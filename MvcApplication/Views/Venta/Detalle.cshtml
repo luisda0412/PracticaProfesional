@@ -8,7 +8,7 @@
         {
             <tr>
                 <th>
-                    Producto
+                    Artículo
                 </th>
                 <th class="center">
                     Cantidad
@@ -17,7 +17,7 @@
                     Precio
                 </th>
                 <th class="right">
-                    SubTotal
+                    Total
                 </th>
                 <th>
                     Opciones
@@ -74,6 +74,24 @@
         <div class="col-lg-7 col-sm-5 ml-auto">
             <table class="table table-clear">
                 <tbody>
+                    <tr>
+                        <td class="left">
+                            <strong>Subtotal</strong>
+                        </td>
+                        <td class="right">
+                            <strong>₡ @(((decimal)Web.ViewModel.Carrito.Instancia.GetSubTotal()))</strong>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="left">
+                            <strong>Impuesto</strong>
+                        </td>
+                        <td class="right">
+                            <strong>+ ₡ @(((decimal)Web.ViewModel.Carrito.Instancia.GetImpuesto()))</strong>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td class="left">
                             <strong>Total</strong>

@@ -120,7 +120,7 @@ namespace Web.ViewModel
         public decimal GetTotal()
         {
             decimal total = 0;
-            total = Items.Sum(x => x.SubTotal);
+            total = GetSubTotal() + GetImpuesto();
 
             return total;
         }
@@ -131,9 +131,40 @@ namespace Web.ViewModel
 
             return total;
         }
-        /**
-         * GetTotalPeso() - Devuelve el total de peso de todos los libros.
-         */
+
+        public long GetTotalLinea()
+        {
+            long total = 0;
+
+            foreach (var i in Items)
+            {
+                total = total + (long)(i.precio * i.cantidad);
+            }
+
+            return total;
+        }
+
+
+        /*Saca el subtotal de la venta*/
+        public decimal GetSubTotal()
+        {
+            decimal total = 0;
+            total = GetTotalLinea();
+            return total;
+        }
+
+        /*Sacar el impuesto total de la venta*/
+        public decimal GetImpuesto()
+        {
+            long impuesto = 0;
+
+            foreach (var i in Items)
+            {
+                    impuesto = impuesto + (long)((0.13 * i.articulo.precio) * i.cantidad);
+            }
+
+            return impuesto;
+        }
 
         public void eliminarCarrito()
         {
