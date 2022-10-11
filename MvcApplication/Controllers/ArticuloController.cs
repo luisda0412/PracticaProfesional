@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,6 +26,7 @@ namespace MvcApplication.Controllers
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 lista = _ServiceArticulo.GetArticulo();
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Mantenimiento", "Acá podrá editar sus artículos", SweetAlertMessageType.success);
             }
             catch (Exception e)
             {
@@ -95,6 +97,7 @@ namespace MvcApplication.Controllers
 
             
             _ServiceArticulo.Save(art, proveedor);
+            ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación registrada", "artículo creado con éxito", SweetAlertMessageType.success);
             return RedirectToAction("Index");
         }
 
