@@ -1,0 +1,197 @@
+﻿@model Infraestructure.Models.Ingreso
+@{
+    ViewBag.Title = "Ingreso";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloListaArticulos.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Registre las nuevas compras
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper13.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <center>
+        <section class="formulario">
+            <center>
+                <br />
+                <h2 id="titulo">Nuevo Ingreso</h2>
+                <br />
+                @using (Html.BeginForm("Save", "Ingreso", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group3">
+                                    <br />
+                                    @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group3">
+                                    <h5>Comentario</h5>
+                                    @Html.TextAreaFor(x => x.comentario)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <span class="glyphicons glyphicons-hand-left"></span>
+                    <div id="resultadoDetalle">
+                        @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
+                        {
+                            @Html.Partial("~/Views/Venta/Detalle.cshtml", (List<Web.ViewModel.ViewModelDetalleEncabezado>)ViewBag.DetalleOrden)
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                El detalle de la venta no tiene artículos asignados
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+
+                    </div>
+                    <hr />
+
+                    <section class="abajo">
+                        <!-- Submit -->
+                        <button class="boton1" id="btnOrdenar">Crear Venta</button>
+                    </section>
+
+                }
+            </center>
+            <br />
+        </section>
+        <section class="desarrollo">
+            <div class="elementos1">
+                <div class="elementoizquierdo">
+                    <h2 class="titulo">Registre los datos del nuevo ingreso</h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="card my-4">
+                        <h5 class="card-header">Buscar artículo por nombre</h5>
+                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
+                        {
+                            UpdateTargetId = "resultado",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            LoadingElementId = "ajaxLoader"
+                        }))
+                        {
+                            <div class="card-body">
+                                <div class="input-group">
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre del artículo" })
+
+                                    <button type="submit" class="boton3" title="Buscar el artículo en la lista">Buscar</button>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
+            <center>
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle" ; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
+                </div>
+                <table class="table">
+                    @{
+                        List<Infraestructure.Models.Articulo> listaArticulo = ViewBag.listaArticulos;
+                    }
+                    @foreach (var arti in listaArticulo)
+                    {
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayName(arti.nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayName(Convert.ToString(arti.precio))
+                                </th>
+                                <th>
+                                    @Html.DisplayName(Convert.ToString(arti.Categoria))
+                                </th>
+                                <th>
+                                    @Html.DisplayName(Convert.ToString(arti.stock))
+                                </th>
+                                <th><p>Opciones</p></th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultado"> 
+                                <tr>
+                                    <td>
+                                        @arti.nombre
+                                    </td>
+                                    <td>
+                                        &cent;@arti.precio
+                                    </td>
+                                    <td>
+                                        @arti.Categoria.descripcion
+                                    </td>
+                                    <td>
+                                        @arti.stock
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Comprar", "Comprar", new { id = arti.id }, new { title = "Agregar a la compra" })</button>
+                                    </td>
+                                </tr>
+                            
+                        </tbody>
+                    }
+                    </table>
+            </center>
+        </section>
+    </center>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}
+

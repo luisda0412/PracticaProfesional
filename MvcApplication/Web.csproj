@@ -304,6 +304,7 @@
     <Content Include="Content\CSSEstiloEmpresa\EstiloDetalleEmpresa.css" />
     <Content Include="Content\CSSEstiloEmpresa\EstiloListaEmpresa.css" />
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
+    <Content Include="Content\CSSEstiloIngresos\EstiloIngresos.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloCreate.css" />
@@ -594,6 +595,8 @@
     <Content Include="Views\Reportes\ProductosLista.cshtml" />
     <Content Include="Views\Venta\Detalle.cshtml" />
     <Content Include="Views\Venta\IndexVenta.cshtml" />
+    <Content Include="Views\Ingreso\IndexIngreso.cshtml" />
+    <Content Include="Views\Ingreso\_PartialViewDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

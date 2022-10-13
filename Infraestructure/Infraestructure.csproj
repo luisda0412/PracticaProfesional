@@ -125,6 +125,7 @@
     <Compile Include="Repository\IRepositoryCajaChica.cs" />
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryEmpresa.cs" />
+    <Compile Include="Repository\IRepositoryIngreso.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryReparaciones.cs" />
     <Compile Include="Repository\IRepositoryResena.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Repository\RepositoryCajaChica.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryEmpresa.cs" />
+    <Compile Include="Repository\RepositoryIngreso.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryReparaciones.cs" />
     <Compile Include="Repository\RepositoryResena.cs" />

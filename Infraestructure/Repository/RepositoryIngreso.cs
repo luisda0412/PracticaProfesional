@@ -1,32 +1,34 @@
 ﻿using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using Web.Utils;
+
+
 
 namespace Infraestructure.Repository
 {
-    public class RepositoryVenta : IRepositoryVenta
+    public class RepositoryIngreso : IRepositoryIngreso
     {
-        public Venta GetVentaByID(long id)
+        public Ingreso GetCompraByID(long id)
         {
-            Venta venta = null;
+            Ingreso ingreso = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    venta = ctx.Venta.
-                               Include("Detalle_Venta").
+                    ingreso = ctx.Ingreso.
+                               Include("Detalle_Ingreso").
                                Where(p => p.id == id).
-                               FirstOrDefault<Venta>();
+                               FirstOrDefault<Ingreso>();
 
                 }
-                return venta;
+                return ingreso;
 
             }
             catch (DbUpdateException dbEx)
@@ -37,40 +39,41 @@ namespace Infraestructure.Repository
             }
         }
 
-        public void GetVentaCountDate(out string etiquetas, out string valores, DateTime fechainicial, DateTime fechafinal)
+        public void GetIngresoCountDate(out string etiquetas, out string valores, DateTime fechainicial, DateTime fechafinal)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Venta> GetVentas()
+        public IEnumerable<Ingreso> GetIngresos()
         {
-            IEnumerable<Venta> lista = null;
+            IEnumerable<Ingreso> lista = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Venta.Include(x => x.Detalle_Venta).ToList<Venta>();
+                lista = ctx.Ingreso.Include(x => x.Detalle_Ingreso).ToList<Ingreso>();
+
             }
             return lista;
         }
 
-        public Venta Save(Venta venta)
+        public Ingreso Save(Ingreso ingreso)
         {
             int resultado = 0;
-            Venta detalle = null;
+            Ingreso detalle = null;
             try
             {
                 using (MyContext cdt = new MyContext())
                 {
                     using (var transaccion = cdt.Database.BeginTransaction())
                     {
-                        cdt.Venta.Add(venta);
+                        cdt.Ingreso.Add(ingreso);
                         resultado = cdt.SaveChanges();
 
-                        foreach (var linea in venta.Detalle_Venta)
+                        foreach (var linea in ingreso.Detalle_Ingreso)
                         {
-                            linea.venta_id = venta.id;
+                            linea.ingreso_id = ingreso.id;
                         }
-                        foreach (var item in venta.Detalle_Venta)
+                        foreach (var item in ingreso.Detalle_Ingreso)
                         {
                             Articulo oArticulo = cdt.Articulo.Find(item.articulo_id);
                             cdt.Entry(oArticulo).State = EntityState.Modified;
@@ -83,7 +86,7 @@ namespace Infraestructure.Repository
 
                 if (resultado >= 0)
 
-                    detalle = GetVentaByID(venta.id);
+                    detalle = GetCompraByID(ingreso.id);
                 return detalle;
 
 
@@ -94,7 +97,6 @@ namespace Infraestructure.Repository
                 Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
-
         }
     }
 }

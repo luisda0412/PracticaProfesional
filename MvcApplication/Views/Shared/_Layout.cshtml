@@ -40,12 +40,16 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("Artículos", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                        @Html.ActionLink("Artículos", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Compras", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los reportes" aria-haspopup="true" aria-expanded="false">Reportes</a>
                         <div class="dropdown-menu">
                             @Html.ActionLink("Artículos", "ProductosLista", "Reportes", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Ingresos", "ProductosLista", "Reportes", null, new { @class = "dropdown-item" })
                         </div>
                     </li>
                     <li class="nav-item" id="cantidadLibros">
