@@ -189,9 +189,6 @@ namespace MvcApplication.Controllers
 
                 if (articulo == null)
                 {
-                    TempData["Message"] = "No existe el articulo solicitado";
-                    TempData["Redirect"] = "Articulo";
-                    TempData["Redirect-Action"] = "Index";
                     // Redireccion a la captura del Error
                     return RedirectToAction("Default", "Error");
                 }
@@ -204,36 +201,11 @@ namespace MvcApplication.Controllers
             {
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Articulo";
-                TempData["Redirect-Action"] = "Index";
+
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }
-
-        /*public ActionResult EliminarArticulo(int? id)
-        {
-            MemoryStream target = new MemoryStream();
-            IServiceArticulo _ServiceArticulo = new ServiceArticulo();
-            try
-            {
-
-                _ServiceArticulo.Eliminar((long)id);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }*/
-
 
         public ActionResult IndexCatalogo()
         {

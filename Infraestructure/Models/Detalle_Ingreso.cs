@@ -11,14 +11,13 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(Detalle_IngresoMetadata))]
+    
     public partial class Detalle_Ingreso
     {
         public int id { get; set; }
         public Nullable<int> ingreso_id { get; set; }
         public Nullable<int> articulo_id { get; set; }
+        public Nullable<int> cantidad { get; set; }
     
         public virtual Articulo Articulo { get; set; }
         public virtual Ingreso Ingreso { get; set; }

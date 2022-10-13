@@ -253,6 +253,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngresoController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ReparacionesController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />

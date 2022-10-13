@@ -22,13 +22,12 @@ namespace Infraestructure.Models
     
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
+        public string comentario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle_Ingreso> Detalle_Ingreso { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

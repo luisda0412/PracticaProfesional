@@ -46,6 +46,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ingreso_id" Type="int" />
           <Property Name="articulo_id" Type="int" />
+          <Property Name="cantidad" Type="int" />
         </EntityType>
         <EntityType Name="Detalle_Venta">
           <Key>
@@ -82,9 +83,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="usuario_id" Type="int" />
-          <Property Name="proveedor_id" Type="int" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="monto_total" Type="float" />
+          <Property Name="comentario" Type="nvarchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -291,18 +292,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Ingreso_Proveedor_FK">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Ingreso">
-              <PropertyRef Name="proveedor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Ingreso_Usuario_FK">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -465,10 +454,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
-          <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
-          </AssociationSet>
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ingreso" EntitySet="Ingreso" />
@@ -559,6 +544,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ingreso_id" Type="Int32" />
           <Property Name="articulo_id" Type="Int32" />
+          <Property Name="cantidad" Type="Int32" />
           <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Ingreso_Articulo_FK" FromRole="Detalle_Ingreso" ToRole="Articulo" />
           <NavigationProperty Name="Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Detalle_Ingreso" ToRole="Ingreso" />
         </EntityType>
@@ -602,11 +588,10 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="usuario_id" Type="Int32" />
-          <Property Name="proveedor_id" Type="Int32" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="monto_total" Type="Double" />
+          <Property Name="comentario" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Ingreso" ToRole="Detalle_Ingreso" />
-          <NavigationProperty Name="Proveedor" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Ingreso" ToRole="Proveedor" />
           <NavigationProperty Name="Usuario" Relationship="Self.Ingreso_Usuario_FK" FromRole="Ingreso" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Proveedor">
@@ -618,7 +603,6 @@
           <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Boolean" />
-          <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Proveedor" ToRole="Ingreso" />
           <NavigationProperty Name="Articulo" Relationship="Self.Proveedor_Articulo" FromRole="Proveedor" ToRole="Articulo" />
         </EntityType>
         <EntityType Name="Reparaciones">
@@ -825,18 +809,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Ingreso_Proveedor_FK">
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
-          <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Ingreso">
-              <PropertyRef Name="proveedor_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="Ingreso_Usuario_FK">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -978,10 +950,6 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="Facturas" EntitySet="Facturas" />
           </AssociationSet>
-          <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="Ingreso" EntitySet="Ingreso" />
-          </AssociationSet>
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ingreso" EntitySet="Ingreso" />
@@ -1064,6 +1032,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="ingreso_id" ColumnName="ingreso_id" />
                 <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1103,9 +1072,9 @@
               <MappingFragment StoreEntitySet="Ingreso">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
-                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
