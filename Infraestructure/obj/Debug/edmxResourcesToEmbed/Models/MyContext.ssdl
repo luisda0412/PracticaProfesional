@@ -41,6 +41,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ingreso_id" Type="int" />
     <Property Name="articulo_id" Type="int" />
+    <Property Name="cantidad" Type="int" />
   </EntityType>
   <EntityType Name="Detalle_Venta">
     <Key>
@@ -77,9 +78,9 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="usuario_id" Type="int" />
-    <Property Name="proveedor_id" Type="int" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="monto_total" Type="float" />
+    <Property Name="comentario" Type="nvarchar" MaxLength="60" />
   </EntityType>
   <EntityType Name="Proveedor">
     <Key>
@@ -286,18 +287,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Ingreso_Proveedor_FK">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proveedor">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Ingreso">
-        <PropertyRef Name="proveedor_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Ingreso_Usuario_FK">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -459,10 +448,6 @@
     <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Venta" EntitySet="Venta" />
-    </AssociationSet>
-    <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
     </AssociationSet>
     <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />

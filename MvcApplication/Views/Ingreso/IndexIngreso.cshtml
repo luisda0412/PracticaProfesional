@@ -3,13 +3,12 @@
     ViewBag.Title = "Ingreso";
 }
 
-<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloListaArticulos.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloIngresos/EstiloIngresos.css">
 
 <section class="section_header">
     <br />
     <div class="contenidoHeader">
         <div class="izquieroHeader">
-            <br />
             <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
@@ -51,7 +50,7 @@
                                     <br />
                                     @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                                        @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("dd-MM-yyyy"), @readonly = "readonly" })
                                         @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -70,12 +69,12 @@
                     <div id="resultadoDetalle">
                         @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
                         {
-                            @Html.Partial("~/Views/Venta/Detalle.cshtml", (List<Web.ViewModel.ViewModelDetalleEncabezado>)ViewBag.DetalleOrden)
+                            @Html.Partial("~/Views/Ingreso/_PartialViewDetalle.cshtml", (List<Web.ViewModel.ViewModelDetalleEncabezado>)ViewBag.DetalleOrden)
                         }
                         else
                         {
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                El detalle de la venta no tiene artículos asignados
+                                El detalle de la compra no tiene artículos asignados
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -87,7 +86,8 @@
 
                     <section class="abajo">
                         <!-- Submit -->
-                        <button class="boton1" id="btnOrdenar">Crear Venta</button>
+                        <button class="boton2" id="btnOrdenar" title="Registrar una nueva compra de inventario">Registrar Compra</button>
+                        <h5>Seleccione los artículos en la sección de abajo</h5>
                     </section>
 
                 }
@@ -97,7 +97,7 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Registre los datos del nuevo ingreso</h2>
+                    <h2 class="titulo">Seleccione los artículos de ingreso</h2>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
@@ -146,26 +146,27 @@
                     @{
                         List<Infraestructure.Models.Articulo> listaArticulo = ViewBag.listaArticulos;
                     }
-                    @foreach (var arti in listaArticulo)
-                    {
+                  
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayName(arti.nombre)
+                                    @Html.DisplayName("Nombre")
                                 </th>
                                 <th>
-                                    @Html.DisplayName(Convert.ToString(arti.precio))
+                                    @Html.DisplayName("Precio")
                                 </th>
                                 <th>
-                                    @Html.DisplayName(Convert.ToString(arti.Categoria))
+                                    @Html.DisplayName("Categoría")
                                 </th>
                                 <th>
-                                    @Html.DisplayName(Convert.ToString(arti.stock))
+                                    @Html.DisplayName("Disponibles")
                                 </th>
                                 <th><p>Opciones</p></th>
                             </tr>
                         </thead>
-                        <tbody id="resultado"> 
+                        @foreach (var arti in listaArticulo)
+                        {
+                            <tbody id="resultado">
                                 <tr>
                                     <td>
                                         @arti.nombre
@@ -183,9 +184,9 @@
                                         <button class="boton2">@Html.ActionLink("Comprar", "Comprar", new { id = arti.id }, new { title = "Agregar a la compra" })</button>
                                     </td>
                                 </tr>
-                            
-                        </tbody>
-                    }
+
+                            </tbody>
+                        }
                     </table>
             </center>
         </section>

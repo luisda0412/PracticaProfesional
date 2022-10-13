@@ -48,6 +48,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ingreso_id" Type="Int32" />
     <Property Name="articulo_id" Type="Int32" />
+    <Property Name="cantidad" Type="Int32" />
     <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Ingreso_Articulo_FK" FromRole="Detalle_Ingreso" ToRole="Articulo" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Detalle_Ingreso" ToRole="Ingreso" />
   </EntityType>
@@ -91,11 +92,10 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="usuario_id" Type="Int32" />
-    <Property Name="proveedor_id" Type="Int32" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
+    <Property Name="comentario" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Ingreso" ToRole="Detalle_Ingreso" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Ingreso" ToRole="Proveedor" />
     <NavigationProperty Name="Usuario" Relationship="Self.Ingreso_Usuario_FK" FromRole="Ingreso" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Proveedor">
@@ -107,7 +107,6 @@
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="estado" Type="Boolean" />
-    <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Proveedor_FK" FromRole="Proveedor" ToRole="Ingreso" />
     <NavigationProperty Name="Articulo" Relationship="Self.Proveedor_Articulo" FromRole="Proveedor" ToRole="Articulo" />
   </EntityType>
   <EntityType Name="Reparaciones">
@@ -314,18 +313,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Ingreso_Proveedor_FK">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
-    <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Proveedor">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Ingreso">
-        <PropertyRef Name="proveedor_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="Ingreso_Usuario_FK">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -466,10 +453,6 @@
     <AssociationSet Name="Facturas__Venta_FK" Association="Self.Facturas__Venta_FK">
       <End Role="Venta" EntitySet="Venta" />
       <End Role="Facturas" EntitySet="Facturas" />
-    </AssociationSet>
-    <AssociationSet Name="Ingreso_Proveedor_FK" Association="Self.Ingreso_Proveedor_FK">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Ingreso" EntitySet="Ingreso" />
     </AssociationSet>
     <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />

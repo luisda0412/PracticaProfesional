@@ -13,7 +13,7 @@
 
 /*Header------------------------------------*/
 .section_header {
-    height: 380px;
+    height: 360px;
     background-image: url(../fondo1.jpg);
     background-size: cover;
     background-attachment: fixed;
@@ -31,7 +31,7 @@
     width: 80%;
     display: flex;
     justify-content: space-between;
-    height: 380px;
+    height: 360px;
 }
 
 .izquieroHeader {
@@ -62,8 +62,8 @@
 }
 
     .derechoHeader img {
-        margin-top: 10%;
-        height: 240px;
+        margin-top: 5%;
+        height: 210px;
         width: 100%;
         transition: .3s ease-in-out;
     }
@@ -74,6 +74,106 @@
         }
 
 /*Formulario-----------------------------------------------------------*/
+.formulario {
+    width: 80%;
+    margin: auto;
+    background-color: whitesmoke;
+    box-shadow: 0px 15px 18px 2px rgba(120,112,120,1);
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 5%;
+    padding-left: 4%;
+    padding-right: 4%;
+    border:;
+    border-color: red;
+}
+
+#titulo {
+    background-color: #161616;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 34px;
+    font-weight: bold;
+    width: 30%;
+    border-radius: 10px;
+}
+
+
+
+.formulario h4 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+}
+
+.formulario .form-group {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 95%;
+}
+
+.form-group .col-md-10 {
+    width: 50%;
+}
+
+.form-group .col-md-11 {
+    width: 30%;
+}
+
+.form-group .col-md-12 {
+    width: 50%;
+}
+
+.form-group .col-md-2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    width: 45%;
+}
+
+
+/*Para Fecha y Sucursal*/
+
+.formulario .form-group3 {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    text-align: justify;
+    width: 79%;
+    padding-left: 2%;
+}
+
+.form-group3 .col-md-10 {
+    width: 50%;
+}
+
+.form-group3 .col-md-11 {
+    width: 30%;
+}
+
+.form-group3 .col-md-12 {
+    width: 50%;
+}
+
+.form-group3 .col-md-2 {
+    font-family: 'Agency FB';
+    font-size: 28px;
+    width: 45%;
+}
+
+.form-group3 h5 {
+    font-family: 'Agency FB';
+    font-size: 25px;
+    width: 45%;
+}
+
+
+
+
+
+
+
+
+
 /*Desarrollo---------------------------------------*/
 
 main {
@@ -137,7 +237,17 @@ main {
     width: 45%;
 }
 
+.formulario .abajo{
+    display:flex;
+    justify-content:space-evenly;
+}
 
+    .formulario .abajo h5 {
+        font-family: 'Agency FB';
+        font-size: 29px;
+        color:green;
+        padding-top:5px;
+    }
 /*Desarrollo-----------------------------------------------------------*/
 
 .elementos1{
@@ -172,8 +282,8 @@ main {
 
 .boton1 a {
     text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 1000;
+    font-size: 21px;
     color: #ffffff;
 }
 
@@ -201,30 +311,32 @@ main {
 }
 
 .boton2 {
-   
-padding-left:5px;
-padding-right:5px;
-background-color: #1a8623;
-border-radius: 6px;
-border: unset;
-height: 39px;
-box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
- border: unset;
- z-index: 1;
- position: relative;
- font-weight: 1000;
- font-size: 17px;
- -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
- transition: all 250ms;
- overflow: hidden;
-}
-
-.boton2 a {
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 16px;
+    padding-left:7px;
+    padding-top:7px;
+    padding-right:7px;
+    padding-bottom:7px;
+    background-color: #1a8623;
+    border-radius: 6px;
+    border: unset;
+    height: 45px;
+    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+    border: unset;
+    z-index: 1;
+    position: relative;
+    font-weight: 1000;
+    font-size: 20px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
     color: #ffffff;
 }
+
+    .boton2 a {
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        color: #ffffff;
+    }
 
     .boton2::before {
         content: "";
@@ -242,7 +354,7 @@ box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
     }
 
 .boton2:hover {
-    color: #0a0a0a;
+    color: whitesmoke;
 }
 
     .boton2:hover::before {

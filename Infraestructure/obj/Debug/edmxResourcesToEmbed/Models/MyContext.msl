@@ -44,6 +44,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="ingreso_id" ColumnName="ingreso_id" />
           <ScalarProperty Name="articulo_id" ColumnName="articulo_id" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -83,9 +84,9 @@
         <MappingFragment StoreEntitySet="Ingreso">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
-          <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="monto_total" ColumnName="monto_total" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

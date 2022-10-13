@@ -122,11 +122,16 @@ namespace Infraestructure.Models
     {
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
+        [Display(Name = "Fecha de ingreso")]
         public Nullable<System.DateTime> fecha { get; set; }
+        [Display(Name = "Monto Total")]
         public Nullable<double> monto_total { get; set; }
+        [Display(Name = "Detalle")]
         public virtual ICollection<Detalle_Ingreso> Detalle_Ingreso { get; set; }
-        public virtual Proveedor Proveedor { get; set; }
+        [Display(Name = "Comentario")]
+        public string comentario { get; set; }
+
+        [Display(Name = "Usuario")]
         public virtual Usuario Usuario { get; set; }
     }
 
