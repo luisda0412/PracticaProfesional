@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using Web.Utils;
+using System.Xml;
 
 namespace Infraestructure.Repository
 {

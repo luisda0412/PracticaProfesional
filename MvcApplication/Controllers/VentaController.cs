@@ -3,9 +3,11 @@ using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 using Web.Security;
 using Web.Utils;
 using Web.ViewModel;
@@ -72,6 +74,7 @@ namespace MvcApplication.Controllers
 
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
+                        SendXmlByEmail(user.correo_electronico);
                     }
                     return RedirectToAction("Index");
                 }
@@ -146,6 +149,55 @@ namespace MvcApplication.Controllers
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return PartialView("Detalle", Carrito.Instancia.Items);
+        }
+
+        private void SendXmlByEmail(string EmailDestino)
+        {
+            //CREAR EL XML
+
+            XmlDocument xml = new XmlDocument();
+            XmlNode root = xml.CreateElement("Libros");
+            xml.AppendChild(root);
+
+            XmlNode nodoLibro = xml.CreateElement("Libro");
+            XmlAttribute atributo = xml.CreateAttribute("Autor");
+            atributo.Value = "Michael Ende";
+            nodoLibro.Attributes.Append(atributo);
+            XmlNode nodoTitulo = xml.CreateElement("Titulo");
+            nodoTitulo.InnerText = "La historia interminable";
+
+            XmlNode nodoPaginas = xml.CreateElement("Paginas");
+            nodoTitulo.InnerText = "234";
+
+            nodoLibro.AppendChild(nodoTitulo);
+            nodoLibro.AppendChild(nodoPaginas);
+
+            root.AppendChild(nodoLibro);
+
+            string XML = xml.DocumentElement.OuterXml;
+
+            //xml.Save(@"D:\Universidad\Z-Otros\ejemplo.xml");
+
+            //ENVIAR EL CORREO
+
+            string urlDomain = "https://localhost:3000/";
+            string EmailOrigen = "dumbmail130@gmail.com";
+            string Contraseña = "vhowlqsgdymyxyho";
+            string url = urlDomain + "/Usuario/Recuperacion/?token=";
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Compra exitosa",
+                "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
+            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "ejemplo2.xml"));
+            oMailMessage.IsBodyHtml = true;
+
+            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+            oSmtpClient.EnableSsl = true;
+            oSmtpClient.UseDefaultCredentials = false;
+            oSmtpClient.Port = 587;
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+
+            oSmtpClient.Send(oMailMessage);
+
+            oSmtpClient.Dispose();
         }
     }
 }

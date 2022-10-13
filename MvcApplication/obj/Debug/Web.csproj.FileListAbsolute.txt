@@ -380,3 +380,9 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Com
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.xml
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.pdb
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.xml
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.dll
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.dll
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.pdb
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.xml
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.pdb
+D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.xml
