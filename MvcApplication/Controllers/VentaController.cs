@@ -68,24 +68,34 @@ namespace MvcApplication.Controllers
                             linea.descuento = 0;
                             linea.venta_id = venta.id;
                             venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto)- linea.descuento;
-                            linea.precio = venta.monto_total;
+                            linea.precio = items.precio;
                             venta.Detalle_Venta.Add(linea);
                         }
 
                         //CREAR EL XML
 
                         XmlDocument xml = new XmlDocument();
-                        XmlNode root = xml.CreateElement("Venta");
+                        XmlNode root = xml.CreateElement("Factura_Electronica");
                         xml.AppendChild(root);
 
                         XmlNode nodoVenta = xml.CreateElement("Venta");
                         //nodoVenta.Attributes.Append(atributo);
 
                         XmlNode nodoCliente = xml.CreateElement("Cliente");
-                        nodoCliente.InnerText = user.nombre;
-                        nodoCliente.InnerText = user.apellidos;
-                        nodoCliente.InnerText = user.correo_electronico;
-                        nodoCliente.InnerText = user.telefono;
+
+                        XmlNode nombreCliente = xml.CreateElement("Nombre");
+                        nombreCliente.InnerText = user.nombre;
+                        XmlNode ApellidoCliente = xml.CreateElement("Apellidos");
+                        ApellidoCliente.InnerText = user.apellidos;
+                        XmlNode correoCliente = xml.CreateElement("Email");
+                        correoCliente.InnerText = user.correo_electronico;
+                        XmlNode telefonoCliente = xml.CreateElement("Telefono");
+                        telefonoCliente.InnerText = user.telefono;
+
+                        nodoCliente.AppendChild(nombreCliente);
+                        nodoCliente.AppendChild(ApellidoCliente);
+                        nodoCliente.AppendChild(correoCliente);
+                        nodoCliente.AppendChild(telefonoCliente);
 
                         XmlNode nodoMontoTotal = xml.CreateElement("Monto_Total");
                         nodoMontoTotal.InnerText = Convert.ToString(venta.monto_total);
