@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MvcApplication.ViewModel
+namespace Web.ViewModel
 {
     public class Comprita
     {
@@ -20,16 +20,16 @@ namespace MvcApplication.ViewModel
         static Comprita()
         {
             // Si el carrito no está en la sesión, cree uno y guarde los items.
-            if (HttpContext.Current.Session["carrito"] == null)
+            if (HttpContext.Current.Session["comprita"] == null)
             {
                 Instancia = new Comprita();
                 Instancia.Items = new List<ViewModelDetalleIngreso>();
-                HttpContext.Current.Session["carrito"] = Instancia;
+                HttpContext.Current.Session["comprita"] = Instancia;
             }
             else
             {
                 // De lo contrario, obténgalo de la sesión.
-                Instancia = (Comprita)HttpContext.Current.Session["carrito"];
+                Instancia = (Comprita)HttpContext.Current.Session["comprita"];
             }
         }
 

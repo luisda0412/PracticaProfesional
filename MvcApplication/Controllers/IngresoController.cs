@@ -1,7 +1,7 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
 using MvcApplication.Util;
-using MvcApplication.ViewModel;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Utils;
+using Web.ViewModel;
 
 namespace MvcApplication.Controllers
 {
@@ -21,7 +22,7 @@ namespace MvcApplication.Controllers
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 ViewBag.listaArticulos = _ServiceArticulo.GetArticulo();
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Registre aquí sus nuevas compras", SweetAlertMessageType.info);
+               // ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Registre aquí sus nuevas compras", SweetAlertMessageType.info);
 
             }
             catch (Exception e)
@@ -31,12 +32,13 @@ namespace MvcApplication.Controllers
             return View();
         }
 
-        public void Comprar(int? idArticulo)
+        public ActionResult Comprar(int? id)
         {
-            idArticulo = Convert.ToInt32(TempData["idArticulo"]);
-            int cantidadLibros = Comprita.Instancia.Items.Count();
-            ViewBag.NotiCarrito = Comprita.Instancia.AgregarItem((int)idArticulo);
-            //return PartialView("MovimientoCantidad");
+          
+            //int cantidadLibros = Comprita.Instancia.Items.Count();
+            ViewBag.NotificationMessage= Comprita.Instancia.AgregarItem((int)id);
+            ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Artículo agregado a la orden", SweetAlertMessageType.success);
+            return RedirectToAction("IndexIngreso");
 
         }
         public ActionResult actualizarCantidad(int idArticulo, int cantidad)
