@@ -1,6 +1,7 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
 using MvcApplication.Util;
+using MvcApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,52 +31,77 @@ namespace MvcApplication.Controllers
             return View();
         }
 
+        public void Comprar(int? idArticulo)
+        {
+            idArticulo = Convert.ToInt32(TempData["idArticulo"]);
+            int cantidadLibros = Comprita.Instancia.Items.Count();
+            ViewBag.NotiCarrito = Comprita.Instancia.AgregarItem((int)idArticulo);
+            //return PartialView("MovimientoCantidad");
+
+        }
+        public ActionResult actualizarCantidad(int idArticulo, int cantidad)
+        {
+            ViewBag.DetalleOrden = Comprita.Instancia.Items;
+            TempData["NotiCarrito"] = Comprita.Instancia.SetItemCantidad(idArticulo, cantidad);
+            TempData.Keep();
+            return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);
+
+        }
+
+        public ActionResult eliminarProducto(long? idArticulo)
+        {
+            try
+            {
+                ViewBag.NotificationMessage = Comprita.Instancia.EliminarItem((long)idArticulo);
+                return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);
+        }
+
         public ActionResult Save(Ingreso ingreso)
         {
             IServiceUsuario serviceUsuario = new ServiceUsuario();
             try
             {
-              
-                 Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
 
-                     IServiceArticulo serviceArticulo = new ServiceArticulo();
+                Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
+                if (user != null)
+                {
 
-                     Articulo articulo = new Articulo();
-                
-
-                    /* foreach (var items in listaLinea)
+                    //Lista que trae provisionalmente cada detalle del ingreso, osea cada linea de cada articulo
+                    var listaLinea = Comprita.Instancia.Items;
+                     
+                    foreach (var items in listaLinea)
                      {
-                         Detalle_Venta linea = new Detalle_Venta();
+                        //Se van llenando en BD cada linea del detalle
+                         Detalle_Ingreso linea = new Detalle_Ingreso();
                          linea.articulo_id = (int)items.idArticulo;
                          linea.cantidad = items.cantidad;
-                         ingreso.impuesto = 0.13;
-                         ingreso.tipoventa = user.rol_id == 2 ? ingreso.tipoventa = true : ingreso.tipoventa = false;
-                         ingreso.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                         ingreso.estado = true;
-                         linea.venta_id = ingreso.id;
-                         linea.descuento = 0;
-                         linea.venta_id = ingreso.id;
-                         ingreso.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * ingreso.impuesto) - linea.descuento;
-                         linea.precio = ingreso.monto_total;
-                         ingreso.Detalle_Venta.Add(linea);
-                     }*/
+                         linea.ingreso_id = ingreso.id;
 
-                     IServiceIngreso _ServiceIngreso = new ServiceIngreso();
-                     Ingreso ven = _ServiceIngreso.Save(ingreso);
-                     return RedirectToAction("Index");
-                
+                         //Voy llenando el monto del ingreso con el precio de cada linea de articulo
+                         ingreso.monto_total += linea.Articulo.precio;
+                     }
+                    ingreso.usuario_id = user.id;
+
+
+                    IServiceIngreso _ServiceIngreso = new ServiceIngreso();
+                    Ingreso ven = _ServiceIngreso.Save(ingreso);
+                    return RedirectToAction("IndexIngreso");
+                }
             }
             catch (Exception ex)
             {
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 return RedirectToAction("Default", "Error");
             }
+            return RedirectToAction("IndexIngreso");
         }
 
-        public void Comprar(int id)
-        {
-
-        }
 
     }
 }

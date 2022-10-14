@@ -277,8 +277,10 @@
     <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModel\Carrito.cs" />
+    <Compile Include="ViewModel\Comprita.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\ViewModelDetalleEncabezado.cs" />
+    <Compile Include="ViewModel\ViewModelDetalleIngreso.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />

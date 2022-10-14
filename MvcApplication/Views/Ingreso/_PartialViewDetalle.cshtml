@@ -43,22 +43,9 @@
                         @Html.DisplayFor(modelItem => item.SubTotal)
                     </td>
                     <td>
-                        @Ajax.ActionLink("X",//Texto para el usuario
-                             "eliminarProducto",//Acción a llamar
-                             "Venta",
-                             new
-                             {
-                                 idArticulo = item.idArticulo
-                             },//Parámetros a enviar
-                             new AjaxOptions
-                             {
-                                 UpdateTargetId = "resultadoDetalle",
-                                 InsertionMode = InsertionMode.Replace,
-                                 HttpMethod = "GET",
-                                 OnComplete = "updateCantLibros()"
-                             }, new { @class = "btn btn-primary" }
-                             )
+                      
 
+                        @Html.ActionLink("X", "eliminarProducto", "Ingreso", new { id = item.idArticulo }, new { @class = "btn btn-primary" })
                     </td>
                 </tr>
             }

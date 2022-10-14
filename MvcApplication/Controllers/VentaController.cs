@@ -60,7 +60,7 @@ namespace MvcApplication.Controllers
                             Detalle_Venta linea = new Detalle_Venta();
                             linea.articulo_id = (int)items.idArticulo;
                             linea.cantidad = items.cantidad;
-                            venta.impuesto = 0.13;
+                            venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
                             venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
                             venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
                             venta.estado = true;
@@ -72,6 +72,8 @@ namespace MvcApplication.Controllers
                             venta.Detalle_Venta.Add(linea);
                         }
 
+                        venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
+                        venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
                         //CREAR EL XML
 
                         XmlDocument xml = new XmlDocument();
@@ -169,6 +171,8 @@ namespace MvcApplication.Controllers
             idArticulo = Convert.ToInt32(TempData["idArticulo"]);
             int cantidadLibros = Carrito.Instancia.Items.Count();
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idArticulo);
+
+            //Creo que por esto se jode los del carrito
             return PartialView("MovimientoCantidad");
 
         }
@@ -185,6 +189,8 @@ namespace MvcApplication.Controllers
         //Actualizar solo la cantidad de libros que se muestra en el menú
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
 
+
+        //POR AQUI PUEDE ANDAR EL ERROR DE QUE SE ESCONDE EL CARRITO 
         public ActionResult actualizarOrdenCantidad()
         {
             if (TempData.ContainsKey("NotiCarrito"))
