@@ -53,38 +53,18 @@ namespace MvcApplication.Controllers
                        
                         Articulo articulo = new Articulo();
                         var listaLinea = Carrito.Instancia.Items;
-                        
-
-                        foreach (var items in listaLinea)
-                        {
-                            Detalle_Venta linea = new Detalle_Venta();
-                            linea.articulo_id = (int)items.idArticulo;
-                            linea.cantidad = items.cantidad;
-                            venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
-                            venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
-                            venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                            venta.estado = true;
-                            linea.venta_id = venta.id;
-                            linea.descuento = 0;
-                            linea.venta_id = venta.id;
-                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto)- linea.descuento;
-                            linea.precio = items.precio;
-                            venta.Detalle_Venta.Add(linea);
-                        }
-
-                        venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
-                        venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
-                        //CREAR EL XML
 
                         XmlDocument xml = new XmlDocument();
                         XmlNode root = xml.CreateElement("Factura_Electronica");
                         xml.AppendChild(root);
 
+                        //CREACION DEL NODO DE VENTA
                         XmlNode nodoVenta = xml.CreateElement("Venta");
-                        //nodoVenta.Attributes.Append(atributo);
 
+                        //CREACION DEL NODO CLIENTE
                         XmlNode nodoCliente = xml.CreateElement("Cliente");
 
+                        //ASIGNACION DE ELEMENTOS AL NODO CLIENTE
                         XmlNode nombreCliente = xml.CreateElement("Nombre");
                         nombreCliente.InnerText = user.nombre;
                         XmlNode ApellidoCliente = xml.CreateElement("Apellidos");
@@ -94,22 +74,72 @@ namespace MvcApplication.Controllers
                         XmlNode telefonoCliente = xml.CreateElement("Telefono");
                         telefonoCliente.InnerText = user.telefono;
 
+                        //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
                         nodoCliente.AppendChild(nombreCliente);
                         nodoCliente.AppendChild(ApellidoCliente);
                         nodoCliente.AppendChild(correoCliente);
                         nodoCliente.AppendChild(telefonoCliente);
 
-                        XmlNode nodoMontoTotal = xml.CreateElement("Monto_Total");
-                        nodoMontoTotal.InnerText = Convert.ToString(venta.monto_total);
+                        //CREACION DEL NODO DETALLE VENTA
+                        XmlNode nodoDetalle = xml.CreateElement("Detalle_Venta");
 
-                        XmlNode nodoImpuesto = xml.CreateElement("Impuesto");
-                        nodoImpuesto.InnerText = Convert.ToString(venta.impuesto);
 
+                        foreach (var items in listaLinea)
+                        {
+                            Detalle_Venta linea = new Detalle_Venta();
+                            linea.articulo_id = (int)items.idArticulo;
+                            linea.cantidad = items.cantidad;
+                            venta.impuesto = (double?)Carrito.Instancia.GetImpuesto();
+                            venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
+                            venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                            venta.estado = true;
+                            linea.venta_id = venta.id;
+                            linea.descuento = 0;
+                            linea.venta_id = venta.id;
+                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
+                            linea.precio = items.precio;
+                            venta.Detalle_Venta.Add(linea);
+
+                            //ASIGNACION DE ELEMENTOS DEL NODO DE DETALLE VENTA
+                            XmlNode cantidad = xml.CreateElement("Cantidad");
+                            cantidad.InnerText = Convert.ToString(linea.cantidad);
+                            XmlNode precio = xml.CreateElement("Precio_Articulo");
+                            precio.InnerText = Convert.ToString(linea.precio);
+                            XmlNode descuento = xml.CreateElement("Descuento");
+                            descuento.InnerText = Convert.ToString(linea.descuento);
+
+                            //ADJUNTAR LOS ELEMENTOS AL NODO DETALLE VENTA
+                            nodoDetalle.AppendChild(cantidad);
+                            nodoDetalle.AppendChild(precio);
+                            nodoDetalle.AppendChild(descuento);
+                        }
+
+                        //venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
+                        //venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
+                        //CREAR EL XML
+
+                        //SI TODO ESTA BIEN SE GUARA LA VENTA
+
+                        IServiceVenta _ServiceVenta = new ServiceVenta();
+                        Venta ven = _Serviceventa.Save(venta);
+
+                        //ASIGNACION DE ELEMENTOS AL NODO DE VENTA
+                        XmlNode ventaID = xml.CreateElement("ID_Venta");
+                        ventaID.InnerText = Convert.ToString(venta.id);
+                        XmlNode montoTotal = xml.CreateElement("Monto_Total");
+                        montoTotal.InnerText = Convert.ToString(venta.monto_total);
+                        XmlNode impuesto = xml.CreateElement("Impuesto");
+                        impuesto.InnerText = Convert.ToString(venta.impuesto);
+
+                        //ADJUNTAR ELEMENTOS AL NODO DE VENTA
                         nodoVenta.AppendChild(nodoCliente);
-                        nodoVenta.AppendChild(nodoMontoTotal);
-                        nodoVenta.AppendChild(nodoImpuesto);
+                        nodoVenta.AppendChild(ventaID);
+                        nodoVenta.AppendChild(montoTotal);
+                        nodoVenta.AppendChild(impuesto);
+                        nodoVenta.AppendChild(nodoDetalle);
 
                         root.AppendChild(nodoVenta);
+
 
                         string XML = xml.DocumentElement.OuterXml;
 
@@ -134,10 +164,6 @@ namespace MvcApplication.Controllers
 
                         oSmtpClient.Dispose();
 
-                        //SI TODO ESTA BIEN SE GUARA LA VENTA
-
-                        IServiceVenta _ServiceVenta = new ServiceVenta();
-                        Venta ven = _Serviceventa.Save(venta);
                     }
                     return RedirectToAction("Index");
                 }
