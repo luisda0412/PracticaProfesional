@@ -75,40 +75,71 @@ main {
     padding-bottom: 3%;
 }
 
+/* From uiverse.io by @barisdogansutcu */
 .pdf {
-    padding: 10px;
-    background-color: #c70505;
-    border-radius: 6px;
-    height: 65px;
-    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-    display:flex;
-    justify-content:space-evenly;
-    width:19%;
-    border:none;
-
+    padding: 17px 40px;
+    border-radius: 10px;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 5px 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 20px;
+    transition: all .5s ease;
 }
+
+    .pdf:hover {
+        letter-spacing: 3px;
+        background-color: hsl(123 65% 50%);
+        color: hsl(0, 0%, 100%);
+        -webkit-box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+        -moz-box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+        box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+    }
+
+    .pdf:active {
+        letter-spacing: 3px;
+        background-color: hsl(261deg 80% 48%);
+        color: hsl(0, 0%, 100%);
+        box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+        transform: translateY(10px);
+        transition: 100ms;
+    }
+
 .pdf img{
-   height:40px;
+   height:30px;
+   margin-left:5px;
 }
 
     .pdf a {
         text-decoration: none;
         font-family: 'Agency FB';
         font-weight: 600;
-        font-size: 29px;
-        color: #ffffff;
+        color: black;
     }
 
+    .pdf a {
+        text-decoration: none;
+        font-family: 'Agency FB';
+        font-weight: 600;
+        color: black;
+    }
 
-.pdf:hover {
-    background-color: #272626;
-}
+    .pdf a:hover{
+        color: white;
+    }
 
 /*Tabla*/
 
+.desarrollo .container{
+    height:400px;
+    overflow-y: scroll;
+    width:70%;
+}
+
 .table
 {
-    width: 75%;
+    
     box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
     text-align: center;
     border-radius: 8px;
@@ -116,7 +147,7 @@ main {
 
 .table td {
     font-weight: 400;
-    font-size:15px;
+    font-size:14px;
     width:12.5%;
 }
 

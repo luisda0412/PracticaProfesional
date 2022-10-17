@@ -32,58 +32,59 @@
 <main>
     <center>
         <section class="desarrollo">
+            <br />
             <button class="pdf">
                 @Html.ActionLink("Generar reporte", "CreatePdfArticulos", "Reportes")<img src="~/Imagenes/Iconos/pdf.png" />
             </button>
             <br />
             <br />
-            <br />
-
-            <table class="table">
-                <tr>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.nombre)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.precio)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.stock)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Categoria.descripcion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.imagen)
-                    </th>
-                </tr>
-
-                @foreach (var item in Model)
-                {
+            <div class="container">
+                <table class="table">
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.nombre)
-                        </td>
-                        <td>
-                            &cent;@Html.DisplayFor(modelItem => item.precio)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.stock)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Categoria.descripcion)
-                        </td>
-                        <td class="foto">
-                            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" role="img"
-                                 alt="Artículo @Html.DisplayNameFor(model => model.nombre)"
-                                 class="bd-placeholder-img" width="70" height="70">
 
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.nombre)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.precio)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.stock)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Categoria.descripcion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.imagen)
+                        </th>
                     </tr>
-                }
 
-            </table>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.nombre)
+                            </td>
+                            <td>
+                                &cent;@Html.DisplayFor(modelItem => item.precio)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.stock)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Categoria.descripcion)
+                            </td>
+                            <td class="foto">
+                                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" role="img"
+                                     alt="Artículo @Html.DisplayNameFor(model => model.nombre)"
+                                     class="bd-placeholder-img" width="70" height="70">
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
         </section>
     </center>
 
