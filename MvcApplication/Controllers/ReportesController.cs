@@ -19,11 +19,14 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Security;
 using Web.Utils;
+using System.Globalization;
 
 namespace MvcApplication.Controllers
 {
     public class ReportesController: Controller
     {
+        CultureInfo culture;
+        string specifier;
 
         public ActionResult ProductosLista()
         {
@@ -52,11 +55,17 @@ namespace MvcApplication.Controllers
         {
             //Ejemplos IText7 https://kb.itextpdf.com/home/it7kb/examples
             IEnumerable<Articulo> lista = null;
+            Usuario user = null;
             try
             {
                 // Extraer informacion
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 lista = _ServiceArticulo.GetArticulo();
+
+                //Extraer Usuario
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                int iduser= Convert.ToInt32(TempData["idUser"]);
+                user = _ServiceUsuario.GetUsuarioByID(iduser);
 
                 // Crear stream para almacenar en memoria el reporte 
                 MemoryStream ms = new MemoryStream();
@@ -68,12 +77,35 @@ namespace MvcApplication.Controllers
                 Document doc = new Document(pdfDoc, PageSize.A4, false);
                 
 
-
-                Paragraph header = new Paragraph("Catálogo de Artículos")
+                //Titulo
+                Paragraph header = new Paragraph("Reporte de Artículos")
                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                    .SetFontSize(14)
-                                   .SetFontColor(ColorConstants.BLUE);
+                                   .SetFontColor(ColorConstants.GREEN);
+
+                //Imagen de la empresa
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
+                logo = logo.SetHeight(50).SetWidth(120);
+
+
+                //Nombre y apellidos del usuario
+                Paragraph cadenanombre = new Paragraph("Usuario:" + user.nombre)
+                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                   .SetFontSize(12)
+                                   .SetFontColor(ColorConstants.BLACK);
+
+                //Para la fecha del sistema
+                Paragraph fecha = new Paragraph(DateTime.Now.ToString())
+                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                   .SetFontSize(10)
+                                   .SetFontColor(ColorConstants.BLACK);
+
+
+                doc.Add(cadenanombre);
+                doc.Add(fecha);
+                doc.Add(logo);
                 doc.Add(header);
+               
 
 
                 // Crear tabla con 5 columnas 
@@ -81,10 +113,9 @@ namespace MvcApplication.Controllers
 
                 table.AddHeaderCell("Nombre");
                 table.AddHeaderCell("Precio");
-                table.AddHeaderCell("Cantidad en Stock");
+                table.AddHeaderCell("Disponibles");
                 table.AddHeaderCell("Descripción");
                 table.AddHeaderCell("Imagen");
-
 
                 foreach (var item in lista)
                 {
@@ -92,7 +123,10 @@ namespace MvcApplication.Controllers
                     // Agregar datos a las celdas
                     // table.AddCell(new Paragraph(item.id));
                     table.AddCell(new Paragraph(item.nombre));
-                    table.AddCell(new Paragraph(item.precio.ToString()));
+                    // double preciobien =  Convert.ToDouble(String.Format("%1$,.2f", (double)item.precio);)String.Format("%1$,.2f",(double)item.precio);
+
+                    string preciobien = "₡" + item.precio.ToString();
+                    table.AddCell(new Paragraph(preciobien));
                     table.AddCell(new Paragraph(item.stock.ToString()));
                     // table.AddCell(new Paragraph(item.cantidadMinima.ToString()));
                     //  table.AddCell(new Paragraph(item.cantidadMaxima.ToString()));
@@ -100,7 +134,7 @@ namespace MvcApplication.Controllers
                     // Convierte la imagen que viene en Bytes en imagen para PDF
                     Image image = new Image(ImageDataFactory.Create(item.imagen));
                     // Tamaño de la imagen
-                    image = image.SetHeight(75).SetWidth(75);
+                    image = image.SetHeight(50).SetWidth(50);
                     table.AddCell(image);
                 }
                 doc.Add(table);
@@ -115,17 +149,18 @@ namespace MvcApplication.Controllers
                     // Write aligned text to the specified by parameters point
 
 
-                    //AQUI SE ME CAE
+                 
                     Paragraph p = new Paragraph("Reporte del catálogo de productos");
-
-                    doc.ShowTextAligned(new Paragraph(String.Format("página {0} de {1}", i, numberOfPages)),559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)),559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 }
 
 
                 //Close document
                 doc.Close();
                 // Retorna un File
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación del reporte", "Reporte del catálogo realizado con éxito!", SweetAlertMessageType.success);
                 return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
+
 
             }
             catch (Exception ex)
@@ -133,8 +168,6 @@ namespace MvcApplication.Controllers
                 // Salvar el error en un archivo 
                 Log.Error(ex, MethodBase.GetCurrentMethod());
                 ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData.Keep();
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }

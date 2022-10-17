@@ -84,6 +84,29 @@
                     }
 
                 </table>
+
+                <!--Tomar el usuario Logueado-->
+                @{
+                    string nombre = "Sesión no iniciada";
+                    string email = "Perfil";
+                    int id = 0;
+                    Infraestructure.Models.Usuario oUsuario;
+                    //Validar si existe en la sesión
+                    if (Session["User"] != null)
+                    {
+                        oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                        if (oUsuario != null)
+                        {
+                            nombre = $"{oUsuario.nombre}";
+                            email = oUsuario.correo_electronico;
+                            id = oUsuario.id;
+                            ViewBag.idUser = id;
+
+                            TempData["idUser"] = id;
+
+                        }
+                    }
+                }
             </div>
         </section>
     </center>
