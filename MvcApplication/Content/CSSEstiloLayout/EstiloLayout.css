@@ -74,6 +74,11 @@ nav li {
             text-align: justify;
         }
 
+        /*Alertas*/
+        .text-danger{
+            font-size:19px;
+            color:red;
+        }
 
 
 /*------------------*/

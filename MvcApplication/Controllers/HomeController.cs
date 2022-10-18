@@ -33,6 +33,13 @@ namespace MvcApplication.Controllers
         {
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
             Usuario oUsuario = null;
+            
+
+            ModelState.Remove("estado");
+            ModelState.Remove("telefono");
+            ModelState.Remove("nombre");
+            ModelState.Remove("apellidos");
+            ModelState.Remove("rol_id");
             try
             {
                 if (ModelState.IsValid)

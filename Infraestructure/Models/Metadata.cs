@@ -250,16 +250,17 @@ namespace Infraestructure.Models
     {
         [Display(Name = "Identificación")]
         public int id { get; set; }
+        
         [Display(Name = "Contraseña")]
-        [Required(ErrorMessage = "{0} es un campo requerido")]
-        //[Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
-        //[RegularExpression("", ErrorMessage = "El peso debe ser un valor numérico.")]
+        [Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
         public string clave { get; set; }
+       
         [Display(Name = "Nombre")]
-        //[Required(ErrorMessage = "*El nombre es un campo obligatorio")]
+        [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
+        
         [Display(Name = "Apellidos")]
-        //[Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
+        [Required(ErrorMessage = "*Los apellidos son un campo obligatorio")]
         public string apellidos { get; set; }
 
         [Display(Name = "Correo")]
@@ -268,12 +269,15 @@ namespace Infraestructure.Models
         public string correo_electronico { get; set; }
 
         [Display(Name = "Teléfono")]
-        //[Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
-        //[MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
-        //[MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
+        [MinLength(8, ErrorMessage = "*El teléfono debe ser exactamente 8 dígitos")]
+        [MaxLength(8, ErrorMessage = "*El teléfono debe ser exactamente 8 dígitos")]
         public string telefono { get; set; }
+       
         [Display(Name = "Tipo de rol")]
+        [Required(ErrorMessage = "El tipo de rol es un campo requerido")]
         public Nullable<int> rol_id { get; set; }
+        
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
         public virtual ICollection<Caja_Chica> Caja_Chica { get; set; }

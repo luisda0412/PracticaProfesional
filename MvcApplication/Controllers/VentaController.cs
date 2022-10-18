@@ -192,14 +192,14 @@ namespace MvcApplication.Controllers
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
 
-        public ActionResult ordenarProducto(int? idArticulo)
+        public void ordenarProducto(int? idArticulo)
         {
             idArticulo = Convert.ToInt32(TempData["idArticulo"]);
             int cantidadLibros = Carrito.Instancia.Items.Count();
             ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idArticulo);
 
             //Creo que por esto se jode los del carrito
-            return PartialView("MovimientoCantidad");
+           // return PartialView("MovimientoCantidad");
 
         }
 
