@@ -1,57 +1,170 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - AFK</title>
-    <link rel="shortcut icon" href="~/IMG/logo5.png" type="image/x-icon">
+    <title>@ViewBag.Title - VYCUZ</title>
+    <link rel="shortcut icon" href="~/Imagenes/Logos/logoPestaña.png" type="image/x-icon">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="~/Content/EstiloLayout.css">
+    <link rel="stylesheet" href="~/Content/CSSEstiloLayout/EstiloLayout.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand">Librería</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="navbar navbar-expand-lg navbar-dark badge-primary">
+        <div class="container-fluid">
+            <!--@Html.ActionLink("AFK", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })-->
 
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
+            <a href="" class="navbar-brand"><img class="imagennav" src="~/Imagenes/Logos/logoIcono.png" alt="Beyond Technology" /></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor03">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+
+                        @Html.ActionLink("Artículos", "IndexCatalogo", "Articulo", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item" id="cantidadLibros">
+                        @Html.Partial("MovimientoCantidad")
+                    </li>
 
 
-                <li class="nav-item">
-                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "nav-link" })
+                    <!--Para el Login VYCUZ-->
+                    @{
+                        string nombre = "Iniciar Sesión";
+                        string email = "Perfil";
+                        int id = 0;
+                        Infraestructure.Models.Usuario oUsuario;
+                        //Validar si existe en la sesión
+                        if (Session["User"] != null)
+                        {
+                            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                            if (oUsuario != null)
+                            {
+                                nombre = $"{oUsuario.nombre}";
+                                email = oUsuario.correo_electronico;
+                                id = oUsuario.id;
+                                TempData["idUser"] = id;
+                            }
+                        }
+                    }
+                    <li class="nav-item dropdown me-auto" id="login">
+                        <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@nombre</a>
 
-                </li>
+                        <div class="dropdown-menu" id="login">
+                            @if (Session["User"] != null)
+                            {
+                                <div class="login">
+                                    @* Nombre Usuario *@
+                                    Usuario: @nombre
+                                </div>
+                            }
 
-            </ul>
+                            <div class="dropdown-divider"></div>
+                            @if (Session["User"] == null)
+                            {
+                                @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", null, new { @class = "dropdown-item" })
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "dropdown-item" })
+                            }
+
+                        </div>
+                    </li>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="ml-auto">@Html.ActionLink("Logout", "Logout", "Account", new { @class = "nav-link" })</li>
+                    }
+                    else
+                    {
+                        <li class="ml-auto">@Html.ActionLink("Login GOOGLE", "Login", "Account", new { @class = "nav-link" })</li>
+                    }
+                    <!--Para el Login VYCUZ-->
+                </ul>
+
+            </div>
         </div>
     </nav>
-    <main>
+    <div>
+        <!--class="container body-content"-->
+        @RenderBody()
 
-        <div class="container">
-
-            @RenderBody()
-        </div>
-    </main>
-    <footer class="footer mt-auto py-3">
-        <hr />
-        <div class="container">
-            <p>&copy; @DateTime.Now.Year - ISW-711 III-2020</p>
-        </div>
-    </footer>
-
+        <footer>
+            <section class="container-fluid sec-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card desc-box">
+                                <div class="card-body">
+                                    <div class="card-title">Sobre Nosotros</div>
+                                    <div class="card-text">
+                                        Somos una empresa con gran auge en ventas de dispositivos electrónicos,
+                                        ubicados en el Cuty Mall de Alajuela hemos brindado una excelente atencion a nuestros clientes,
+                                        y brindado productos de primera calidad entre ellos: consolas, videojuegos, componentes internos, computadoras, luces, accesorios, etc...
+                                        compra con nosotros y viví la experiencia VYCUZ.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card desc-box">
+                                <div class="card-body">
+                                    <div class="card-title">Contáctenos</div>
+                                    <div class="card-text">
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/tel.png" alt="Beyond Technology" class="mb-3">
+                                                <span>2433-7070</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/ubi.png" alt="Beyond Technology" class="mb-3">
+                                                <span>City Mall</span>
+                                            </div><!--.col-->
+                                        </div><!--.row-->
+                                        <div class="row">
+                                            <div class="col">
+                                                <img src="~/Imagenes/Iconos/mail.png" alt="Beyond Technology" class="mb-3">
+                                                <span>VYCUZ@gmail.com</span>
+                                            </div><!--.col-->
+                                        </div><!--.row-->
+                                    </div><!--.card-text-->
+                                </div>
+                            </div><!--.card-->
+                        </div><!--.col-->
+                        <div class="col text-center">
+                            <br /><br />
+                            <img src="~/Imagenes/Logos/logomenu.png" alt="Beyond Technology" class="mb-3">
+                            <br class="clearfix">
+                            <a href="#" title="Ir al perfil de facebook" class="snip1472"><img src="~/Imagenes/Iconos/facebook.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al perfil de Instagram" class="snip1472"><img src="~/Imagenes/Iconos/instagram.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al chat de Telegram" class="snip1472"><img src="~/Imagenes/Iconos/telegram.png" alt="Beyond Technology" /></a>
+                            <a href="#" title="Ir al buscador de Google" class="snip1472"><img src="~/Imagenes/Iconos/google.png" alt="Beyond Technology" /></a>
+                        </div><!--.col-->
+                    </div><!--.row-->
+                </div>
+            </section>
+        </footer>
+    </div>
 
 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/sweetalert")
-
     @RenderSection("scripts", required: false)
+
     @if (ViewBag.NotificationMessage != null)
     {
         <script>

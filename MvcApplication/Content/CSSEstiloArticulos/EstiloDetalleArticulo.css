@@ -244,11 +244,11 @@
 }
 
         .columna .right h3, h4, p {    
-            margin-top:23px;
+            margin-top:18px;
             font-family: 'Agency FB';
         }
 
-.row img {
+.partebaja .row img {
     max-height: 70px;
     max-width: 80px;
     background-color: black;
