@@ -58,8 +58,39 @@ namespace MvcApplication.Controllers
                         XmlNode root = xml.CreateElement("Factura_Electronica");
                         xml.AppendChild(root);
 
-                        //CREACION DEL NODO DE VENTA
-                        XmlNode nodoVenta = xml.CreateElement("Venta");
+                        //CREACION DEL NODO DE INFORMACION DE LA EMPRESA
+                        XmlNode nodoEmpresa = xml.CreateElement("Emisor");
+
+                        //ASIGNACION DE ELEMENTOS AL NODO DE LA EMPRESA
+                        XmlNode nombreEmpresa = xml.CreateElement("Nombre");
+                        nombreEmpresa.InnerText = "VYCUZ";
+
+                        //CREACION DEL NODO DE UBICACION DENTRO DEL NODO DE LA EMRPESA
+                        XmlNode nodoUbicacion = xml.CreateElement("Ubicacion");
+
+                        //ASIGNACION DE LOS ELEMENTOS AL NODO DE UBICACION
+                        XmlNode provincia = xml.CreateElement("Provincia");
+                        provincia.InnerText = "Alajuela";
+                        XmlNode centroComercial = xml.CreateElement("Centro_Comercial");
+                        centroComercial.InnerText = "City Mall";
+                        XmlNode otrasSenas = xml.CreateElement("Otras_Senas");
+                        otrasSenas.InnerText = "Segundo piso al frente de CellCom";
+
+                        //ASGNACION DE LOS ELEMENTOS DENTRO DEL NODO DE UBICACION
+                        nodoUbicacion.AppendChild(provincia);
+                        nodoUbicacion.AppendChild(centroComercial);
+                        nodoUbicacion.AppendChild(otrasSenas);
+
+                        XmlNode telefonoEmpresa = xml.CreateElement("Telefono");
+                        telefonoEmpresa.InnerText = "72791408";
+                        XmlNode correoEmpresa = xml.CreateElement("Correo_Electronico");
+                        correoEmpresa.InnerText = "vycuz@gmail.com";
+
+                        //ASIGNACION DE LOS ELEMENTOS AL NODO DE LA EMPRESA
+                        nodoEmpresa.AppendChild(nombreEmpresa);
+                        nodoEmpresa.AppendChild(nodoUbicacion);
+                        nodoEmpresa.AppendChild(telefonoEmpresa);
+                        nodoEmpresa.AppendChild(correoEmpresa);
 
                         //CREACION DEL NODO CLIENTE
                         XmlNode nodoCliente = xml.CreateElement("Cliente");
@@ -123,22 +154,29 @@ namespace MvcApplication.Controllers
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
 
+                        //CREACION DEL NODO DETALLE VENTA
+                        XmlNode nodoVenta = xml.CreateElement("Venta");
+
                         //ASIGNACION DE ELEMENTOS AL NODO DE VENTA
                         XmlNode ventaID = xml.CreateElement("ID_Venta");
                         ventaID.InnerText = Convert.ToString(venta.id);
-                        XmlNode montoTotal = xml.CreateElement("Monto_Total");
-                        montoTotal.InnerText = Convert.ToString(venta.monto_total);
                         XmlNode impuesto = xml.CreateElement("Impuesto");
                         impuesto.InnerText = Convert.ToString(venta.impuesto);
+                        XmlNode montoTotal = xml.CreateElement("Monto_Total");
+                        montoTotal.InnerText = Convert.ToString(venta.monto_total);
 
-                        //ADJUNTAR ELEMENTOS AL NODO DE VENTA
-                        nodoVenta.AppendChild(nodoCliente);
+                        //ADJUNTAR ELEMENMTOS AL NODO DE VENTA
                         nodoVenta.AppendChild(ventaID);
-                        nodoVenta.AppendChild(montoTotal);
                         nodoVenta.AppendChild(impuesto);
-                        nodoVenta.AppendChild(nodoDetalle);
+                        nodoVenta.AppendChild(montoTotal);
 
+                        //ADJUNTAR ELEMENTOS AL NODO DE FACTURA ELECTRONICA
+                        root.AppendChild(nodoEmpresa);
+                        root.AppendChild(nodoCliente);
                         root.AppendChild(nodoVenta);
+                        root.AppendChild(nodoDetalle);
+
+                        //root.AppendChild(nodoVenta);
 
 
                         string XML = xml.DocumentElement.OuterXml;
