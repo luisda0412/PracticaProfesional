@@ -130,6 +130,7 @@ namespace MvcApplication.Controllers
                             venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
                             linea.precio = items.precio;
                             venta.Detalle_Venta.Add(linea);
+                            serviceArticulo.actualizarCantidad(linea.articulo_id, (int)linea.cantidad, (int)venta.);
 
                             //ASIGNACION DE ELEMENTOS DEL NODO DE DETALLE VENTA
                             XmlNode cantidad = xml.CreateElement("Cantidad");

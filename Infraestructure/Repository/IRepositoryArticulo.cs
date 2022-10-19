@@ -15,5 +15,6 @@ namespace Infraestructure.Repository
         void Save(Articulo articulo, string[] proveedor);
         IEnumerable<Articulo> GetArticuloByProveedor(long id);
         void Eliminar(long id);
+        void actualizarCantidad(int id, int cantidad, long tipoMovimiento);
     }
 }

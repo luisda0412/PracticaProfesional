@@ -14,6 +14,41 @@ namespace Infraestructure.Repository
     {
         IRepositoryProveedor repoP = new RepositoryProveedor();
 
+        public void actualizarCantidad(int id, int cantidad, long tipoMovimiento)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                try
+                {
+                    Articulo oldArti = GetArticuloByID(id);
+                    oldArti.Categoria = null;
+                    oldArti.Proveedor = null;
+
+                    if (tipoMovimiento == 1)
+                    {
+                        oldArti.stock += cantidad;
+
+                    }
+                    else
+                    {
+                        oldArti.stock -= cantidad;
+
+                    }
+
+                    cdt.Articulo.Add(oldArti);
+                    cdt.Entry(oldArti).State = EntityState.Modified;
+                    cdt.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    string mensaje = "";
+                    Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+
+                }
+            }
+        }
+
         public void Eliminar(long id)
         {
             using (MyContext cdt = new MyContext())
