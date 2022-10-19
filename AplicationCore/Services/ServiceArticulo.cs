@@ -10,10 +10,10 @@ namespace AplicationCore.Services
 {
     public class ServiceArticulo : IServiceArticulo
     {
-        public void actualizarCantidad(int id, int cantidad, long tipoMovimiento)
+        public void actualizarCantidad(int id, int cantidad)
         {
             IRepositoryArticulo repository = new RepositoryArticulo();
-            repository.actualizarCantidad(id, cantidad, tipoMovimiento);
+            repository.actualizarCantidad(id, cantidad);
         }
 
         public void Eliminar(long id)
