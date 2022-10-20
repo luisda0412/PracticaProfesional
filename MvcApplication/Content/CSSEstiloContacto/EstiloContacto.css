@@ -1,0 +1,123 @@
+﻿main {
+    background-color: white;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 380px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 380px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+    .izquieroHeader img {
+        justify-content: center;
+    }
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 18%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        margin-top: 10%;
+        height: 210px;
+        width: 90%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+/*Cuerpo---------------------------------------------*/
+.cuerpo {
+    background-color: white;
+    margin: auto;
+}
+
+
+/*Boton ver detalles*/
+
+.boton2 a {
+    text-decoration: none;
+    color: white;
+}
+
+.boton2 {
+    text-decoration: none;
+    padding: 5px 15px;
+    border: unset;
+    border-radius: 15px;
+    color: white;
+    z-index: 1;
+    background: #1a8623;
+    position: relative;
+    font-weight: 1000;
+    font-size: 19px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .boton2::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .boton2:hover {
+        background-color: #1a8623;
+        color: white;
+    }
+
+    .boton2 a:hover {
+        color: white;
+    }
+
+    .boton2:hover::before {
+        width: 100%;
+    }

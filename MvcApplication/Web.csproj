@@ -251,6 +251,7 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\CajaChicaController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoController.cs" />
@@ -302,6 +303,7 @@
     <Content Include="Content\CSSEstiloCategoria\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloDetalleCategoria.css" />
     <Content Include="Content\CSSEstiloCategoria\EstiloListaCategorias.css" />
+    <Content Include="Content\CSSEstiloContacto\EstiloContacto.css" />
     <Content Include="Content\CSSEstiloEmpresa\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloEmpresa\EstiloDetalleEmpresa.css" />
     <Content Include="Content\CSSEstiloEmpresa\EstiloListaEmpresa.css" />
@@ -599,6 +601,7 @@
     <Content Include="Views\Venta\IndexVenta.cshtml" />
     <Content Include="Views\Ingreso\IndexIngreso.cshtml" />
     <Content Include="Views\Ingreso\_PartialViewDetalle.cshtml" />
+    <Content Include="Views\Contacto\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
