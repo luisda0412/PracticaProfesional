@@ -58,6 +58,30 @@ namespace MvcApplication.Controllers
                         XmlNode root = xml.CreateElement("Factura_Electronica");
                         xml.AppendChild(root);
 
+                        //ATRIBUTOS DE FACTURA
+                        XmlAttribute xmlns = xml.CreateAttribute("xmlns");
+                        xmlns.Value = "https://cdn.comprobanteselectronicos.go.cr/xml-schemas/v4.3/facturaElectronica";
+                        XmlAttribute xsd = xml.CreateAttribute("xmlns:xsd");
+                        xsd.Value = "http://www.w3.org/2001/XMLSchema";
+                        XmlAttribute xsi = xml.CreateAttribute("xmlns:xsi");
+                        xsi.Value = "http://www.w3.org/2001/XMLSchema-instance";
+                        root.Attributes.Append(xmlns);
+                        root.Attributes.Append(xsd);
+                        root.Attributes.Append(xsi);
+
+                        //CREACION DEL NODO DE INFO DE LA FACTURA ELECTRONICA
+                        XmlNode clave = xml.CreateElement("Clave");
+                        clave.InnerText = "1";
+                        root.AppendChild(clave);
+                        XmlNode codigoActividad = xml.CreateElement("Codigo_Actividad");
+                        codigoActividad.InnerText = "1";
+                        root.AppendChild(codigoActividad);
+                        XmlNode fechaEmision = xml.CreateElement("Fecha_Emision");
+                        string formatted = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK");
+                        fechaEmision.InnerText = formatted;
+                        root.AppendChild(fechaEmision);
+
+
                         //CREACION DEL NODO DE INFORMACION DE LA EMPRESA
                         XmlNode nodoEmpresa = xml.CreateElement("Emisor");
 
@@ -81,19 +105,31 @@ namespace MvcApplication.Controllers
                         nodoUbicacion.AppendChild(centroComercial);
                         nodoUbicacion.AppendChild(otrasSenas);
 
+                        //CREACION DEL NODO DE TELEFONO
                         XmlNode telefonoEmpresa = xml.CreateElement("Telefono");
-                        telefonoEmpresa.InnerText = "72791408";
+
+                        //ASIGNACION DE ELEMENTOS AL NODO DE TELEFONO
+                        XmlNode codigo = xml.CreateElement("Codigo_Pais");
+                        codigo.InnerText = "506";
+                        XmlNode telefono = xml.CreateElement("Telefono_Empresa");
+                        telefono.InnerText = "72791408";
+
+                        //ADJUNTAR ELEMENTOS AL N0DO DE TELEFONO
+                        telefonoEmpresa.AppendChild(codigo);
+                        telefonoEmpresa.AppendChild(telefono);
+
                         XmlNode correoEmpresa = xml.CreateElement("Correo_Electronico");
                         correoEmpresa.InnerText = "vycuz@gmail.com";
 
-                        //ASIGNACION DE LOS ELEMENTOS AL NODO DE LA EMPRESA
+                        //ADJUNTAR ELEMENTOS AL NODO DE LA EMPRESA
                         nodoEmpresa.AppendChild(nombreEmpresa);
                         nodoEmpresa.AppendChild(nodoUbicacion);
                         nodoEmpresa.AppendChild(telefonoEmpresa);
                         nodoEmpresa.AppendChild(correoEmpresa);
+                        root.AppendChild(nodoEmpresa);
 
                         //CREACION DEL NODO CLIENTE
-                        XmlNode nodoCliente = xml.CreateElement("Cliente");
+                        XmlNode nodoCliente = xml.CreateElement("Receptor");
 
                         //ASIGNACION DE ELEMENTOS AL NODO CLIENTE
                         XmlNode nombreCliente = xml.CreateElement("Nombre");
@@ -110,10 +146,9 @@ namespace MvcApplication.Controllers
                         nodoCliente.AppendChild(ApellidoCliente);
                         nodoCliente.AppendChild(correoCliente);
                         nodoCliente.AppendChild(telefonoCliente);
+                        root.AppendChild(nodoCliente);
 
-                        //CREACION DEL NODO DETALLE VENTA
-                        XmlNode nodoDetalle = xml.CreateElement("Detalle_Venta");
-
+                        string descuento2="";
 
                         foreach (var items in listaLinea)
                         {
@@ -131,10 +166,16 @@ namespace MvcApplication.Controllers
                             linea.precio = items.precio;
                             venta.Detalle_Venta.Add(linea);
 
+                            descuento2 = Convert.ToString(linea.descuento);
                             //LINEA DE CODGO PARA ACTUALIZAR EL PRODUCTO CUANDO SE HACE UNA COMPRA, LA COMENTO YA QUE HAY QUE HACER PRUEBAS Y LUEGO NOS QUEDAMOS SIN UNIDADES
                             //serviceArticulo.actualizarCantidad(linea.articulo_id, (int)linea.cantidad);
 
+                            //CREACION DEL NODO DETALLE VENTA
+                            XmlNode nodoDetalle = xml.CreateElement("Detalle_Venta");
+
                             //ASIGNACION DE ELEMENTOS DEL NODO DE DETALLE VENTA
+                            XmlNode articuloID = xml.CreateElement("Articulo_ID");
+                            articuloID.InnerText = Convert.ToString(linea.articulo_id);
                             XmlNode cantidad = xml.CreateElement("Cantidad");
                             cantidad.InnerText = Convert.ToString(linea.cantidad);
                             XmlNode precio = xml.CreateElement("Precio_Articulo");
@@ -143,10 +184,11 @@ namespace MvcApplication.Controllers
                             descuento.InnerText = Convert.ToString(linea.descuento);
 
                             //ADJUNTAR LOS ELEMENTOS AL NODO DETALLE VENTA
+                            nodoDetalle.AppendChild(articuloID);
                             nodoDetalle.AppendChild(cantidad);
                             nodoDetalle.AppendChild(precio);
                             nodoDetalle.AppendChild(descuento);
-
+                            root.AppendChild(nodoDetalle);
                         }
 
                         //venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
@@ -173,12 +215,30 @@ namespace MvcApplication.Controllers
                         nodoVenta.AppendChild(ventaID);
                         nodoVenta.AppendChild(impuesto);
                         nodoVenta.AppendChild(montoTotal);
+                        root.AppendChild(nodoVenta);
+
+                        //CREACION DEL NODO RESUMEN FACTURA
+                        XmlNode resumenFactura = xml.CreateElement("Resumen_Factura");
+
+                        //ASIGNACION DE LOS ELEMENTOS DEL NODO FACTURA
+                        XmlNode impuestoResumen = xml.CreateElement("Impuesto");
+                        impuestoResumen.InnerText = Convert.ToString(venta.impuesto);
+                        XmlNode descuentoResumen = xml.CreateElement("Descuento");
+                        descuentoResumen.InnerText = descuento2;
+                        XmlNode montoTotalResumen = xml.CreateElement("Monto_Total");
+                        montoTotalResumen.InnerText = Convert.ToString(venta.monto_total);
+
+                        //ADJUNTAT LOS ELEMENTOS AL NODO FACTURA
+                        resumenFactura.AppendChild(impuestoResumen);
+                        resumenFactura.AppendChild(descuentoResumen);
+                        resumenFactura.AppendChild(montoTotalResumen);
+                        root.AppendChild(resumenFactura);
 
                         //ADJUNTAR ELEMENTOS AL NODO DE FACTURA ELECTRONICA
-                        root.AppendChild(nodoEmpresa);
-                        root.AppendChild(nodoCliente);
-                        root.AppendChild(nodoVenta);
-                        root.AppendChild(nodoDetalle);
+                        //root.AppendChild(nodoEmpresa);
+                        //root.AppendChild(nodoCliente);
+                        //root.AppendChild(nodoVenta);
+                        //root.AppendChild(nodoDetalle);
 
                         //root.AppendChild(nodoVenta);
 
