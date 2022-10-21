@@ -1,4 +1,5 @@
-﻿main {
+﻿
+main {
     background-color: white;
 }
 
@@ -67,17 +68,61 @@
 .cuerpo {
     background-color: white;
     margin: auto;
+    padding-top:15px;
 }
+
+/*Contact*/
+#name,
+#email,
+#subject,
+#message
+{
+    color: black;
+
+}
+
+.contact .container-fluid {
+    display:flex;
+    justify-content:space-around;
+    padding:0%;
+}
+
+.formulario .container-fluid .container1 {
+    height: 400px;
+    width:45%;
+    background: url(../contacto2.jpeg) left center no-repeat;
+    background-size: contain;
+
+}
+
+
+.formulario .container-fluid .container {
+    width: 55%;
+  
+}
+
+.formulario {
+    max-width: 70%;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0px 15px 18px 2px rgba(120,112,120,1);
+}
+
+input{
+    width:90%;
+}
+
+
 
 
 /*Boton ver detalles*/
 
-.boton2 a {
+.formulario .btn a {
     text-decoration: none;
     color: white;
 }
 
-.boton2 {
+.formulario .btn {
     text-decoration: none;
     padding: 5px 15px;
     border: unset;
@@ -92,9 +137,10 @@
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
     overflow: hidden;
+    margin: 0%;
 }
 
-    .boton2::before {
+    .formulario .btn::before {
         content: "";
         position: absolute;
         top: 0;
@@ -109,15 +155,15 @@
         transition: all 250ms
     }
 
-    .boton2:hover {
+    .formulario  .btn:hover {
         background-color: #1a8623;
         color: white;
     }
 
-    .boton2 a:hover {
+    .formulario .btn a:hover {
         color: white;
     }
 
-    .boton2:hover::before {
+    .formulario .btn:hover::before {
         width: 100%;
     }

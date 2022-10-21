@@ -293,6 +293,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\contacto2.jpeg" />
     <Content Include="Content\CSSEstiloArticulos\EstiloArticulos.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloArticulos\EstiloDetalleArticulo.css" />
@@ -383,6 +384,7 @@
     <Content Include="Imagenes\Visuals\carrusel2.jpg" />
     <Content Include="Imagenes\Visuals\carrusel3.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
+    <Content Include="Imagenes\Visuals\contacto2.jpeg" />
     <Content Include="Imagenes\Visuals\proveedores.jpg" />
     <Content Include="Imagenes\Visuals\reparaciones.jpg" />
     <Content Include="Imagenes\Visuals\servicios.jpg" />
@@ -405,6 +407,10 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\contacto\contact.js" />
+    <Content Include="Scripts\contacto\contact.php" />
+    <Content Include="Scripts\contacto\jqBootstrapValidation.min.js" />
+    <Content Include="Scripts\contacto\mensaje.php" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

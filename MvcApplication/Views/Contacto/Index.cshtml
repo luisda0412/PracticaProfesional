@@ -2,7 +2,16 @@
     ViewBag.Title = "Contáctenos";
 }
 
-<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloArticulos.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloContacto/EstiloContacto.css">
+
+<!--Para que funcione el correo-->
+<script src="~/Scripts/contacto/contact.js"></script>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+<!---------------------------------->
 <section class="section_header">
     <br />
     <div class="contenidoHeader">
@@ -17,7 +26,7 @@
             </h2>
         </div>
         <div class="derechoHeader">
-            <img src="~/Imagenes/Visuals/wallpaper4.png" />
+            <img src="~/Imagenes/Visuals/wallpaper14.png" />
         </div>
     </div>
     <div class="wave" style="height: 150px; overflow: hidden;">
@@ -30,8 +39,66 @@
 </section>
 <section class="cuerpo">
     <center>
-        
+        <div class="section-header text-center">
+            <h3>Contáctenos a través de nuestro correo</h3>
+        </div>
+        <div class="formulario">
+            <div class="contact">
+                <div class="container-fluid">
+                    <div class="container1">
+
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="contact-form" style="width:90%;">
+                                    <div id="success"></div>
+                                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                                        <br />
+                                        <div class="control-group">
+                                            <input type="text" class="form-control" id="name" placeholder="Nombre y apellidos"
+                                                   required="required" data-validation-required-message="Please enter your name" />
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <br />
+                                        <div class="control-group">
+                                            <input type="email" class="form-control" id="email"
+                                                   placeholder="Correo electrónico" required="required"
+                                                   data-validation-required-message="Please enter your email" />
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <br />
+                                        <div class="control-group">
+                                            <input type="text" class="form-control" id="subject" placeholder="Tema"
+                                                   required="required" data-validation-required-message="Please enter a subject" />
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <br />
+                                        <div class="control-group">
+                                            <textarea class="form-control" id="message" placeholder="Mensaje"
+                                                      required="required"
+                                                      data-validation-required-message="Por Favor ingrese su mensaje"></textarea>
+                                            <p class="help-block text-danger"></p>
+                                        </div>
+                                        <br />
+                                        <div>
+                                            <button class="btn" type="submit" id="sendMessageButton"
+                                                    onclick="">
+                                                @Html.ActionLink("Enviar mensaje", "EnviarCorreo", new { title = "Enviar mensaje escrito" })
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact End -->
+        </div>
     </center>
+    <br />
+    <br />
 </section>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryajax")
