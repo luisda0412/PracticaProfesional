@@ -29,13 +29,14 @@ namespace MvcApplication.Controllers
             {
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
+            ViewBag.DetalleIngreso = Comprita.Instancia.Items;
             return View();
         }
 
         public ActionResult Comprar(int? id)
         {
           
-            //int cantidadLibros = Comprita.Instancia.Items.Count();
+            int cantidadCompra = Comprita.Instancia.Items.Count();
             ViewBag.NotificationMessage= Comprita.Instancia.AgregarItem((int)id);
             ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Artículo agregado a la orden", SweetAlertMessageType.success);
             return RedirectToAction("IndexIngreso");
@@ -43,7 +44,7 @@ namespace MvcApplication.Controllers
         }
         public ActionResult actualizarCantidad(int idArticulo, int cantidad)
         {
-            ViewBag.DetalleOrden = Comprita.Instancia.Items;
+            ViewBag.DetalleIngreso = Comprita.Instancia.Items;
             TempData["NotiCarrito"] = Comprita.Instancia.SetItemCantidad(idArticulo, cantidad);
             TempData.Keep();
             return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);

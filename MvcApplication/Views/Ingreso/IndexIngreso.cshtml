@@ -67,9 +67,9 @@
                     <hr />
                     <span class="glyphicons glyphicons-hand-left"></span>
                     <div id="resultadoDetalle">
-                        @if (Web.ViewModel.Carrito.Instancia.Items.Count() > 0)
+                        @if (Web.ViewModel.Comprita.Instancia.Items.Count() > 0)
                         {
-                            @Html.Partial("~/Views/Ingreso/_PartialViewDetalle.cshtml", (List<Web.ViewModel.ViewModelDetalleEncabezado>)ViewBag.DetalleOrden)
+                            @Html.Partial("~/Views/Ingreso/_PartialViewDetalle.cshtml", (List<Web.ViewModel.ViewModelDetalleIngreso>)ViewBag.DetalleIngreso)
                         }
                         else
                         {
@@ -223,10 +223,10 @@
             $.ajax({
                 type: "GET",
                 dataType: 'text',
-                url: "/Venta/actualizarOrdenCantidad",
+                url: "/Ingreso/actualizarOrdenCantidad",
                 success: function (data) {
-                    $("#cantidadLibros").html('');
-                    $("#cantidadLibros").html(data);
+                    $("#cantidadCompra").html('');
+                    $("#cantidadCompra").html(data);
                 }, error: function (xhr, status, error) {
                     console.log("Error: " + error + ", No Error: " + xhr.status);
                 },
