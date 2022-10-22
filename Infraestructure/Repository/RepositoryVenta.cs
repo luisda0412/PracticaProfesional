@@ -97,5 +97,30 @@ namespace Infraestructure.Repository
             }
 
         }
+
+        public void aplicarDescuento(int idArticulo, double descuento)
+        {
+            IRepositoryArticulo repoA = new RepositoryArticulo();
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                try
+                {
+
+                    Articulo oArticulo = repoA.GetArticuloByID(idArticulo);
+                    descuento = descuento / 100;
+                    oArticulo.precio = oArticulo.precio - (oArticulo.precio * descuento);
+                    cdt.Articulo.Add(oArticulo);
+                    cdt.Entry(oArticulo).State = EntityState.Modified;
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
     }
 }
