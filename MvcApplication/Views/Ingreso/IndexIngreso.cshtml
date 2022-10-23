@@ -86,7 +86,7 @@
 
                     <section class="abajo">
                         <!-- Submit -->
-                        <button class="boton2" id="btnOrdenar" title="Registrar una nueva compra de inventario">Registrar Compra</button>
+                        <button class="boton2" id="btnOrdenar" title="Registrar una nueva compra de inventario">Registrar Ingreso</button>
                         <h5>Seleccione los artículos en la sección de abajo</h5>
                     </section>
 
@@ -142,52 +142,54 @@
                         <rect x="8" y="8" width="64" height="64"></rect>
                     </svg>
                 </div>
-                <table class="table">
-                    @{
-                        List<Infraestructure.Models.Articulo> listaArticulo = ViewBag.listaArticulos;
-                    }
+                <div class="container">
+                    <table class="table">
+                        @{
+                            List<Infraestructure.Models.Articulo> listaArticulo = ViewBag.listaArticulos;
+                        }
 
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayName("Nombre")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Precio")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Categoría")
-                            </th>
-                            <th>
-                                @Html.DisplayName("Disponibles")
-                            </th>
-                            <th><p>Opciones</p></th>
-                        </tr>
-                    </thead>
-                    @foreach (var arti in listaArticulo)
-                    {
-                        <tbody id="resultado">
+                        <thead>
                             <tr>
-                                <td>
-                                    @arti.nombre
-                                </td>
-                                <td>
-                                    &cent;@arti.precio
-                                </td>
-                                <td>
-                                    @arti.Categoria.descripcion
-                                </td>
-                                <td>
-                                    @arti.stock
-                                </td>
-                                <td class="columnabotones">
-                                    <button class="boton2">@Html.ActionLink("Comprar", "Comprar", new { id = arti.id }, new { title = "Agregar a la compra" })</button>
-                                </td>
+                                <th>
+                                    @Html.DisplayName("Nombre")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Precio")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Categoría")
+                                </th>
+                                <th>
+                                    @Html.DisplayName("Disponibles")
+                                </th>
+                                <th><p>Opciones</p></th>
                             </tr>
+                        </thead>
+                        @foreach (var arti in listaArticulo)
+                        {
+                            <tbody id="resultado">
+                                <tr>
+                                    <td>
+                                        @arti.nombre
+                                    </td>
+                                    <td>
+                                        &cent;@arti.precio
+                                    </td>
+                                    <td>
+                                        @arti.Categoria.descripcion
+                                    </td>
+                                    <td>
+                                        @arti.stock
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Comprar", "Comprar", new { id = arti.id }, new { title = "Agregar a la compra" })</button>
+                                    </td>
+                                </tr>
 
-                        </tbody>
-                    }
-                </table>
+                            </tbody>
+                        }
+                    </table>
+                </div>
             </center>
         </section>
     </center>

@@ -120,9 +120,10 @@ namespace Infraestructure.Models
 
     internal partial class IngresoMetadata
     {
+        [Display(Name = "Num. Ingreso")]
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
-        [Display(Name = "Fecha de ingreso")]
+        [Display(Name = "Fecha del ingreso")]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto Total")]
         public Nullable<double> monto_total { get; set; }

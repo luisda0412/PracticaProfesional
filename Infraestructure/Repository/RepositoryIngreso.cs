@@ -50,7 +50,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Ingreso.Include(x => x.Detalle_Ingreso).ToList<Ingreso>();
+                lista = ctx.Ingreso.Include(x => x.Detalle_Ingreso).Include(x => x.Usuario).ToList<Ingreso>();
 
             }
             return lista;

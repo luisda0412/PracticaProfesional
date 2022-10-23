@@ -293,17 +293,20 @@ main {
 
 /*TABLA---------------------------------------------------------------------*/
 
-.table {
-    width: 85%;
+.desarrollo .container {
+    height: 400px;
+    overflow-y: scroll;
+    width:84%;
+}
+.desarrollo  .table {
     box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
     text-align: center;
     border-radius: 8px;
-    
 }
 
-.table td{
-       font-weight:500;
-}
+    .desarrollo  .table td {
+        font-weight: 500;
+    }
 
 .columnabotones {
     display: flex;

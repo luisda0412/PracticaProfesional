@@ -70,7 +70,6 @@ namespace MvcApplication.Controllers
             IServiceUsuario serviceUsuario = new ServiceUsuario();
             try
             {
-
                 Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
                 if (user != null)
                 {
@@ -81,25 +80,25 @@ namespace MvcApplication.Controllers
                     foreach (var items in listaLinea)
                      {
                         //Se van llenando en BD cada linea del detalle
-                         Detalle_Ingreso linea = new Detalle_Ingreso();
-                         linea.articulo_id = (int)items.idArticulo;
-                         linea.cantidad = items.cantidad;
-                         linea.ingreso_id = ingreso.id;
-
-                         //Voy llenando el monto del ingreso con el precio de cada linea de articulo
-                         ingreso.monto_total += linea.Articulo.precio;
-                     }
-                    ingreso.usuario_id = user.id;
-
-
+                         Detalle_Ingreso detalle = new Detalle_Ingreso();
+                         detalle.articulo_id = (int)items.idArticulo;
+                         detalle.cantidad = items.cantidad;
+                        //ingreso.monto_total += linea.Articulo.precio;
+                        ingreso.monto_total = (double)Comprita.Instancia.GetTotal();
+                        ingreso.Detalle_Ingreso.Add(detalle);
+                    }
+                    ingreso.fecha = DateTime.Now;
+                    ingreso.usuario_id = Convert.ToInt32(TempData["idUser"]);
                     IServiceIngreso _ServiceIngreso = new ServiceIngreso();
-                    Ingreso ven = _ServiceIngreso.Save(ingreso);
+                    Ingreso compra = _ServiceIngreso.Save(ingreso);
+
+                    Comprita.Instancia.eliminarCarrito();
                     return RedirectToAction("IndexIngreso");
                 }
             }
             catch (Exception ex)
             {
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 return RedirectToAction("Default", "Error");
             }
             return RedirectToAction("IndexIngreso");

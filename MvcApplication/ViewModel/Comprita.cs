@@ -121,7 +121,7 @@ namespace Web.ViewModel
         public decimal GetTotal()
         {
             decimal total = 0;
-            total = GetSubTotal() + GetImpuesto();
+            total = GetSubTotal();
 
             return total;
         }
