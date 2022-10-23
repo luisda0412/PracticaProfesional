@@ -71,10 +71,10 @@ namespace MvcApplication.Controllers
 
                         //CREACION DEL NODO DE INFO DE LA FACTURA ELECTRONICA
                         XmlNode clave = xml.CreateElement("Clave");
-                        clave.InnerText = "1";
+                        clave.InnerText = "";
                         root.AppendChild(clave);
                         XmlNode codigoActividad = xml.CreateElement("Codigo_Actividad");
-                        codigoActividad.InnerText = "1";
+                        codigoActividad.InnerText = "";
                         root.AppendChild(codigoActividad);
                         XmlNode fechaEmision = xml.CreateElement("Fecha_Emision");
                         string formatted = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK");
@@ -160,10 +160,11 @@ namespace MvcApplication.Controllers
                             venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
                             venta.estado = true;
                             linea.venta_id = venta.id;
-                            linea.descuento = 0;
-                            linea.venta_id = venta.id;
-                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
                             linea.precio = items.precio;
+                            //DESCUENTO POR MAS DE 3 PRODUCTOS
+                            linea.descuento= listaLinea.Count() >= 3? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.25: linea.descuento=0;
+                            descuento2 = Convert.ToString(linea.descuento);
+                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
                             venta.Detalle_Venta.Add(linea);
 
                             descuento2 = Convert.ToString(linea.descuento);
