@@ -211,7 +211,7 @@ namespace MvcApplication.Controllers
 
 
                 //Titulo
-                Paragraph header = new Paragraph("Reporte de Artículos")
+                Paragraph header = new Paragraph("Reporte de Ingresos")
                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                    .SetFontSize(14)
                                    .SetFontColor(ColorConstants.GREEN);
@@ -222,7 +222,7 @@ namespace MvcApplication.Controllers
 
 
                 //Nombre y apellidos del usuario
-                Paragraph cadenanombre = new Paragraph("Usuario:" + user.nombre)
+                Paragraph cadenanombre = new Paragraph("Usuario: " + user.nombre)
                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                    .SetFontSize(12)
                                    .SetFontColor(ColorConstants.BLACK);
@@ -239,36 +239,26 @@ namespace MvcApplication.Controllers
                 doc.Add(logo);
                 doc.Add(header);
 
+                // Crear tabla con 4 columnas 
+                Table table = new Table(4, true);
 
-
-                // Crear tabla con 5 columnas 
-                Table table = new Table(5, true);
-
-                table.AddHeaderCell("Nombre");
-                table.AddHeaderCell("Precio");
-                table.AddHeaderCell("Disponibles");
-                table.AddHeaderCell("Descripción");
-                table.AddHeaderCell("Imagen");
+                table.AddHeaderCell("# Ingreso");
+                table.AddHeaderCell("Usuario");
+                table.AddHeaderCell("Fecha y Hora");
+                table.AddHeaderCell("Monto Total");
 
                 foreach (var item in lista)
                 {
+                    //FALTA RECORRER LOS DETALLES DE CADA INGRESO
 
                     // Agregar datos a las celdas
-                    // table.AddCell(new Paragraph(item.id));
-                   // table.AddCell(new Paragraph(item.nombre));
-                    // double preciobien =  Convert.ToDouble(String.Format("%1$,.2f", (double)item.precio);)String.Format("%1$,.2f",(double)item.precio);
-
-                  //  string preciobien = "₡" + item.precio.ToString();
-                   // table.AddCell(new Paragraph(preciobien));
-                   // table.AddCell(new Paragraph(item.stock.ToString()));
-                    // table.AddCell(new Paragraph(item.cantidadMinima.ToString()));
-                    //  table.AddCell(new Paragraph(item.cantidadMaxima.ToString()));
-                    //table.AddCell(new Paragraph(item.Categoria.descripcion));
-                    // Convierte la imagen que viene en Bytes en imagen para PDF
-                   // Image image = new Image(ImageDataFactory.Create(item.imagen));
-                    // Tamaño de la imagen
-                   // image = image.SetHeight(50).SetWidth(50);
-                   // table.AddCell(image);
+                    table.AddCell(new Paragraph(Convert.ToString(item.id)));
+                    table.AddCell(new Paragraph(item.Usuario.nombre));
+                    table.AddCell(new Paragraph(item.fecha.ToString()));
+                    string preciobien = "₡" + item.monto_total.ToString();
+                    table.AddCell(new Paragraph(preciobien));
+                 
+               
                 }
                 doc.Add(table);
 
@@ -283,7 +273,7 @@ namespace MvcApplication.Controllers
 
 
 
-                    Paragraph p = new Paragraph("Reporte del catálogo de productos");
+                    Paragraph p = new Paragraph("Reporte de registro de ingresos");
                     doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
                 }
 
@@ -291,8 +281,8 @@ namespace MvcApplication.Controllers
                 //Close document
                 doc.Close();
                 // Retorna un File
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación del reporte", "Reporte del catálogo realizado con éxito!", SweetAlertMessageType.success);
-                return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación del reporte", "Reporte de ingresos realizado con éxito!", SweetAlertMessageType.success);
+                return File(ms.ToArray(), "application/pdf", "Reporte de ingresos.pdf");
 
 
             }
