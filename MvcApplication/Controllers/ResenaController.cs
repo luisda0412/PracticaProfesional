@@ -19,7 +19,7 @@ namespace MvcApplication.Controllers
         
 
         [HttpPost]
-        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Save(Resena resena)
         {
             MemoryStream target = new MemoryStream();
@@ -44,7 +44,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Create()
         {
             return View();
