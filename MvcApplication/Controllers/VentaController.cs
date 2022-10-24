@@ -161,8 +161,8 @@ namespace MvcApplication.Controllers
                             venta.estado = true;
                             linea.venta_id = venta.id;
                             linea.precio = items.precio;
-                            //DESCUENTO POR MAS DE 3 PRODUCTOS
-                            linea.descuento= listaLinea.Count() >= 3? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.25: linea.descuento=0;
+                            //DESCUENTO POR MAS DE 3 PRODUCTOS Y QUE EL TOTAL A PAGAR SEA MAYOR A 30000
+                            linea.descuento= (listaLinea.Count() >= 3 || items.cantidad >=3) && (double?)Carrito.Instancia.GetTotal() > 30000? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.10: linea.descuento=0;
                             descuento2 = Convert.ToString(linea.descuento);
                             venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
                             venta.Detalle_Venta.Add(linea);
@@ -222,6 +222,14 @@ namespace MvcApplication.Controllers
                         XmlNode resumenFactura = xml.CreateElement("Resumen_Factura");
 
                         //ASIGNACION DE LOS ELEMENTOS DEL NODO FACTURA
+                        XmlNode servGravados = xml.CreateElement("TotalServGravados");
+                        servGravados.InnerText = Convert.ToString("");
+                        XmlNode servExento = xml.CreateElement("TotalServExento");
+                        servExento.InnerText = Convert.ToString("");
+                        XmlNode mercanciaGravada = xml.CreateElement("TotalMercanciasGravadas");
+                        mercanciaGravada.InnerText = Convert.ToString("");
+                        XmlNode mercanciaExenta = xml.CreateElement("TotalMercanciasExentas");
+                        mercanciaExenta.InnerText = Convert.ToString("");
                         XmlNode impuestoResumen = xml.CreateElement("Impuesto");
                         impuestoResumen.InnerText = Convert.ToString(venta.impuesto);
                         XmlNode descuentoResumen = xml.CreateElement("Descuento");
@@ -230,6 +238,10 @@ namespace MvcApplication.Controllers
                         montoTotalResumen.InnerText = Convert.ToString(venta.monto_total);
 
                         //ADJUNTAT LOS ELEMENTOS AL NODO FACTURA
+                        resumenFactura.AppendChild(servGravados);
+                        resumenFactura.AppendChild(servExento);
+                        resumenFactura.AppendChild(mercanciaGravada);
+                        resumenFactura.AppendChild(mercanciaExenta);
                         resumenFactura.AppendChild(impuestoResumen);
                         resumenFactura.AppendChild(descuentoResumen);
                         resumenFactura.AppendChild(montoTotalResumen);
