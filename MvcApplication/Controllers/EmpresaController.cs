@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceEmpresa _ServiceEmpresa = new ServiceEmpresa();
                 lista = _ServiceEmpresa.GetEmpresa();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -35,25 +38,25 @@ namespace MvcApplication.Controllers
 
         public ActionResult Save(Empresa emp)
         {
-            MemoryStream target = new MemoryStream();
+      
             IServiceEmpresa _ServiceEmpresa = new ServiceEmpresa();
-            try
-            {
+            if (ModelState.IsValid) {
+                try
+                {
 
-                _ServiceEmpresa.Save(emp);
+                    _ServiceEmpresa.Save(emp);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "infomación guardada con éxito", SweetAlertMessageType.success);
 
-                return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
             }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
+            return RedirectToAction("Index");
+
         }
 
         [CustomAuthorize((int)Roles.Administrador)]

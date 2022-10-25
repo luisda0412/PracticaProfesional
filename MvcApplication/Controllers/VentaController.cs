@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceVenta _ServiceVenta = new ServiceVenta();
                 lista = _ServiceVenta.GetVentas();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -191,7 +194,7 @@ namespace MvcApplication.Controllers
                             nodoDetalle.AppendChild(descuento);
                             root.AppendChild(nodoDetalle);
                         }
-
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Venta exitosa", "Una nueva venta ha sido registrada", SweetAlertMessageType.success);
                         //venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
                         //venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
                         //CREAR EL XML
@@ -276,6 +279,7 @@ namespace MvcApplication.Controllers
                         oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
 
                         oSmtpClient.Send(oMailMessage);
+
 
                         oSmtpClient.Dispose();
 

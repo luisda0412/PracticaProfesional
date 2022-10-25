@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,6 +26,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceServicio _ServiceServicio = new ServiceServicio();
                 lista = _ServiceServicio.GetServicio();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -37,23 +40,22 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Servicio_Reparacion ser)
         {
-            MemoryStream target = new MemoryStream();
-            try
-            {
+            ModelState.Remove("estado");
+            if (ModelState.IsValid) {
+                try
+                {
+                    _ServiceServicio.Save(ser);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "servicio guardado con éxito", SweetAlertMessageType.success);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
+            }
+            return RedirectToAction("Index");
 
-                _ServiceServicio.Save(ser);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
         }
 
         [CustomAuthorize((int)Roles.Administrador)]

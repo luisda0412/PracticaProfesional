@@ -169,20 +169,29 @@ namespace Infraestructure.Models
         [Display(Name = "Usuario")]
         public Nullable<int> usuario_id { get; set; }
         [Display(Name = "Cliente")]
+        [Required(ErrorMessage = "*La cédula es requerida")]
         public Nullable<int> cliente_id { get; set; }
         [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "*El numero de teléfono es requerido")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "*Solo se permiten números.")]
         public string telefono { get; set; }
         [Display(Name = "Servicio de reparación")]
+        [Required(ErrorMessage = "*El servicio a realizar es requerido")]
         public Nullable<int> servicio_reparacion_id { get; set; }
         [Display(Name = "Artículo recibido")]
+        [Required(ErrorMessage = "*La descripción es requerida")]
         public string descripcion_articulo { get; set; }
         [Display(Name = "Problema")]
+        [Required(ErrorMessage = "*El problema o fallo es requerido")]
         public string descripcion_problema { get; set; }
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto total")]
+        [Required(ErrorMessage = "*El monto aproximado es requerido")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "* Solo se permiten números.")]
         public Nullable<double> monto_total { get; set; }
         [Display(Name = "Entrega estimada")]
+        [Required(ErrorMessage = "*La entrega estimada es requerida")]
         public string entregaestimada { get; set; }
 
         [Display(Name = "Servicio de reparación")]

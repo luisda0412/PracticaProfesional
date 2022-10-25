@@ -9,7 +9,8 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.estado)
+            @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+            @isActive
         </td>
         <td class="columnabotones">
             <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>

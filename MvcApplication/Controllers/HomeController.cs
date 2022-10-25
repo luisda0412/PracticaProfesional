@@ -14,7 +14,9 @@ namespace MvcApplication.Controllers
         IServiceUsuario iserviceU = new ServiceUsuario();
         public ActionResult Index()
         {
-            return View();
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            return View();      
         }
 
         public ActionResult Loguearse()
@@ -49,18 +51,14 @@ namespace MvcApplication.Controllers
                     if (oUsuario != null)
                     {
                         Session["User"] = oUsuario;
-                        Log.Info($"Accede {oUsuario.nombre}");
-                        ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "un gusto tenerte de vuelta", SweetAlertMessageType.success);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá", SweetAlertMessageType.info);
                         return RedirectToAction("Index");
-
                     }
                     else
                     {
                         ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Ups! no se ha podido crear su sesión", "revise sus credenciales e intente de nuevo", SweetAlertMessageType.warning);
-
                     }
                 }
-
                 return View("Loguearse");
             }
             catch (Exception ex)

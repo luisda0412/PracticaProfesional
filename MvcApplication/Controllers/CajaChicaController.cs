@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
                 lista = _ServiceCaja.GetCajaChica();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -93,27 +96,26 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Caja_Chica caja)
         {
-            MemoryStream target = new MemoryStream();
+            
             IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
-            try
+            ModelState.Remove("estado");
+            if (ModelState.IsValid)
             {
-
-                caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                caja.fecha = DateTime.Now;
-                _ServiceCaja.Save(caja);
-
-                return RedirectToAction("Index");
+                try
+                {
+                    caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                    caja.fecha = DateTime.Now;
+                    _ServiceCaja.Save(caja);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "arqueo de caja guardado con éxito", SweetAlertMessageType.success);
+                }
+                catch (Exception ex)
+                {
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
             }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
+            return RedirectToAction("Index");
+
         }
 
         [CustomAuthorize((int)Roles.Administrador)]

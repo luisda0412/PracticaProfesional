@@ -12,6 +12,7 @@ using Infraestructure.Models;
 using Web.Utils;
 using System.IO;
 using Web.Security;
+using MvcApplication.Util;
 
 namespace MvcApplication.Controllers
 {
@@ -37,6 +38,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
                 lista = _ServiceReparaciones.GetReparacion();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -49,26 +52,26 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Reparaciones repa)
         {
-            MemoryStream target = new MemoryStream();
+        
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
-            try
+            ModelState.Remove("imagen");
+            if (ModelState.IsValid)
             {
-                repa.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                repa.fecha = DateTime.Now;
-                _ServiceReparaciones.Save(repa);
-
-                return RedirectToAction("Index");
+                try
+                {
+                    repa.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                    repa.fecha = DateTime.Now;
+                    _ServiceReparaciones.Save(repa);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "reparación guardada con éxito", SweetAlertMessageType.success);
+                }
+                catch (Exception ex)
+                {
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
             }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Proveedor";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
+           
+            return RedirectToAction("Index");
         }
 
         [CustomAuthorize((int)Roles.Administrador)]
