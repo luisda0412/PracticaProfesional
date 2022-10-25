@@ -19,19 +19,21 @@ namespace MvcApplication.Controllers
         IServiceArticulo _ServiceArticulo = new ServiceArticulo();
         // GET: Articulo
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult Index()
+        public ActionResult Index(string mensaje)
         {
             IEnumerable<Articulo> lista = null;
             try
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 lista = _ServiceArticulo.GetArticulo();
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Mantenimiento", "Acá podrá editar sus artículos", SweetAlertMessageType.success);
+                if (TempData["mensaje"] != null)
+                        ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
+
             return View(lista);
         }
 
@@ -79,28 +81,49 @@ namespace MvcApplication.Controllers
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Save( Articulo art, string[] proveedor, HttpPostedFileBase ImageFile)
+        public ActionResult Save( Articulo art, HttpPostedFileBase ImageFile)
          {
+ 
             MemoryStream target = new MemoryStream();
-
-            if (ModelState.IsValid)
+          
+            if(art.id != 0)
             {
-               if(art.id != 0)
+                ModelState.Remove("imagen");
+                if (ModelState.IsValid)
                 {
-
-                }                
-                if (art.imagen == null)
-                {
-                    if (ImageFile != null)
+                    if (art.imagen == null)
                     {
-                        ImageFile.InputStream.CopyTo(target);
-                        art.imagen = target.ToArray();
-                        ModelState.Remove("Imagen");
+                        if (ImageFile != null)
+                        {
+                            ImageFile.InputStream.CopyTo(target);
+                            art.imagen = target.ToArray();
+                            ModelState.Remove("Imagen");
 
+                        }
                     }
+                    _ServiceArticulo.Save(art);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Modificación registrada", "Cambios guardados", SweetAlertMessageType.success);
                 }
-                _ServiceArticulo.Save(art, proveedor);
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación registrada", "artículo creado con éxito", SweetAlertMessageType.success);              
+            }
+            else
+            {
+                ModelState.Remove("estado");
+                ModelState.Remove("imagen");
+                if (ModelState.IsValid && ImageFile!=null)
+                {
+                    if (art.imagen == null)
+                    {
+                        if (ImageFile != null)
+                        {
+                            ImageFile.InputStream.CopyTo(target);
+                            art.imagen = target.ToArray();
+                            ModelState.Remove("Imagen");
+
+                        }
+                    }
+                    _ServiceArticulo.Save(art);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Creación registrada", "artículo creado con éxito", SweetAlertMessageType.success);
+                }
             }
             return RedirectToAction("Index");
         }

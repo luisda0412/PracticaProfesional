@@ -32,6 +32,9 @@ namespace Infraestructure.Models
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
 
+        [Display(Name = "Categoría")]
+        public virtual Categoria Categoria { get; set; }
+
     }
 
     internal partial class Caja_ChicaMetadata
@@ -157,8 +160,6 @@ namespace Infraestructure.Models
         public string telefono { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
-        public virtual ICollection<Ingreso> Ingreso { get; set; }
-        public virtual ICollection<Articulo> Articulo { get; set; }
     }
 
     internal partial class ReparacionesMetadata

@@ -46,10 +46,10 @@ namespace AplicationCore.Services
             return repository.GetArticuloByProveedor(id);
         }
 
-        public void Save(Articulo articulo, string[] proveedor)
+        public void Save(Articulo articulo)
         {
             IRepositoryArticulo repository = new RepositoryArticulo();
-            repository.Save(articulo, proveedor);
+            repository.Save(articulo);
         }
     }
 }

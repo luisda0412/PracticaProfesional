@@ -9,13 +9,14 @@
     <Property Name="precio" Type="Double" />
     <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="categoria_id" Type="Int32" />
+    <Property Name="proveedor_id" Type="Int32" />
     <Property Name="stock" Type="Int32" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Categoria" Relationship="Self.Articulo_Categoria_FK" FromRole="Articulo" ToRole="Categoria" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.Articulo_Proveedor_FK" FromRole="Articulo" ToRole="Proveedor" />
     <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Articulo_FK" FromRole="Articulo" ToRole="Detalle_Ingreso" />
     <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Producto_FK" FromRole="Articulo" ToRole="Detalle_Venta" />
     <NavigationProperty Name="Resena" Relationship="Self.Resena_Articulo_FK" FromRole="Articulo" ToRole="Resena" />
-    <NavigationProperty Name="Proveedor" Relationship="Self.Proveedor_Articulo" FromRole="Articulo" ToRole="Proveedor" />
   </EntityType>
   <EntityType Name="Caja_Chica">
     <Key>
@@ -107,7 +108,7 @@
     <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="estado" Type="Boolean" />
-    <NavigationProperty Name="Articulo" Relationship="Self.Proveedor_Articulo" FromRole="Proveedor" ToRole="Articulo" />
+    <NavigationProperty Name="Articulo" Relationship="Self.Articulo_Proveedor_FK" FromRole="Proveedor" ToRole="Articulo" />
   </EntityType>
   <EntityType Name="Reparaciones">
     <Key>
@@ -214,6 +215,18 @@
       </Principal>
       <Dependent Role="Articulo">
         <PropertyRef Name="categoria_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Articulo_Proveedor_FK">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Articulo">
+        <PropertyRef Name="proveedor_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -397,10 +410,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="Proveedor_Articulo">
-    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-    <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="Registro_Inventario_VYCUZEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Articulo" EntityType="Self.Articulo" />
     <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" />
@@ -420,6 +429,10 @@
     <EntitySet Name="Venta" EntityType="Self.Venta" />
     <AssociationSet Name="Articulo_Categoria_FK" Association="Self.Articulo_Categoria_FK">
       <End Role="Categoria" EntitySet="Categoria" />
+      <End Role="Articulo" EntitySet="Articulo" />
+    </AssociationSet>
+    <AssociationSet Name="Articulo_Proveedor_FK" Association="Self.Articulo_Proveedor_FK">
+      <End Role="Proveedor" EntitySet="Proveedor" />
       <End Role="Articulo" EntitySet="Articulo" />
     </AssociationSet>
     <AssociationSet Name="Detalle_Ingreso_Articulo_FK" Association="Self.Detalle_Ingreso_Articulo_FK">
@@ -481,10 +494,6 @@
     <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Venta" EntitySet="Venta" />
-    </AssociationSet>
-    <AssociationSet Name="Proveedor_Articulo" Association="Self.Proveedor_Articulo">
-      <End Role="Proveedor" EntitySet="Proveedor" />
-      <End Role="Articulo" EntitySet="Articulo" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

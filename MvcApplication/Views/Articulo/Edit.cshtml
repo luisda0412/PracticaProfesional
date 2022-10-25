@@ -42,7 +42,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.id)
             @Html.HiddenFor(model => model.estado)
-           
+
 
             <div class="secciones">
                 <div class="seccion1">
@@ -88,13 +88,12 @@
                         </div>
                     </section>
                     <section class="cuerporight">
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.imagen, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.Label("Busque la imagen", htmlAttributes: new { @class = "control-label col-md-2" })
                             <br />
                             <br />
                             <div class="col-md-10">
-                                <input type="file" name="ImageFile" required />
+                                <input type="file" name="ImageFile" required/>
                             </div>
                         </div>
 
@@ -102,23 +101,24 @@
                             @Html.Label("Imagen registrada", htmlAttributes: new { @class = "control-label col-md-2" })
                             <br />
                             <br />
+
                             <div class="col-md-10">
-                                <img style="max-width:150px; max-height:250px" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img" alt="Producto @Html.DisplayNameFor(model => model.nombre)">
+                                <img style="max-width:150px; max-height:250px" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.imagen)" role="img">
                             </div>
                         </div>
-
                     </section>
                 </div>
+                <br />
                 <div class="seccion2">
                     <div class="form-group2">
-
-                        <input type="submit" value="Guardar Artículo" class="btn" title="Guardar modificaciones" />
+                        <input type="submit" value="Guardar Cambios" class="btn" title="Guardar modificaciones" />
                         <button class="btn">@Html.ActionLink("<- Volver Atrás", "Index", new { title = "Regresar a la lista" })</button>
                     </div>
                 </div>
                 <br />
             </div>
         }
+
         <br />
         <br />
     </center>

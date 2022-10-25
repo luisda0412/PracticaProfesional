@@ -12,7 +12,7 @@ namespace Infraestructure.Repository
         IEnumerable<Articulo> GetArticulo();
         Articulo GetArticuloByID(int id);
         IEnumerable<Articulo> GetProductoByNombre(String nombre);
-        void Save(Articulo articulo, string[] proveedor);
+        void Save(Articulo articulo);
         IEnumerable<Articulo> GetArticuloByProveedor(long id);
         void Eliminar(long id);
         void actualizarCantidad(int id, int cantidad);

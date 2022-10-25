@@ -50,7 +50,6 @@ namespace Infraestructure.Repository
 
                     //Articulo art = cdt.Articulo.Where(a => a.id == id).Include(x => x.Proveedor).Include(x => x.Categoria).FirstOrDefault();
                     Articulo art = cdt.Articulo.Where(a => a.id == id).Include("Proveedor").Include("Categoria").FirstOrDefault();
-                    art.Proveedor.Clear();
                     cdt.Articulo.Remove(art);                 
                     cdt.SaveChanges();
 
@@ -108,7 +107,7 @@ namespace Infraestructure.Repository
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 lista = ctx.Articulo.Include(p => p.Proveedor).
-                Where(p => p.Proveedor.Any(o => o.id == id))
+                Where(p => p.proveedor_id == id)
                 .ToList();
             }
             return lista;
@@ -126,11 +125,11 @@ namespace Infraestructure.Repository
             return lista;
         }
 
-        public void Save(Articulo articulo, string[] proveedor)
+        public void Save(Articulo articulo)
         {
             
             Articulo articuloExist = GetArticuloByID(articulo.id);
-            Proveedor oPoveedor;
+
 
                 using (MyContext cdt = new MyContext())
                 {
@@ -140,10 +139,6 @@ namespace Infraestructure.Repository
                     {
                         if (articuloExist == null)
                         {
-
-                            oPoveedor = repoP.GetProveedorByID(int.Parse(proveedor[0]));
-                            cdt.Proveedor.Attach(oPoveedor);
-                            articulo.Proveedor.Add(oPoveedor);
                             articulo.estado = true;
                             cdt.Articulo.Add(articulo);
                             cdt.SaveChanges();
@@ -151,12 +146,6 @@ namespace Infraestructure.Repository
                         else
                         {
                             cdt.Articulo.Add(articulo);
-                            cdt.Entry(articulo).State = EntityState.Modified;
-
-                            var proveedoresLista = new HashSet<string>(proveedor);
-                            cdt.Entry(articulo).Collection(p => p.Proveedor).Load();
-                            var nuevoProveedorLista = cdt.Proveedor.Where(x => proveedoresLista.Contains(x.id.ToString())).ToList();
-                            articulo.Proveedor = nuevoProveedorLista;
                             cdt.Entry(articulo).State = EntityState.Modified;
                             cdt.SaveChanges();
 

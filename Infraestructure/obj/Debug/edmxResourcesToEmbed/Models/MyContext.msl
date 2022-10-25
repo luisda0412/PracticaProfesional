@@ -9,6 +9,7 @@
           <ScalarProperty Name="precio" ColumnName="precio" />
           <ScalarProperty Name="imagen" ColumnName="imagen" />
           <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+          <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
           <ScalarProperty Name="stock" ColumnName="stock" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
@@ -187,13 +188,5 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Proveedor_Articulo" TypeName="Registro_Inventario_VYCUZModel.Proveedor_Articulo" StoreEntitySet="Proveedor_Articulo">
-      <EndProperty Name="Proveedor">
-        <ScalarProperty Name="id" ColumnName="idProveedor" />
-      </EndProperty>
-      <EndProperty Name="Articulo">
-        <ScalarProperty Name="id" ColumnName="idArticulo" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
