@@ -106,8 +106,8 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Articulo.Include(p => p.Proveedor).
-                Where(p => p.proveedor_id == id)
+                lista = ctx.Articulo.
+                Where(p => p.categoria_id== id)
                 .ToList();
             }
             return lista;

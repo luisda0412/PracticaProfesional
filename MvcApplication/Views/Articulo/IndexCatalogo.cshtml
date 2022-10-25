@@ -33,11 +33,11 @@
     <center>
         <div class="elementos">
             <div class="cuerpoizquierdo">
-                <h2 class="my-4">Buscar por proveedor</h2>
+                <h2 class="my-4">Buscar por categoría</h2>
                 <div class="list-group">
-                    @foreach (var proveedor in (List<Infraestructure.Models.Proveedor>)ViewBag.listaProveedores)
+                    @foreach (var proveedor in (List<Infraestructure.Models.Categoria>)ViewBag.listaCategorias)
                     {
-                        @Ajax.ActionLink(proveedor.descripcion, "ArticulosxProveedor", new { id = proveedor.id},//Parámetros para la acción
+                        @Ajax.ActionLink(proveedor.nombre, "ArticulosxProveedor", new { id = proveedor.id},//Parámetros para la acción
                        new AjaxOptions
                        {
                            UpdateTargetId = "resultado",

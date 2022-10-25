@@ -243,8 +243,8 @@ namespace MvcApplication.Controllers
                 lista = _ServiceArticulo.GetArticulo();
 
                 //enviar la lista de productos al viewBag
-                IServiceProveedor _ServiceProveedor = new ServiceProveedor();
-                ViewBag.listaProveedores = _ServiceProveedor.GetProveedor();
+                IServiceCategoria _ServiceCategoria = new ServiceCategoria();
+                ViewBag.listaCategorias = _ServiceCategoria.GetCategoria();
             }
             catch (Exception e)
             {

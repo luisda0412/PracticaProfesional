@@ -44,15 +44,7 @@
                         <b>Precio:</b> &cent;@Html.DisplayFor(model => model.precio)<br />
                         <b>@Html.DisplayNameFor(model => model.stock):</b> @Html.DisplayFor(model => model.stock)<br />
                         <b>@Html.DisplayNameFor(model => model.Categoria.descripcion):</b> @Html.DisplayFor(model => model.Categoria.descripcion)<br />
-                      
-
-                        <b>@Html.DisplayNameFor(model => model.Proveedor):</b>
-                        <ul>
-                            @foreach (var c in Model.Proveedor)
-                            {
-                                <li>@c.descripcion</li>
-                            }
-                        </ul>
+                        <b>@Html.DisplayNameFor(model => model.Proveedor):</b> @Html.DisplayFor(model => model.Proveedor.descripcion)<br />
                     </p>
                 </div>
             </div>
