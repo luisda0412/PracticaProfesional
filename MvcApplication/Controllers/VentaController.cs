@@ -272,12 +272,12 @@ namespace MvcApplication.Controllers
                         //ENVIAR EL CORREO
 
                         string urlDomain = "https://localhost:3000/";
-                        string EmailOrigen = "dumbmail130@gmail.com";
-                        string Contraseña = "vhowlqsgdymyxyho";
+                        string EmailOrigen = "soportevycuz@gmail.com";
+                        string Contraseña = "ecfykdmojjjlpfcn";
                         string url = urlDomain + "/Usuario/Recuperacion/?token=";
                         MailMessage oMailMessage = new MailMessage(EmailOrigen, user.correo_electronico, "Compra exitosa",
                             "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
-                        oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "ejemplo2.xml"));
+                        oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
                         oMailMessage.IsBodyHtml = true;
 
                         SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
