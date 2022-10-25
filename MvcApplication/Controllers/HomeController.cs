@@ -56,7 +56,6 @@ namespace MvcApplication.Controllers
                     }
                     else
                     {
-                        Log.Warn($"{usuario.correo_electronico} se intentó conectar  y falló");
                         ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Ups! no se ha podido crear su sesión", "revise sus credenciales e intente de nuevo", SweetAlertMessageType.warning);
 
                     }
@@ -66,11 +65,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception ex)
             {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                // Pasar el Error a la página que lo muestra
-                TempData["Message"] = ex.Message;
-                TempData.Keep();
+                TempData["Message"] = ex.Message;         
                 return RedirectToAction("Default", "Error");
             }
         }

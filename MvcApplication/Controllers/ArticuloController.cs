@@ -83,21 +83,25 @@ namespace MvcApplication.Controllers
          {
             MemoryStream target = new MemoryStream();
 
-            if (art.imagen == null)
+            if (ModelState.IsValid)
             {
-                if (ImageFile != null)
+               if(art.id != 0)
                 {
-                    ImageFile.InputStream.CopyTo(target);
-                    art.imagen = target.ToArray();
-                    ModelState.Remove("Imagen");
 
+                }                
+                if (art.imagen == null)
+                {
+                    if (ImageFile != null)
+                    {
+                        ImageFile.InputStream.CopyTo(target);
+                        art.imagen = target.ToArray();
+                        ModelState.Remove("Imagen");
+
+                    }
                 }
-
+                _ServiceArticulo.Save(art, proveedor);
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación registrada", "artículo creado con éxito", SweetAlertMessageType.success);              
             }
-
-            
-            _ServiceArticulo.Save(art, proveedor);
-            ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación registrada", "artículo creado con éxito", SweetAlertMessageType.success);
             return RedirectToAction("Index");
         }
 

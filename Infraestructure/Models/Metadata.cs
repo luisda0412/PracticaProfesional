@@ -21,13 +21,17 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*La imagen es un campo obligatorio")]
         public byte[] imagen { get; set; }
         [Display(Name = "Categoría")]
-        [Required(ErrorMessage = "*La categoría es un campo obligatorio")]
+        [Required(ErrorMessage = "*Necesita seleccionar la categoría")]
         public Nullable<int> categoria_id { get; set; }
+        [Display(Name = "Categoría")]
+        [Required(ErrorMessage = "*Necesita seleccionar el proveedor")]
+        public Nullable<int> proveedor_id { get; set; }
         [Display(Name = "Stock")]
         [Required(ErrorMessage = "*El stock es un campo obligatorio")]
         public Nullable<int> stock { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
+
     }
 
     internal partial class Caja_ChicaMetadata
