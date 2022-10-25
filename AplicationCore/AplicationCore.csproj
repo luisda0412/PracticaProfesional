@@ -46,6 +46,7 @@
     <Compile Include="Services\IServiceCajaChica.cs" />
     <Compile Include="Services\IServiceCategoria.cs" />
     <Compile Include="Services\IServiceEmpresa.cs" />
+    <Compile Include="Services\IServiceFactura.cs" />
     <Compile Include="Services\IServiceIngreso.cs" />
     <Compile Include="Services\IServiceProveedor.cs" />
     <Compile Include="Services\IServiceReparaciones.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Services\ServiceCajaChica.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServiceEmpresa.cs" />
+    <Compile Include="Services\ServiceFactura.cs" />
     <Compile Include="Services\ServiceIngreso.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceReparaciones.cs" />

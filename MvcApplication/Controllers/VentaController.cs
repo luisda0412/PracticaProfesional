@@ -48,6 +48,7 @@ namespace MvcApplication.Controllers
                 }
                 else
                 {
+                    Facturas factura= new Facturas();
                     Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
                     venta.nombre_cliente = user.nombre;
                     if (venta.nombre_cliente != null)
@@ -204,6 +205,13 @@ namespace MvcApplication.Controllers
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
 
+                        //FACTURA
+                        factura.venta_id = venta.id;
+                        factura.empresa_id = 1;
+                        factura.tipoFactura = user.rol_id == 1 || user.rol_id == 2 ? factura.tipoFactura = true : factura.tipoFactura = false;
+
+                        IServiceFactura serviceFactura = new ServiceFactura();
+                        Facturas fac = serviceFactura.Save(factura);
                         //CREACION DEL NODO DETALLE VENTA
                         XmlNode nodoVenta = xml.CreateElement("Venta");
 
