@@ -174,7 +174,7 @@
     <Key>
       <PropertyRef Name="id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id" Type="Int32" Nullable="false" />
     <Property Name="clave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

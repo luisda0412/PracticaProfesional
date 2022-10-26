@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Infraestructure.Models.Reparaciones>
+
+@{
+    ViewBag.Title = "IndexUsuario";
+}
+
+<h2>IndexUsuario</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_articulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_articulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

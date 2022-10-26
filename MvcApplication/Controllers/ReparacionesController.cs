@@ -49,6 +49,24 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        public ActionResult IndexUsuario()
+        {
+            IEnumerable<Reparaciones> lista = null;
+            try
+            {
+                IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
+                int idUsuario = Convert.ToInt32(TempData["idUser"]);
+                lista = _ServiceReparaciones.GetReparacionPorUsuario(idUsuario);
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
+        }
+
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Reparaciones repa)

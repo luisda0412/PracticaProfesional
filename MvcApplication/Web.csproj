@@ -612,6 +612,7 @@
     <Content Include="Views\Ingreso\_PartialViewDetalle.cshtml" />
     <Content Include="Views\Contacto\Index.cshtml" />
     <Content Include="Views\Reportes\IngresosLista.cshtml" />
+    <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

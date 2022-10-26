@@ -85,6 +85,32 @@ namespace Infraestructure.Repository
             return lista;
         }
 
+        public IEnumerable<Reparaciones> GetReparacionPorUsuario(int idUsuario)
+        {
+            try
+            {
+                IEnumerable<Reparaciones> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Reparaciones.Where(x=> x.cliente_id==idUsuario).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).ToList<Reparaciones>();
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
+                throw new Exception(mensaje);
+            }
+            catch (Exception e)
+            {
+                string mensaje = "";
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
+                throw new Exception(mensaje);
+            }
+        }
+
         public void Save(Reparaciones reparacion)
         {
             Reparaciones reparacionExist = GetReparacionByID(reparacion.id);

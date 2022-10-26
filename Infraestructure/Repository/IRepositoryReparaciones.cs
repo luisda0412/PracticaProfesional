@@ -14,5 +14,6 @@ namespace Infraestructure.Repository
         IEnumerable<Reparaciones> GetReparacionByNombre(String nombre);
         void Save(Reparaciones reparacion);
         void Eliminar(int id);
+        IEnumerable<Reparaciones> GetReparacionPorUsuario(int idUsuario);
     }
 }

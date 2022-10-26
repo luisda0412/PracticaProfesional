@@ -34,6 +34,12 @@ namespace AplicationCore.Services
             return repository.GetReparacionByNombre(nombre);
         }
 
+        public IEnumerable<Reparaciones> GetReparacionPorUsuario(int idUsuario)
+        {
+            IRepositoryReparaciones repository = new RepositoryReparaciones();
+            return repository.GetReparacionPorUsuario(idUsuario);
+        }
+
         public void Save(Reparaciones reparacion)
         {
             IRepositoryReparaciones repository = new RepositoryReparaciones();
