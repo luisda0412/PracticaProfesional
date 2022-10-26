@@ -43,6 +43,7 @@ namespace Infraestructure.Models
         public int id { get; set; }
         [Display(Name = "Fecha")]
         [Required(ErrorMessage = "*La fecha es un campo obligatorio")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto Efectivo")]
         [Required(ErrorMessage = "*El monto efectivo es un campo obligatorio")]
@@ -185,6 +186,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*El problema o fallo es requerido")]
         public string descripcion_problema { get; set; }
         [Display(Name = "Fecha")]
+        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto total")]
         [Required(ErrorMessage = "*El monto aproximado es requerido")]

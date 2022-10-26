@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="~/Content/CSSEstiloLayout/EstiloLayout.css">
+    <script src="~/Scripts/main/main.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark badge-primary">
@@ -53,6 +54,9 @@
 
                             <li class="nav-item">
                                 @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Reparación", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
                             </li>
                         }
                     }
@@ -130,7 +134,7 @@
     <div>
         <!--class="container body-content"-->
         @RenderBody()
-     
+
         <footer>
             <section class="container-fluid sec-footer">
                 <div class="container">
@@ -162,7 +166,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <img src="~/Imagenes/Iconos/ubi.png" alt="Beyond Technology" class="mb-3">
-                                                <span>City Mall</span>
+                                                <span>City Mall, Radial Francisco J.Orlich</span>
                                             </div><!--.col-->
                                         </div><!--.row-->
                                         <div class="row">
@@ -188,6 +192,8 @@
                 </div>
             </section>
         </footer>
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up">Hola</i></a>
     </div>
 
 

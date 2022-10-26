@@ -18,6 +18,7 @@ namespace MvcApplication.Controllers
 {
     public class ReparacionesController : Controller
     {
+
         //Para guardadr la reparacion que se clickee
         int? codigo = 0;
 
@@ -152,27 +153,17 @@ namespace MvcApplication.Controllers
 
         public ActionResult desabilitar(long id)
         {
-            using (MyContext cdt = new MyContext())
-            {
-                cdt.Configuration.LazyLoadingEnabled = false;
-
+            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();       
                 try
                 {
-                    Reparaciones repa = cdt.Reparaciones.Where(x => x.id == id).FirstOrDefault();
-                    repa.estado = !repa.estado;
-                    cdt.Reparaciones.Add(repa);
-                    cdt.Entry(repa).State = EntityState.Modified;
-                    cdt.SaveChanges();
-                    return RedirectToAction("Index");
-
+                    _ServiceReparaciones.Eliminar((int)id);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reparación eliminada", "Datos eliminados de la base", SweetAlertMessageType.success);                  
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                    throw;
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 }
-            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult buscarReparacionxCedula(string filtro)

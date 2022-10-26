@@ -1,6 +1,7 @@
 ﻿body{
     margin: auto;
-    padding:0%;  
+    padding:0%; 
+    background-color:whitesmoke;
 }
 
 /*NAV-----------------------------------------------------*/
@@ -80,6 +81,33 @@ nav li {
             color:red;
         }
 
+.back-to-top {
+    position: fixed;
+    display: none;
+    background: #1a8623;
+    width: 44px;
+    height: 44px;
+    text-align: center;
+    line-height: 1;
+    font-size: 22px;
+    right: 15px;
+    bottom: 15px;
+    transition: background 0.5s;
+    z-index: 9;
+}
+
+    .back-to-top:hover {
+        background: #000000;
+    }
+
+        .back-to-top:hover i {
+            color: #000000;
+        }
+
+    .back-to-top i {
+        color: #ffffff;
+        padding-top: 10px;
+    }
 
 /*------------------*/
 .snip1472 {
@@ -130,7 +158,7 @@ nav li {
         .snip1472:hover:after,
         .snip1472:active:after,
         .snip1472.hover:after {
-            border-color: #c0392b transparent #c0392b transparent;
+            border-color: #1a8623 transparent #1a8623 transparent;
             -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
         }

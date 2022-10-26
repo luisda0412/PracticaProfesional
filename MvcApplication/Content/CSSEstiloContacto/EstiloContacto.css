@@ -65,6 +65,17 @@ main {
             transform: scale(0.9);
         }
 /*Cuerpo---------------------------------------------*/
+
+.titulo {
+    background-color: #1a8623;
+    color: white;
+    font-family: 'Agency FB';
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 45%;
+    margin:auto;
+}
 .cuerpo {
     background-color: white;
     margin: auto;

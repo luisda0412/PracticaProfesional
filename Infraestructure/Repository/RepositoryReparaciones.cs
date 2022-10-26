@@ -14,7 +14,26 @@ namespace Infraestructure.Repository
     {
         public void Eliminar(int id)
         {
-            throw new NotImplementedException();
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+
+
+                    Reparaciones repo = cdt.Reparaciones.Find(id);
+                    cdt.Reparaciones.Remove(repo);
+                    cdt.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
         }
 
         public IEnumerable<Reparaciones> GetReparacion()

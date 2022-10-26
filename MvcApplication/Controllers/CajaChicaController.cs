@@ -43,16 +43,12 @@ namespace MvcApplication.Controllers
             {
 
                 _ServiceCaja.Eliminar((int)id);
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Arqueo eliminado", "Datos eliminados del sistema", SweetAlertMessageType.success);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Servicio_Reparacion";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
         }

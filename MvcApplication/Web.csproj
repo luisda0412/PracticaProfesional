@@ -339,6 +339,7 @@
     <Content Include="Content\CSSEstiloVentas\EstiloMovimientoVenta.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\fondo2.jpg" />
+    <Content Include="Content\pic4.png" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2.css" />
     <Content Include="favicon.ico" />
@@ -385,6 +386,7 @@
     <Content Include="Imagenes\Visuals\carrusel3.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
     <Content Include="Imagenes\Visuals\contacto2.jpeg" />
+    <Content Include="Imagenes\Visuals\pic.jpg" />
     <Content Include="Imagenes\Visuals\proveedores.jpg" />
     <Content Include="Imagenes\Visuals\reparaciones.jpg" />
     <Content Include="Imagenes\Visuals\servicios.jpg" />
@@ -436,6 +438,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
