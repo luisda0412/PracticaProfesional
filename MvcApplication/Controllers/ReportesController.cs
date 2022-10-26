@@ -20,6 +20,10 @@ using System.Web.Mvc;
 using Web.Security;
 using Web.Utils;
 using System.Globalization;
+using iText.IO.Font;
+using iText.Layout.Borders;
+using iText.Kernel.Events;
+using iText.Kernel.Pdf.Canvas;
 
 namespace MvcApplication.Controllers
 {
@@ -33,7 +37,6 @@ namespace MvcApplication.Controllers
             IEnumerable<Articulo> lista = null;
             try
             {
-
                 IServiceArticulo _ServiceProducto = new ServiceArticulo();
                 lista = _ServiceProducto.GetArticulo();
                 return View(lista);
@@ -117,15 +120,10 @@ namespace MvcApplication.Controllers
                 {
 
                     // Agregar datos a las celdas
-                    // table.AddCell(new Paragraph(item.id));
                     table.AddCell(new Paragraph(item.nombre));
-                    // double preciobien =  Convert.ToDouble(String.Format("%1$,.2f", (double)item.precio);)String.Format("%1$,.2f",(double)item.precio);
-
                     string preciobien = "₡" + item.precio.ToString();
                     table.AddCell(new Paragraph(preciobien));
                     table.AddCell(new Paragraph(item.stock.ToString()));
-                    // table.AddCell(new Paragraph(item.cantidadMinima.ToString()));
-                    //  table.AddCell(new Paragraph(item.cantidadMaxima.ToString()));
                     table.AddCell(new Paragraph(item.Categoria.descripcion));
                     // Convierte la imagen que viene en Bytes en imagen para PDF
                     Image image = new Image(ImageDataFactory.Create(item.imagen));
@@ -165,6 +163,217 @@ namespace MvcApplication.Controllers
 
         }
 
+
+        public ActionResult CreatePdfPrueba()
+        {
+            Registro_Inventario_VYCUZEntities dbArticulos = new Registro_Inventario_VYCUZEntities();
+
+            //Ejemplos IText7 https://kb.itextpdf.com/home/it7kb/examples
+            IEnumerable<Articulo> listaarticulos = null;
+            Usuario user = null;
+            try
+            {
+                // Extraer  informacion
+                IServiceArticulo _ServiceArticulo = new ServiceArticulo();
+                listaarticulos = _ServiceArticulo.GetArticulo();
+
+                //Extraer Usuario
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                int iduser = Convert.ToInt32(TempData["idUser"]);
+                user = _ServiceUsuario.GetUsuarioByID(iduser);
+
+                // Crear stream para almacenar en memoria el reporte 
+                MemoryStream ms = new MemoryStream();
+                //Initialize writer
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 35,70,35);
+
+                //Imagen de la empresa
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
+                logo = logo.SetHeight(50).SetWidth(120);
+
+                //Eventos de pie y encabezado de pagina
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
+                pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
+
+                Table table = new Table(1).UseAllAvailableWidth();
+                Cell cell = new Cell().Add(new Paragraph("Reporte de Artículos").SetFontSize(14))
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetBorder(Border.NO_BORDER);
+                table.AddCell(cell);
+               
+                cell = new Cell().Add(new Paragraph("Artículos en existencia"))
+                      .SetTextAlignment(TextAlignment.CENTER)
+                      .SetBorder(Border.NO_BORDER); ;
+                table.AddCell(cell);
+
+                doc.Add(table);
+
+
+                Style styleCell = new Style()
+                    .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
+
+                Table _table = new Table(5).UseAllAvailableWidth();
+                //2 filas y 1 celda
+                Cell _cell = new Cell(2,1).Add(new Paragraph("#"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell(1, 3).Add(new Paragraph("Artículo"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell(2, 1).Add(new Paragraph("Unidades en existencia"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell)); 
+                _cell = new Cell().Add(new Paragraph("Nombre"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Precio Unitario"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Imagen"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+
+                List<Articulo> model = dbArticulos.Articulo.Where(t => t.stock > 0).ToList();
+
+                int x = 0;
+                foreach (var item in model)
+                { 
+                    x++;
+                    _cell = new Cell().Add(new Paragraph(x.ToString()));
+                    _table.AddCell(_cell.SetBackgroundColor(ColorConstants.GREEN));
+                    _cell = new Cell().Add(new Paragraph(item.nombre)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph("₡"+item.precio)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);                   
+                    Image image = new Image(ImageDataFactory.Create(item.imagen)).SetTextAlignment(TextAlignment.CENTER);
+                    // Tamaño de la imagen
+                    image = image.SetHeight(50).SetWidth(50).SetTextAlignment(TextAlignment.CENTER);                  
+                    _cell = new Cell().Add(image);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.stock.ToString())).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                }
+
+                doc.Add(_table);
+                doc.Close();
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+                ms.Position = 0;
+
+                //return new FileStreamResult(ms, "application/pdf");
+
+                return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Log.Error(ex, MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
+        public class HeaderEventHandler1 : IEventHandler
+        {
+            Image Img;
+            Usuario User;
+            public HeaderEventHandler1(Image img, Usuario user)
+            {
+                Img = img;
+                User = user;
+            }
+            public void HandleEvent(Event @event)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+
+                PdfCanvas canvas1 = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+                Rectangle rootArea = new Rectangle(35, page.GetPageSize().GetTop() - 75, page.GetPageSize().GetWidth()-72, 60);
+                new Canvas(canvas1, pdfDoc, rootArea)
+                  .Add(getTable(docEvent, User));
+
+
+            }
+
+            //Eventos para el pdf
+            public Table getTable(PdfDocumentEvent docEvent, Usuario user)
+            {
+                float[] cellWidth = { 20f, 80f };
+                Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth();
+                //tableEvent.SetWidth (UnitValue. CreatePercentValue(100f));
+
+                    Style styleCell = new Style()
+                    .SetBorder(Border.NO_BORDER);
+
+                Style styleText = new Style()
+                .SetTextAlignment(TextAlignment.RIGHT).SetFontSize(10f);
+
+                Cell cell = new Cell().Add(Img.SetAutoScale(true));
+               
+                tableEvent.AddCell(cell.AddStyle(styleCell)
+                .SetTextAlignment(TextAlignment.LEFT)); PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
+
+                cell = new Cell()
+                .Add(new Paragraph("Reporte del día\n").SetFont(bold))
+                    .Add(new Paragraph("Inventario del local City Mall\n").SetFont(bold))
+                    .Add(new Paragraph("Fecha de emisión: " + DateTime.Now.ToShortDateString()))
+                    .Add(new Paragraph("Usuario: " + user.nombre))
+                    .AddStyle(styleText).AddStyle(styleCell);
+                   
+
+                tableEvent.AddCell(cell);
+
+                return tableEvent;
+            }
+        }
+
+
+        public class FooterEventHandler1 : IEventHandler
+        {
+            public void HandleEvent(Event @event)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
+                PdfDocument pdfDoc = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+
+                PdfCanvas canvas1 = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
+                Rectangle rootArea = new Rectangle(36, 20, page.GetPageSize().GetWidth() - 70, 50);
+                new Canvas(canvas1, pdfDoc, rootArea)
+                  .Add(getTable(docEvent));
+
+            }
+            //Eventos para el pdf
+            public Table getTable(PdfDocumentEvent docEvent)
+            {
+                float[] cellWidth = { 92f, 8f }; 
+                Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth(); 
+                //tableEvent.SetWidth (UnitValue. CreatePercentValue(100f));
+
+                PdfPage page = docEvent.GetPage();
+                int pageNum = docEvent.GetDocument().GetPageNumber(page);
+
+                Style styleCell = new Style()
+                    .SetPadding(5).
+                    SetBorder(Border.NO_BORDER).
+                    SetBorderTop(new SolidBorder(ColorConstants.BLACK, 2));
+                
+                Cell cell = new Cell().Add(new Paragraph(DateTime.Now.ToLongDateString()));
+                tableEvent. AddCell(cell
+                .AddStyle(styleCell).SetTextAlignment(TextAlignment.RIGHT)
+                .SetFontColor(ColorConstants.LIGHT_GRAY)); 
+               
+                cell = new Cell().Add(new Paragraph(pageNum.ToString()));
+  
+                tableEvent.AddCell(cell.AddStyle(styleCell)
+                .SetBackgroundColor(ColorConstants.BLACK)
+                .SetFontColor(ColorConstants.WHITE)
+                .SetTextAlignment(TextAlignment.CENTER));
+
+                return tableEvent;
+            }
+
+        }
 
         //Reporte de compras/ingresos
 
