@@ -116,16 +116,6 @@
 
                         </div>
                     </li>
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <li class="ml-auto">@Html.ActionLink("Logout", "Logout", "Account", new { @class = "nav-link" })</li>
-                    }
-                    else
-                    {
-                        <li class="ml-auto">@Html.ActionLink("Login GOOGLE", "Login", "Account", new { @class = "nav-link" })</li>
-                    }
-                    <!--Para el Login VYCUZ-->
                 </ul>
 
             </div>

@@ -70,10 +70,13 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.clave, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.clave, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.PasswordFor(model => model.clave, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
                             </div>
                         </div>
+                    
+                    </section>
+                    <section class="cuerporight">
                         <div class="form-group">
                             @Html.LabelFor(model => model.correo_electronico, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -81,9 +84,6 @@
                                 @Html.ValidationMessageFor(model => model.correo_electronico, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
-                    </section>
-                    <section class="cuerporight">
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })

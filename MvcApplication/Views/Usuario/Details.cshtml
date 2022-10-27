@@ -42,13 +42,13 @@
                 </center>
                 <div class="texto">
                     <p class="">
-
+                        <b>@Html.DisplayNameFor(model => model.id):</b> @Html.DisplayFor(model => model.id)<br />
                         <b>@Html.DisplayNameFor(model => model.nombre):</b> @Html.DisplayFor(model => model.nombre)<br />
                         <b>@Html.DisplayNameFor(model => model.apellidos):</b> @Html.DisplayFor(model => model.apellidos)<br />
                         <b>@Html.DisplayNameFor(model => model.correo_electronico):</b> @Html.DisplayFor(model => model.correo_electronico)<br />
                         <b>@Html.DisplayNameFor(model => model.telefono):</b> @Html.DisplayFor(model => model.telefono)<br />
                         @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
-                        <span><b>Estado:</b> @isActive</span>
+                        <span><b>Estado:</b> @isActive</span><br />
                         <b>@Html.DisplayNameFor(model => model.Rol):</b> @Html.DisplayFor(model => model.Rol.tipo)<br />
                     </p>
                 </div>

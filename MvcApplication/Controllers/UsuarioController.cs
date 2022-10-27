@@ -1,5 +1,6 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -26,6 +27,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 lista = _ServiceUsuario.GetUsuario();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {
@@ -40,24 +43,23 @@ namespace MvcApplication.Controllers
         {
             MemoryStream target = new MemoryStream();
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-            try
+            ModelState.Remove("estado");
+            if (ModelState.IsValid)
             {
+                try
+                {
+                    Usuario oUser = _ServiceUsuario.Save(user);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "usuario guardado con éxito", SweetAlertMessageType.success);
 
-             
-                Usuario oUser = _ServiceUsuario.Save(user);
-              
-                return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {                  
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
             }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
+            return RedirectToAction("Index");
+
         }
 
         [CustomAuthorize((int)Roles.Administrador)]
