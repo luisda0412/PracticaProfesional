@@ -137,7 +137,7 @@ CONSTRAINT Venta_PK PRIMARY KEY (id)
 );
 
 CREATE TABLE Usuario(
-id int Identity(1,1) NOT NULL,
+id int NOT NULL,
 clave nvarchar(max),
 nombre nvarchar(50),
 apellidos nvarchar(50),
@@ -350,9 +350,9 @@ INSERT INTO Rol VALUES('Empleado', 1)
 
 --INSERT A USUARIO
 
-INSERT INTO Usuario VALUES('Admin2022@', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1, '')
-INSERT INTO Usuario VALUES('Kenethmcr16@', 'Keneth', 'Miranda Chaves', 'kennethmiranda56@gmail.com', 85878912, 2, 1, '')
-INSERT INTO Usuario VALUES('LuisDa12$', 'Luis', 'Cordero Valverde', 'corderoluisdavid@gmail.com', 87529425, 2, 1, '')
+INSERT INTO Usuario VALUES(1,'Admin2022@', 'Administrador', 'Admin', 'admin@gmail.com', 88888888, 1, 1, '')
+INSERT INTO Usuario VALUES(208130675, 'Kenethmcr16@', 'Keneth', 'Miranda Chaves', 'kennethmiranda56@gmail.com', 85878912, 2, 1, '')
+INSERT INTO Usuario VALUES(208120070,'LuisDa12$', 'Luis', 'Cordero Valverde', 'corderoluisdavid@gmail.com', 87529425, 2, 1, '')
 
 
 
@@ -375,9 +375,9 @@ INSERT INTO Caja_Chica VALUES(GETDATE(),110000,80000,30000,1,1,1)
 INSERT INTO Caja_Chica VALUES(GETDATE(),90000,70000,20000,1,1,1)
 
 --INSERT A VENTA
-INSERT INTO Venta VALUES(2,'Keneth', GETDATE() ,22600,2600,1,1)
-INSERT INTO Venta VALUES(2,'Keneth', GETDATE() ,18080,2080,0,1)
-INSERT INTO Venta VALUES(2,'Keneth', GETDATE() ,19340,2340,0,1)
+INSERT INTO Venta VALUES(208130675,'Keneth', GETDATE() ,22600,2600,1,1)
+INSERT INTO Venta VALUES(208130675,'Keneth', GETDATE() ,18080,2080,0,1)
+INSERT INTO Venta VALUES(208130675,'Keneth', GETDATE() ,19340,2340,0,1)
 
 
 --INSERT A DETALLE VENTA
@@ -387,7 +387,7 @@ INSERT INTO Detalle_Venta VALUES(3,1,10000,0,1)
 INSERT INTO Detalle_Venta VALUES(3,2,8000,0,1)
 
 --INSERT A RESENA
-INSERT INTO Resena VALUES('Luces perfectas', 'Las luces funcionan excelente y alumbran bastante',2,3)
+INSERT INTO Resena VALUES('Luces perfectas', 'Las luces funcionan excelente y alumbran bastante',2,208120070)
 
 --INSERT A REPARACION
 INSERT INTO Reparaciones VALUES(1,208130675,24337955,3,'Telefono Huawei P20','Pantalla quebrada',GETDATE(),47000, '28 Septiembre 2022',1)
@@ -420,3 +420,5 @@ Select * FROM Caja_Chica
 
 --RESENA 
 SELECT * FROM Resena
+SELECT * FROM Venta
+SELECT * FROM Reparaciones
