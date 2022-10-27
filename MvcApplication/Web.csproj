@@ -613,6 +613,7 @@
     <Content Include="Views\Contacto\Index.cshtml" />
     <Content Include="Views\Reportes\IngresosLista.cshtml" />
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
+    <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

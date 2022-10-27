@@ -18,7 +18,7 @@ namespace MvcApplication.Controllers
 {
     public class ReparacionesController : Controller
     {
-
+        Reportes_Tecnicos re = new Reportes_Tecnicos();
         //Para guardadr la reparacion que se clickee
         int? codigo = 0;
 
@@ -59,6 +59,22 @@ namespace MvcApplication.Controllers
                 lista = _ServiceReparaciones.GetReparacionPorUsuario(idUsuario);
                 if (TempData["mensaje"] != null)
                     ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
+        }
+
+        public ActionResult ReportesTecnicosUsuario(int? id)
+        {
+
+            IEnumerable<Reportes_Tecnicos> lista = null;
+            try
+            {
+                IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
+                lista = _ServiceRTecnico.GetReportesByID((long)id);
             }
             catch (Exception e)
             {
@@ -209,9 +225,13 @@ namespace MvcApplication.Controllers
         //Reportes Tecnicos--------------------------------------------------
         //-------------------------------------------------------------------
         //-------------------------------------------------------------------
+
+        //VARIABLE QUE LLENA EL CODIGO DEL SERVICIO PARA EL REPORTE
+        public static int codigoSer { get; set; }
         public ActionResult ReportesTecnicos(int? id)
         {
             this.codigo = id;
+            codigoSer = (int)id;
 
              IEnumerable<Reportes_Tecnicos> lista = null;
             try
@@ -238,7 +258,7 @@ namespace MvcApplication.Controllers
             IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
             try
             {
-                repo.reparacion_id = (Convert.ToInt32(TempData["idReparacion"])); 
+                repo.reparacion_id = codigoSer; 
                 _ServiceRTecnico.Save(repo);
 
                 return RedirectToAction("Index");

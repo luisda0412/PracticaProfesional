@@ -1,0 +1,80 @@
+﻿
+@model IEnumerable<Infraestructure.Models.Reportes_Tecnicos>
+@{
+    ViewBag.Title = "Reportes registrados";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloRTecnicos/EstiloListaRTecnicos.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <br />
+            <br />
+            <h2>
+                Reportes Técnicos
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper9.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 135px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="elementos1">
+            <h2 class="titulo">Procesos registrados actualmente</h2>
+        </div>
+        <br />
+        <center>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reparacion_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.reporte)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fecha)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.reparacion_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.reporte)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fecha)
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                    TempData["idReparacion"] = item.reparacion_id;
+                }
+
+            </table>
+        </center>
+    </section>
+</main>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}
