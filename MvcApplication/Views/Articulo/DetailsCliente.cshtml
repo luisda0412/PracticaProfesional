@@ -6,6 +6,9 @@
 
 <link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloDetalleArticulo.css">
 
+<!--Script del modal-->
+<script src="~/Scripts/resenas/resena.js"></script>
+
 <section class="section_header">
     <br />
     <div class="contenidoHeader">
@@ -69,56 +72,108 @@
                        UpdateTargetId = "cantidadLibros",
                        InsertionMode = InsertionMode.Replace,
                        HttpMethod = "GET",
-                   }, new {  }
+                   }, new { }
                    )
                 </button>
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>
     </section>
-    <section class="partebaja">
+    <section class="partebaja" style="overflow-x:scroll; overflow-y:hidden">
         <center>
             @{
                 TempData["idArticulo"] = Model.id;
             }
+            @{
+                int id = 0;
+                Infraestructure.Models.Usuario oUsuario;
+                //Validar si existe en la sesión
+                if (Session["User"] != null)
+                {
+                    oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                    if (oUsuario != null)
+                    {
+                        id = oUsuario.id;
+                        ViewBag.idUser = id;
 
+                        TempData["idUser"] = id;
+
+                    }
+                }
+            }
             <br />
             <br />
             <h1>Reseñas de este artículo</h1>
             <br />
-            @Html.Partial("ResenaArticulo")
 
+            <!--Boton que llama al modal que esta abajo de la pagina lo llama con el datatoggle y datatarget-->
+            <button type="button" class="agregar" data-toggle="modal" data-target="#exampleModal">Agregar </button>
+        </center>
+        <center>
+            <div>
+                <div class="row">
 
-            <div class="row">
+                    @{
+                        List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
+                    }
 
-                @{
-                    List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
-                }
+                    @foreach (var resena in listaResena)
+                    {
+                        <div class="columna">
+                            <div class="left">
+                                <center>
+                                    <img src="~/Imagenes/Avatares/avatar1.png" />
+                                    <br />
+                                    <br />
+                                    <h3>@resena.Usuario.nombre</h3>
+                                </center>
+                            </div>
+                            <div class="right">
+                                <h4>@resena.Articulo.nombre</h4>
+                                <h5>@resena.encabezado</h5>
 
-                @foreach (var resena in listaResena)
-                {
-                    <div class="columna">
-                        <div class="left">
-                            <center>
-                                <img src="~/Imagenes/Avatares/avatar1.png" />
-                                <br />
-                                <br />
-                                <h3>@resena.Usuario.nombre</h3>
-                            </center>
+                                <p>
+                                    @resena.comentario
+                                </p>
+                            </div>
+
                         </div>
-                        <div class="right">
-                            <h3>@resena.Articulo.nombre</h3>
-                            <h4>@resena.encabezado</h4>
-
-                            <p>
-                                @resena.comentario
-                            </p>
-                        </div>
-
-                    </div>
-                }
+                    }
+                </div>
             </div>
         </center>
     </section>
+
+
+    <!--Modal de crear reseña-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Escriba su reseña para el @Model.nombre</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                @using (Html.BeginForm("CrearReseña", "Articulo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Encabezado:</label>
+                            <input name="enca" type="text" class="form-control" id="recipient-name" style="max-width:100%">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Comentario:</label>
+                            <textarea name="comen" class="form-control" id="message-text" style="max-width:100%"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Agregar Reseña</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
 </main>
 

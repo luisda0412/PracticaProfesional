@@ -165,6 +165,8 @@ namespace MvcApplication.Controllers
             }
         }
 
+
+        //Para las reseñas
         public ActionResult DetailsCliente(int? id)
         {
             ServiceArticulo _ServiceArticulo = new ServiceArticulo();
@@ -172,8 +174,9 @@ namespace MvcApplication.Controllers
 
             IEnumerable<Resena> listaResena = null;
             IServiceResena _ServiceResena = new ServiceResena();
-            //id = Convert.ToInt32(TempData["idArticulo"]);
-            
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+
             try
             {
                 if (id == null)
@@ -198,6 +201,44 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        public ActionResult CrearReseña(string enca, string comen)
+        {
+            string encabezado = enca;
+            string comentario = comen;
+            int id = Convert.ToInt32(TempData["idArticulo"]);
+            int userid = Convert.ToInt32(TempData["idUser"]);
+
+            if(userid !=0)
+            {
+                if (encabezado.Trim().Length != 0 || comentario.Trim().Length != 0)
+                {
+                    Resena oResena = new Resena();
+                    oResena.comentario = comentario;
+                    oResena.encabezado = encabezado;
+                    oResena.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                    oResena.articulo_id = Convert.ToInt32(TempData["idArticulo"]);
+                    IServiceResena _ServiceResena = new ServiceResena();
+                    Resena random = _ServiceResena.Save(oResena);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reseña guardada!", "Su reseña se ha creado con éxito!", SweetAlertMessageType.success);
+                    return RedirectToAction("DetailsCliente", routeValues: new { id });
+                }
+                else
+                {
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Fallo en envío!", "Asegurese de no dejar espacios en blanco", SweetAlertMessageType.error);
+                    return RedirectToAction("DetailsCliente", routeValues: new { id });
+                }
+            }
+            else
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Necesita Login!", "Inicie su sesión para agregar una reseña!", SweetAlertMessageType.warning);
+            }
+           
+            return RedirectToAction("IndexCatalogo");
+        }
+
+
+
 
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Edit(int? id)
@@ -245,6 +286,8 @@ namespace MvcApplication.Controllers
                 //enviar la lista de productos al viewBag
                 IServiceCategoria _ServiceCategoria = new ServiceCategoria();
                 ViewBag.listaCategorias = _ServiceCategoria.GetCategoria();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             }
             catch (Exception e)
             {

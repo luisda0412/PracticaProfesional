@@ -178,6 +178,8 @@
         width: 100%;
     }
 
+
+
     /*--------------------Sección de Reseñas----------------------*/
 
 .partebaja {
@@ -198,25 +200,75 @@
     color: white;
 }
 
-    .partebaja .agregar {
+/*Boton agregar*/
+    .partebaja .agregar a{
         text-decoration:none;
-        font-family: 'Agency FB';
-        font-size: 30px;
-        font-weight: 700;
         color: white;
     }
 
-    .partebaja .agregar:hover{
-        color: lawngreen;
+/* From uiverse.io by @kirzin */
+.agregar {
+    text-decoration: none;
+    border: none;
+    font-size: 28px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    width: 7em;
+    height: 2em;
+    line-height: 1em;
+    background: linear-gradient(90deg,#25d934,#0cd5d5,#ffeb3b,#25d934);
+    background-size: 300%;
+    border-radius: 30px;
+    z-index: 1;
+    font-family: 'Agency FB';
+}
+
+    .agregar:hover {
+        animation: ani 8s linear infinite;
+        border: none;
     }
 
+@keyframes ani {
+    0% {
+        background-position: 0%;
+    }
 
+    100% {
+        background-position: 400%;
+    }
+}
+
+.agregar:before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;
+    background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+    background-size: 400%;
+    border-radius: 35px;
+    transition: 1s;
+}
+
+.agregar:hover::before {
+    filter: blur(20px);
+}
+
+.agregar:active {
+    background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+}
+
+
+
+/*--------------------------------------------------*/
     .partebaja .row {
         margin: auto;
         max-width: 90%;
         word-wrap: break-word;
     }
-
 .row .columna {
     display: flex;
     justify-content: space-evenly;
@@ -233,19 +285,19 @@
 }
 
 .columna .left {
-    width: 50%;
+    width: 40%;
     margin: auto;
     font-family: 'Agency FB';
 
 }
 
 .columna .right {
-    width: 50%;
+    width: 60%;
     font-family: 'Agency FB';
 }
 
         .columna .right h3, h4, p {    
-            margin-top:18px;
+            margin-top:24px;
             font-family: 'Agency FB';
         }
 
