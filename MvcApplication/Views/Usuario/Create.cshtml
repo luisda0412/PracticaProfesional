@@ -96,12 +96,13 @@
                             @Html.LabelFor(model => model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
                                 @Html.DropDownListFor(model => model.rol_id, (SelectList)ViewBag.RolesLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
-
+                                @Html.ValidationMessageFor(model => model.rol_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
                     </section>
                 </div>
+                <br />
                 <div class="seccion2">
                     <div class="form-group2">
 

@@ -43,19 +43,39 @@ namespace MvcApplication.Controllers
         {
             MemoryStream target = new MemoryStream();
             IServiceUsuario _ServiceUsuario = new ServiceUsuario();
-            ModelState.Remove("estado");
-            if (ModelState.IsValid)
+            if(user.estado != null)
             {
-                try
+                ModelState.Remove("estado");
+                ModelState.Remove("clave");
+                if (ModelState.IsValid)
                 {
-                    Usuario oUser = _ServiceUsuario.Save(user);
-                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "usuario guardado con éxito", SweetAlertMessageType.success);
-
+                 try
+                    {
+                        Usuario oUser = _ServiceUsuario.Save(user);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "usuario editado con éxito", SweetAlertMessageType.success);
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                        return RedirectToAction("Default", "Error");
+                    }
                 }
-                catch (Exception ex)
-                {                  
-                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                    return RedirectToAction("Default", "Error");
+            }
+            else
+            {
+                ModelState.Remove("estado");
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        Usuario oUser = _ServiceUsuario.Save(user);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "usuario guardado con éxito", SweetAlertMessageType.success);
+                    }
+                    catch (Exception ex)
+                    {
+                        TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                        return RedirectToAction("Default", "Error");
+                    }
                 }
             }
             return RedirectToAction("Index");
