@@ -5,9 +5,14 @@
 }
 
 <link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloDetalleArticulo.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloResenas/EstiloTarjetas.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
 
-<!--Script del modal-->
+<!--Script del modal----------------------------------->
 <script src="~/Scripts/resenas/resena.js"></script>
+
+
+
 
 <section class="section_header">
     <br />
@@ -74,12 +79,13 @@
                        HttpMethod = "GET",
                    }, new { }
                    )
+                    <img src="~/Imagenes/Iconos/shopping-cart.png" />
                 </button>
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>
     </section>
-    <section class="partebaja" style="overflow-x:scroll; overflow-y:hidden">
+    <section class="partebaja">
         <center>
             @{
                 TempData["idArticulo"] = Model.id;
@@ -111,35 +117,56 @@
         </center>
         <center>
             <div>
-                <div class="row">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        @{
+                            List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
+                        }
+                        @foreach (var resena in listaResena)
+                        {
+                            <div class="swiper-slide">
+                                <div class="row">
+                                    <div class="columna">
+                                        <div class="left">
+                                            <center>
+                                                <img src="~/Imagenes/Avatares/avatar1.png" />
+                                                <br />
+                                                <br />
+                                                <h3>@resena.Usuario.nombre</h3>
+                                            </center>
+                                        </div>
+                                        <div class="right">
+                                            <h4>@resena.Articulo.nombre</h4>
+                                            <h5>@resena.encabezado</h5>
 
-                    @{
-                        List<Infraestructure.Models.Resena> listaResena = ViewBag.listaResena;
-                    }
+                                            <p>
+                                                @resena.comentario
+                                            </p>
+                                        </div>
 
-                    @foreach (var resena in listaResena)
-                    {
-                        <div class="columna">
-                            <div class="left">
-                                <center>
-                                    <img src="~/Imagenes/Avatares/avatar1.png" />
-                                    <br />
-                                    <br />
-                                    <h3>@resena.Usuario.nombre</h3>
-                                </center>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="right">
-                                <h4>@resena.Articulo.nombre</h4>
-                                <h5>@resena.encabezado</h5>
+                        }
 
-                                <p>
-                                    @resena.comentario
-                                </p>
-                            </div>
-
-                        </div>
-                    }
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
+
+                <!-- Swiper JS -->
+                <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+                <!-- Initialize Swiper -->
+                <script>
+                    var swiper = new Swiper(".mySwiper", {
+                        slidesPerView: 3,
+                        spaceBetween: 30,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                    });
+                </script>
             </div>
         </center>
     </section>

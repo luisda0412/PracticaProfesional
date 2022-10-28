@@ -128,6 +128,10 @@
     width: 80%;
 }
 
+.boton1 img {
+    height: 30px;
+    margin-left: 5px;
+}
 .boton1 a {
     text-decoration: none;
     color: black;
@@ -205,6 +209,7 @@
         text-decoration:none;
         color: white;
     }
+
 
 /* From uiverse.io by @kirzin */
 .agregar {

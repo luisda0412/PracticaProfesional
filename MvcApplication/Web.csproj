@@ -322,6 +322,7 @@
     <Content Include="Content\CSSEstiloResenas\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloDetalleResenas.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloListaResenas.css" />
+    <Content Include="Content\CSSEstiloResenas\EstiloTarjetas.css" />
     <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloDetalleRTecnicos.css" />
@@ -370,6 +371,7 @@
     <Content Include="Imagenes\Iconos\mail.png" />
     <Content Include="Imagenes\Iconos\net.png" />
     <Content Include="Imagenes\Iconos\pdf.png" />
+    <Content Include="Imagenes\Iconos\shopping-cart.png" />
     <Content Include="Imagenes\Iconos\tel.png" />
     <Content Include="Imagenes\Iconos\tel2.png" />
     <Content Include="Imagenes\Iconos\telegram.png" />
@@ -615,6 +617,7 @@
     <Content Include="Views\Reportes\IngresosLista.cshtml" />
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
+    <Content Include="Scripts\resenas\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
