@@ -98,7 +98,7 @@
                                 @Html.DisplayNameFor(model => model.monto_total)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.tipoventa)
+                                @Html.DisplayNameFor(model => model.tipopago)
                             </th>
                             <th><p>Opciones</p></th>
                         </tr>
@@ -117,7 +117,8 @@
                                     &cent;@Html.DisplayFor(modelItem => item.monto_total)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.tipoventa)
+                                    @{ string isActive = item.tipopago == true ? "Efectivo" : "Tarjeta"; }
+                                    @isActive
                                 </td>
                                 <td class="columnabotones">
                                     <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>

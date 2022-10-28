@@ -37,6 +37,26 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
+        public ActionResult facturaElectronica(string nombre, string apellidos, string email, string telefono)
+        {
+            if (nombre.Trim().Length != 0 || apellidos.Trim().Length != 0 || email.Trim().Length != 0 || telefono.Trim().Length != 0)
+            {
+                TempData["Nombre"]= nombre;
+                TempData["Apellidos"] = apellidos;
+                TempData["Email"] = email;
+                TempData["Telefono"]= telefono;
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Factura generada!", "La factura electrónica se ha creado!", SweetAlertMessageType.success);
+              
+            }
+            else
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Fallo en factura!", "No puede dejar espacios vacíos!", SweetAlertMessageType.error);     
+            }
+            return RedirectToAction("IndexVenta");
+
+        }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Save(Venta venta)
         {
              IServiceUsuario serviceUsuario = new ServiceUsuario();
@@ -59,7 +79,7 @@ namespace MvcApplication.Controllers
                         var listaLinea = Carrito.Instancia.Items;
 
                         XmlDocument xml = new XmlDocument();
-                        XmlNode root = xml.CreateElement("Factura Electrónica");
+                        XmlNode root = xml.CreateElement("Factura_Electronica");
                         xml.AppendChild(root);
 
                         //ATRIBUTOS DE FACTURA
@@ -77,10 +97,10 @@ namespace MvcApplication.Controllers
                         XmlNode clave = xml.CreateElement("Clave");
                         clave.InnerText = "";
                         root.AppendChild(clave);
-                        XmlNode codigoActividad = xml.CreateElement("Código de Actividad");
+                        XmlNode codigoActividad = xml.CreateElement("Codigo_de_Actividad");
                         codigoActividad.InnerText = "";
                         root.AppendChild(codigoActividad);
-                        XmlNode fechaEmision = xml.CreateElement("Fecha de Emisión");
+                        XmlNode fechaEmision = xml.CreateElement("Fecha_de_Emision");
                         string formatted = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK");
                         fechaEmision.InnerText = formatted;
                         root.AppendChild(fechaEmision);
@@ -99,7 +119,7 @@ namespace MvcApplication.Controllers
                         //ASIGNACION DE LOS ELEMENTOS AL NODO DE UBICACION
                         XmlNode provincia = xml.CreateElement("Provincia");
                         provincia.InnerText = "Alajuela";
-                        XmlNode centroComercial = xml.CreateElement("Centro Comercial");
+                        XmlNode centroComercial = xml.CreateElement("Centro_Comercial");
                         centroComercial.InnerText = "City Mall";
                         XmlNode otrasSenas = xml.CreateElement("Otras_Senas");
                         otrasSenas.InnerText = "Segundo piso al frente de CellCom";
@@ -110,19 +130,19 @@ namespace MvcApplication.Controllers
                         nodoUbicacion.AppendChild(otrasSenas);
 
                         //CREACION DEL NODO DE TELEFONO
-                        XmlNode telefonoEmpresa = xml.CreateElement("Teléfono");
+                        XmlNode telefonoEmpresa = xml.CreateElement("Telefono");
 
                         //ASIGNACION DE ELEMENTOS AL NODO DE TELEFONO
-                        XmlNode codigo = xml.CreateElement("Código Pais");
+                        XmlNode codigo = xml.CreateElement("Codigo_Pais");
                         codigo.InnerText = "506";
-                        XmlNode telefono = xml.CreateElement("Teléfono Empresa");
+                        XmlNode telefono = xml.CreateElement("Telefono_Empresa");
                         telefono.InnerText = "72791408";
 
                         //ADJUNTAR ELEMENTOS AL N0DO DE TELEFONO
                         telefonoEmpresa.AppendChild(codigo);
                         telefonoEmpresa.AppendChild(telefono);
 
-                        XmlNode correoEmpresa = xml.CreateElement("Correo Electrónico");
+                        XmlNode correoEmpresa = xml.CreateElement("Correo_Electronico");
                         correoEmpresa.InnerText = "vycuz@gmail.com";
 
                         //ADJUNTAR ELEMENTOS AL NODO DE LA EMPRESA
@@ -137,12 +157,12 @@ namespace MvcApplication.Controllers
 
                         //ASIGNACION DE ELEMENTOS AL NODO CLIENTE
                         XmlNode nombreCliente = xml.CreateElement("Nombre");
-                        nombreCliente.InnerText = user.nombre;
+                        nombreCliente.InnerText = Convert.ToString(TempData["Nombre"]);
                         XmlNode ApellidoCliente = xml.CreateElement("Apellidos");
-                        ApellidoCliente.InnerText = user.apellidos;
+                        ApellidoCliente.InnerText = Convert.ToString(TempData["Apellidos"]);
                         XmlNode correoCliente = xml.CreateElement("Email");
-                        correoCliente.InnerText = user.correo_electronico;
-                        XmlNode telefonoCliente = xml.CreateElement("Teléfono");
+                        correoCliente.InnerText = Convert.ToString(TempData["Email"]);
+                        XmlNode telefonoCliente = xml.CreateElement("Telefono");
                         telefonoCliente.InnerText = user.telefono;
 
                         //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
@@ -160,7 +180,6 @@ namespace MvcApplication.Controllers
                             linea.articulo_id = (int)items.idArticulo;
                             linea.cantidad = items.cantidad;
                             venta.impuesto = (double?)Carrito.Instancia.GetImpuesto();
-                           // venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
                             venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
                             venta.estado = true;
                             linea.venta_id = venta.id;
@@ -297,11 +316,8 @@ namespace MvcApplication.Controllers
             }
             catch (Exception ex)
             {
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Factura";
-                TempData["Redirect-Action"] = "IndexFactura";
-                // Redireccion a la captura del Error
+              
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;           
                 return RedirectToAction("Default", "Error");
             }
         }
@@ -310,11 +326,8 @@ namespace MvcApplication.Controllers
 
         public ActionResult IndexVenta()
         {
-            if (TempData.ContainsKey("NotificationMessage"))
-            {
-                ViewBag.NotificationMessage = TempData["NotificationMessage"];
-            }
-
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
             return View();
         }
