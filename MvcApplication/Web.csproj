@@ -322,7 +322,7 @@
     <Content Include="Content\CSSEstiloResenas\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloDetalleResenas.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloListaResenas.css" />
-    <Content Include="Content\CSSEstiloResenas\EstiloTarjetas.css" />
+    <Content Include="Content\CSSEstiloResenas\swiper-bundle.min.css" />
     <Content Include="Content\CSSEstiloRol\EstiloListaRol.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloRTecnicos\EstiloDetalleRTecnicos.css" />
@@ -341,6 +341,11 @@
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\fondo2.jpg" />
     <Content Include="Content\pic4.png" />
+    <Content Include="Content\Prettify\prettify.css" />
+    <Content Include="Content\Prettify\Themes\desert.css" />
+    <Content Include="Content\Prettify\Themes\doxy.css" />
+    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
+    <Content Include="Content\Prettify\Themes\sunburst.css" />
     <Content Include="Content\sweetalert.css" />
     <Content Include="Content\sweetalert2.css" />
     <Content Include="favicon.ico" />
@@ -446,6 +451,36 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Prettify\lang-apollo.js" />
+    <Content Include="Scripts\Prettify\lang-basic.js" />
+    <Content Include="Scripts\Prettify\lang-clj.js" />
+    <Content Include="Scripts\Prettify\lang-css.js" />
+    <Content Include="Scripts\Prettify\lang-dart.js" />
+    <Content Include="Scripts\Prettify\lang-erlang.js" />
+    <Content Include="Scripts\Prettify\lang-go.js" />
+    <Content Include="Scripts\Prettify\lang-hs.js" />
+    <Content Include="Scripts\Prettify\lang-lisp.js" />
+    <Content Include="Scripts\Prettify\lang-llvm.js" />
+    <Content Include="Scripts\Prettify\lang-lua.js" />
+    <Content Include="Scripts\Prettify\lang-matlab.js" />
+    <Content Include="Scripts\Prettify\lang-ml.js" />
+    <Content Include="Scripts\Prettify\lang-mumps.js" />
+    <Content Include="Scripts\Prettify\lang-n.js" />
+    <Content Include="Scripts\Prettify\lang-pascal.js" />
+    <Content Include="Scripts\Prettify\lang-proto.js" />
+    <Content Include="Scripts\Prettify\lang-r.js" />
+    <Content Include="Scripts\Prettify\lang-rd.js" />
+    <Content Include="Scripts\Prettify\lang-scala.js" />
+    <Content Include="Scripts\Prettify\lang-sql.js" />
+    <Content Include="Scripts\Prettify\lang-tcl.js" />
+    <Content Include="Scripts\Prettify\lang-tex.js" />
+    <Content Include="Scripts\Prettify\lang-vb.js" />
+    <Content Include="Scripts\Prettify\lang-vhdl.js" />
+    <Content Include="Scripts\Prettify\lang-wiki.js" />
+    <Content Include="Scripts\Prettify\lang-xq.js" />
+    <Content Include="Scripts\Prettify\lang-yaml.js" />
+    <Content Include="Scripts\Prettify\prettify.js" />
+    <Content Include="Scripts\Prettify\run_prettify.js" />
     <Content Include="Scripts\resenas\resena.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -617,7 +652,6 @@
     <Content Include="Views\Reportes\IngresosLista.cshtml" />
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
-    <Content Include="Scripts\resenas\package.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

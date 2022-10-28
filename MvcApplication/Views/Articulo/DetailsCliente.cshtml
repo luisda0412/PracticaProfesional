@@ -4,14 +4,9 @@
     ViewBag.Title = "Detalles";
 }
 
+
+<link rel="stylesheet" href="~/Content/CSSEstiloResenas/swiper-bundle.min.css">
 <link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloDetalleArticulo.css">
-<link rel="stylesheet" href="~/Content/CSSEstiloResenas/EstiloTarjetas.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-
-<!--Script del modal----------------------------------->
-<script src="~/Scripts/resenas/resena.js"></script>
-
-
 
 
 <section class="section_header">
@@ -21,7 +16,7 @@
             <br />
             <br />
             <div class="logo">
-                <img src="~/Imagenes/Logos/logo1.png" />
+                <img src="~/Imagenes/Logos/logo1.png">
             </div>
             <br />
             <h2>
@@ -29,7 +24,7 @@
             </h2>
         </div>
         <div class="derechoHeader">
-            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+            <img src="~/Imagenes/Visuals/wallpaper7.png">
         </div>
     </div>
     <div class="wave" style="height: 135px; overflow: hidden;">
@@ -40,6 +35,7 @@
         </svg>
     </div>
 </section>
+
 <main>
     <section class="desarrollo">
         <div class="tarjeta">
@@ -65,7 +61,7 @@
         <center>
             <div class="botones_producto">
                 <button class="boton1">
-                    @Ajax.ActionLink("Agregar Carrito",//Texto para el usuario
+                    @Ajax.ActionLink("Comprar",//Texto para el usuario
                    "ordenarProducto",//Acción a llamar
                    "Venta",
                    new
@@ -80,12 +76,13 @@
                    }, new { }
                    )
                     <img src="~/Imagenes/Iconos/shopping-cart.png" />
+
                 </button>
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>
     </section>
-    <section class="partebaja">
+    <section class="partebaja" style=" overflow-y: hidden; overflow-x:hidden">
         <center>
             @{
                 TempData["idArticulo"] = Model.id;
@@ -115,6 +112,7 @@
             <!--Boton que llama al modal que esta abajo de la pagina lo llama con el datatoggle y datatarget-->
             <button type="button" class="agregar" data-toggle="modal" data-target="#exampleModal">Agregar </button>
         </center>
+        <br />
         <center>
             <div>
                 <div class="swiper mySwiper">
@@ -150,11 +148,15 @@
                         }
 
                     </div>
+                    <br />
                     <div class="swiper-pagination"></div>
                 </div>
 
                 <!-- Swiper JS -->
                 <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+                <!--Script del modal----------------------------------->
+                <script src="~/Scripts/resenas/resena.js"></script>
 
                 <!-- Initialize Swiper -->
                 <script>
@@ -168,6 +170,7 @@
                     });
                 </script>
             </div>
+            <br />
         </center>
     </section>
 
