@@ -65,8 +65,27 @@
                                     <h5 class="card-title">@Html.DisplayFor(modelItem => item.nombre)</h5>
                                     <p class="card-text">   @Html.DisplayNameFor(model => model.precio):  @Html.DisplayFor(modelItem => item.precio)</p>
                                     <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.stock): @Html.DisplayFor(modelItem => item.stock)</h6>
-                                    <div class="card-body">
-                                       <button class="boton2">@Html.ActionLink("Ver :)", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                    <div class="card-body" style="display:flex; justify-content:space-evenly">
+                                        <button class="boton2">@Html.ActionLink("Ver :)", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                        <button style="margin-left: 5px" class="boton3" id="carrito">
+                                            <img style="height:30px" src="~/Imagenes/Iconos/cart.png" />
+                                            @Ajax.ActionLink(" ",//Texto para el usuario
+                                           "ordenarProducto",//Acción a llamar
+                                           "Venta",
+                                           new
+                                           {
+                                               idArtiuclo = item.id
+                                           },//Parámetros a enviar
+                                           new AjaxOptions
+                                           {
+                                               UpdateTargetId = "cantidadLibros",
+                                               InsertionMode = InsertionMode.Replace,
+                                               HttpMethod = "GET",
+                                           }, new { }
+                                           )
+
+
+                                        </button>
                                     </div>
                                 </div>
                             </div>

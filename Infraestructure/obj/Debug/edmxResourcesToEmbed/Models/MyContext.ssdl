@@ -169,7 +169,7 @@
     <Property Name="fecha" Type="datetime" />
     <Property Name="monto_total" Type="float" />
     <Property Name="impuesto" Type="float" />
-    <Property Name="tipoventa" Type="bit" />
+    <Property Name="tipopago" Type="bit" />
     <Property Name="estado" Type="bit" />
   </EntityType>
   <Association Name="Articulo_Categoria_FK">

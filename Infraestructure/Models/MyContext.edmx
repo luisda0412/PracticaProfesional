@@ -174,7 +174,7 @@
           <Property Name="fecha" Type="datetime" />
           <Property Name="monto_total" Type="float" />
           <Property Name="impuesto" Type="float" />
-          <Property Name="tipoventa" Type="bit" />
+          <Property Name="tipopago" Type="bit" />
           <Property Name="estado" Type="bit" />
         </EntityType>
         <Association Name="Articulo_Categoria_FK">
@@ -672,7 +672,7 @@
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="monto_total" Type="Double" />
           <Property Name="impuesto" Type="Double" />
-          <Property Name="tipoventa" Type="Boolean" />
+          <Property Name="tipopago" Type="Boolean" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Venta" ToRole="Detalle_Venta" />
           <NavigationProperty Name="Facturas" Relationship="Self.Facturas__Venta_FK" FromRole="Venta" ToRole="Facturas" />
@@ -1156,7 +1156,7 @@
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
                 <ScalarProperty Name="impuesto" ColumnName="impuesto" />
-                <ScalarProperty Name="tipoventa" ColumnName="tipoventa" />
+                <ScalarProperty Name="tipopago" ColumnName="tipopago" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>

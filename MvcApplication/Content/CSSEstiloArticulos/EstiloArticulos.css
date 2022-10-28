@@ -167,7 +167,9 @@
 
 
 /*Boton ver detalles*/
+.card-body{
 
+}
 .boton2 a {
     text-decoration: none;
     color: white;
@@ -183,7 +185,7 @@
     background: #1a8623;
     position: relative;
     font-weight: 1000;
-    font-size: 19px;
+    font-size: 16px;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
@@ -217,3 +219,13 @@
     .boton2:hover::before {
         width: 100%;
     }
+
+    .boton3{
+        border-radius:50px;
+        border:none;
+        background-color:orange;
+    }
+
+        .boton3:hover {
+            background-color: #191919;
+        }

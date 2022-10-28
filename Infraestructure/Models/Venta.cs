@@ -11,10 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(VentaMetadata))]
-
+    
     public partial class Venta
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -30,7 +27,7 @@ namespace Infraestructure.Models
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
         public Nullable<double> impuesto { get; set; }
-        public Nullable<bool> tipoventa { get; set; }
+        public Nullable<bool> tipopago { get; set; }
         public Nullable<bool> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

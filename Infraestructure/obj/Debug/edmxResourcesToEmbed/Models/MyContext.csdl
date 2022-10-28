@@ -200,7 +200,7 @@
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
     <Property Name="impuesto" Type="Double" />
-    <Property Name="tipoventa" Type="Boolean" />
+    <Property Name="tipopago" Type="Boolean" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Detalle_Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Venta" ToRole="Detalle_Venta" />
     <NavigationProperty Name="Facturas" Relationship="Self.Facturas__Venta_FK" FromRole="Venta" ToRole="Facturas" />

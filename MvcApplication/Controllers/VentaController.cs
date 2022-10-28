@@ -59,7 +59,7 @@ namespace MvcApplication.Controllers
                         var listaLinea = Carrito.Instancia.Items;
 
                         XmlDocument xml = new XmlDocument();
-                        XmlNode root = xml.CreateElement("Factura_Electronica");
+                        XmlNode root = xml.CreateElement("Factura Electrónica");
                         xml.AppendChild(root);
 
                         //ATRIBUTOS DE FACTURA
@@ -77,10 +77,10 @@ namespace MvcApplication.Controllers
                         XmlNode clave = xml.CreateElement("Clave");
                         clave.InnerText = "";
                         root.AppendChild(clave);
-                        XmlNode codigoActividad = xml.CreateElement("Codigo_Actividad");
+                        XmlNode codigoActividad = xml.CreateElement("Código de Actividad");
                         codigoActividad.InnerText = "";
                         root.AppendChild(codigoActividad);
-                        XmlNode fechaEmision = xml.CreateElement("Fecha_Emision");
+                        XmlNode fechaEmision = xml.CreateElement("Fecha de Emisión");
                         string formatted = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK");
                         fechaEmision.InnerText = formatted;
                         root.AppendChild(fechaEmision);
@@ -99,7 +99,7 @@ namespace MvcApplication.Controllers
                         //ASIGNACION DE LOS ELEMENTOS AL NODO DE UBICACION
                         XmlNode provincia = xml.CreateElement("Provincia");
                         provincia.InnerText = "Alajuela";
-                        XmlNode centroComercial = xml.CreateElement("Centro_Comercial");
+                        XmlNode centroComercial = xml.CreateElement("Centro Comercial");
                         centroComercial.InnerText = "City Mall";
                         XmlNode otrasSenas = xml.CreateElement("Otras_Senas");
                         otrasSenas.InnerText = "Segundo piso al frente de CellCom";
@@ -110,19 +110,19 @@ namespace MvcApplication.Controllers
                         nodoUbicacion.AppendChild(otrasSenas);
 
                         //CREACION DEL NODO DE TELEFONO
-                        XmlNode telefonoEmpresa = xml.CreateElement("Telefono");
+                        XmlNode telefonoEmpresa = xml.CreateElement("Teléfono");
 
                         //ASIGNACION DE ELEMENTOS AL NODO DE TELEFONO
-                        XmlNode codigo = xml.CreateElement("Codigo_Pais");
+                        XmlNode codigo = xml.CreateElement("Código Pais");
                         codigo.InnerText = "506";
-                        XmlNode telefono = xml.CreateElement("Telefono_Empresa");
+                        XmlNode telefono = xml.CreateElement("Teléfono Empresa");
                         telefono.InnerText = "72791408";
 
                         //ADJUNTAR ELEMENTOS AL N0DO DE TELEFONO
                         telefonoEmpresa.AppendChild(codigo);
                         telefonoEmpresa.AppendChild(telefono);
 
-                        XmlNode correoEmpresa = xml.CreateElement("Correo_Electronico");
+                        XmlNode correoEmpresa = xml.CreateElement("Correo Electrónico");
                         correoEmpresa.InnerText = "vycuz@gmail.com";
 
                         //ADJUNTAR ELEMENTOS AL NODO DE LA EMPRESA
@@ -142,7 +142,7 @@ namespace MvcApplication.Controllers
                         ApellidoCliente.InnerText = user.apellidos;
                         XmlNode correoCliente = xml.CreateElement("Email");
                         correoCliente.InnerText = user.correo_electronico;
-                        XmlNode telefonoCliente = xml.CreateElement("Telefono");
+                        XmlNode telefonoCliente = xml.CreateElement("Teléfono");
                         telefonoCliente.InnerText = user.telefono;
 
                         //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
@@ -160,7 +160,7 @@ namespace MvcApplication.Controllers
                             linea.articulo_id = (int)items.idArticulo;
                             linea.cantidad = items.cantidad;
                             venta.impuesto = (double?)Carrito.Instancia.GetImpuesto();
-                            venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
+                           // venta.tipoventa= user.rol_id == 2 ? venta.tipoventa = true : venta.tipoventa = false;
                             venta.usuario_id = Convert.ToInt32(TempData["idUser"]);
                             venta.estado = true;
                             linea.venta_id = venta.id;
@@ -325,7 +325,8 @@ namespace MvcApplication.Controllers
         {
             idArticulo = Convert.ToInt32(TempData["idArticulo"]);
             int cantidadLibros = Carrito.Instancia.Items.Count();
-            ViewBag.NotiCarrito = Carrito.Instancia.AgregarItem((int)idArticulo);
+            TempData["mensaje"] = Carrito.Instancia.AgregarItem((int)idArticulo);
+
 
             return RedirectToAction("IndexCatalogo", "Articulo");
 

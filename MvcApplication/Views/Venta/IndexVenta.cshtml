@@ -60,10 +60,30 @@
                             <div class="form-group3">
                                 <h5>Nombre del cliente</h5>
                                 @Html.EditorFor(x => x.nombre_cliente)
+                                @Html.ValidationMessageFor(model => model.nombre_cliente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group3">
+                                <h5>Factura Electrónica?</h5>
+                                @Html.CheckBox("Facturar", htmlAttributes: new { @class = "control-label col-md-2", @data_toggle = "modal", @data_target = "#exampleModal" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label(model => model., htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.RadioButtonFor(model => model.tipopago, true, new { id = "married-true" })
+                                @Html.Label("married-true", "Efectivo")
+                                @Html.RadioButtonFor(model => model.tipopago, false, new { id = "married-false" })
+                                @Html.Label("married-true", "Tarjeta")
+                                @Html.ValidationMessageFor(model => model.tipopago, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <br />
                 <hr />
                 <span class="glyphicons glyphicons-hand-left"></span>
@@ -86,19 +106,70 @@
                 <hr />
                 <section class="abajo">
                     <!-- Submit -->
-                    <button class="boton1" id="btnOrdenar">Crear Venta</button>
+                    <button class="boton1" id="btnOrdenar">Registrar Venta</button>
                 </section>
 
             }
         </center>
         <br />
     </section>
+
+    <!--Modal de crear reseña-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Solicite los datos para la factura electrónica</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                @using (Html.BeginForm("", "Venta", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Nombre:</label>
+                            <input name="nombre" type="text" class="form-control" id="recipient-name" style="max-width:100%">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Apellidos:</label>
+                            <input name="apellidos" class="form-control" id="message-text" style="max-width:100%">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Email:</label>
+                            <input name="email" class="form-control" id="message-text" style="max-width:100%">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Teléfono:</label>
+                            <input name="telefono" class="form-control" id="message-text" style="max-width:100%">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
     @section Scripts {
 
         @Scripts.Render("~/bundles/jqueryval")
         @Scripts.Render("~/bundles/jqueryajax")
 
+        <!--Script del modal----------------------------------->
+        <script src="~/Scripts/resenas/resena.js"></script>
+
         <script type="text/javascript">
+
+
+            //Desmarcar el checkbox cuando en el modal le den click en cancelar
+            $("button").click(function () {
+                // Desmarcar todas las checkboxes
+                $("input[type=checkbox]").prop("checked", false);
+            })  
+        
 
             //Actualizar cantidad de libros en el carrito
             //Cambio de cantidad en caja de texto
@@ -190,7 +261,7 @@
                     }
 
                 },
-                                })
+                                                                        })
         </script>
     }
 

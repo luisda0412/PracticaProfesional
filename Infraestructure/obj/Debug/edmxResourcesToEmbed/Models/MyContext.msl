@@ -183,7 +183,7 @@
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="monto_total" ColumnName="monto_total" />
           <ScalarProperty Name="impuesto" ColumnName="impuesto" />
-          <ScalarProperty Name="tipoventa" ColumnName="tipoventa" />
+          <ScalarProperty Name="tipopago" ColumnName="tipopago" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>
