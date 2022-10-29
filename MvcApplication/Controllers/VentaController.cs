@@ -84,7 +84,7 @@ namespace MvcApplication.Controllers
                 {
                     Facturas factura= new Facturas();
                     Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
-                    venta.nombre_cliente = user.nombre;
+                    //venta.nombre_cliente = user.nombre;
                     if (venta.nombre_cliente != null)
                     {
                         IServiceArticulo serviceArticulo = new ServiceArticulo();
@@ -304,26 +304,28 @@ namespace MvcApplication.Controllers
 
                         //ENVIAR EL CORREO
 
-                        string urlDomain = "https://localhost:3000/";
-                        string EmailOrigen = "soportevycuz@gmail.com";
-                        string Contraseña = "ecfykdmojjjlpfcn";
-                        string url = urlDomain + "/Usuario/Recuperacion/?token=";
-                        MailMessage oMailMessage = new MailMessage(EmailOrigen, emailForm, "Compra exitosa",
-                            "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
-                        oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
-                        oMailMessage.IsBodyHtml = true;
+                        if (emailForm!= null)
+                        {
+                            string urlDomain = "https://localhost:3000/";
+                            string EmailOrigen = "soportevycuz@gmail.com";
+                            string Contraseña = "ecfykdmojjjlpfcn";
+                            string url = urlDomain + "/Usuario/Recuperacion/?token=";
+                            MailMessage oMailMessage = new MailMessage(EmailOrigen, emailForm, "Compra exitosa",
+                                "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
+                            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
+                            oMailMessage.IsBodyHtml = true;
 
-                        SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
-                        oSmtpClient.EnableSsl = true;
-                        oSmtpClient.UseDefaultCredentials = false;
-                        oSmtpClient.Port = 587;
-                        oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+                            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+                            oSmtpClient.EnableSsl = true;
+                            oSmtpClient.UseDefaultCredentials = false;
+                            oSmtpClient.Port = 587;
+                            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
 
-                        oSmtpClient.Send(oMailMessage);
+                            oSmtpClient.Send(oMailMessage);
 
 
-                        oSmtpClient.Dispose();
-
+                            oSmtpClient.Dispose();
+                        }
                     }
                     return RedirectToAction("Index");
                 }
