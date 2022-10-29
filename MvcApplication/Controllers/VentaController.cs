@@ -56,6 +56,20 @@ namespace MvcApplication.Controllers
 
         }
 
+        public static string nombreForm { get; set; }
+        public static string apellidosForm { get; set; }
+        public static string emailForm { get; set; }
+        public static string telefonoForm { get; set; }
+        public ActionResult obtenerDatosForm()
+        {
+            nombreForm = Request.Form["name"];
+            apellidosForm = Request.Form["lastname"];
+            emailForm = Request.Form["email"];
+            telefonoForm = Request.Form["phone"];
+
+            return RedirectToAction("IndexVenta");
+        }
+
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Save(Venta venta)
         {
@@ -157,13 +171,13 @@ namespace MvcApplication.Controllers
 
                         //ASIGNACION DE ELEMENTOS AL NODO CLIENTE
                         XmlNode nombreCliente = xml.CreateElement("Nombre");
-                        nombreCliente.InnerText = Convert.ToString(TempData["Nombre"]);
+                        nombreCliente.InnerText = nombreForm;
                         XmlNode ApellidoCliente = xml.CreateElement("Apellidos");
-                        ApellidoCliente.InnerText = Convert.ToString(TempData["Apellidos"]);
+                        ApellidoCliente.InnerText = apellidosForm;
                         XmlNode correoCliente = xml.CreateElement("Email");
-                        correoCliente.InnerText = Convert.ToString(TempData["Email"]);
+                        correoCliente.InnerText = emailForm;
                         XmlNode telefonoCliente = xml.CreateElement("Telefono");
-                        telefonoCliente.InnerText = user.telefono;
+                        telefonoCliente.InnerText = telefonoForm;
 
                         //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
                         nodoCliente.AppendChild(nombreCliente);
@@ -294,7 +308,7 @@ namespace MvcApplication.Controllers
                         string EmailOrigen = "soportevycuz@gmail.com";
                         string Contraseña = "ecfykdmojjjlpfcn";
                         string url = urlDomain + "/Usuario/Recuperacion/?token=";
-                        MailMessage oMailMessage = new MailMessage(EmailOrigen, user.correo_electronico, "Compra exitosa",
+                        MailMessage oMailMessage = new MailMessage(EmailOrigen, emailForm, "Compra exitosa",
                             "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
                         oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
                         oMailMessage.IsBodyHtml = true;

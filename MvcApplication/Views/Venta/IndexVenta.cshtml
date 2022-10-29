@@ -52,7 +52,7 @@
                                 @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @readonly = "readonly" })
-                                 
+
                                 </div>
                             </div>
                         </div>
@@ -82,8 +82,8 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
                     </div>
+                </div>
 
                 <br />
                 <hr />
@@ -123,32 +123,36 @@
                     <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Solicite los datos para la factura electrónica</h1>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
-                <form>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" style="max-width:100%">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Apellidos:</label>
-                            <input name="@TempData["Apellidos"]" class="form-control" id="message-text" style="max-width:100%">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Email:</label>
-                            <input name="@TempData["Email"]" class="form-control" id="message-text" style="max-width:100%">
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Teléfono:</label>
-                            <input name="@TempData["Telefono"]" class="form-control" id="message-text" style="max-width:100%">
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button onclick="getValueInput()" style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
-                    </div>
-                </form>
-                
+                @using (Html.BeginForm("obtenerDatosForm", "Venta"))
+                {
+                    <form>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="name" style="max-width:100%" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Apellidos:</label>
+                                <input name="lastname" class="form-control" id="message-text" style="max-width:100%">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Email:</label>
+                                <input name="email" class="form-control" id="message-text" style="max-width:100%">
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label">Teléfono:</label>
+                                <input name="phone" class="form-control" id="message-text" style="max-width:100%">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                        </div>
+                    </form>
+                }
+
             </div>
         </div>
     </div>
@@ -160,17 +164,20 @@
         @Scripts.Render("~/bundles/jqueryajax")
 
         <!--Script del modal----------------------------------->
-        <script src="~/Scripts/resenas/resena.js"></script>
-
-        <script type="text/javascript">
-
-           
-
-
-            const getValueInput = () => {
-                let inputValue = document.getElementById("nombre").value;
-                 @TempData["Nombre"] = inputValue;
+        
+        @{ 
+            <script>
+                const getValueInput = () =>
+            {
+                var inputValue = document.getElementByName("nombre").value;
+                @TempData["Nombre"] = inputValue;
+                alert("prueba");
+                console.log("prueba");
             }
+            </script>
+
+        }
+        <script type="text/javascript">
 
             //Desmarcar el checkbox cuando en el modal le den click en cancelar
             $("button").click(function () {
@@ -269,7 +276,7 @@
                     }
 
                 },
-                                                                        })
+                                                                                })
         </script>
     }
 
