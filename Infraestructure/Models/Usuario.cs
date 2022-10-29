@@ -17,7 +17,6 @@ namespace Infraestructure.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
-            this.Caja_Chica = new HashSet<Caja_Chica>();
             this.Ingreso = new HashSet<Ingreso>();
             this.Reparaciones = new HashSet<Reparaciones>();
             this.Resena = new HashSet<Resena>();
@@ -34,8 +33,6 @@ namespace Infraestructure.Models
         public Nullable<bool> estado { get; set; }
         public string tokenRecuperacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Caja_Chica> Caja_Chica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

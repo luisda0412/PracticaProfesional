@@ -24,13 +24,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
-    <Property Name="efectivo_total" Type="Double" />
-    <Property Name="billetes" Type="Double" />
-    <Property Name="monedas" Type="Double" />
-    <Property Name="usuario_id" Type="Int32" />
-    <Property Name="tipo" Type="Boolean" />
-    <Property Name="estado" Type="Boolean" />
-    <NavigationProperty Name="Usuario" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Caja_Chica" ToRole="Usuario" />
+    <Property Name="saldo" Type="Double" />
+    <Property Name="entrada" Type="Double" />
+    <Property Name="salida" Type="Double" />
   </EntityType>
   <EntityType Name="Categoria">
     <Key>
@@ -183,7 +179,6 @@
     <Property Name="rol_id" Type="Int32" />
     <Property Name="estado" Type="Boolean" />
     <Property Name="tokenRecuperacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Caja_Chica" Relationship="Self.Caja_Chica_Usuario_FK" FromRole="Usuario" ToRole="Caja_Chica" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Usuario" ToRole="Reparaciones" />
     <NavigationProperty Name="Resena" Relationship="Self.Resena_Usuario_FK" FromRole="Usuario" ToRole="Resena" />
@@ -263,18 +258,6 @@
       </Principal>
       <Dependent Role="Resena">
         <PropertyRef Name="articulo_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Caja_Chica_Usuario_FK">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Caja_Chica" Type="Self.Caja_Chica" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Caja_Chica">
-        <PropertyRef Name="usuario_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -446,10 +429,6 @@
     <AssociationSet Name="Resena_Articulo_FK" Association="Self.Resena_Articulo_FK">
       <End Role="Articulo" EntitySet="Articulo" />
       <End Role="Resena" EntitySet="Resena" />
-    </AssociationSet>
-    <AssociationSet Name="Caja_Chica_Usuario_FK" Association="Self.Caja_Chica_Usuario_FK">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Caja_Chica" EntitySet="Caja_Chica" />
     </AssociationSet>
     <AssociationSet Name="Detalle_Ingreso_Ingreso_FK" Association="Self.Detalle_Ingreso_Ingreso_FK">
       <End Role="Ingreso" EntitySet="Ingreso" />

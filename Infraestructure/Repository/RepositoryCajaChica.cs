@@ -19,7 +19,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Caja_Chica.Include(x => x.Usuario).ToList().
+                lista = ctx.Caja_Chica.ToList().
                     FindAll(l => l.fecha.Equals(fecha.Date));
             }
             return lista;
@@ -54,7 +54,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Caja_Chica.Include(x => x.Usuario).ToList<Caja_Chica>();
+                    lista = ctx.Caja_Chica.ToList<Caja_Chica>();
                 }
                 return lista;
             }
@@ -78,7 +78,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oCaja = ctx.Caja_Chica.Where(a => a.id == id).Include(x => x.Usuario).FirstOrDefault();
+                oCaja = ctx.Caja_Chica.Where(a => a.id == id).FirstOrDefault();
             }
             return oCaja;
         }

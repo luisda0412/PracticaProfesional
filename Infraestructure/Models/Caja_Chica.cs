@@ -16,13 +16,8 @@ namespace Infraestructure.Models
     {
         public int id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<double> efectivo_total { get; set; }
-        public Nullable<double> billetes { get; set; }
-        public Nullable<double> monedas { get; set; }
-        public Nullable<int> usuario_id { get; set; }
-        public Nullable<bool> tipo { get; set; }
-        public Nullable<bool> estado { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
+        public Nullable<double> saldo { get; set; }
+        public Nullable<double> entrada { get; set; }
+        public Nullable<double> salida { get; set; }
     }
 }

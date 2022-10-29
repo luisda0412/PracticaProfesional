@@ -99,7 +99,7 @@ namespace MvcApplication.Controllers
             {
                 try
                 {
-                    caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                  //  caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
                     caja.fecha = DateTime.Now;
                     _ServiceCaja.Save(caja);
                     TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "arqueo de caja guardado con éxito", SweetAlertMessageType.success);

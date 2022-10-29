@@ -19,12 +19,9 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="fecha" Type="datetime" />
-    <Property Name="efectivo_total" Type="float" />
-    <Property Name="billetes" Type="float" />
-    <Property Name="monedas" Type="float" />
-    <Property Name="usuario_id" Type="int" />
-    <Property Name="tipo" Type="bit" />
-    <Property Name="estado" Type="bit" />
+    <Property Name="saldo" Type="float" />
+    <Property Name="entrada" Type="float" />
+    <Property Name="salida" Type="float" />
   </EntityType>
   <EntityType Name="Categoria">
     <Key>
@@ -193,18 +190,6 @@
       </Principal>
       <Dependent Role="Articulo">
         <PropertyRef Name="proveedor_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="Caja_Chica_Usuario_FK">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Caja_Chica" Type="Self.Caja_Chica" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Caja_Chica">
-        <PropertyRef Name="usuario_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -400,10 +385,6 @@
     <AssociationSet Name="Articulo_Proveedor_FK" Association="Self.Articulo_Proveedor_FK">
       <End Role="Proveedor" EntitySet="Proveedor" />
       <End Role="Articulo" EntitySet="Articulo" />
-    </AssociationSet>
-    <AssociationSet Name="Caja_Chica_Usuario_FK" Association="Self.Caja_Chica_Usuario_FK">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Caja_Chica" EntitySet="Caja_Chica" />
     </AssociationSet>
     <AssociationSet Name="Detalle_Ingreso_Articulo_FK" Association="Self.Detalle_Ingreso_Articulo_FK">
       <End Role="Articulo" EntitySet="Articulo" />

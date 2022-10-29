@@ -20,12 +20,9 @@
         <MappingFragment StoreEntitySet="Caja_Chica">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="efectivo_total" ColumnName="efectivo_total" />
-          <ScalarProperty Name="billetes" ColumnName="billetes" />
-          <ScalarProperty Name="monedas" ColumnName="monedas" />
-          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
-          <ScalarProperty Name="tipo" ColumnName="tipo" />
-          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+          <ScalarProperty Name="entrada" ColumnName="entrada" />
+          <ScalarProperty Name="salida" ColumnName="salida" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

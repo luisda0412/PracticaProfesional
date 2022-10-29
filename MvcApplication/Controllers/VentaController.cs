@@ -18,6 +18,7 @@ namespace MvcApplication.Controllers
     public class VentaController: Controller
     {
         IServiceVenta _Serviceventa = new ServiceVenta();
+        public static double saldoActual { get; set; }
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Index()
@@ -82,6 +83,7 @@ namespace MvcApplication.Controllers
                 }
                 else
                 {
+                    Caja_Chica cajaChica = new Caja_Chica();
                     Facturas factura= new Facturas();
                     Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
                     //venta.nombre_cliente = user.nombre;
@@ -242,6 +244,19 @@ namespace MvcApplication.Controllers
                         factura.venta_id = venta.id;
                         factura.empresa_id = 1;
                         factura.tipoFactura = user.rol_id == 1 || user.rol_id == 2 ? factura.tipoFactura = true : factura.tipoFactura = false;
+
+                        //LLENAR DATOS DE CAJA CHICA
+                        if (venta.tipopago==true)
+                        {
+                            cajaChica.fecha = DateTime.Now;
+                            cajaChica.entrada = Convert.ToDouble(Request.Form["entrada"]);
+                            cajaChica.salida = cajaChica.entrada-venta.monto_total;
+                            saldoActual += (double)cajaChica.entrada;
+                            cajaChica.saldo = saldoActual-cajaChica.salida;
+
+                            IServiceCajaChica caja = new ServiceCajaChica();
+                            caja.Save(cajaChica);
+                        }
 
                         IServiceFactura serviceFactura = new ServiceFactura();
                         Facturas fac = serviceFactura.Save(factura);
