@@ -251,8 +251,8 @@ namespace MvcApplication.Controllers
                             cajaChica.fecha = DateTime.Now;
                             cajaChica.entrada = Convert.ToDouble(Request.Form["entrada"]);
                             cajaChica.salida = cajaChica.entrada-venta.monto_total;
-                            saldoActual += (double)cajaChica.entrada;
-                            cajaChica.saldo = saldoActual-cajaChica.salida;
+                            saldoActual += (double)cajaChica.entrada-(double)cajaChica.salida;
+                            cajaChica.saldo = saldoActual;
 
                             IServiceCajaChica caja = new ServiceCajaChica();
                             caja.Save(cajaChica);
