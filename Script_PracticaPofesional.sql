@@ -170,12 +170,9 @@ CONSTRAINT Rol_PK PRIMARY KEY (id)
 CREATE TABLE Caja_Chica(
 id int Identity(1,1) NOT NULL,
 fecha datetime,
-efectivo_total float,
-billetes float,
-monedas float,
-usuario_id int,
-tipo bit,
-estado bit
+saldo float,
+entrada float,
+salida float,
 
 CONSTRAINT Caja_Chica_PK PRIMARY KEY (id)
 );
@@ -214,10 +211,6 @@ ALTER TABLE Venta ADD CONSTRAINT Facturas_Fisica_Usuario_FK FOREIGN KEY (usuario
 
 --USUARIO
 ALTER TABLE Usuario ADD CONSTRAINT Usuario_Rol_FK FOREIGN KEY (rol_id) REFERENCES Rol (id)
-
-
---CAJA CHICA
-ALTER TABLE Caja_Chica ADD CONSTRAINT Caja_Chica_Usuario_FK FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
 
 --ARTICULO
 
@@ -321,10 +314,6 @@ INSERT INTO Servicio_Reparacion VALUES('Reparación de placa base',35000,1)
 
 INSERT INTO Empresa VALUES(1, 'VYCUZ', 'City Mall, Alajuela', 24335000)
 
-
---Insert a CAJA CHICA
-INSERT INTO Caja_Chica VALUES(GETDATE(),110000,80000,30000,1,1,1)
-INSERT INTO Caja_Chica VALUES(GETDATE(),90000,70000,20000,1,1,1)
 
 --INSERT A VENTA
 --1 Tarjeta 2 Efectivo
