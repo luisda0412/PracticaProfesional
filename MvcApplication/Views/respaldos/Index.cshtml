@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Respaldar Base de Datos";
+}
+<div class="container">
+    <div class="row">
+        <div class="col" align="center" style="margin-top:5%;">
+            <img class="img img-fluid" width="150" height="150" src="~/Img/cloud-computing.png" style="margin-bottom:2%;" />
+            <h2>¿Desea crear un respaldo de los datos del sistema?</h2>
+            <a class="btn btn-success" href="@Url.Action("guardarRespaldo", "Respaldos")">Crear respaldo</a>
+        </div>
+
+        <div class="col" align="center" style="margin-top:5%;">
+            <img class="img img-fluid" width="150" height="150" src="~/Img/data-recovery.png" style="margin-bottom:2%;" />
+            <h2>¿Desea restaurar una versión anterior de la base de datos?</h2>
+            @using (Html.BeginForm("restaurarRespaldo", "Respaldos", FormMethod.Post))
+            {
+                @Html.Hidden("ruta", "", new { @class = "form-control" })
+                <input style="display:none" type="file" id="file" name="file" required />
+                <label class="btn btn-primary" for="file">Seleccione el archivo</label>
+                <button class="btn btn-danger" type="submit">Restaurar</button>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <br />
+        <br />
+
+        <p>Nota: Consultá el manual de usuario para más información.</p>
+    </div>
+</div>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#file").change(function () {
+                var filePath = $('#file').val();
+                $("#ruta").val(filePath);
+
+            });
+        })
+    </script>
+}
+

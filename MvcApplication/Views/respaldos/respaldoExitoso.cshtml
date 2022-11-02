@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Respaldo Exitoso";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal" style="margin-top:6%; margin-bottom: 8%" align="center">
+    <h2 style=" padding-top: 2%;">¡Respaldo creado con éxito!<br />Se guardó el archivo en la carpeta RespaldosSCAP</h2>
+    <h5 style=" padding-top: 2%;">Consultar el manual de usuario para más información</h5>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <img class="img img-responsive" src="@Url.Content("~/Img/check-green.gif")" width="200" height="200" />
+        </div>
+    </div>
+
+    <center>
+        <div class="form-group">
+            <div class="col-md-10">
+                @*<p>
+                        <b>
+                            VYCUZ
+                        </b>
+                    </p>*@
+                <br />
+                <p>
+                    <a href="@Url.Action("Index", "Home")">Volver al Inicio</a>
+                </p>
+            </div>
+        </div>
+    </center>
+</div>
+

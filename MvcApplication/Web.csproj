@@ -284,6 +284,7 @@
     <Compile Include="Controllers\ReparacionesController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\ResenaController.cs" />
+    <Compile Include="Controllers\respaldosController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\ServicioReparacionController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -683,6 +684,9 @@
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
     <Content Include="Views\Home\IndexAdmin.cshtml" />
+    <Content Include="Views\respaldos\Index.cshtml" />
+    <Content Include="Views\respaldos\respaldoExitoso.cshtml" />
+    <Content Include="Views\respaldos\restauracionExitosa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
