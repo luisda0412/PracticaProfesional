@@ -28,7 +28,7 @@ namespace MvcApplication.Controllers
 
             if (ruta.Contains(".bak"))
             {
-                ruta = @"C:\RespaldosSCAP\" + ruta;
+                ruta = @"C:\RespaldosVYCUZ\" + ruta;
                 IServiceRespaldos serviceRespaldos = new ServiceRespaldos();
                 serviceRespaldos.restaurarRespaldo(ruta);
             }
