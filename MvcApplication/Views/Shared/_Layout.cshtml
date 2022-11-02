@@ -24,12 +24,18 @@
 
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
+                    if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3)
+                    {
                     <li class="nav-item">
                         @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
                     </li>
+                    }
                     @{
                         if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
                         {
+                            <li class="nav-item">
+                                @Html.ActionLink("Administración", "IndexAdmin", "Home", null, new { @class = "nav-link" })
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los mantenimientos del sistema VYCUZ" aria-haspopup="true" aria-expanded="false">Mantenimientos</a>
                                 <div class="dropdown-menu">
@@ -58,6 +64,12 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Reparación", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
                             </li>
+                            <li class="nav-item" id="cantidadLibros">
+                                @Html.Partial("MovimientoCantidad")
+                            </li>
+                            <li class="nav-item">
+                                <input type="text" value="<?php echo($Venta);?>" placeholder="CRC" readonly>
+                            </li>
                         }
                     }
                     <li class="nav-item">
@@ -66,12 +78,6 @@
                     <li class="nav-item">
                         @Html.ActionLink("Contácto", "Index", "Contacto", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item" id="cantidadLibros">
-                        @Html.Partial("MovimientoCantidad")
-                    </li>
-
-
-
                     <!--Para el Login VYCUZ-->
                     @{
                         string nombre = "Iniciar Sesión";
@@ -121,6 +127,7 @@
             </div>
         </div>
     </nav>
+    
     <div>
         <!--class="container body-content"-->
         @RenderBody()
@@ -189,7 +196,7 @@
 
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
+
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/sweetalert")
     @RenderSection("scripts", required: false)

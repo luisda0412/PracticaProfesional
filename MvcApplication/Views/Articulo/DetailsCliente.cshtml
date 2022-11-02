@@ -60,6 +60,8 @@
 
         <center>
             <div class="botones_producto">
+                if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
+                {
                 <button class="boton1">
                     @Ajax.ActionLink("Comprar",//Texto para el usuario
                    "ordenarProducto",//Acción a llamar
@@ -78,6 +80,7 @@
                     <img src="~/Imagenes/Iconos/shopping-cart.png" />
 
                 </button>
+                }
                 <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
             </div>
         </center>

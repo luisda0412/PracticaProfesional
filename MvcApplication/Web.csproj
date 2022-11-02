@@ -248,6 +248,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\CajaChicaController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
@@ -417,6 +418,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\cambio\cambiomoneda.php" />
     <Content Include="Scripts\contacto\contact.js" />
     <Content Include="Scripts\contacto\contact.php" />
     <Content Include="Scripts\contacto\jqBootstrapValidation.min.js" />

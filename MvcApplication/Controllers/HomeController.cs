@@ -19,8 +19,16 @@ namespace MvcApplication.Controllers
             return View();      
         }
 
+        public ActionResult IndexAdmin()
+        {
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            return View();
+        }
+
         public ActionResult Loguearse()
         {
+            
             return View();
         }
         public ActionResult recuperar()
@@ -50,8 +58,14 @@ namespace MvcApplication.Controllers
 
                     if (oUsuario != null)
                     {
+                        if (oUsuario.rol_id == 1)
+                        {
+                            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá" + oUsuario.nombre, SweetAlertMessageType.info);
+                            Session["User"] = oUsuario;
+                            return RedirectToAction("IndexAdmin");
+                        }
                         Session["User"] = oUsuario;
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá", SweetAlertMessageType.info);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá" + oUsuario.nombre, SweetAlertMessageType.info);
                         return RedirectToAction("Index");
                     }
                     else
