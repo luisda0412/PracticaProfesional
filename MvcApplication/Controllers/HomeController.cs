@@ -60,12 +60,12 @@ namespace MvcApplication.Controllers
                     {
                         if (oUsuario.rol_id == 1)
                         {
-                            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá" + oUsuario.nombre, SweetAlertMessageType.info);
+                            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá " + oUsuario.nombre, SweetAlertMessageType.info);
                             Session["User"] = oUsuario;
                             return RedirectToAction("IndexAdmin");
                         }
                         Session["User"] = oUsuario;
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá" + oUsuario.nombre, SweetAlertMessageType.info);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá " + oUsuario.nombre, SweetAlertMessageType.info);
                         return RedirectToAction("Index");
                     }
                     else

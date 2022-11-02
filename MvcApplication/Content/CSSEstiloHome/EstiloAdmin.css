@@ -1,0 +1,190 @@
+﻿
+
+/*Estilo Tarjetas-------------------------------------*/
+
+.tarjetas .container {
+    width: 90%;
+    min-height: 70vh;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tarjetas .center {
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjetas .card {
+    background-color: white;
+    width: 290px;
+    text-align: justify;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 5px;
+    box-shadow: -20px -20px 0px 0px green;
+    border-radius: 10px;
+    -webkit-animation-name: shadow-show;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1.5s;
+    /* Safari 4.0 - 8.0 */
+    animation-name: shadow-show;
+    animation-duration: 1.5s;
+    transition-timing-function: cubic-bezier(0.795, 0, 0.165, 1);
+    /* custom */
+}
+
+    .tarjetas .card h1, .card h2, .card h3, .card h4, .card h5 {
+        margin: 0px;
+        padding: 0px 0px 15px 0px;
+        font-family: "Noto Sans KR", sans-serif;
+        font-size: 30px;
+        color: #282828;
+    }
+
+    .tarjetas .card hr {
+        display: block;
+        border: none;
+        height: 3px;
+        background-color: green;
+        margin: 0px;
+        -webkit-animation-name: line-show;
+        /* Safari 4.0 - 8.0 */
+        -webkit-animation-duration: 0.3s;
+        /* Safari 4.0 - 8.0 */
+        animation-name: line-show;
+        animation-duration: 0.3s;
+        transition-timing-function: cubic-bezier(0.795, 0, 0.165, 1);
+        /* custom */
+    }
+
+.card p {
+    margin: 15px 0px 0px 0px;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 100;
+    letter-spacing: -0.25px;
+    line-height: 1.25;
+    font-size: 18px;
+    word-break: break-all;
+    word-wrap: pre-wrap;
+    text-align: justify;
+    color: #282828;
+    -webkit-animation-name: p-show;
+    /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1.5s;
+    /* Safari 4.0 - 8.0 */
+    animation-name: p-show;
+    animation-duration: 1.5s;
+}
+
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes line-show {
+    from {
+        margin: 0px 100px;
+    }
+
+    to {
+        margin: 0px;
+    }
+}
+/* Standard syntax */
+@keyframes line-show {
+    from {
+        margin: 0px 100px;
+    }
+
+    to {
+        margin: 0px;
+    }
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes p-show {
+    from {
+        color: white;
+    }
+
+    to {
+        color: #282828;
+    }
+}
+/* Standard syntax */
+@keyframes p-show {
+    from {
+        color: white;
+    }
+
+    to {
+        color: #282828;
+    }
+}
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes shadow-show {
+    from {
+        box-shadow: 0px 0px 0px 0px #e0e0e0;
+    }
+
+    to {
+        box-shadow: -20px -20px 0px 0px green;
+    }
+}
+/* Standard syntax */
+@keyframes shadow-show {
+    from {
+        box-shadow: 0px 0px 0px 0px #e0e0e0;
+    }
+
+    to {
+        box-shadow: -20px -20px 0px 0px green;
+    }
+}
+
+/* From uiverse.io by @barisdogansutcu */
+.pdf {
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: 0;
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 5%) 0 5px 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 18px;
+    transition: all .5s ease;
+}
+
+    .pdf:hover {
+        letter-spacing: 3px;
+        background-color: hsl(123 65% 50%);
+        color: hsl(0, 0%, 100%);
+        -webkit-box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+        -moz-box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+        box-shadow: 0px 3px 18px 5px rgba(106,176,83,1);
+    }
+
+    .pdf:active {
+        letter-spacing: 3px;
+        background-color: hsl(123 65% 50%);
+        color: hsl(0, 0%, 100%);
+        box-shadow: hsl(123 65% 50%) 0px 0px 0px 0px;
+        transform: translateY(10px);
+        transition: 100ms;
+    }
+
+    .pdf img {
+        height: 30px;
+        margin-left: 5px;
+    }
+
+    .pdf a {
+        text-decoration: none;
+        font-family: 'Agency FB';
+        font-weight: 700;
+        color: black;
+    }
+
+    .pdf a:hover {
+        color: white;
+    }

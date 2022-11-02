@@ -30,7 +30,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                TempData["Message"] = "Error al procesar los datos! " + e.Message;
             }
             return View(lista);
         }

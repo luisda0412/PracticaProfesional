@@ -386,3 +386,16 @@ D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.pd
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.xml
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.pdb
 D:\Universidad\Practica\PracticaProfesional\MvcApplication\bin\Common.Logging.Core.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Google.Protobuf.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Compression.LZ4.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Compression.LZ4.Streams.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Hash.xxHash.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\MySql.Data.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\MySqlBackup.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\ZstdNet.dll
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Google.Protobuf.pdb
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\Google.Protobuf.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Compression.LZ4.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Compression.LZ4.Streams.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\K4os.Hash.xxHash.xml
+C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\MvcApplication\bin\MySql.Data.xml

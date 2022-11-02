@@ -24,11 +24,13 @@
 
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
-                    if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3)
-                    {
-                    <li class="nav-item">
-                        @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
-                    </li>
+                    @{
+                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3)
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
+                            </li>
+                        }
                     }
                     @{
                         if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
@@ -66,9 +68,6 @@
                             </li>
                             <li class="nav-item" id="cantidadLibros">
                                 @Html.Partial("MovimientoCantidad")
-                            </li>
-                            <li class="nav-item">
-                                <input type="text" value="<?php echo($Venta);?>" placeholder="CRC" readonly>
                             </li>
                         }
                     }

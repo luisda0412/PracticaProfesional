@@ -29,8 +29,6 @@ namespace MvcApplication.Controllers
 {
     public class ReportesController: Controller
     {
-        CultureInfo culture;
-        string specifier;
 
         public ActionResult ProductosLista()
         {
