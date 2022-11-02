@@ -314,7 +314,6 @@ namespace MvcApplication.Controllers
 
                 cell = new Cell()
                 .Add(new Paragraph("Reporte del día\n").SetFont(bold))
-                    .Add(new Paragraph("Inventario del local City Mall\n").SetFont(bold))
                     .Add(new Paragraph("Fecha de emisión: " + DateTime.Now.ToShortDateString()))
                     .Add(new Paragraph("Usuario: " + user.nombre))
                     .AddStyle(styleText).AddStyle(styleCell);
@@ -393,7 +392,12 @@ namespace MvcApplication.Controllers
         }
         public ActionResult CreatePdfIngresos()
         {
-           
+            string FONT = "c:/windows/fonts/arial.ttf";
+            PdfFont fuente = PdfFontFactory.CreateFont(FONT);
+
+
+            Registro_Inventario_VYCUZEntities dbIngresos = new Registro_Inventario_VYCUZEntities();
+
             IEnumerable<Ingreso> lista = null;
             Usuario user = null;
             try
@@ -411,87 +415,71 @@ namespace MvcApplication.Controllers
                 MemoryStream ms = new MemoryStream();
                 //Initialize writer
                 PdfWriter writer = new PdfWriter(ms);
-
-                //Initialize document
-                PdfDocument pdfDoc = new PdfDocument(writer);
-                Document doc = new Document(pdfDoc, PageSize.A4, false);
-
-
-                //Titulo
-                Paragraph header = new Paragraph("Reporte de Ingresos")
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(14)
-                                   .SetFontColor(ColorConstants.GREEN);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 35, 70, 35);
 
                 //Imagen de la empresa
                 Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
                 logo = logo.SetHeight(50).SetWidth(120);
 
+                //Eventos de pie y encabezado de pagina
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
+                pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
 
-                //Nombre y apellidos del usuario
-                Paragraph cadenanombre = new Paragraph("Usuario: " + user.nombre)
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(12)
-                                   .SetFontColor(ColorConstants.BLACK);
+                Table table = new Table(1).UseAllAvailableWidth();
+                Cell cell = new Cell().Add(new Paragraph("Reporte de Ingresos").SetFontSize(14))
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetBorder(Border.NO_BORDER);
+                table.AddCell(cell);
 
-                //Para la fecha del sistema
-                Paragraph fecha = new Paragraph(DateTime.Now.ToString())
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(10)
-                                   .SetFontColor(ColorConstants.BLACK);
+                cell = new Cell().Add(new Paragraph("Compras registradas en el sistema"))
+                      .SetTextAlignment(TextAlignment.CENTER)
+                      .SetBorder(Border.NO_BORDER); ;
+                table.AddCell(cell);
 
-
-                doc.Add(cadenanombre);
-                doc.Add(fecha);
-                doc.Add(logo);
-                doc.Add(header);
-
-                // Crear tabla con 4 columnas 
-                Table table = new Table(4, true);
-
-                table.AddHeaderCell("# Ingreso");
-                table.AddHeaderCell("Usuario");
-                table.AddHeaderCell("Fecha y Hora");
-                table.AddHeaderCell("Monto Total");
-
-                foreach (var item in lista)
-                {
-                    //FALTA RECORRER LOS DETALLES DE CADA INGRESO
-
-                    // Agregar datos a las celdas
-                    table.AddCell(new Paragraph(Convert.ToString(item.id)));
-                    table.AddCell(new Paragraph(item.Usuario.nombre));
-                    table.AddCell(new Paragraph(item.fecha.ToString()));
-                    string preciobien = "₡" + item.monto_total.ToString();
-                    table.AddCell(new Paragraph(preciobien));
-                 
-               
-                }
                 doc.Add(table);
 
 
+                Style styleCell = new Style()
+                    .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                // Colocar número de páginas
-                int numberOfPages = pdfDoc.GetNumberOfPages();
-                for (int i = 1; i <= numberOfPages; i++)
+                Table _table = new Table(4).UseAllAvailableWidth();
+                //2 filas y 1 celda
+                Cell _cell = new Cell().Add(new Paragraph("#"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Usuario"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Fecha"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Monto Total"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+
+                List<Ingreso> model = dbIngresos.Ingreso.ToList();
+
+                int x = 0;
+                foreach (var item in model)
                 {
-
-                    // Write aligned text to the specified by parameters point
-
-
-
-                    Paragraph p = new Paragraph("Reporte de registro de ingresos");
-                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    x++;
+                    _cell = new Cell().Add(new Paragraph(x.ToString()));
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.Usuario.nombre)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph("₡" + item.monto_total.ToString()).SetFont(fuente)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
                 }
 
-
-                //Close document
+                doc.Add(_table);
                 doc.Close();
-                // Retorna un File
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación del reporte", "Reporte de ingresos realizado con éxito!", SweetAlertMessageType.success);
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+                ms.Position = 0;
+
                 return File(ms.ToArray(), "application/pdf", "Reporte de ingresos.pdf");
-
-
             }
             catch (Exception ex)
             {
@@ -501,6 +489,7 @@ namespace MvcApplication.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
+
 
         }
 
