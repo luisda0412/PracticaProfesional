@@ -365,8 +365,10 @@
     <Content Include="Content\CSSEstiloVentas\EstiloDetalleVentas.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloListaVentas.css" />
     <Content Include="Content\CSSEstiloVentas\EstiloMovimientoVenta.css" />
+    <Content Include="Content\EstiloNoAuth.css" />
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\fondo2.jpg" />
+    <Content Include="Content\fondoauth.jpg" />
     <Content Include="Content\pic4.png" />
     <Content Include="Content\Prettify\prettify.css" />
     <Content Include="Content\Prettify\Themes\desert.css" />
@@ -404,6 +406,7 @@
     <Content Include="Imagenes\Iconos\mail.png" />
     <Content Include="Imagenes\Iconos\net.png" />
     <Content Include="Imagenes\Iconos\pdf.png" />
+    <Content Include="Imagenes\Iconos\reciclar.png" />
     <Content Include="Imagenes\Iconos\respaldo.png" />
     <Content Include="Imagenes\Iconos\shopping-cart.png" />
     <Content Include="Imagenes\Iconos\tel.png" />

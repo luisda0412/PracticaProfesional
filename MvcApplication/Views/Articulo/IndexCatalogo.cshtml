@@ -68,8 +68,7 @@
                                     <div class="card-body" style="display:flex; justify-content:space-evenly">
                                         <button class="boton2">@Html.ActionLink("Ver :)", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
                                         <button style="margin-left: 5px" class="boton3" id="carrito">
-                                            <img style="height:30px" src="~/Imagenes/Iconos/cart.png" />
-                                            @Ajax.ActionLink(" ",//Texto para el usuario
+                                            @Ajax.ActionLink("+",//Texto para el usuario
                                            "ordenarProducto",//Acción a llamar
                                            "Venta",
                                            new

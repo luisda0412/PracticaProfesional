@@ -1,21 +1,23 @@
 ﻿
 @{
     ViewBag.Title = "Acceso Denegado";
+
 }
 
-<link rel="stylesheet" href="~/Content/EstiloNoAutorizado.css">
+<link rel="stylesheet" href="~/Content/EstiloNoAuth.css">
 <center>
     <section class="cuerpo">
         <br>
         <br>
+        <h2 style="font-size:28px; font-weight:bold; margin-top:10%;">Ups! Inicie su sesión para poder realizar esta acción!</h2>
         <br>
         <br>
-        <br>
-        <br>
-        <h2>Ups! Inicie su sesión para poder realizar esta acción!</h2>
-        <br>
-        <br>
-        <input type="button" value="Regresar" class="btn btn-warning" onclick="goBack()" />
+        <!--<input type="button" value="Volver Atrás" class="atras" onclick="goBack()" />-->
+
+        <button onclick="goBack()" class="atras">
+            <span class="actual-text">&nbsp;Volver Atrás&nbsp;</span>
+            <span class="hover-text" aria-hidden="true">&nbsp;Volver Atrás&nbsp;</span>
+        </button>
         <br>
         <br>
 

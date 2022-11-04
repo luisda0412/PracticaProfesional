@@ -10,24 +10,56 @@
 <div class="tarjetas">
     <div class="container center">
         <div class="card">
-            <h2>Respaldos</h2>
+            <h2>Respaldar BD</h2>
             <hr />
-            <p>
-                Acá podrá crear el respaldo de la base de datos VYCUZ hoy  @DateTime.Now.ToShortDateString() en caso de necesitarlo :), recuerde que este archivo lo podrá encontrar en su carpeta local como vycuzBackup.sql
-            </p>
+            <div class="card-text">
+                Acá podrá crear el respaldo de la base de datos VYCUZ hoy  @DateTime.Now.ToShortDateString() en caso de necesitarlo, el mismo podrá encontrarlo en su disco local:).
+            </div>
             <br />
             <button class="pdf">
                 @Html.ActionLink("Crear Respaldo", "respaldoBD", "Admin")<img src="~/Imagenes/Iconos/respaldo.png" />
             </button>
         </div>
     </div>
+
+    <div class="container center">
+        <div class="card">
+            <h2>Restaurar BD</h2>
+            <hr />
+            <div class="card-text">
+                Acá podrá crear la restauración de la base de datos VYCUZ hoy  @DateTime.Now.ToShortDateString(), en caso de necesitarlo solo presione el botón de abajo :).
+            </div>
+            <br />
+            <center>
+                @using (Html.BeginForm("restaurarRespaldo", "Admin", FormMethod.Post))
+                {
+                    @Html.Hidden("ruta", "", new { @class = "form-control" })
+                    <input style="display:none" type="file" id="file" name="file" required />
+                    <label style="background-color:#cfcfcf; padding:15px; border-radius:10px;" for="file">Seleccione el archivo</label>
+                    <button class="pdf" type="submit">
+                        Crear Restauración<img src="~/Imagenes/Iconos/reciclar.png" />
+                    </button>
+                }
+            </center>
+
+        </div>
+    </div>
 </div>
 
+<div class="reportes">
 
+</div>
 
-@if (ViewBag.NotificationMessage != null)
-{
-    <script>
-            @Html.Raw(@ViewBag.NotificationMessage);
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryajax")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#file").change(function () {
+                var filePath = $('#file').val();
+                $("#ruta").val(filePath);
+
+            });
+        })
     </script>
 }

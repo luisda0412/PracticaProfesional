@@ -1,4 +1,5 @@
-﻿using MvcApplication.Util;
+﻿using AplicationCore.Services;
+using MvcApplication.Util;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -14,29 +15,26 @@ namespace MvcApplication.Controllers
         public ActionResult respaldoBD()
         {
 
-            string cnx = "server=localhost;user=sa;pwd=123456;database=Registro_Inventario_VYCUZ;";
-            cnx += "charset=utf8;convertzerodatetime=true;";
-
-            string mibackup = "C:\\vycuzBackup.sql";
-
-            using (MySqlConnection conn = new MySqlConnection(cnx))
-            {
-                using (MySqlCommand cmd= new MySqlCommand())
-                {
-                    using (MySqlBackup mb= new MySqlBackup(cmd))
-                    {
-                        cmd.Connection = conn;
-                        conn.Open();
-                        mb.ExportToFile(mibackup);
-                        conn.Close();
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Respaldo Exitoso!", "El respado se ha creado en su carpeta local C", SweetAlertMessageType.info);
-                    }
-
-                }
-
-            }
+            IServiceRespaldos serviceRespaldos = new ServiceRespaldos();
+            serviceRespaldos.guardarRespaldo();
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Respaldo Exitoso!", "El respaldo se ha creado!", SweetAlertMessageType.success);  
             return RedirectToAction("IndexAdmin", "Home");
 
+        }
+
+        public ActionResult restaurarRespaldo(string ruta)
+        {
+            ruta = ruta.Substring(12);
+
+            if (ruta.Contains(".bak"))
+            {
+                ruta = @"C:\RespaldosVYCUZ\" + ruta;
+                IServiceRespaldos serviceRespaldos = new ServiceRespaldos();
+                serviceRespaldos.restaurarRespaldo(ruta);
+            }
+
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Restauración Exitosa!", "La restauración se ha creado!", SweetAlertMessageType.success);
+            return RedirectToAction("IndexAdmin", "Home");
         }
     }
 }

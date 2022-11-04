@@ -103,7 +103,7 @@
         box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
     }
 
-/*Estilo para la lista de proveedores--------------------------------*/
+/*Estilo para la lista de categorias--------------------------------*/
 
 .list-group-item {
     --color: #560bad;
@@ -223,9 +223,17 @@
     .boton3{
         border-radius:50px;
         border:none;
-        background-color:orange;
+        background-color: #191919;
     }
 
         .boton3:hover {
-            background-color: #191919;
+            background-color: #1a8623;
+        }
+
+        .boton3 a{
+            text-decoration:none;
+            font-size:20px;
+            color:white;
+            font-weight:bold;
+
         }

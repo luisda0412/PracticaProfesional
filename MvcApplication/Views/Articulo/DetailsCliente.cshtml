@@ -60,29 +60,32 @@
 
         <center>
             <div class="botones_producto">
-                if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
-                {
-                <button class="boton1">
-                    @Ajax.ActionLink("Comprar",//Texto para el usuario
-                   "ordenarProducto",//Acción a llamar
-                   "Venta",
-                   new
-                   {
-                       idArtiuclo = Model.id
-                   },//Parámetros a enviar
-                   new AjaxOptions
-                   {
-                       UpdateTargetId = "cantidadLibros",
-                       InsertionMode = InsertionMode.Replace,
-                       HttpMethod = "GET",
-                   }, new { }
-                   )
-                    <img src="~/Imagenes/Iconos/shopping-cart.png" />
+                @{
+                    if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
+                    {
+                        <button class="boton1">
+                            @Ajax.ActionLink("Comprar",//Texto para el usuario
+                                "ordenarProducto",//Acción a llamar
+                                "Venta",
+                                new
+                                {
+                                    idArtiuclo = Model.id
+                                },//Parámetros a enviar
+                                new AjaxOptions
+                                {
+                                    UpdateTargetId = "cantidadLibros",
+                                    InsertionMode = InsertionMode.Replace,
+                                    HttpMethod = "GET",
+                                }, new { }
+                                )
+                            <img src="~/Imagenes/Iconos/shopping-cart.png" />
 
-                </button>
-                }
-                <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
-            </div>
+                     
+                        </button>
+                        }
+                    }
+                    <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
+                </div>
         </center>
     </section>
     <section class="partebaja" style=" overflow-y: hidden; overflow-x:hidden">
