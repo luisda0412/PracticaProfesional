@@ -9,10 +9,6 @@ namespace MvcApplication.Controllers
 {
     public class respaldosController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public ActionResult guardarRespaldo()
         {

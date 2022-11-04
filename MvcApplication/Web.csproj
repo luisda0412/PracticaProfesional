@@ -690,9 +690,6 @@
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
     <Content Include="Views\Home\IndexAdmin.cshtml" />
-    <Content Include="Views\respaldos\Index.cshtml" />
-    <Content Include="Views\respaldos\respaldoExitoso.cshtml" />
-    <Content Include="Views\respaldos\restauracionExitosa.cshtml" />
     <Content Include="Views\Cotizacion\_PartialViewDetalle.cshtml" />
     <Content Include="Views\Cotizacion\Index.cshtml" />
   </ItemGroup>
