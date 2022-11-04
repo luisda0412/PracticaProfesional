@@ -277,6 +277,7 @@
     <Compile Include="Controllers\CajaChicaController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
+    <Compile Include="Controllers\CotizacionController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngresoController.cs" />
@@ -305,7 +306,9 @@
     <Compile Include="Utils\Util.cs" />
     <Compile Include="ViewModel\Carrito.cs" />
     <Compile Include="ViewModel\Comprita.cs" />
+    <Compile Include="ViewModel\Cotizacion.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelDetalleCotizacion.cs" />
     <Compile Include="ViewModel\ViewModelDetalleEncabezado.cs" />
     <Compile Include="ViewModel\ViewModelDetalleIngreso.cs" />
   </ItemGroup>
@@ -690,6 +693,8 @@
     <Content Include="Views\respaldos\Index.cshtml" />
     <Content Include="Views\respaldos\respaldoExitoso.cshtml" />
     <Content Include="Views\respaldos\restauracionExitosa.cshtml" />
+    <Content Include="Views\Cotizacion\_PartialViewDetalle.cshtml" />
+    <Content Include="Views\Cotizacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

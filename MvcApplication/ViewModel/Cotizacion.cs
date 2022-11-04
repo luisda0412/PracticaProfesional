@@ -3,39 +3,37 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Web.ViewModel;
 
 namespace Web.ViewModel
 {
-    public class Comprita
+    public class Cotizacion
     {
-
         public List<ViewModelDetalleIngreso> Items { get; private set; }
 
         //Implementación Singleton
 
         // Las propiedades de solo lectura solo se pueden establecer en la inicialización o en un constructor
-        public static readonly Comprita Instancia;
+        public static readonly Cotizacion Instancia;
 
         // Se llama al constructor estático tan pronto como la clase se carga en la memoria
-        static Comprita()
+        static Cotizacion()
         {
-            // Si el carrito no está en la sesión, cree uno y guarde los items.
-            if (HttpContext.Current.Session["comprita"] == null)
+            // Si el cotizacion no está en la sesión, cree uno y guarde los items.
+            if (HttpContext.Current.Session["cotizacion"] == null)
             {
-                Instancia = new Comprita();
+                Instancia = new Cotizacion();
                 Instancia.Items = new List<ViewModelDetalleIngreso>();
-                HttpContext.Current.Session["comprita"] = Instancia;
+                HttpContext.Current.Session["cotizacion"] = Instancia;
             }
             else
             {
                 // De lo contrario, obténgalo de la sesión.
-                Instancia = (Comprita)HttpContext.Current.Session["comprita"];
+                Instancia = (Cotizacion)HttpContext.Current.Session["cotizacion"];
             }
         }
 
         // Un constructor protegido asegura que un objeto no se puede crear desde el exterior
-        protected Comprita() { }
+        protected Cotizacion() { }
 
         /**
          * AgregarItem (): agrega un artículo a la compra
@@ -43,7 +41,7 @@ namespace Web.ViewModel
         public String AgregarItem(int productoID)
         {
             String mensaje = "";
-            // Crear un nuevo artículo para agregar al carrito
+            // Crear un nuevo artículo para agregar al cotizacion
             ViewModelDetalleIngreso nuevoItem = new ViewModelDetalleIngreso(productoID);
             // Si este artículo ya existe en lista de libros, aumente la Cantidad
             // De lo contrario, agregue el nuevo elemento a la lista
@@ -60,19 +58,19 @@ namespace Web.ViewModel
                     nuevoItem.cantidad = 1;
                     Items.Add(nuevoItem);
                 }
-                mensaje = SweetAlertHelper.Mensaje("Nuevo Ingreso", "Artículo agregado a la compra", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Carrito actualizado", "Artículo agregado a la orden", SweetAlertMessageType.success);
 
             }
             else
             {
-                mensaje = SweetAlertHelper.Mensaje("Nueva Venta", "El artículo solicitado no se encuentra en stock", SweetAlertMessageType.warning);
+                mensaje = SweetAlertHelper.Mensaje("Ups!", "El artículo solicitado no existe", SweetAlertMessageType.warning);
             }
             return mensaje;
         }
 
 
         /**
-         * SetItemCantidad(): cambia la Cantidad de un artículo en el carrito
+         * SetItemCantidad(): cambia la Cantidad de un artículo en el cotizacion
          */
         public String SetItemCantidad(int productoID, int Cantidad)
         {
@@ -81,18 +79,18 @@ namespace Web.ViewModel
             if (Cantidad == 0)
             {
                 EliminarItem(productoID);
-                mensaje = SweetAlertHelper.Mensaje("Orden Compra", "Artículo eliminado", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Orden Libro", "Producto eliminado", SweetAlertMessageType.success);
 
             }
             else
             {
                 // Encuentra el artículo y actualiza la Cantidad
-                ViewModelDetalleIngreso actualizarItem = new ViewModelDetalleIngreso(productoID);
+                ViewModelDetalleEncabezado actualizarItem = new ViewModelDetalleEncabezado(productoID);
                 if (Items.Exists(x => x.idArticulo == productoID))
                 {
                     ViewModelDetalleIngreso item = Items.Find(x => x.idArticulo == productoID);
                     item.cantidad = Cantidad;
-                    mensaje = SweetAlertHelper.Mensaje("Orden Compra", "Cantidad actualizada", SweetAlertMessageType.success);
+                    mensaje = SweetAlertHelper.Mensaje("Orden Detalle", "Cantidad actualizada", SweetAlertMessageType.success);
 
                 }
             }
@@ -101,7 +99,7 @@ namespace Web.ViewModel
         }
 
         /**
-         * EliminarItem (): elimina un artículo del carrito de compras
+         * EliminarItem (): elimina un artículo del cotizacion de compras
          */
         public String EliminarItem(long productoID)
         {
@@ -110,7 +108,7 @@ namespace Web.ViewModel
             {
                 var itemEliminar = Items.Single(x => x.idArticulo == productoID);
                 Items.Remove(itemEliminar);
-                mensaje = SweetAlertHelper.Mensaje("Orden Compra", "Artículo eliminado", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Orden Libro", "Producto eliminado", SweetAlertMessageType.success);
             }
             return mensaje;
 
@@ -122,7 +120,7 @@ namespace Web.ViewModel
         public decimal GetTotal()
         {
             decimal total = 0;
-            total = GetSubTotal();
+            total = GetSubTotal() + GetImpuesto();
 
             return total;
         }
