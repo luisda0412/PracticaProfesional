@@ -194,8 +194,8 @@
                     url: "/Cotizacion/actualizarCantidad",
                     data: { "idArticulo": id, "cantidad": cantidad },
                     success: function (data) {
-                        $("#resultadoDetalle").html('');
-                        $("#resultadoDetalle").html(data);
+                        $("#resultadoCotizacion").html('');
+                        $("#resultadoCotizacion").html(data);
                     }, error: function (xhr, status, error) {
                         console.log("Error: " + error + ", No Error: " + xhr.status);
                     },
