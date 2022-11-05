@@ -80,8 +80,12 @@
                                     @Html.Label("married-true", "Tarjeta")
                                     @Html.ValidationMessageFor(model => model.tipopago, "", new { @class = "text-danger" })
                                 </div>
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Entrada de dinero:</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group3">
+                                @Html.Label("Efectivo recibido", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
                                     <input name="entrada" class="form-control" id="message-text" style="max-width:100%">
                                 </div>
                             </div>

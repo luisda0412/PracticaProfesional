@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Security;
 using Web.Utils;
+using Web.ViewModel;
 
 namespace MvcApplication.Controllers
 {
@@ -332,6 +333,22 @@ namespace MvcApplication.Controllers
                     throw;
                 }
             }
+        }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+
+        public ActionResult ordenarProducto(int? idArticulo)
+        {
+            if (idArticulo == 0)
+            {
+                idArticulo = Convert.ToInt32(TempData["idArticulo"]);
+            }
+
+            int cantidadLibros = Carrito.Instancia.Items.Count();
+            TempData["mensaje"] = Carrito.Instancia.AgregarItem((int)idArticulo);
+
+            return PartialView("MovimientoCantidad");
+
         }
     }
 }

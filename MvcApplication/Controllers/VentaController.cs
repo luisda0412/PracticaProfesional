@@ -1,10 +1,21 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
+using iText.IO.Font.Constants;
+using iText.IO.Image;
+using iText.Kernel.Colors;
+using iText.Kernel.Font;
+using iText.Kernel.Geom;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
 using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -189,10 +200,11 @@ namespace MvcApplication.Controllers
                         root.AppendChild(nodoCliente);
 
                         string descuento2="";
-
+                        Detalle_Venta linea = new Detalle_Venta();
+                        
                         foreach (var items in listaLinea)
                         {
-                            Detalle_Venta linea = new Detalle_Venta();
+                            
                             linea.articulo_id = (int)items.idArticulo;
                             linea.cantidad = items.cantidad;
                             venta.impuesto = (double?)Carrito.Instancia.GetImpuesto();
@@ -235,7 +247,7 @@ namespace MvcApplication.Controllers
                         //venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
                         //CREAR EL XML
 
-                        //SI TODO ESTA BIEN SE GUARA LA VENTA
+                        //SI TODO ESTA BIEN SE GUARDA LA VENTA
 
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
@@ -306,18 +318,100 @@ namespace MvcApplication.Controllers
                         resumenFactura.AppendChild(montoTotalResumen);
                         root.AppendChild(resumenFactura);
 
-                        //ADJUNTAR ELEMENTOS AL NODO DE FACTURA ELECTRONICA
-                        //root.AppendChild(nodoEmpresa);
-                        //root.AppendChild(nodoCliente);
-                        //root.AppendChild(nodoVenta);
-                        //root.AppendChild(nodoDetalle);
-
-                        //root.AppendChild(nodoVenta);
-
-
                         string XML = xml.DocumentElement.OuterXml;
 
-                        //ENVIAR EL CORREO
+
+                        //------------------------------------------------------------------------------------------------------------------------
+                        //Crear el pdf de la factura--------------------------------------------------------------------------------------
+                        //------------------------------------------------------------------------------------------------------------------------
+                        MemoryStream ms = new MemoryStream();
+                        if (emailForm.ToString().Length != 0)
+                        {
+                            try
+                            {
+                               
+                                PdfWriter writer = new PdfWriter(ms);
+                                PdfDocument pdfDoc = new PdfDocument(writer);
+                                Document doc = new Document(pdfDoc, PageSize.A4, false);
+
+                                Paragraph header = new Paragraph("Factura Electrónica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(20);
+
+                                //Imagen de la empresa
+                                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
+                                logo = logo.SetHeight(50).SetWidth(120);
+
+                                Paragraph cadenanombre = new Paragraph("Atendido por: " + user.nombre).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
+                                Paragraph header2 = new Paragraph("2ndo Piso, City Mall").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
+                                Paragraph header3 = new Paragraph("Alajuela, Costa Rica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
+                                Paragraph fecha = new Paragraph("Fecha de Compra: " + DateTime.Now.ToString()).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
+                                Paragraph header4 = new Paragraph("Cliente " + nombreForm).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
+                                Paragraph header5 = new Paragraph("-------------------------").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(10).SetFontColor(ColorConstants.BLACK);
+
+                                doc.Add(header);
+                                doc.Add(fecha);
+                                doc.Add(logo);
+                                doc.Add(cadenanombre);
+                                doc.Add(header2);
+                                doc.Add(header3);
+                                doc.Add(header4);
+
+                                // Crear tabla con 4 columnas 
+                                Table table = new Table(4, true);
+
+                                table.AddHeaderCell("#");
+                                table.AddHeaderCell("Descripción");
+                                table.AddHeaderCell("Unidades");
+                                table.AddHeaderCell("Precio");
+
+                                int x = 0;
+                                double subtotal = 0;
+                                foreach (var item in listaLinea)
+                                {
+                                    x++;
+                                    table.AddCell(new Paragraph(x.ToString()));
+                                    IServiceArticulo servicio = new ServiceArticulo();
+                                    Articulo arti = servicio.GetArticuloByID((int)item.idArticulo);
+                                    table.AddCell(new Paragraph(arti.nombre));
+                                    table.AddCell(new Paragraph(item.cantidad.ToString()));
+                                    table.AddCell(new Paragraph(item.precio.ToString()));
+                                    subtotal += (double)item.precio;
+                                }
+                                doc.Add(table);
+
+
+                                doc.Add(header5);
+
+
+
+                                Table table2 = new Table(3, true);
+
+                                table2.AddHeaderCell("Subtotal");
+                                table2.AddHeaderCell("Impuesto IVA");
+                                table2.AddHeaderCell("Total");
+
+                                table2.AddCell(new Paragraph(Carrito.Instancia.GetSubTotal().ToString()));
+                                table2.AddCell(new Paragraph(Carrito.Instancia.GetImpuesto().ToString()));
+                                table2.AddCell(new Paragraph(venta.monto_total.ToString()));
+
+                                doc.Add(table2);
+
+                                Paragraph header6 = new Paragraph("Gracias por comprar con VYCUZ!").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14);
+                                doc.Add(header6);
+
+                                doc.Close();
+                                return File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
+
+                            }
+                            catch (Exception ex)
+                            {
+                                TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
+                            }
+                        }
+
+
+                        //-------------------------------------------------------------------------
+                        //ENVIAR EL CORREO---------------------------------------------------------
+                        //-------------------------------------------------------------------------
 
                         if (emailForm!= null)
                         {
@@ -326,8 +420,8 @@ namespace MvcApplication.Controllers
                             string Contraseña = "ecfykdmojjjlpfcn";
                             string url = urlDomain + "/Usuario/Recuperacion/?token=";
                             MailMessage oMailMessage = new MailMessage(EmailOrigen, emailForm, "Compra exitosa",
-                                "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
-                            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
+                                "<p>Estimado usuario,</br></br><hr/>Ha realizado una compra en VYCUZ.</p>");
+                            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));                        
                             oMailMessage.IsBodyHtml = true;
 
                             SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
@@ -341,8 +435,12 @@ namespace MvcApplication.Controllers
 
                             oSmtpClient.Dispose();
                         }
+
+
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Venta generada!", "La venta se ha registrado en la base de datos!", SweetAlertMessageType.success);
+                        return RedirectToAction("IndexCatalogo", "Articulo");
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("IndexCatalogo","Articulo");
                 }
             }
             catch (Exception ex)
@@ -367,11 +465,14 @@ namespace MvcApplication.Controllers
 
         public ActionResult ordenarProducto(int? idArticulo)
         {
-            idArticulo = Convert.ToInt32(TempData["idArticulo"]);
+            if (idArticulo == 0)
+            {
+                idArticulo = Convert.ToInt32(TempData["idArticulo"]);
+            }
+
             int cantidadLibros = Carrito.Instancia.Items.Count();
-            TempData["mensaje"] = Carrito.Instancia.AgregarItem((int)idArticulo);
-
-
+            TempData["mensaje"] = Carrito.Instancia.AgregarItem((int)idArticulo);            
+         
             return RedirectToAction("IndexCatalogo", "Articulo");
 
         }
@@ -416,54 +517,5 @@ namespace MvcApplication.Controllers
             }
             return PartialView("Detalle", Carrito.Instancia.Items);
         }
-
-        //private void SendXmlByEmail(string EmailDestino)
-        //{
-        //    //CREAR EL XML
-
-        //    XmlDocument xml = new XmlDocument();
-        //    XmlNode root = xml.CreateElement("Libros");
-        //    xml.AppendChild(root);
-
-        //    XmlNode nodoLibro = xml.CreateElement("Libro");
-        //    XmlAttribute atributo = xml.CreateAttribute("Autor");
-        //    atributo.Value = "Michael Ende";
-        //    nodoLibro.Attributes.Append(atributo);
-        //    XmlNode nodoTitulo = xml.CreateElement("Titulo");
-        //    nodoTitulo.InnerText = "La historia interminable";
-
-        //    XmlNode nodoPaginas = xml.CreateElement("Paginas");
-        //    nodoTitulo.InnerText = "234";
-
-        //    nodoLibro.AppendChild(nodoTitulo);
-        //    nodoLibro.AppendChild(nodoPaginas);
-
-        //    root.AppendChild(nodoLibro);
-
-        //    string XML = xml.DocumentElement.OuterXml;
-
-        //    //xml.Save(@"D:\Universidad\Z-Otros\ejemplo.xml");
-
-        //    //ENVIAR EL CORREO
-
-        //    string urlDomain = "https://localhost:3000/";
-        //    string EmailOrigen = "dumbmail130@gmail.com";
-        //    string Contraseña = "vhowlqsgdymyxyho";
-        //    string url = urlDomain + "/Usuario/Recuperacion/?token=";
-        //    MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Compra exitosa",
-        //        "<p>Estimado usuario,</br></br><hr />Ha realizado una compra y la misma ha sido exitosa.</p>");
-        //    oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "ejemplo2.xml"));
-        //    oMailMessage.IsBodyHtml = true;
-
-        //    SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
-        //    oSmtpClient.EnableSsl = true;
-        //    oSmtpClient.UseDefaultCredentials = false;
-        //    oSmtpClient.Port = 587;
-        //    oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
-
-        //    oSmtpClient.Send(oMailMessage);
-
-        //    oSmtpClient.Dispose();
-        //}
     }
 }

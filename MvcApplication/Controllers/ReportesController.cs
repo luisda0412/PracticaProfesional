@@ -37,6 +37,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceArticulo _ServiceProducto = new ServiceArticulo();
                 lista = _ServiceProducto.GetArticulo();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
                 return View(lista);
             }
             catch (Exception ex)
@@ -257,7 +259,7 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
-                //return new FileStreamResult(ms, "application/pdf");
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
 
                 return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
             }
@@ -382,6 +384,8 @@ namespace MvcApplication.Controllers
 
                 IServiceIngreso _ServiceIngreso = new ServiceIngreso();
                 lista = _ServiceIngreso.GetIngresos();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
                 return View(lista);
             }
             catch (Exception ex)
@@ -479,6 +483,7 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
                 return File(ms.ToArray(), "application/pdf", "Reporte de ingresos.pdf");
             }
             catch (Exception ex)
@@ -489,8 +494,6 @@ namespace MvcApplication.Controllers
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
             }
-
-
         }
 
         public ActionResult CreatePdfArqueosCaja()
