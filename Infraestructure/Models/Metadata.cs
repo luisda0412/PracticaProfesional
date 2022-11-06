@@ -26,8 +26,8 @@ namespace Infraestructure.Models
         [Display(Name = "Categoría")]
         [Required(ErrorMessage = "*Necesita seleccionar el proveedor")]
         public Nullable<int> proveedor_id { get; set; }
-        [Display(Name = "Stock")]
-        [Required(ErrorMessage = "*El stock es un campo obligatorio")]
+        [Display(Name = "Unidades")]
+        [Required(ErrorMessage = "*El número de unidades es un campo obligatorio")]
         public Nullable<int> stock { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -45,23 +45,17 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*La fecha es un campo obligatorio")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
-        [Display(Name = "Monto Efectivo")]
-        [Required(ErrorMessage = "*El monto efectivo es un campo obligatorio")]
-        public Nullable<double> efectivo_total { get; set; }
-        [Display(Name = "Monto Billetes")]
-        [Required(ErrorMessage = "*El monto en billetes es un campo obligatorio")]
-        public Nullable<double> billetes { get; set; }
-        [Display(Name = "Monto Monedas")]
-        [Required(ErrorMessage = "*El monto en monedas es un campo obligatorio")]
-        public Nullable<double> monedas { get; set; }
-        [Display(Name = "Usuario")]
-        [Required(ErrorMessage = "*El usuario es un campo obligatorio")]
-        public Nullable<int> usuario_id { get; set; }
-        [Display(Name = "Tipo de arqueo")]
-        [Required(ErrorMessage = "*El tipo de arqueo es un campo obligatorio")]
-        public Nullable<bool> tipo { get; set; }
 
-        public virtual Usuario Usuario { get; set; }
+
+        [Display(Name = "Saldo")]
+        [Required(ErrorMessage = "*El saldo es un campo obligatorio")]
+        public Nullable<double> saldo { get; set; }
+
+        [Display(Name = "Efectivo Entrante")]
+        public Nullable<double> entrada { get; set; }
+
+        [Display(Name = "Efectivo Saliente")]
+        public Nullable<double> salida { get; set; }
     }
 
     internal partial class CategoriaMetadata
@@ -83,7 +77,6 @@ namespace Infraestructure.Models
         public int id { get; set; }
         public Nullable<int> ingreso_id { get; set; }
         public Nullable<int> articulo_id { get; set; }
-
         public virtual Articulo Articulo { get; set; }
         public virtual Ingreso Ingreso { get; set; }
     }
@@ -156,8 +149,8 @@ namespace Infraestructure.Models
         public string direccion { get; set; }
         [Display(Name = "Teléfono")]
         [Required(ErrorMessage = "*El teléfono es un campo obligatorio")]
-        [MinLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
-        [MaxLength(8, ErrorMessage = "*El teléfono debe se exactamente 8 dígitos")]
+        [MinLength(8, ErrorMessage = "*El teléfono debe ser exactamente 8 dígitos")]
+        [MaxLength(8, ErrorMessage = "*El teléfono debe ser exactamente 8 dígitos")]
         public string telefono { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
@@ -173,7 +166,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*La cédula es requerida")]
         public Nullable<int> cliente_id { get; set; }
         [Display(Name = "Teléfono")]
-        [Required(ErrorMessage = "*El numero de teléfono es requerido")]
+        [Required(ErrorMessage = "*El número de teléfono es requerido")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "*Solo se permiten números.")]
         public string telefono { get; set; }
         [Display(Name = "Servicio de reparación")]
@@ -281,7 +274,7 @@ namespace Infraestructure.Models
         public string apellidos { get; set; }
 
         [Display(Name = "Correo")]
-        [Required(ErrorMessage = "{0} es un campo requerido")]
+        [Required(ErrorMessage = "*{0} es un campo requerido")]
         [DataType(DataType.EmailAddress, ErrorMessage = "{0} no tiene formato válido")]
         public string correo_electronico { get; set; }
 
@@ -297,7 +290,6 @@ namespace Infraestructure.Models
         
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
-        public virtual ICollection<Caja_Chica> Caja_Chica { get; set; }
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         public virtual ICollection<Reparaciones> Reparaciones { get; set; }
         public virtual ICollection<Resena> Resena { get; set; }
