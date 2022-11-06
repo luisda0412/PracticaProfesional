@@ -15,6 +15,6 @@ namespace AplicationCore.Services
         void Save(Articulo articulo);
         IEnumerable<Articulo> GetArticuloByProveedor(long id);
         void Eliminar(long id);
-        void actualizarCantidad(int id, int cantidad);
+        void actualizarCantidad(int id, int cantidad, bool tipoMovimiento);
     }
 }

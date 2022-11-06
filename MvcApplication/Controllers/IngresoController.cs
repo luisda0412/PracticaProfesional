@@ -68,6 +68,7 @@ namespace MvcApplication.Controllers
         public ActionResult Save(Ingreso ingreso)
         {
             IServiceUsuario serviceUsuario = new ServiceUsuario();
+            IServiceArticulo serviceArticulo = new ServiceArticulo();
             try
             {
                 Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
@@ -86,6 +87,7 @@ namespace MvcApplication.Controllers
                         //ingreso.monto_total += linea.Articulo.precio;
                         ingreso.monto_total = (double)Comprita.Instancia.GetTotal();
                         ingreso.Detalle_Ingreso.Add(detalle);
+                        serviceArticulo.actualizarCantidad((int)detalle.articulo_id, (int)detalle.cantidad, true);
                     }
                     ingreso.fecha = DateTime.Now;
                     ingreso.usuario_id = Convert.ToInt32(TempData["idUser"]);

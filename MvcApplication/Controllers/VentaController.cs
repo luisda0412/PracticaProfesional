@@ -220,7 +220,7 @@ namespace MvcApplication.Controllers
 
                             descuento2 = Convert.ToString(linea.descuento);
                             //LINEA DE CODGO PARA ACTUALIZAR EL PRODUCTO CUANDO SE HACE UNA COMPRA, LA COMENTO YA QUE HAY QUE HACER PRUEBAS Y LUEGO NOS QUEDAMOS SIN UNIDADES
-                            //serviceArticulo.actualizarCantidad(linea.articulo_id, (int)linea.cantidad);
+                            serviceArticulo.actualizarCantidad(linea.articulo_id, (int)linea.cantidad, false);
 
                             //CREACION DEL NODO DETALLE VENTA
                             XmlNode nodoDetalle = xml.CreateElement("Detalle_Venta");

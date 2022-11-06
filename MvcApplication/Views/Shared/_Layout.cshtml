@@ -49,6 +49,7 @@
                                     @Html.ActionLink("Caja Chica", "Index", "CajaChica", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Empresa", "Index", "Empresa", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Usuarios", "Index", "Usuario", null, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Cotización", "Index", "Cotizacion", null, new { @class = "dropdown-item" })
                                 </div>
                             </li>
 
@@ -76,6 +77,9 @@
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Cotizar", "Index", "Cotizacion", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
                     </li>
                     <li class="nav-item">
                         @Html.ActionLink("Contácto", "Index", "Contacto", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })

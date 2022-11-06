@@ -14,7 +14,7 @@ namespace Infraestructure.Repository
     {
         IRepositoryProveedor repoP = new RepositoryProveedor();
 
-        public void actualizarCantidad(int id, int cantidad)
+        public void actualizarCantidad(int id, int cantidad, bool tipoMovimiento)
         {
             using (MyContext cdt = new MyContext())
             {
@@ -24,7 +24,7 @@ namespace Infraestructure.Repository
                     oldArti.Categoria = null;
                     oldArti.Proveedor = null;
 
-                    oldArti.stock -= cantidad;
+                    oldArti.stock= tipoMovimiento==true? oldArti.stock+cantidad: oldArti.stock-cantidad;
 
                     cdt.Articulo.Add(oldArti);
                     cdt.Entry(oldArti).State = EntityState.Modified;
