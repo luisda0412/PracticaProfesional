@@ -258,7 +258,8 @@ namespace MvcApplication.Controllers
             IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
             try
             {
-                repo.reparacion_id = codigoSer; 
+                repo.reparacion_id = codigoSer;
+                repo.fecha = DateTime.Now;
                 _ServiceRTecnico.Save(repo);
 
                 return RedirectToAction("Index");
