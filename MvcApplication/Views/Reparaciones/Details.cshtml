@@ -49,7 +49,7 @@
                         <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
                         <b>@Html.DisplayNameFor(model => model.monto_total):</b> &cent;@Html.DisplayFor(model => model.monto_total)<br />
                         <b>@Html.DisplayNameFor(model => model.entregaestimada):</b> @Html.DisplayFor(model => model.entregaestimada)<br />
-                        @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
+                        @{ string isActive = @Model.estado == true ? "Habilitado" : "Deshabilitado"; }
                         <span><b>Estado:</b> @isActive</span><br />
                       
                     </p>

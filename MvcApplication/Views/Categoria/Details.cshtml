@@ -43,7 +43,7 @@
                     <p class="">
                         <b>@Html.DisplayNameFor(model => model.nombre):</b> @Html.DisplayFor(model => model.nombre)<br />
                         <b>@Html.DisplayNameFor(model => model.descripcion):</b> @Html.DisplayFor(model => model.descripcion)<br />
-                        @{ string isActive = @Model.estado == true ? "Activo" : "Inactivo"; }
+                        @{ string isActive = @Model.estado == true ? "Habilitado" : "Deshabilitado"; }
                         <span><b>Estado:</b> @isActive</span>
                     </p>
                 </div>

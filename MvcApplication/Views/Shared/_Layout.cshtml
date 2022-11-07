@@ -49,26 +49,26 @@
                                     @Html.ActionLink("Caja Chica", "Index", "CajaChica", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Empresa", "Index", "Empresa", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Usuarios", "Index", "Usuario", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Cotización", "Index", "Cotizacion", null, new { @class = "dropdown-item" })
                                 </div>
                             </li>
 
+
+
+                            <li class="nav-item">
+                                @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Reparaciónes", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
+                            </li>
+                            <li class="nav-item" id="cantidadLibros">
+                                @Html.Partial("MovimientoCantidad")
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los reportes" aria-haspopup="true" aria-expanded="false">Reportes</a>
                                 <div class="dropdown-menu">
                                     @Html.ActionLink("Artículos", "ProductosLista", "Reportes", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Ingresos", "IngresosLista", "Reportes", null, new { @class = "dropdown-item" })
                                 </div>
-                            </li>
-
-                            <li class="nav-item">
-                                @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Reparación", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
-                            </li>
-                            <li class="nav-item" id="cantidadLibros">
-                                @Html.Partial("MovimientoCantidad")
                             </li>
                         }
                     }
