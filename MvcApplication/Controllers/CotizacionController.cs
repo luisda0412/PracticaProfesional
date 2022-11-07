@@ -1,4 +1,5 @@
 ﻿using AplicationCore.Services;
+using Infraestructure.Models;
 using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 ViewBag.listaArticulos = _ServiceArticulo.GetArticulo();
-                // ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Registre aquí sus nuevas compras", SweetAlertMessageType.info);
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
 
             }
             catch (Exception e)
@@ -38,7 +40,7 @@ namespace MvcApplication.Controllers
 
             int cantidadCompra = Cotizacion.Instancia.Items.Count();
             ViewBag.NotificationMessage = Cotizacion.Instancia.AgregarItem((int)id);
-            ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Artículo agregado a la orden", SweetAlertMessageType.success);
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Cotización", "Artículo agregado a la orden", SweetAlertMessageType.success);
             return RedirectToAction("Index");
 
         }
@@ -64,18 +66,38 @@ namespace MvcApplication.Controllers
 
         }
 
-        public ActionResult eliminarProducto(long? idArticulo)
+        public ActionResult eliminarProducto(long? id)
         {
             try
             {
-                ViewBag.NotificationMessage = Cotizacion.Instancia.EliminarItem((long)idArticulo);
-                return PartialView("_PartialViewDetalle", Cotizacion.Instancia.Items);
+                TempData["mensaje"] = Cotizacion.Instancia.EliminarItem((long)id);
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
-            return PartialView("_PartialViewDetalle", Cotizacion.Instancia.Items);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult buscarArticuloxNombre(string filtro)
+        {
+            IEnumerable<Articulo> lista = null;
+            IServiceArticulo _ServiceArticulo = new ServiceArticulo();
+
+            // Error porque viene en blanco 
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = _ServiceArticulo.GetArticulo();
+            }
+            else
+            {
+                lista = _ServiceArticulo.GetArticuloByNombre(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxNombre", lista);
         }
     }
 }

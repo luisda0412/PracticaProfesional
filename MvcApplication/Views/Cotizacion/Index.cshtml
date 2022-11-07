@@ -1,5 +1,10 @@
 ﻿<link rel="stylesheet" href="~/Content/CSSEstiloIngresos/EstiloIngresos.css">
 
+@{
+    ViewBag.Title = "Cotizar";
+}
+
+
 <section class="section_header">
     <br />
     <div class="contenidoHeader">
@@ -59,7 +64,7 @@
                         else
                         {
                             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                El detalle de la compra no tiene artículos asignados
+                                El detalle de la cotización no tiene artículos asignados
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -70,7 +75,7 @@
                     <hr />
 
                     <section class="abajo">
-                        <h5>Seleccione los artículos en la sección de abajo</h5>
+                        <h5>Seleccione los artículos a cotizar en la sección de abajo</h5>
                     </section>
 
                 }
@@ -80,29 +85,7 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Seleccione los artículos de ingreso</h2>
-                </div>
-                <div class="col-md-4">
-                    <div class="card my-4">
-                        <h5 class="card-header">Buscar artículo por nombre</h5>
-                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
-                        {
-                            UpdateTargetId = "resultado",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET",
-                            LoadingElementId = "ajaxLoader"
-                        }))
-                        {
-                            <div class="card-body">
-                                <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre del artículo" })
-
-                                    <button type="submit" class="boton3" title="Buscar el artículo en la lista">Buscar</button>
-
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <h2 class="titulo">Seleccione los artículos</h2>
                 </div>
             </div>
             <br />
@@ -156,7 +139,7 @@
                                         @arti.nombre
                                     </td>
                                     <td>
-                                        &cent;@arti.precio
+                                        ₡@arti.precio
                                     </td>
                                     <td>
                                         @arti.Categoria.descripcion
@@ -182,24 +165,24 @@
 
     <script type="text/javascript">
 
-            //Actualizar cantidad de articulos en la comprita
-            //Cambio de cantidad en caja de texto
-            function updateCantidadC(ctr) {
-                var txtCantidad = $(ctr);
-                var cantidad = txtCantidad.val();
-                var id = txtCantidad.data("productoid");
-                $.ajax({
-                    type: "GET",
-                    dataType: 'text',
-                    url: "/Cotizacion/actualizarCantidad",
-                    data: { "idArticulo": id, "cantidad": cantidad },
-                    success: function (data) {
-                        $("#resultadoCotizacion").html('');
-                        $("#resultadoCotizacion").html(data);
-                    }, error: function (xhr, status, error) {
-                        console.log("Error: " + error + ", No Error: " + xhr.status);
-                    },
-                });
+        //Actualizar cantidad de articulos en la comprita
+        //Cambio de cantidad en caja de texto
+        function updateCantidadC(ctr) {
+            var txtCantidad = $(ctr);
+            var cantidad = txtCantidad.val();
+            var id = txtCantidad.data("productoid");
+            $.ajax({
+                type: "GET",
+                dataType: 'text',
+                url: "/Cotizacion/actualizarCantidad",
+                data: { "idArticulo": id, "cantidad": cantidad },
+                success: function (data) {
+                    $("#resultadoCotizacion").html('');
+                    $("#resultadoCotizacion").html(data);
+                }, error: function (xhr, status, error) {
+                    console.log("Error: " + error + ", No Error: " + xhr.status);
+                },
+            });
         }
 
 

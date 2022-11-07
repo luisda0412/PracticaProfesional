@@ -692,6 +692,7 @@
     <Content Include="Views\Home\IndexAdmin.cshtml" />
     <Content Include="Views\Cotizacion\_PartialViewDetalle.cshtml" />
     <Content Include="Views\Cotizacion\Index.cshtml" />
+    <Content Include="Views\Cotizacion\_PartialViewVistaxNombr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

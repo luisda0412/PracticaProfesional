@@ -52,18 +52,18 @@ namespace MvcApplication.Controllers
 
         }
 
-        public ActionResult eliminarProducto(long? idArticulo)
+        public ActionResult eliminarProducto(long? id)
         {
             try
             {
-                ViewBag.NotificationMessage = Comprita.Instancia.EliminarItem((long)idArticulo);
-                return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);
+                TempData["mensaje"] = Comprita.Instancia.EliminarItem((long)id);
+                return RedirectToAction("IndexIngreso");
             }
             catch (Exception e)
             {
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
-            return PartialView("_PartialViewDetalle", Comprita.Instancia.Items);
+            return RedirectToAction("IndexIngreso");
         }
 
         public ActionResult Save(Ingreso ingreso)

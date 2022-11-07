@@ -58,7 +58,7 @@ namespace Web.ViewModel
                     nuevoItem.cantidad = 1;
                     Items.Add(nuevoItem);
                 }
-                mensaje = SweetAlertHelper.Mensaje("Carrito actualizado", "Artículo agregado a la orden", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Cotizacion actualizada", "Artículo agregado a la orden", SweetAlertMessageType.success);
 
             }
             else
@@ -108,7 +108,7 @@ namespace Web.ViewModel
             {
                 var itemEliminar = Items.Single(x => x.idArticulo == productoID);
                 Items.Remove(itemEliminar);
-                mensaje = SweetAlertHelper.Mensaje("Orden Libro", "Producto eliminado", SweetAlertMessageType.success);
+                mensaje = SweetAlertHelper.Mensaje("Acción en Cotización", "Artículo eliminado", SweetAlertMessageType.success);
             }
             return mensaje;
 

@@ -102,28 +102,7 @@
                 <div class="elementoizquierdo">
                     <h2 class="titulo">Seleccione los artículos de ingreso</h2>
                 </div>
-                <div class="col-md-4">
-                    <div class="card my-4">
-                        <h5 class="card-header">Buscar artículo por nombre</h5>
-                        @using (Ajax.BeginForm("buscarArticuloxNombre", "Articulo", new AjaxOptions
-                        {
-                            UpdateTargetId = "resultado",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET",
-                            LoadingElementId = "ajaxLoader"
-                        }))
-                        {
-                            <div class="card-body">
-                                <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre del artículo" })
-
-                                    <button type="submit" class="boton3" title="Buscar el artículo en la lista">Buscar</button>
-
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
+             
             </div>
             <br />
             <br />
