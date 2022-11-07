@@ -663,7 +663,6 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
     <Content Include="Views\CajaChica\Create.cshtml" />
-    <Content Include="Views\CajaChica\Edit.cshtml" />
     <Content Include="Views\CajaChica\Details.cshtml" />
     <Content Include="Views\Empresa\Details.cshtml" />
     <Content Include="Views\Empresa\Edit.cshtml" />

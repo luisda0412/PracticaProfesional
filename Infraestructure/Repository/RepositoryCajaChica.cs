@@ -13,14 +13,14 @@ namespace Infraestructure.Repository
     public class RepositoryCajaChica : IRepositoryCajaChica
     {
         IRepositoryUsuario repoU = new RepositoryUsuario();
-        public IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha)
+        public IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fechaparam)
         {
             IEnumerable<Caja_Chica> lista = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Caja_Chica.ToList().
-                    FindAll(l => l.fecha.Equals(fecha.Date));
+                lista = ctx.Caja_Chica.Where(f => f.fecha.Value.Date == fechaparam.Date);
+                    
             }
             return lista;
         }

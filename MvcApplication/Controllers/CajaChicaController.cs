@@ -59,7 +59,27 @@ namespace MvcApplication.Controllers
             return View();
         }
 
-     
+        public ActionResult buscarCajaxFecha(DateTime filtro)
+        {
+            IEnumerable<Caja_Chica> lista = null;
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+
+            // Error porque viene en blanco 
+            if (filtro==null)
+            {
+                lista = _ServiceCaja.GetCajaChica();
+            }
+            else
+            {
+                lista = _ServiceCaja.GetCajaByFecha(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxNombre", lista);
+        }
+
+
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
@@ -88,41 +108,6 @@ namespace MvcApplication.Controllers
 
         }
 
-        [CustomAuthorize((int)Roles.Administrador)]
-        public ActionResult Edit(int? id)
-        {
-            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
-            Caja_Chica caja;
-
-            try
-            {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                caja = _ServiceCaja.GetCajaChicaByID(id.Value);
-
-                if (caja == null)
-                {
-                    TempData["Message"] = "No existe el articulo solicitado";
-                    TempData["Redirect"] = "Articulo";
-                    TempData["Redirect-Action"] = "Index";
-                    // Redireccion a la captura del Error
-                    return RedirectToAction("Default", "Error");
-                }
-                return View(caja);
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Articulo";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
+       
     }
 }
