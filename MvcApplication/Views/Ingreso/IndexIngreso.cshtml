@@ -58,8 +58,11 @@
                             <div class="col-md-6">
                                 <div class="form-group3">
                                     <h5>Comentario</h5>
+
                                     @Html.TextAreaFor(x => x.comentario)
+                                    @Html.ValidationMessageFor(model => model.comentario, "", new { @class = "text-danger" })
                                 </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -173,7 +176,7 @@
                                         @arti.nombre
                                     </td>
                                     <td>
-                                        &cent;@arti.precio
+                                        ₡@arti.precio
                                     </td>
                                     <td>
                                         @arti.Categoria.descripcion

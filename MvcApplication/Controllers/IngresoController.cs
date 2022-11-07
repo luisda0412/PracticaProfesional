@@ -22,7 +22,8 @@ namespace MvcApplication.Controllers
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
                 ViewBag.listaArticulos = _ServiceArticulo.GetArticulo();
-               // ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Registre aquí sus nuevas compras", SweetAlertMessageType.info);
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
 
             }
             catch (Exception e)
@@ -71,32 +72,45 @@ namespace MvcApplication.Controllers
             IServiceArticulo serviceArticulo = new ServiceArticulo();
             try
             {
-                Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
-                if (user != null)
+               
+                if (ModelState.IsValid)
                 {
-
-                    //Lista que trae provisionalmente cada detalle del ingreso, osea cada linea de cada articulo
                     var listaLinea = Comprita.Instancia.Items;
-                     
-                    foreach (var items in listaLinea)
-                     {
-                        //Se van llenando en BD cada linea del detalle
-                         Detalle_Ingreso detalle = new Detalle_Ingreso();
-                         detalle.articulo_id = (int)items.idArticulo;
-                         detalle.cantidad = items.cantidad;
-                        //ingreso.monto_total += linea.Articulo.precio;
-                        ingreso.monto_total = (double)Comprita.Instancia.GetTotal();
-                        ingreso.Detalle_Ingreso.Add(detalle);
-                        serviceArticulo.actualizarCantidad((int)detalle.articulo_id, (int)detalle.cantidad, true);
-                    }
-                    ingreso.fecha = DateTime.Now;
-                    ingreso.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                    IServiceIngreso _ServiceIngreso = new ServiceIngreso();
-                    Ingreso compra = _ServiceIngreso.Save(ingreso);
 
-                    Comprita.Instancia.eliminarCarrito();
-                    return RedirectToAction("IndexIngreso");
+                    if (listaLinea.Count != 0)
+                    {
+                        foreach (var items in listaLinea)
+                        {
+                            //Se van llenando en BD cada linea del detalle
+                            Detalle_Ingreso detalle = new Detalle_Ingreso();
+                            detalle.articulo_id = (int)items.idArticulo;
+                            detalle.cantidad = items.cantidad;
+                            //ingreso.monto_total += linea.Articulo.precio;
+                            ingreso.monto_total = (double)Comprita.Instancia.GetTotal();
+                            ingreso.Detalle_Ingreso.Add(detalle);
+                            serviceArticulo.actualizarCantidad((int)detalle.articulo_id, (int)detalle.cantidad, true);
+                        }
+                        ingreso.fecha = DateTime.Now;
+                        ingreso.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                        IServiceIngreso _ServiceIngreso = new ServiceIngreso();
+                        Ingreso compra = _ServiceIngreso.Save(ingreso);
+
+                        Comprita.Instancia.eliminarCarrito();
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Compra Registrada!", "El ingreso de inventario a la tienda se ha realizado con éxito!", SweetAlertMessageType.warning);
+                        return RedirectToAction("IndexIngreso");
+                    }
+                    else
+                    {
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Sin Artículos", "Primero seleccione los artículos de la compra realizada, diríjase a la sección de abajo", SweetAlertMessageType.warning);
+                    }
+                       
                 }
+                else
+                {
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Comentario vacío", "Digíte un comentario acorde a la compra", SweetAlertMessageType.warning);
+                }
+                       
+                
             }
             catch (Exception ex)
             {

@@ -136,6 +136,7 @@ namespace Infraestructure.Models
         [Display(Name = "Detalle")]
         public virtual ICollection<Detalle_Ingreso> Detalle_Ingreso { get; set; }
         [Display(Name = "Comentario")]
+        [Required(ErrorMessage = "*Debe digitar un comentario")]
         public string comentario { get; set; }
 
         [Display(Name = "Usuario")]
