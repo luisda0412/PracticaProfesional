@@ -25,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     @{
-                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3)
+                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2)
                         {
                             <li class="nav-item">
                                 @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })
@@ -33,7 +33,7 @@
                         }
                     }
                     @{
-                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
+                        if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3))
                         {
                             <li class="nav-item">
                                 @Html.ActionLink("Administración", "IndexAdmin", "Home", null, new { @class = "nav-link" })
@@ -48,12 +48,15 @@
                                     @Html.ActionLink("Proveedores", "Index", "Proveedor", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Caja Chica", "Index", "CajaChica", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Empresa", "Index", "Empresa", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Usuarios", "Index", "Usuario", null, new { @class = "dropdown-item" })
+
+                                    @{
+                                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
+                                        {
+                                            @Html.ActionLink("Usuarios", "Index", "Usuario", null, new { @class = "dropdown-item" })
+                                        }
+                                    }
                                 </div>
                             </li>
-
-
-
                             <li class="nav-item">
                                 @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                             </li>
@@ -63,6 +66,12 @@
                             <li class="nav-item" id="cantidadLibros">
                                 @Html.Partial("MovimientoCantidad")
                             </li>
+
+                        }
+                    }
+                    @{
+                        if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1))
+                        {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver los reportes" aria-haspopup="true" aria-expanded="false">Reportes</a>
                                 <div class="dropdown-menu">
@@ -130,7 +139,7 @@
             </div>
         </div>
     </nav>
-    
+
     <div>
         <!--class="container body-content"-->
         @RenderBody()
@@ -192,7 +201,7 @@
                             <button class="ayuda">Ayuda en línea</button>
                         </div><!--.col-->
                     </div><!--.row-->
-                   
+
                 </div>
             </section>
         </footer>
