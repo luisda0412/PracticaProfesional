@@ -166,8 +166,8 @@ namespace Infraestructure.Repository
         private void SendEmail(string EmailDestino, string token)
         {
             string urlDomain = "https://localhost:3000/";
-            string EmailOrigen = "dumbmail130@gmail.com";
-            string Contraseña = "vhowlqsgdymyxyho";
+            string EmailOrigen = "soportevycuz@gmail.com";
+            string Contraseña = "ecfykdmojjjlpfcn";
             string url = urlDomain + "/Usuario/Recuperacion/?token=" + token;
             MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperación de Contraseña",
                 "<p>Estimado usuario,</br></br><hr />Ha iniciado el proceso para la recuperación de contraseña del sistema VYCUZ, a continuación se le presentará el link para que proceda a realizar el cambio de su respectiva contraseña.</p><br>" +
