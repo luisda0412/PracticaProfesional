@@ -162,7 +162,7 @@ namespace Infraestructure.Models
         public int id { get; set; }
         [Display(Name = "Usuario")]
         public Nullable<int> usuario_id { get; set; }
-        [Display(Name = "Cliente")]
+        [Display(Name = "ID Cliente")]
         [Required(ErrorMessage = "*La cédula es requerida")]
         public Nullable<int> cliente_id { get; set; }
         [Display(Name = "Teléfono")]
@@ -178,10 +178,10 @@ namespace Infraestructure.Models
         [Display(Name = "Problema")]
         [Required(ErrorMessage = "*El problema o fallo es requerido")]
         public string descripcion_problema { get; set; }
-        [Display(Name = "Fecha")]
+        [Display(Name = "Fecha de Ingreso")]
         [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
         public Nullable<System.DateTime> fecha { get; set; }
-        [Display(Name = "Monto total")]
+        [Display(Name = "Costo Aproximado")]
         [Required(ErrorMessage = "*El monto aproximado es requerido")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "* Solo se permiten números.")]
         public Nullable<double> monto_total { get; set; }
@@ -195,6 +195,9 @@ namespace Infraestructure.Models
 
         [Display(Name = "Reportes Técnicos")]
         public virtual ICollection<Reportes_Tecnicos> Reportes_Tecnicos { get; set; }
+
+        [Display(Name = "Estado")]
+        public Nullable<bool> estado { get; set; }
     }
 
     internal partial class Reportes_TecnicosMetadata

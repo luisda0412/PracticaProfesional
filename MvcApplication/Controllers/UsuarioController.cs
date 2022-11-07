@@ -47,6 +47,7 @@ namespace MvcApplication.Controllers
             {
                 ModelState.Remove("estado");
                 ModelState.Remove("clave");
+                ModelState.Remove("id");
                 if (ModelState.IsValid)
                 {
                  try

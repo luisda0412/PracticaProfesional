@@ -9,7 +9,7 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+            @{ string isActive = item.estado == true ? "Habilitado" : "Deshabilitado"; }
             @isActive
         </td>
         <td class="columnabotones">
