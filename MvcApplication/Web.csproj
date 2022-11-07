@@ -394,6 +394,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
+    <Content Include="PDF\Manual de usuario VYCUZ.pdf" />
     <None Include="README.md" />
     <Content Include="Imagenes\Avatares\avatar1.png" />
     <Content Include="Imagenes\Avatares\avatar2.png" />

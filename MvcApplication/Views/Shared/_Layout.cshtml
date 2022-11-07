@@ -206,7 +206,7 @@
                             @{
                                 if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3))
                                 {
-                                    <button class="ayuda">Ayuda en línea</button>
+                                    <button class="ayuda"><a href="~/PDF/Manual de usuario VYCUZ.pdf">Ayuda en línea</a></button>
                                     }
                                 }
                                 </div><!--.col-->
