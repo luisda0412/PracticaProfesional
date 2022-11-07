@@ -67,7 +67,7 @@
                                 @Html.Partial("MovimientoCantidad")
                             </li>
 
-                        }
+                                        }
                     }
                     @{
                         if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1))
@@ -87,9 +87,14 @@
                     <li class="nav-item">
                         @Html.ActionLink("Cotizar", "Index", "Cotizacion", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
                     </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
-                    </li>
+                    @{
+                        if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2))
+                        {
+                            <li class="nav-item">
+                                @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
+                            </li>
+                        }
+                    }
                     <!--Para el Login VYCUZ-->
                     @{
                         string nombre = "Iniciar Sesión";
@@ -198,8 +203,13 @@
                             <a href="#" title="Ir al buscador de Google" class="snip1472"><img src="~/Imagenes/Iconos/google.png" alt="Beyond Technology" /></a>
                             <br class="clearfix" />
                             <br class="clearfix" />
-                            <button class="ayuda">Ayuda en línea</button>
-                        </div><!--.col-->
+                            @{
+                                if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3))
+                                {
+                                    <button class="ayuda">Ayuda en línea</button>
+                                    }
+                                }
+                                </div><!--.col-->
                     </div><!--.row-->
 
                 </div>
