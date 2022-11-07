@@ -76,7 +76,7 @@ namespace MvcApplication.Controllers
 
 
             // Retorna un Partial View
-            return PartialView("_PartialViewVistaxNombre", lista);
+            return PartialView("_PartialViewVistaxFecha", lista);
         }
 
 

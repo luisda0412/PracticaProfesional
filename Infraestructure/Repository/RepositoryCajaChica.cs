@@ -19,7 +19,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Caja_Chica.Where(f => f.fecha.Value.Date == fechaparam.Date);
+                lista = ctx.Caja_Chica.ToList().FindAll(l => l.fecha.Value.Date.Equals(fechaparam.Date));
                     
             }
             return lista;

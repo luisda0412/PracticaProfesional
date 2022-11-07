@@ -266,7 +266,7 @@ namespace MvcApplication.Controllers
 
                             cajaChica.fecha = DateTime.Now;
                             cajaChica.entrada = Convert.ToDouble(Request.Form["entrada"]);
-                            cajaChica.salida = Convert.ToDouble(Request.Form["salida"]);
+                            cajaChica.salida = cajaChica.entrada - (double?)Carrito.Instancia.GetTotal();
 
                             saldoActual += (double)cajaChica.entrada-(double)cajaChica.salida;
                             saldoActual += (double)ultimacaja.saldo;

@@ -65,7 +65,7 @@
         }
 /*Cuerpo------------------------------------------------------------------------*/
 .secciones {
-    width: 60%;
+    width: 70%;
     box-shadow: 1px 10px 10px 1px rgba(56,56,56,0.42);
     border-radius: 10px;
 }
@@ -94,7 +94,7 @@
 
 /*Cuerpo izquierdo------------------------------------------------*/
 .cuerpoleft {
-   width: 45%;
+   width: 40%;
     margin-top: 3%;
     margin-bottom: 3%;
 
@@ -124,7 +124,7 @@
 
 /*Cuerpo derecho--------------------------------------------------------*/
 .cuerporight {
-    width: 45%;
+    width: 48%;
     margin-top: 3%;
     margin-bottom: 3%;
 

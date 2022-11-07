@@ -306,6 +306,7 @@ namespace Infraestructure.Models
         [Display(Name = "Usuario")]
         public Nullable<int> usuario_id { get; set; }
         [Display(Name = "Cliente")]
+        [Required(ErrorMessage = "*El nombre del cliente es un campo requerido")]
         public string nombre_cliente { get; set; }
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
@@ -313,10 +314,12 @@ namespace Infraestructure.Models
         public Nullable<double> monto_total { get; set; }
         [Display(Name = "Impuesto")]
         public Nullable<double> impuesto { get; set; }
-        [Display(Name = "Tipo de venta")]
-        public Nullable<bool> tipoventa { get; set; }
+
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
+
+        [Display(Name = "Tipo de Pago")]
+        public Nullable<bool> tipopago { get; set; }
         public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
         public virtual ICollection<Facturas> Facturas { get; set; }
         public virtual Usuario Usuario { get; set; }

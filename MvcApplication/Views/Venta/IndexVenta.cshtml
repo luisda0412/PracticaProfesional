@@ -58,20 +58,6 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group3">
-                                <h5>Nombre del cliente</h5>
-                                @Html.EditorFor(x => x.nombre_cliente)
-                                @Html.ValidationMessageFor(model => model.nombre_cliente, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group3">
-                                <h5>Factura Electrónica?</h5>
-                                @Html.CheckBox("Facturar", htmlAttributes: new { @class = "control-label col-md-2", @data_toggle = "modal", @data_target = "#exampleModal" })
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group3">
                                 @Html.LabelFor(model => model.tipopago, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.RadioButtonFor(model => model.tipopago, true, new { id = "married-true" })
@@ -82,22 +68,31 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group3">
+                                <h5>Factura Electrónica?</h5>
+                                @Html.CheckBox("Facturar", htmlAttributes: new { @class = "control-label col-md-2", @data_toggle = "modal", @data_target = "#exampleModal" })
+
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group3">
                                 @Html.Label("Entrada Efectivo", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <input name="entrada" class="form-control" id="message-text" style="max-width:100%">
+                                    <input name="entrada" type="number" class="form-control" id="message-text" style="max-width:100%">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group3">
-                                @Html.Label("Salida Efectivo", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    <input name="salida" class="form-control" id="message-text" style="max-width:100%">
-                                </div>
+                                <h5>Nombre del cliente</h5>
+                                @Html.EditorFor(x => x.nombre_cliente)
+
                             </div>
+                            @Html.ValidationMessageFor(model => model.nombre_cliente, "", new { @class = "text-danger" })
                         </div>
+                       
                     </div>
                 </div>
 

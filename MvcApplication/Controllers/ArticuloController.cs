@@ -345,7 +345,8 @@ namespace MvcApplication.Controllers
             }
 
             int cantidadLibros = Carrito.Instancia.Items.Count();
-            TempData["mensaje"] = Carrito.Instancia.AgregarItem((int)idArticulo);
+            string mensaje= Carrito.Instancia.AgregarItem((int)idArticulo);
+            TempData["mensaje"] = TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Carrito Actualizado", "artículos agregados a la orden!", SweetAlertMessageType.success); ;
 
             return PartialView("MovimientoCantidad");
 
