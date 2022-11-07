@@ -15,6 +15,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*El nombre es un campo obligatorio")]
         public string nombre { get; set; }
         [Display(Name = "Precio")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         [Required(ErrorMessage = "*El precio es un campo obligatorio")]
         public Nullable<double> precio { get; set; }
         [Display(Name = "Imagen")]
@@ -46,14 +47,17 @@ namespace Infraestructure.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
 
-        [Display(Name = "Saldo")]
+        [Display(Name = "Saldo Actual")]
         [Required(ErrorMessage = "*El saldo es un campo obligatorio")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> saldo { get; set; }
 
         [Display(Name = "Efectivo Entrante")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> entrada { get; set; }
 
         [Display(Name = "Efectivo Saliente")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> salida { get; set; }
     }
 
@@ -84,6 +88,8 @@ namespace Infraestructure.Models
     {
         public int venta_id { get; set; }
         public int articulo_id { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> precio { get; set; }
         public Nullable<double> descuento { get; set; }
         public Nullable<int> cantidad { get; set; }
@@ -182,6 +188,7 @@ namespace Infraestructure.Models
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Costo Aproximado")]
         [Required(ErrorMessage = "*El monto aproximado es requerido")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "* Solo se permiten números.")]
         public Nullable<double> monto_total { get; set; }
         [Display(Name = "Entrega estimada")]
@@ -251,6 +258,7 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "*La descripción es un campo obligatorio")]
         public string descripcion { get; set; }
         [Display(Name = "Costo")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         [Required(ErrorMessage = "*El costo es un campo obligatorio")]
         public Nullable<double> costo { get; set; }
         [Display(Name = "Estado")]
@@ -311,8 +319,10 @@ namespace Infraestructure.Models
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Monto total")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> monto_total { get; set; }
         [Display(Name = "Impuesto")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> impuesto { get; set; }
 
         [Display(Name = "Estado")]

@@ -43,7 +43,7 @@ namespace MvcApplication.Controllers
             {
 
                 _ServiceCaja.Eliminar((int)id);
-                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Arqueo eliminado", "Datos eliminados del sistema", SweetAlertMessageType.success);
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Registro eliminado", "Datos eliminados del sistema", SweetAlertMessageType.success);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)

@@ -86,47 +86,50 @@
                         <rect x="8" y="8" width="64" height="64"></rect>
                     </svg>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.fecha)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.saldo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.entrada)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.salida)
-                            </th>
-                            <th style="text-align:center; padding:0%;"><p>Opciones</p></th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultado">
-                        @foreach (var item in Model)
-                        {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fecha)
-                            </td>
-                            <td>
-                                &cent;@Html.DisplayFor(modelItem => item.saldo)
-                            </td>
-                            <td>
-                                &cent;@Html.DisplayFor(modelItem => item.entrada)
-                            </td>
-                            <td>
-                                &cent;@Html.DisplayFor(modelItem => item.salida)
-                            </td>
-                            <td class="columnabotones">                              
-                                <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { title = "Eliminar registro de caja" })</button>
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="container">
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fecha)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.saldo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.entrada)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.salida)
+                                </th>
+                                <th style="text-align:center; padding:0%;"><p>Opciones</p></th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultado">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.fecha)
+                                    </td>
+                                    <td>
+                                        ₡@Html.DisplayFor(modelItem => item.saldo)
+                                    </td>
+                                    <td>
+                                        ₡@Html.DisplayFor(modelItem => item.entrada)
+                                    </td>
+                                    <td>
+                                        ₡@Html.DisplayFor(modelItem => item.salida)
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { title = "Eliminar registro de caja" })</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    </div>
             </center>
         </section>
     </center>

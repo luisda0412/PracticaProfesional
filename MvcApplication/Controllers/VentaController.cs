@@ -406,7 +406,7 @@ namespace MvcApplication.Controllers
 
                                 doc.Close();
 
-                                Carrito.Instancia.eliminarCarrito();
+                               
                                 return File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
 
                             }
@@ -444,7 +444,7 @@ namespace MvcApplication.Controllers
                             oSmtpClient.Dispose();
                         }
 
-
+                        Carrito.Instancia.eliminarCarrito();
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Venta generada!", "La venta se ha registrado en la base de datos!", SweetAlertMessageType.success);
                         return RedirectToAction("IndexCatalogo", "Articulo");
                     }

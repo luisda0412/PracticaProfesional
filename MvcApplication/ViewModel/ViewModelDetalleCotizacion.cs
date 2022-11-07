@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -14,6 +15,8 @@ namespace Web.ViewModel
         public long idArticulo { get; set; }
 
         public Nullable<int> cantidad { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> precio
         {
             get { return articulo.precio; }
@@ -21,6 +24,7 @@ namespace Web.ViewModel
 
         public virtual Detalle_Ingreso detalleIngreso { get; set; }
         public virtual Articulo articulo { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public long SubTotal
         {
             get

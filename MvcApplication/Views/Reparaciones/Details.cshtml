@@ -47,11 +47,11 @@
                         <b>@Html.DisplayNameFor(model => model.descripcion_articulo):</b> @Html.DisplayFor(model => model.descripcion_articulo)<br />
                         <b>@Html.DisplayNameFor(model => model.descripcion_problema):</b> @Html.DisplayFor(model => model.descripcion_problema)<br />
                         <b>@Html.DisplayNameFor(model => model.fecha):</b> @Html.DisplayFor(model => model.fecha)<br />
-                        <b>@Html.DisplayNameFor(model => model.monto_total):</b> &cent;@Html.DisplayFor(model => model.monto_total)<br />
+                        <b>@Html.DisplayNameFor(model => model.monto_total):</b> ₡@Html.DisplayFor(model => model.monto_total)<br />
                         <b>@Html.DisplayNameFor(model => model.entregaestimada):</b> @Html.DisplayFor(model => model.entregaestimada)<br />
                         @{ string isActive = @Model.estado == true ? "Activa" : "Inactiva"; }
                         <span><b>Estado:</b> @isActive</span><br />
-                      
+
                     </p>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 ﻿using AplicationCore.Services;
 using Infraestructure.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Web.ViewModel
 {
@@ -10,6 +11,8 @@ namespace Web.ViewModel
         public long idArticulo{ get; set; }
 
         public Nullable<int> cantidad { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public Nullable<double> precio
         {
             get { return articulo.precio; }
@@ -17,6 +20,8 @@ namespace Web.ViewModel
 
         public virtual Detalle_Venta detalleVenta { get; set; }
         public virtual Articulo articulo { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public long SubTotal
         {
             get

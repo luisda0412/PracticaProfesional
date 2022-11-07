@@ -54,7 +54,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Caja_Chica.ToList<Caja_Chica>();
+                    lista = ctx.Caja_Chica.OrderByDescending(x => x.fecha).ToList<Caja_Chica>();
                 }
                 return lista;
             }
