@@ -64,9 +64,11 @@
                                     @Html.Label("married-true", "Efectivo")
                                     @Html.RadioButtonFor(model => model.tipopago, false, new { id = "married-false" })
                                     @Html.Label("married-true", "Tarjeta")
-                                    @Html.ValidationMessageFor(model => model.tipopago, "", new { @class = "text-danger" })
+
                                 </div>
+
                             </div>
+                            @Html.ValidationMessageFor(model => model.tipopago, "", new { @class = "text-danger" })
                         </div>
 
                         <div class="col-md-6">

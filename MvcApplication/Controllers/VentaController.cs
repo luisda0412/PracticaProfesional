@@ -331,7 +331,7 @@ namespace MvcApplication.Controllers
                         //Crear el pdf de la factura--------------------------------------------------------------------------------------
                         //------------------------------------------------------------------------------------------------------------------------
                         MemoryStream ms = new MemoryStream();
-                        if (emailForm.ToString().Length != 0)
+                        if (emailForm!= null)
                         {
                             try
                             {
@@ -405,6 +405,8 @@ namespace MvcApplication.Controllers
                                 doc.Add(header6);
 
                                 doc.Close();
+
+                                Carrito.Instancia.eliminarCarrito();
                                 return File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
 
                             }

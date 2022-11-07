@@ -42,8 +42,8 @@ namespace Infraestructure.Models
         [Display(Name = "Identificación")]
         public int id { get; set; }
       
-        [Display(Name = "Fecha")]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Fecha y Hora")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
 
         [Display(Name = "Saldo")]
@@ -319,6 +319,7 @@ namespace Infraestructure.Models
         public Nullable<bool> estado { get; set; }
 
         [Display(Name = "Tipo de Pago")]
+        [Required(ErrorMessage = "*El tipo de pago es requerido")]
         public Nullable<bool> tipopago { get; set; }
         public virtual ICollection<Detalle_Venta> Detalle_Venta { get; set; }
         public virtual ICollection<Facturas> Facturas { get; set; }
