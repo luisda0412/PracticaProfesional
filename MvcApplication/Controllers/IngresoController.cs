@@ -38,8 +38,8 @@ namespace MvcApplication.Controllers
         {
           
             int cantidadCompra = Comprita.Instancia.Items.Count();
-            ViewBag.NotificationMessage= Comprita.Instancia.AgregarItem((int)id);
-            ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Compras", "Artículo agregado a la orden", SweetAlertMessageType.success);
+            ViewBag.NotificationMessage= Comprita.Instancia.AgregarItem((int)id);   
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Aviso", "Artículo agregado a la orden", SweetAlertMessageType.success);
             return RedirectToAction("IndexIngreso");
 
         }

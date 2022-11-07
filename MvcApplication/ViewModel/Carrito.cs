@@ -1,6 +1,7 @@
 ﻿using MvcApplication.Util;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -113,10 +114,8 @@ namespace Web.ViewModel
             return mensaje;
 
         }
+        
 
-        /**
-         * GetTotal() - Devuelve el precio total de todos los libros.
-         */
         public decimal GetTotal()
         {
             decimal total = 0;

@@ -62,8 +62,20 @@
         <br />
         <center>
             <div class="botones">
-                <button class="boton1">@Html.ActionLink("Editar Reparación", "Edit", new { id = Model.id })</button>
-                <button class="boton1">@Html.ActionLink("Volver a lista", "Index")</button>
+                @{
+                    if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3))
+                    {
+                        <button class="boton1">@Html.ActionLink("Editar Reparación", "Edit", new { id = Model.id })</button>
+                        <button class="boton1">@Html.ActionLink("Volver atrás", "Index")</button>
+                    }
+                }
+                @{
+                    if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2 ))
+                    {
+                        <button class="boton1">@Html.ActionLink("Volver atrás", "IndexUsuario")</button>
+                    }
+                }
+
             </div>
         </center>
     </section>

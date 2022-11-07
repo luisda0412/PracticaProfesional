@@ -187,17 +187,28 @@ namespace MvcApplication.Controllers
 
         public ActionResult desabilitar(long id)
         {
-            IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();       
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
                 try
                 {
-                    _ServiceReparaciones.Eliminar((int)id);
-                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reparación eliminada", "Datos eliminados de la base", SweetAlertMessageType.success);                  
+                    Reparaciones art = cdt.Reparaciones.Where(x => x.id == id).FirstOrDefault();
+                    art.estado = !art.estado;
+                    cdt.Reparaciones.Add(art);
+                    cdt.Entry(art).State = EntityState.Modified;
+                    cdt.SaveChanges();
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reparación eliminada", "Datos eliminados de la base", SweetAlertMessageType.success);
+                    return RedirectToAction("Index");
+
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    string mensaje = "";
+                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
                 }
-            return RedirectToAction("Index");
+            }
         }
 
         public ActionResult buscarReparacionxCedula(string filtro)
@@ -256,24 +267,29 @@ namespace MvcApplication.Controllers
         {
             MemoryStream target = new MemoryStream();
             IServiceRTecnico _ServiceRTecnico = new ServiceRTecnico();
-            try
-            {
-                repo.reparacion_id = codigoSer;
-                repo.fecha = DateTime.Now;
-                _ServiceRTecnico.Save(repo);
 
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
+            ModelState.Remove("id");
+            ModelState.Remove("reparacion_id");
+            if (ModelState.IsValid)
             {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Libro";
-                TempData["Redirect-Action"] = "IndexAdmin";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
+                try
+                {
+                    repo.reparacion_id = codigoSer;
+                    repo.fecha = DateTime.Now;
+                    _ServiceRTecnico.Save(repo);
+
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte creado", "El trabajo realizado ha quedado registrado en la reparación", SweetAlertMessageType.success);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, MethodBase.GetCurrentMethod());
+                    TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                    return RedirectToAction("Default", "Error");
+                }
             }
+            return RedirectToAction("Index");
+
         }
 
         public ActionResult EliminarReporte(int? id)

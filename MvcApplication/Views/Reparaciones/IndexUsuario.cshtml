@@ -16,7 +16,7 @@
             </div>
             <br />
             <h2>
-                Lista de Reparaciones
+                Vea aquí sus reparaciones
             </h2>
 
         </div>
@@ -37,29 +37,7 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Reparaciones registradas actualmente</h2>
-                </div>
-                <div class="col-md-4">
-                    <div class="card my-4">
-                        <h5 class="card-header">Buscar por cédula de cliente</h5>
-                        @using (Ajax.BeginForm("buscarReparacionxCedula", "Reparaciones", new AjaxOptions
-                        {
-                            UpdateTargetId = "resultado",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "GET",
-                            LoadingElementId = "ajaxLoader"
-                        }))
-                        {
-                            <div class="card-body">
-                                <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Digíte la cédula completa" })
-
-                                    <button type="submit" class="boton3" title="Buscar la reparación del cliente">Buscar</button>
-
-                                </div>
-                            </div>
-                        }
-                    </div>
+                    <h2 class="titulo">Reparaciones registradas con su cédula</h2>
                 </div>
             </div>
             <br />
@@ -85,9 +63,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.usuario_id)
-                            </th>
+                          
                             <th>
                                 @Html.DisplayNameFor(model => model.cliente_id)
                             </th>
@@ -108,9 +84,7 @@
                         {
 
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Usuario.nombre)
-                                </td>
+                             
                                 <td>
                                     @Html.DisplayFor(modelItem => item.cliente_id)
                                 </td>
