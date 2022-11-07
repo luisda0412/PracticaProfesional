@@ -59,34 +59,7 @@ namespace MvcApplication.Controllers
             return View();
         }
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult Details(int? id)
-        {
-            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
-            Caja_Chica caja = null;
-
-            try
-            {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                caja = _ServiceCaja.GetCajaChicaByID(id.Value);
-
-                if (caja == null)
-                {
-                    return RedirectToAction("Index");
-                }
-                return View(caja);
-
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, MethodBase.GetCurrentMethod());
-                return RedirectToAction("Index");
-            }
-        }
+     
 
         [HttpPost]
         [CustomAuthorize((int)Roles.Administrador)]
@@ -94,15 +67,16 @@ namespace MvcApplication.Controllers
         {
             
             IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
-            ModelState.Remove("estado");
+            ModelState.Remove("id");
+            ModelState.Remove("fecha");
             if (ModelState.IsValid)
             {
                 try
                 {
-                  //  caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
+
                     caja.fecha = DateTime.Now;
                     _ServiceCaja.Save(caja);
-                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "arqueo de caja guardado con éxito", SweetAlertMessageType.success);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Datos registrados", "La información de la caja chica ha sido guardada con éxito", SweetAlertMessageType.success);
                 }
                 catch (Exception ex)
                 {

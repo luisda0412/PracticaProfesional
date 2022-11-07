@@ -28,10 +28,10 @@ namespace AplicationCore.Services
             return repository.GetCajaChica();
         }
 
-        public Caja_Chica GetCajaChicaByID(int id)
+        public Caja_Chica GetCajaChicaLast()
         {
             IRepositoryCajaChica repository = new RepositoryCajaChica();
-            return repository.GetCajaChicaByID(id);
+            return repository.GetCajaChicaLast();
         }
 
         public void Save(Caja_Chica caja)

@@ -2,7 +2,7 @@
 @model IEnumerable<Infraestructure.Models.Caja_Chica>
 
 @{
-    ViewBag.Title = "Lista de Arqueos de Caja";
+    ViewBag.Title = "Registros caja";
 }
 
 
@@ -19,7 +19,7 @@
             </div>
             <br />
             <h2>
-                Lista de arqueos de caja
+                Lista de registros de caja chica
             </h2>
 
         </div>
@@ -40,8 +40,8 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Arqueos registrados por el momento</h2>
-                    <button class="boton1"><p>@Html.ActionLink("Crear un nuevo arqueo", "Create")</p></button>
+                    <h2 class="titulo">Registros realizados hasta el momento</h2>
+                    <button class="boton1"><p>@Html.ActionLink("Crear nuevo registro", "Create")</p></button>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
@@ -56,7 +56,7 @@
                         {
                             <div class="card-body">
                                 <div class="input-group">
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Fecha del arqueo" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @type = "date", @placeholder = "Fecha del arqueo" })
 
                                     <button type="submit" class="boton3">Buscar</button>
 
@@ -120,13 +120,8 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.salida)
                             </td>
-                            <td class="columnabotones">
-
-                                <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
-                                <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                            <td class="columnabotones">                              
                                 <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { title = "Eliminar registro de caja" })</button>
-
-
                             </td>
                         </tr>
                         }

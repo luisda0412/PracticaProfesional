@@ -41,11 +41,10 @@ namespace Infraestructure.Models
     {
         [Display(Name = "Identificación")]
         public int id { get; set; }
+      
         [Display(Name = "Fecha")]
-        [Required(ErrorMessage = "*La fecha es un campo obligatorio")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
-
 
         [Display(Name = "Saldo")]
         [Required(ErrorMessage = "*El saldo es un campo obligatorio")]

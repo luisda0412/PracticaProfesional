@@ -72,40 +72,27 @@ namespace Infraestructure.Repository
             }
         }
 
-        public Caja_Chica GetCajaChicaByID(int id)
+        public Caja_Chica GetCajaChicaLast()
         {
             Caja_Chica oCaja = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                oCaja = ctx.Caja_Chica.Where(a => a.id == id).FirstOrDefault();
+                oCaja = ctx.Caja_Chica.OrderByDescending(x => x.fecha).First();
             }
             return oCaja;
         }
 
         public void Save(Caja_Chica caja)
         {
-            Caja_Chica cajaexist = GetCajaChicaByID(caja.id);
-
             using (MyContext cdt = new MyContext())
             {
                 cdt.Configuration.LazyLoadingEnabled = false;
 
                 try
-                {
-                    if (cajaexist == null)
-                    {
-
+                {                  
                         cdt.Caja_Chica.Add(caja);
                         cdt.SaveChanges();
-                    }
-                    else
-                    {
-                        cdt.Caja_Chica.Add(caja);
-                        cdt.Entry(caja).State = EntityState.Modified;
-                        cdt.SaveChanges();
-
-                    }
                 }
                 catch (Exception e)
                 {

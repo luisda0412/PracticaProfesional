@@ -260,10 +260,16 @@ namespace MvcApplication.Controllers
                         //LLENAR DATOS DE CAJA CHICA
                         if (venta.tipopago==true)
                         {
+                            IServiceCajaChica servicio  = new ServiceCajaChica();
+                            Caja_Chica ultimacaja = new Caja_Chica();
+                            ultimacaja = servicio.GetCajaChicaLast();
+
                             cajaChica.fecha = DateTime.Now;
                             cajaChica.entrada = Convert.ToDouble(Request.Form["entrada"]);
-                            cajaChica.salida = cajaChica.entrada-venta.monto_total;
+                            cajaChica.salida = Convert.ToDouble(Request.Form["salida"]);
+
                             saldoActual += (double)cajaChica.entrada-(double)cajaChica.salida;
+                            saldoActual += (double)ultimacaja.saldo;
                             cajaChica.saldo = saldoActual;
 
                             IServiceCajaChica caja = new ServiceCajaChica();

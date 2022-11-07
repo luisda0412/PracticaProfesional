@@ -10,7 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoryCajaChica
     {
         IEnumerable<Caja_Chica > GetCajaChica();
-        Caja_Chica GetCajaChicaByID(int id);
+        Caja_Chica GetCajaChicaLast();
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);
         void Save(Caja_Chica caja);
         void Eliminar(int id);

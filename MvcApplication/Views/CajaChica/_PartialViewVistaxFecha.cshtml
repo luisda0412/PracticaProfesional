@@ -6,16 +6,16 @@
             @Html.DisplayFor(modelItem => item.fecha)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Usuario.nombre)
+            &cent;@Html.DisplayFor(modelItem => item.saldo)
         </td>
         <td>
-            &cent; @Html.DisplayFor(modelItem => item.efectivo_total)
+            @Html.DisplayFor(modelItem => item.entrada)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.salida)
         </td>
         <td class="columnabotones">
-            <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id })</button>
-            <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id })</button>
-            <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id })</button>
-
+            <button class="boton2">@Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new { title = "Eliminar registro de caja" })</button>
         </td>
     </tr>
 }
