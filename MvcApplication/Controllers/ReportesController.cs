@@ -25,6 +25,7 @@ using iText.Layout.Borders;
 using iText.Kernel.Events;
 using iText.Kernel.Pdf.Canvas;
 
+
 namespace MvcApplication.Controllers
 {
     public class ReportesController: Controller
@@ -233,9 +234,8 @@ namespace MvcApplication.Controllers
                     _cell = new Cell().Add(new Paragraph(item.nombre)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
 
-                    
-
-                    _cell = new Cell().Add(new Paragraph("₡"+item.precio)).SetTextAlignment(TextAlignment.CENTER);
+                    string precio =(String.Format("{0:N2}", item.precio));
+                    _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);                   
                     Image image = new Image(ImageDataFactory.Create(item.imagen)).SetTextAlignment(TextAlignment.CENTER);
                     // Tamaño de la imagen
@@ -489,7 +489,9 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                     _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
-                    _cell = new Cell().Add(new Paragraph("₡" + item.monto_total.ToString()).SetFont(fuente)).SetTextAlignment(TextAlignment.CENTER);
+                    string precio = (String.Format("{0:N2}", item.monto_total));
+                    _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
+                  
                     _table.AddCell(_cell);
                 }
 

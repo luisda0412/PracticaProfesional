@@ -13,13 +13,13 @@
                 <th class="center">
                     Cantidad
                 </th>
-                <th class="right">
+                <th class="right"  style="text-align:right">
                     Precio
                 </th>
-                <th class="right">
+                <th class="right"  style="text-align:right">
                     Total
                 </th>
-                <th>
+                <th  style="text-align:center">
                     Opciones
                 </th>
             </tr>
@@ -34,15 +34,15 @@
                     <td class="center" style="width:1.5em">
                         @Html.EditorFor(modelItem => item.cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_productoid = item.articulo.id, onchange = "updateCantidad(this)" } })
                     </td>
-                    <td class="right">
+                    <td class="right" style="text-align:right">
 
                         ₡@Html.DisplayFor(modelItem => item.precio)
                     </td>
 
-                    <td class="right">
-                        ₡@Html.DisplayFor(modelItem => item.SubTotal)
+                    <td class="right"  style="text-align:right">
+                        ₡ @Html.DisplayFor(modelItem => item.SubTotal)
                     </td>
-                    <td>
+                    <td  style="text-align:center">
                         @Ajax.ActionLink("X",//Texto para el usuario
                              "eliminarProducto",//Acción a llamar
                              "Venta",
@@ -78,8 +78,8 @@
                         <td class="left">
                             <strong>Subtotal</strong>
                         </td>
-                        <td class="right">
-                            <strong>₡ @(((decimal)Web.ViewModel.Carrito.Instancia.GetSubTotal()))</strong>
+                        <td class="right" style="width:50%">
+                            <strong>₡ @((Web.ViewModel.Carrito.Instancia.tirarSubtotal()))</strong>
                         </td>
                     </tr>
 
@@ -87,8 +87,8 @@
                         <td class="left">
                             <strong>Impuesto</strong>
                         </td>
-                        <td class="right">
-                            <strong>+ ₡ @(((decimal)Web.ViewModel.Carrito.Instancia.GetImpuesto()))</strong>
+                        <td class="right" style="width:50%;">
+                            <strong>+ ₡ @((Web.ViewModel.Carrito.Instancia.tirarImpuesto()))</strong>
                         </td>
                     </tr>
 
@@ -96,8 +96,8 @@
                         <td class="left">
                             <strong>Total</strong>
                         </td>
-                        <td class="right">
-                            <strong>₡ @(((decimal)Web.ViewModel.Carrito.Instancia.GetTotal()))</strong>
+                        <td class="right" style="width:50%">
+                            <strong>₡ @((Web.ViewModel.Carrito.Instancia.tirarTotal()))</strong>
                         </td>
                     </tr>
                 </tbody>

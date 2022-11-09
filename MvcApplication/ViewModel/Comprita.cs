@@ -173,5 +173,22 @@ namespace Web.ViewModel
             Items.Clear();
 
         }
+
+
+        //Para mostrar en las vistas
+        public string tirarSubtotal()
+        {
+            return String.Format("{0:N2}", GetSubTotal());
+        }
+
+        public string tirarImpuesto()
+        {
+            return String.Format("{0:N2}", GetImpuesto());
+        }
+        public string tirarTotal()
+        {
+            return String.Format("{0:N2}", GetTotal());
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Web.ViewModel
 
         public Nullable<int> cantidad { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> precio
         {
             get { return articulo.precio; }
@@ -21,7 +21,7 @@ namespace Web.ViewModel
         public virtual Detalle_Venta detalleVenta { get; set; }
         public virtual Articulo articulo { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:N0}")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         public long SubTotal
         {
             get

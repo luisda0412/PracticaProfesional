@@ -13,13 +13,13 @@
                 <th class="center">
                     Cantidad
                 </th>
-                <th class="right">
+                <th class="right" style="text-align:right">
                     Precio
                 </th>
-                <th class="right">
+                <th class="right" style="text-align:right">
                     Total
                 </th>
-                <th>
+                <th style="text-align:center">
                     Opciones
                 </th>
             </tr>
@@ -34,16 +34,16 @@
                     <td class="center" style="width:1.5em">
                         @Html.EditorFor(modelItem => item.cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_productoid = item.articulo.id, onchange = "updateCantidadC(this)" } })
                     </td>
-                    <td class="right">
+                    <td class="right" style="text-align:right">
 
                         ₡@Html.DisplayFor(modelItem => item.precio)
                     </td>
 
-                    <td class="right">
+                    <td class="right" style="text-align:right">
                         ₡@Html.DisplayFor(modelItem => item.SubTotal)
                     </td>
 
-                    <td>
+                    <td style="text-align:center">
                   
                         @Html.ActionLink("X", "eliminarProducto", "Cotizacion", new { id = item.idArticulo }, new { @class = "btn btn-primary" })
                     </td>
@@ -62,17 +62,11 @@
             <table class="table table-clear">
                 <tbody>
                     <tr>
-                        <td>
-                            <strong>El costo de obtener estos productos sería el siguiente </strong>
-                        </td>
-
-                    </tr>
-                    <tr>
                         <td class="left">
                             <strong>Subtotal</strong>
                         </td>
-                        <td class="right">
-                            <strong>₡ @(((decimal)Web.ViewModel.Cotizacion.Instancia.GetSubTotal()))</strong>
+                        <td class="right" style="width:49%">
+                            <strong>₡ @((Web.ViewModel.Cotizacion.Instancia.tirarSubtotal()))</strong>
                         </td>
                     </tr>
 
@@ -80,8 +74,8 @@
                         <td class="left">
                             <strong>Impuesto de Ventas</strong>
                         </td>
-                        <td class="right">
-                            <strong>+ ₡ @(((decimal)Web.ViewModel.Cotizacion.Instancia.GetImpuesto()))</strong>
+                        <td class="right" style="width:49%">
+                            <strong>+ ₡ @((Web.ViewModel.Cotizacion.Instancia.tirarImpuesto()))</strong>
                         </td>
                     </tr>
 
@@ -89,8 +83,8 @@
                         <td class="left">
                             <strong>Total</strong>
                         </td>
-                        <td class="right">
-                            <strong>₡ @(((decimal)Web.ViewModel.Cotizacion.Instancia.GetTotal()))</strong>
+                        <td class="right" style="width:49%">
+                            <strong>₡ @((Web.ViewModel.Cotizacion.Instancia.tirarSubtotal()))</strong>
                         </td>
 
                     </tr>

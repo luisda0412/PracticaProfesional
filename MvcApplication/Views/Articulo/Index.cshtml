@@ -90,7 +90,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.nombre)
                             </th>
-                            <th>
+                            <th style="text-align:right">
                                 @Html.DisplayNameFor(model => model.precio)
                             </th>
                             <th>
@@ -109,10 +109,10 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.nombre)
                                 </td>
-                                <td>
+                                <td style="text-align:right">
                                     ₡@Html.DisplayFor(modelItem => item.precio)
                                 </td>
-                                <td>
+                                <td >
                                     @Html.DisplayFor(modelItem => item.Categoria.descripcion)
                                 </td>
                                 <td>

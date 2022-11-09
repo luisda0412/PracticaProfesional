@@ -38,6 +38,8 @@
                 <br />
                 <h2 id="titulo">Cotización</h2>
                 <br />
+                <strong>Seleccione los artículos y podrá ver el costo aproximado que tendría el obtenerlos</strong>
+                <br />
                 @using (Html.BeginForm("Save", "Ingreso", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -85,7 +87,7 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Seleccione los artículos</h2>
+                    <h2 class="titulo">Artículos disponibles</h2>
                 </div>
             </div>
             <br />
