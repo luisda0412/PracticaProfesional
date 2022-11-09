@@ -134,18 +134,6 @@ namespace MvcApplication.Controllers
                 doc.Add(table);
 
 
-
-                // Colocar número de páginas
-                int numberOfPages = pdfDoc.GetNumberOfPages();
-                for (int i = 1; i <= numberOfPages; i++)
-                {
-
-                    // Write aligned text to the specified by parameters point          
-                    Paragraph p = new Paragraph("Reporte del catálogo de productos");
-                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)),559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                }
-
-
                 //Close document
                 doc.Close();
                 // Retorna un File
@@ -194,6 +182,9 @@ namespace MvcApplication.Controllers
                 Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
                 logo = logo.SetHeight(50).SetWidth(120);
 
+               
+
+
                 //Eventos de pie y encabezado de pagina
                 pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
                 pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
@@ -241,6 +232,9 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell.SetBackgroundColor(ColorConstants.GREEN));
                     _cell = new Cell().Add(new Paragraph(item.nombre)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
+
+                    
+
                     _cell = new Cell().Add(new Paragraph("₡"+item.precio)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);                   
                     Image image = new Image(ImageDataFactory.Create(item.imagen)).SetTextAlignment(TextAlignment.CENTER);
@@ -252,7 +246,20 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                 }
 
+                int numberOfPages = pdfDocument.GetNumberOfPages();
+                for (int i = 1; i <= numberOfPages; i++)
+                {
+                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 540, 100, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                }
+
                 doc.Add(_table);
+
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                                  .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                  .SetFontSize(14)
+                                  .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
+
                 doc.Close();
                 byte[] bytesStream = ms.ToArray();
                 ms = new MemoryStream();
@@ -316,7 +323,7 @@ namespace MvcApplication.Controllers
 
                 cell = new Cell()
                 .Add(new Paragraph("Reporte del día\n").SetFont(bold))
-                    .Add(new Paragraph("Fecha de emisión: " + DateTime.Now.ToShortDateString()))
+                    .Add(new Paragraph("Fecha de emisión: " + DateTime.Now))
                     .Add(new Paragraph("Usuario: " + user.nombre))
                     .AddStyle(styleText).AddStyle(styleCell);
                    
@@ -330,6 +337,7 @@ namespace MvcApplication.Controllers
 
         public class FooterEventHandler1 : IEventHandler
         {
+          
             public void HandleEvent(Event @event)
             {
                 PdfDocumentEvent docEvent = (PdfDocumentEvent)@event;
@@ -338,16 +346,23 @@ namespace MvcApplication.Controllers
 
                 PdfCanvas canvas1 = new PdfCanvas(page.NewContentStreamBefore(), page.GetResources(), pdfDoc);
                 Rectangle rootArea = new Rectangle(36, 20, page.GetPageSize().GetWidth() - 70, 50);
+
+                
+
                 new Canvas(canvas1, pdfDoc, rootArea)
                   .Add(getTable(docEvent));
+
+              
 
             }
             //Eventos para el pdf
             public Table getTable(PdfDocumentEvent docEvent)
             {
                 float[] cellWidth = { 92f, 8f }; 
-                Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth(); 
+                Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth();
                 //tableEvent.SetWidth (UnitValue. CreatePercentValue(100f));
+
+               
 
                 PdfPage page = docEvent.GetPage();
                 int pageNum = docEvent.GetDocument().GetPageNumber(page);
@@ -426,6 +441,8 @@ namespace MvcApplication.Controllers
                 //Imagen de la empresa
                 Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
                 logo = logo.SetHeight(50).SetWidth(120);
+
+                
 
                 //Eventos de pie y encabezado de pagina
                 pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
