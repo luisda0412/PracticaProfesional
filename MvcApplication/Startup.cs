@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Configuration;
+using System.Data.Entity;
+using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Infraestructure.Models;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin;
@@ -11,6 +14,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using MvcApplication.Support;
 using Owin;
+using Web.Utils;
 
 [assembly: OwinStartup(typeof(MvcApplication.Startup))]
 
@@ -92,6 +96,36 @@ namespace MvcApplication
                     }
                 }
             });
+
+            try
+            {
+                if (DateTime.Now.Day == 10)
+                {
+                    string path = @"C:\RespaldosSCAP";
+                    try
+                    {
+                        if (!Directory.Exists(path))
+                        {
+                            Directory.CreateDirectory(path);
+                        }
+                        string url = @"'C:\RespaldosVYCUZ\VYCUZ_" + DateTime.Now.ToString("dd-MMMM-yyyy HH-mm") + ".bak'";
+                        using (MyContext ctx = new MyContext())
+                        {
+                            ctx.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "backup database Registro_Inventario_VYCUZ to disk = " + url);
+                        }
+                    }
+                    catch (DirectoryNotFoundException ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
+            catch (Exception dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
         }
     }
 }
