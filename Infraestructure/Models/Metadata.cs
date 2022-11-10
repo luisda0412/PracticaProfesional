@@ -131,6 +131,7 @@ namespace Infraestructure.Models
         public Nullable<int> usuario_id { get; set; }
         [Display(Name = "Fecha del ingreso")]
         public Nullable<System.DateTime> fecha { get; set; }
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         [Display(Name = "Monto Total")]
         public Nullable<double> monto_total { get; set; }
         [Display(Name = "Detalle")]

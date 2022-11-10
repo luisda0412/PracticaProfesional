@@ -99,7 +99,7 @@ namespace MvcApplication
 
             try
             {
-                if (DateTime.Now.Day == 10)
+                if (DateTime.Now.Day == 1)
                 {
                     string path = @"C:\RespaldosSCAP";
                     try
