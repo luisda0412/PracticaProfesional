@@ -1,6 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="Registro_Inventario_VYCUZModelStoreContainer" CdmEntityContainer="Registro_Inventario_VYCUZEntities">
+    <EntitySetMapping Name="Arqueos_Caja">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Arqueos_Caja">
+        <MappingFragment StoreEntitySet="Arqueos_Caja">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="saldo" ColumnName="saldo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Articulo">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Articulo">
         <MappingFragment StoreEntitySet="Articulo">

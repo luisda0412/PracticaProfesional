@@ -55,6 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Arqueos_Caja.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Articulo.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>

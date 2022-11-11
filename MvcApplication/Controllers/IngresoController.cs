@@ -21,7 +21,7 @@ namespace MvcApplication.Controllers
             try
             {
                 IServiceArticulo _ServiceArticulo = new ServiceArticulo();
-                ViewBag.listaArticulos = _ServiceArticulo.GetArticulo();
+                ViewBag.listaArticulos = _ServiceArticulo.GetArticuloMante();
                 if (TempData["mensaje"] != null)
                     ViewBag.NotificationMessage = TempData["mensaje"].ToString();
 

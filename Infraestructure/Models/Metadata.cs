@@ -38,6 +38,24 @@ namespace Infraestructure.Models
 
     }
 
+    internal partial class ArqueosCajaMetadata
+    {
+        [Display(Name = "# Arqueo")]
+        public int id { get; set; }
+
+        [Display(Name = "Usuario")]
+        public Nullable<int> usuario_id { get; set; }
+        [Display(Name = "Fecha")]
+        public Nullable<System.DateTime> fecha { get; set; }
+        [Display(Name = "Saldo de Caja")]
+        public Nullable<double> saldo { get; set; }
+        [Display(Name = "Estado")]
+        public Nullable<bool> estado { get; set; }
+
+        [Display(Name = "Usuario")]
+        public virtual Usuario Usuario { get; set; }
+    }
+
     internal partial class Caja_ChicaMetadata
     {
         [Display(Name = "Identificación")]

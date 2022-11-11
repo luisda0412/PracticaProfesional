@@ -9,6 +9,7 @@ namespace AplicationCore.Services
 {
     public interface IServiceArticulo
     {
+        IEnumerable<Articulo> GetArticuloMante();
         IEnumerable<Articulo> GetArticulo();
         Articulo GetArticuloByID(int id);
         IEnumerable<Articulo> GetArticuloByNombre(String nombre);

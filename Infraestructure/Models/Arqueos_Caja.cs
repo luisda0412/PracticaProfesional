@@ -11,23 +11,17 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Ingreso
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(ArqueosCajaMetadata))]
+    public partial class Arqueos_Caja
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ingreso()
-        {
-            this.Detalle_Ingreso = new HashSet<Detalle_Ingreso>();
-        }
-    
         public int id { get; set; }
         public Nullable<int> usuario_id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<double> monto_total { get; set; }
-        public string comentario { get; set; }
+        public Nullable<double> saldo { get; set; }
+        public Nullable<bool> estado { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Detalle_Ingreso> Detalle_Ingreso { get; set; }
         public virtual Usuario Usuario { get; set; }
     }
 }

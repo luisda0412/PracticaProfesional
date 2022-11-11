@@ -331,6 +331,7 @@ namespace MvcApplication.Controllers
                         //Crear el pdf de la factura--------------------------------------------------------------------------------------
                         //------------------------------------------------------------------------------------------------------------------------
                         MemoryStream ms = new MemoryStream();
+                        FileContentResult FileFact = null;
                         if (emailForm!= null)
                         {
                             try
@@ -367,7 +368,7 @@ namespace MvcApplication.Controllers
                                 table.AddHeaderCell("#");
                                 table.AddHeaderCell("Descripción");
                                 table.AddHeaderCell("Unidades");
-                                table.AddHeaderCell("Precio");
+                                table.AddHeaderCell("Precio Unidad");
 
                                 int x = 0;
                                 double subtotal = 0;
@@ -379,7 +380,9 @@ namespace MvcApplication.Controllers
                                     Articulo arti = servicio.GetArticuloByID((int)item.idArticulo);
                                     table.AddCell(new Paragraph(arti.nombre));
                                     table.AddCell(new Paragraph(item.cantidad.ToString()));
-                                    table.AddCell(new Paragraph(item.precio.ToString()));
+
+                                    string precio = (String.Format("{0:N2}", item.precio));
+                                    table.AddCell(new Paragraph("¢" + precio));
                                     subtotal += (double)item.precio;
                                 }
                                 doc.Add(table);
@@ -395,19 +398,21 @@ namespace MvcApplication.Controllers
                                 table2.AddHeaderCell("Impuesto IVA");
                                 table2.AddHeaderCell("Total");
 
-                                table2.AddCell(new Paragraph(Carrito.Instancia.GetSubTotal().ToString()));
-                                table2.AddCell(new Paragraph(Carrito.Instancia.GetImpuesto().ToString()));
-                                table2.AddCell(new Paragraph(venta.monto_total.ToString()));
+                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarSubtotal()));
+                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarImpuesto()));
+                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarTotal()));
 
                                 doc.Add(table2);
 
                                 Paragraph header6 = new Paragraph("Gracias por comprar con VYCUZ!").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14);
+
+                                doc.Add(header5);
                                 doc.Add(header6);
 
                                 doc.Close();
 
                                
-                                return File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
+                                FileFact = File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
 
                             }
                             catch (Exception ex)
@@ -429,7 +434,15 @@ namespace MvcApplication.Controllers
                             string url = urlDomain + "/Usuario/Recuperacion/?token=";
                             MailMessage oMailMessage = new MailMessage(EmailOrigen, emailForm, "Compra exitosa",
                                 "<p>Estimado usuario,</br></br><hr/>Ha realizado una compra en VYCUZ.</p>");
-                            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));                        
+                            oMailMessage.Attachments.Add(Attachment.CreateAttachmentFromString(XML, "facturaElectronica.xml"));
+
+                            var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
+                            var attachmentFile = FileFact;
+                            var attachmentStream = new MemoryStream((attachmentFile as FileContentResult).FileContents);
+                            var attachmentTitle = (attachmentFile as FileContentResult).FileDownloadName;
+
+                            oMailMessage.Attachments.Add(new Attachment(attachmentStream, attachmentTitle, contentType.ToString()));
+
                             oMailMessage.IsBodyHtml = true;
 
                             SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");

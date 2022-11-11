@@ -25,6 +25,7 @@ namespace Infraestructure.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Arqueos_Caja> Arqueos_Caja { get; set; }
         public virtual DbSet<Articulo> Articulo { get; set; }
         public virtual DbSet<Caja_Chica> Caja_Chica { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }

@@ -63,6 +63,26 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<Articulo> GetArticuloMante()
+        {
+            try
+            {
+                IEnumerable<Articulo> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Articulo.Include(x => x.Categoria).ToList<Articulo>();
+                }
+                return lista;
+            }
+            catch (Exception e)
+            {
+                string mensaje = "";
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
+                throw new Exception(mensaje);
+            }
+        }
+
         public IEnumerable<Articulo> GetArticulo()
         {
             try
@@ -71,7 +91,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx= new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Articulo.Include(x=> x.Categoria).ToList<Articulo>();
+                    lista = ctx.Articulo.Where(x => x.stock>0).Include(x=> x.Categoria).ToList<Articulo>();
                 }
                 return lista;
             }

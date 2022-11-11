@@ -27,6 +27,12 @@ namespace AplicationCore.Services
             IRepositoryArticulo repository = new RepositoryArticulo();
             return repository.GetArticulo();
         }
+        public IEnumerable<Articulo> GetArticuloMante()
+        {
+            IRepositoryArticulo repository = new RepositoryArticulo();
+            return repository.GetArticuloMante();
+        }
+
 
         public Articulo GetArticuloByID(int id)
         {

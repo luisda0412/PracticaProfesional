@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Registro_Inventario_VYCUZModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Arqueos_Caja">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario_id" Type="Int32" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+    <Property Name="saldo" Type="Double" />
+    <Property Name="estado" Type="Boolean" />
+    <NavigationProperty Name="Usuario" Relationship="Self.Caja_Usuario_FK" FromRole="Arqueos_Caja" ToRole="Usuario" />
+  </EntityType>
   <EntityType Name="Articulo">
     <Key>
       <PropertyRef Name="id" />
@@ -179,6 +190,7 @@
     <Property Name="rol_id" Type="Int32" />
     <Property Name="estado" Type="Boolean" />
     <Property Name="tokenRecuperacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Arqueos_Caja" Relationship="Self.Caja_Usuario_FK" FromRole="Usuario" ToRole="Arqueos_Caja" />
     <NavigationProperty Name="Ingreso" Relationship="Self.Ingreso_Usuario_FK" FromRole="Usuario" ToRole="Ingreso" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Usuario" ToRole="Reparaciones" />
     <NavigationProperty Name="Resena" Relationship="Self.Resena_Usuario_FK" FromRole="Usuario" ToRole="Resena" />
@@ -201,6 +213,18 @@
     <NavigationProperty Name="Facturas" Relationship="Self.Facturas__Venta_FK" FromRole="Venta" ToRole="Facturas" />
     <NavigationProperty Name="Usuario" Relationship="Self.Facturas_Fisica_Usuario_FK" FromRole="Venta" ToRole="Usuario" />
   </EntityType>
+  <Association Name="Caja_Usuario_FK">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Arqueos_Caja" Type="Self.Arqueos_Caja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Arqueos_Caja">
+        <PropertyRef Name="usuario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="Articulo_Categoria_FK">
     <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
     <End Role="Articulo" Type="Self.Articulo" Multiplicity="*" />
@@ -394,6 +418,7 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="Registro_Inventario_VYCUZEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Arqueos_Caja" EntityType="Self.Arqueos_Caja" />
     <EntitySet Name="Articulo" EntityType="Self.Articulo" />
     <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" />
     <EntitySet Name="Categoria" EntityType="Self.Categoria" />
@@ -410,6 +435,10 @@
     <EntitySet Name="Servicio_Reparacion" EntityType="Self.Servicio_Reparacion" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <EntitySet Name="Venta" EntityType="Self.Venta" />
+    <AssociationSet Name="Caja_Usuario_FK" Association="Self.Caja_Usuario_FK">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Arqueos_Caja" EntitySet="Arqueos_Caja" />
+    </AssociationSet>
     <AssociationSet Name="Articulo_Categoria_FK" Association="Self.Articulo_Categoria_FK">
       <End Role="Categoria" EntitySet="Categoria" />
       <End Role="Articulo" EntitySet="Articulo" />

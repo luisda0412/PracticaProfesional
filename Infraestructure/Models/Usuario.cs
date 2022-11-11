@@ -14,13 +14,12 @@ namespace Infraestructure.Models
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(UsuarioMetadata))]
-
-
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuario()
         {
+            this.Arqueos_Caja = new HashSet<Arqueos_Caja>();
             this.Ingreso = new HashSet<Ingreso>();
             this.Reparaciones = new HashSet<Reparaciones>();
             this.Resena = new HashSet<Resena>();
@@ -37,6 +36,8 @@ namespace Infraestructure.Models
         public Nullable<bool> estado { get; set; }
         public string tokenRecuperacion { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Arqueos_Caja> Arqueos_Caja { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingreso> Ingreso { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
