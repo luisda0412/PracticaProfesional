@@ -87,6 +87,9 @@ namespace MvcApplication.Controllers
             {
                 Log.Info("Usuario desconectado!");
                 Session["User"] = null;
+                int id = Convert.ToInt32(TempData["idUser"]);
+                TempData["idUser"] = null;
+                id = Convert.ToInt32(TempData["idUser"]);
                 return RedirectToAction("Login", "Home");
             }
             catch (Exception ex)
