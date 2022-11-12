@@ -38,6 +38,7 @@
         <center>
             <br />
             <h2 id="titulo">Nueva Venta</h2>
+            Tipo de cambio <p>@ViewBag.tipoCambio</p>
             <br />
             @using (Html.BeginForm("Save", "Venta", FormMethod.Post))
             {
@@ -94,7 +95,7 @@
                             </div>
                             @Html.ValidationMessageFor(model => model.nombre_cliente, "", new { @class = "text-danger" })
                         </div>
-                       
+
                     </div>
                 </div>
 
