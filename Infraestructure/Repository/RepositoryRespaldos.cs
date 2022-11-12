@@ -17,7 +17,7 @@ namespace Infraestructure.Repository
         {
             try
             {
-                string path = @"C:\RespaldosSCAP";
+                string path = @"C:\RespaldosVYCUZ";
                 try
                 {
                     if (!Directory.Exists(path))

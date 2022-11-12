@@ -101,7 +101,7 @@ namespace MvcApplication
             {
                 if (DateTime.Now.Day == 1)
                 {
-                    string path = @"C:\RespaldosSCAP";
+                    string path = @"C:\RespaldosVYCUZ";
                     try
                     {
                         if (!Directory.Exists(path))
