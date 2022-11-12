@@ -14,9 +14,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Xml;
@@ -537,6 +539,22 @@ namespace MvcApplication.Controllers
                 Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return PartialView("Detalle", Carrito.Instancia.Items);
+        }
+
+        public async Task API()
+        {
+            var c = new HttpClient();
+            var r = await c.GetAsync("https://tipodecambio.paginasweb.cr/api");
+            var json = await r.Content.ReadAsStringAsync();
+
+            string compra = "Compra: " + json[10].ToString() + json[11].ToString() + json[12].ToString() + json[13].ToString() + json[14].ToString() + json[15].ToString();
+            string venta = "Venta: " + json[25].ToString() + json[26].ToString() + json[27].ToString() + json[28].ToString() + json[29].ToString() + json[30].ToString();
+            string fecha = "Fecha: " + json[41].ToString() + json[42].ToString() + json[43].ToString() + json[44].ToString() + json[45].ToString() + json[46].ToString() + json[47].ToString() + json[48].ToString() + json[49].ToString() + json[50].ToString();
+
+            string hilera = fecha + " " +compra+ " " + venta;
+
+            ViewBag.tipoCambio = hilera;
+          
         }
     }
 }
