@@ -48,6 +48,7 @@ namespace Infraestructure.Models
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
         [Display(Name = "Saldo de Caja")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> saldo { get; set; }
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }

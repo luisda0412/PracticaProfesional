@@ -639,12 +639,9 @@
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Categoria\Create.cshtml" />
     <Content Include="Views\Categoria\Edit.cshtml" />
-    <Content Include="Views\Rol\Index.cshtml" />
     <Content Include="Views\Categoria\_PartialViewVistaxNombre.cshtml" />
-    <Content Include="Views\Rol\Create.cshtml" />
     <Content Include="Views\ServicioReparacion\Create.cshtml" />
     <Content Include="Views\ServicioReparacion\_PartialViewVistaxDescripcion.cshtml" />
-    <Content Include="Views\Rol\Edit.cshtml" />
     <Content Include="Views\Empresa\Index.cshtml" />
     <Content Include="Views\CajaChica\Index.cshtml" />
     <Content Include="Views\CajaChica\_PartialViewVistaxFecha.cshtml" />
@@ -652,7 +649,6 @@
     <Content Include="Views\Proveedor\Index.cshtml" />
     <Content Include="Views\Proveedor\Edit.cshtml" />
     <Content Include="Views\Proveedor\Details.cshtml" />
-    <Content Include="Views\Rol\Details.cshtml" />
     <Content Include="Views\Categoria\Details.cshtml" />
     <Content Include="Views\ServicioReparacion\Details.cshtml" />
     <Content Include="Views\ServicioReparacion\Edit.cshtml" />
@@ -696,10 +692,12 @@
     <Content Include="Views\Cotizacion\_PartialViewDetalle.cshtml" />
     <Content Include="Views\Cotizacion\Index.cshtml" />
     <Content Include="Views\Cotizacion\_PartialViewVistaxNombr.cshtml" />
+    <Content Include="Views\CajaChica\IndexArqueos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Respaldos\" />
+    <Folder Include="Views\Rol\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />

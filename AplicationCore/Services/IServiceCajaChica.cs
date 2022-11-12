@@ -9,6 +9,7 @@ namespace AplicationCore.Services
 {
     public interface IServiceCajaChica
     {
+        IEnumerable<Arqueos_Caja> GetArqueos();
         IEnumerable<Caja_Chica> GetCajaChica();
         Caja_Chica GetCajaChicaLast();
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);

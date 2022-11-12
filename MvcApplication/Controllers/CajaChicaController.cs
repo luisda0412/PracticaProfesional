@@ -108,6 +108,26 @@ namespace MvcApplication.Controllers
 
         }
 
-       
+
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult IndexArqueos()
+        {
+            IEnumerable<Arqueos_Caja> lista = null;
+            try
+            {
+                IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+                lista = _ServiceCaja.GetArqueos();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            }
+            catch (Exception e)
+            {
+                TempData["mensaje"] = "Error al procesar los datos! " + e.Message;
+            }
+            return View(lista);
+        }
+
+
     }
 }

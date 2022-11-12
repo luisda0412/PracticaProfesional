@@ -9,6 +9,7 @@ namespace Infraestructure.Repository
 {
     public interface IRepositoryCajaChica
     {
+        IEnumerable<Arqueos_Caja> GetArqueos();
         IEnumerable<Caja_Chica > GetCajaChica();
         Caja_Chica GetCajaChicaLast();
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);

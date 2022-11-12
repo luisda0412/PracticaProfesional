@@ -102,5 +102,25 @@ namespace Infraestructure.Repository
                 }
             }
         }
+
+        public IEnumerable<Arqueos_Caja> GetArqueos()
+        {
+            try
+            {
+                IEnumerable<Arqueos_Caja> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Arqueos_Caja.Include(x => x.Usuario).ToList<Arqueos_Caja>();
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
+                throw new Exception(mensaje);
+            }
+        }
     }
 }
