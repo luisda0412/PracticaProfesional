@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AplicationCore.Services;
 using Infraestructure.Models;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
@@ -96,36 +97,6 @@ namespace MvcApplication
                     }
                 }
             });
-
-            try
-            {
-                if (DateTime.Now.Day == 1)
-                {
-                    string path = @"C:\RespaldosVYCUZ";
-                    try
-                    {
-                        if (!Directory.Exists(path))
-                        {
-                            Directory.CreateDirectory(path);
-                        }
-                        string url = @"'C:\RespaldosVYCUZ\VYCUZ_" + DateTime.Now.ToString("dd-MMMM-yyyy HH-mm") + ".bak'";
-                        using (MyContext ctx = new MyContext())
-                        {
-                            ctx.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, "backup database Registro_Inventario_VYCUZ to disk = " + url);
-                        }
-                    }
-                    catch (DirectoryNotFoundException ex)
-                    {
-                        throw new Exception(ex.Message);
-                    }
-                }
-            }
-            catch (Exception dbEx)
-            {
-                string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
         }
     }
 }
