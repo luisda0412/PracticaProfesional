@@ -488,6 +488,7 @@ namespace MvcApplication.Controllers
             string MainString = json;
             //replace special characters with space
             hilera = Regex.Replace(MainString, @"[^0-9a-zA-Z./]+", " ");
+
         }
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
@@ -495,7 +496,7 @@ namespace MvcApplication.Controllers
         public ActionResult IndexVenta()
         {
             if (TempData["mensaje"] != null)
-                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
             ViewBag.tipoCambio = hilera;
             return View();

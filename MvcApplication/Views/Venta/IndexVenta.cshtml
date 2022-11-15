@@ -38,7 +38,7 @@
         <center>
             <br />
             <h2 id="titulo">Nueva Venta</h2>
-            Tipo de cambio @Html.ActionLink("API", "API", "Venta")
+            @Html.ActionLink("Consultar tipo de cambio", "API", "Venta")
             @ViewBag.tipoCambio
             <br />
             @using (Html.BeginForm("Save", "Venta", FormMethod.Post))
