@@ -18,7 +18,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
-using Web.Utils;
+
 using System.Globalization;
 using iText.IO.Font;
 using iText.Layout.Borders;
@@ -170,7 +170,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -405,7 +405,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -527,7 +527,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");

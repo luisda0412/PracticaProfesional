@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
 
-namespace Web.Utils
+namespace Infraestructure.Util
 {
 
     public class Log

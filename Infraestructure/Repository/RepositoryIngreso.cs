@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Web.Utils;
+
 
 
 
@@ -34,7 +34,7 @@ namespace Infraestructure.Repository
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                //Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
         }
@@ -94,7 +94,7 @@ namespace Infraestructure.Repository
             catch (DbUpdateException dbEx)
             {
                 string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
         }

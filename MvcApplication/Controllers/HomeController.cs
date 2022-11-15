@@ -3,7 +3,6 @@ using Infraestructure.Models;
 using System;
 using System.Reflection;
 using System.Web.Mvc;
-using Web.Utils;
 using MvcApplication.Util;
 using System.IO;
 using System.Data.Entity;
@@ -52,7 +51,7 @@ namespace MvcApplication.Controllers
             catch (Exception dbEx)
             {
                 string mensaje = "";
-                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw new Exception(mensaje);
             }
 
@@ -95,6 +94,10 @@ namespace MvcApplication.Controllers
                         {
                             TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá " + oUsuario.nombre, SweetAlertMessageType.info);
                             Session["User"] = oUsuario;
+
+                            string msj = "Nuevo inicio de sesión (administrador) por: ";
+                            
+                            Infraestructure.Util.Log.Info(msj + usuario.clave + " " + usuario.correo_electronico);
                             return RedirectToAction("IndexAdmin");
                         }
                         Session["User"] = oUsuario;
@@ -118,7 +121,7 @@ namespace MvcApplication.Controllers
         {
             try
             {
-                Log.Info("Usuario desconectado!");
+                Infraestructure.Util.Log.Info("Usuario desconectado!");
                 Session["User"] = null;
                 int id = Convert.ToInt32(TempData["idUser"]);
                 TempData["idUser"] = null;
@@ -128,7 +131,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData["Redirect"] = "Login";
@@ -146,7 +149,7 @@ namespace MvcApplication.Controllers
                 if (Session["User"] != null)
                 {
                     Usuario oUsuario = Session["User"] as Usuario;
-                    Log.Warn($"El usuario {oUsuario.nombre}");
+                    Infraestructure.Util.Log.Warn($"El usuario {oUsuario.nombre}");
                 }
 
                 return View();
@@ -154,7 +157,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData["Redirect"] = "Login";
@@ -184,7 +187,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 TempData["Redirect"] = "Libro";
                 TempData["Redirect-Action"] = "IndexAdmin";

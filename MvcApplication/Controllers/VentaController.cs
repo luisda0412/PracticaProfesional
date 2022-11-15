@@ -23,7 +23,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml;
 using Web.Security;
-using Web.Utils;
+
 using Web.ViewModel;
 
 namespace MvcApplication.Controllers
@@ -46,7 +46,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return View(lista);
         }
@@ -536,7 +536,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return PartialView("Detalle", Carrito.Instancia.Items);
         }

@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
-using Web.Utils;
+
 using Web.ViewModel;
 
 namespace MvcApplication.Controllers
@@ -29,7 +29,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
             }
             ViewBag.DetalleIngreso = Cotizacion.Instancia.Items;
             return View();
@@ -75,7 +75,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return RedirectToAction("Index");
         }

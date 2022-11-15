@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Web.Utils;
+
 
 namespace Infraestructure.Repository
 {
@@ -29,7 +29,7 @@ namespace Infraestructure.Repository
                 catch (Exception e)
                 {
                     string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                     throw;
                 }
             }
@@ -62,7 +62,7 @@ namespace Infraestructure.Repository
                 catch (Exception e)
                 {
                     string mensaje = "";
-                    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                     throw;
                 }
             }

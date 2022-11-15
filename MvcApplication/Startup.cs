@@ -15,7 +15,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OpenIdConnect;
 using MvcApplication.Support;
 using Owin;
-using Web.Utils;
+
 
 [assembly: OwinStartup(typeof(MvcApplication.Startup))]
 

@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
-using Web.Utils;
+
 
 namespace MvcApplication.Controllers
 {
@@ -85,7 +85,7 @@ namespace MvcApplication.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
                 // Redireccion a la captura del Error
                 return RedirectToAction("Default", "Error");
@@ -117,7 +117,7 @@ namespace MvcApplication.Controllers
             }
             catch (Exception e)
             {
-                Log.Error(e, MethodBase.GetCurrentMethod());
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
                 return RedirectToAction("Index");
             }
         }

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Reflection;
 using System.Text;
 
-namespace Web.Utils
+namespace MvcApplication.Utils
 {
 
     public class Log
@@ -15,7 +15,7 @@ namespace Web.Utils
         protected ILog monitoringLogger;
         protected static ILog debugLogger;
 
-        private Log()
+        public Log()
         {
             monitoringLogger = LogManager.GetLogger("MonitoringLogger");
             debugLogger = LogManager.GetLogger("DebugLogger");
