@@ -128,5 +128,28 @@ namespace MvcApplication.Controllers
         }
 
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult ArquearCaja()
+        {
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja caja = new Arqueos_Caja();
+             try
+             {
+
+                caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                caja.fecha = DateTime.Now;
+                 _ServiceCaja.SaveArqueo(caja);
+                 TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Acción de Caja", "El estado de la caja ha cambiado", SweetAlertMessageType.info);
+             }
+             catch (Exception ex)
+             {
+                 TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                 return RedirectToAction("Default", "Error");
+             }
+            
+            return RedirectToAction("IndexArqueos");
+        }
+
+
     }
 }

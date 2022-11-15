@@ -69,6 +69,23 @@
                 </div>
                 <div class="container">
                     <br />
+                    @{
+                        int id = 0;
+                        Infraestructure.Models.Usuario oUsuario;
+                        //Validar si existe en la sesión
+                        if (Session["User"] != null)
+                        {
+                            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                            if (oUsuario != null)
+                            {
+                                id = oUsuario.id;
+                                ViewBag.idUser = id;
+
+                                TempData["idUser"] = id;
+
+                            }
+                        }
+                    }
                     <table class="table">
                         <thead>
                             <tr>
@@ -100,7 +117,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.fecha)
                                     </td>
-                                 
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Usuario.nombre)
                                     </td>
@@ -108,7 +125,7 @@
                                         @{ string isActive = item.estado == true ? "Abierta" : "Cerrada"; }
                                         @isActive
                                     </td>
-                                       <td style="text-align:right">
+                                    <td style="text-align:right">
                                         ₡@Html.DisplayFor(modelItem => item.saldo)
                                     </td>
                                 </tr>

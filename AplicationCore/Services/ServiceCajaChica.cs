@@ -45,5 +45,11 @@ namespace AplicationCore.Services
             IRepositoryCajaChica repository = new RepositoryCajaChica();
             repository.Save(caja);
         }
+
+        public void SaveArqueo(Arqueos_Caja arq)
+        {
+            IRepositoryCajaChica repository = new RepositoryCajaChica();
+            repository.SaveArqueo(arq);
+        }
     }
 }

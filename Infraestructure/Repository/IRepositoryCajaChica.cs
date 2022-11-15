@@ -14,6 +14,7 @@ namespace Infraestructure.Repository
         Caja_Chica GetCajaChicaLast();
         IEnumerable<Caja_Chica> GetCajaByFecha(DateTime fecha);
         void Save(Caja_Chica caja);
+        void SaveArqueo(Arqueos_Caja arq);
         void Eliminar(int id);
 
     }

@@ -52,7 +52,7 @@
                                 <br />
                                 @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.TextBoxFor(model => model.fecha, htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("dd-MM-yyyy"), @readonly = "readonly" })
+                                    @Html.TextBox(" "," ", htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("dd-MM-yyyy"), @readonly = "readonly" })
 
                                 </div>
                             </div>

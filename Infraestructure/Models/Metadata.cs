@@ -339,8 +339,10 @@ namespace Infraestructure.Models
         [Display(Name = "Cliente")]
         [Required(ErrorMessage = "*El nombre del cliente es un campo requerido")]
         public string nombre_cliente { get; set; }
+       
         [Display(Name = "Fecha")]
         public Nullable<System.DateTime> fecha { get; set; }
+      
         [Display(Name = "Monto total")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> monto_total { get; set; }

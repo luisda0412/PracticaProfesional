@@ -58,12 +58,6 @@ namespace Infraestructure.Repository
                 }
                 return lista;
             }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
-                throw new Exception(mensaje);
-            }
             catch (Exception e)
             {
                 string mensaje = "";
@@ -90,9 +84,11 @@ namespace Infraestructure.Repository
                 cdt.Configuration.LazyLoadingEnabled = false;
 
                 try
-                {                  
-                        cdt.Caja_Chica.Add(caja);
-                        cdt.SaveChanges();
+                {         
+                    
+                    cdt.Caja_Chica.Add(caja);
+                    Infraestructure.Util.Log.Info("Acción de Salvar Caja, entrada de efectivo: " + caja.entrada +"salida de efectivo: "+caja.salida);
+                    cdt.SaveChanges();
                 }
                 catch (Exception e)
                 {
@@ -111,7 +107,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Arqueos_Caja.Include(x => x.Usuario).ToList<Arqueos_Caja>();
+                    lista = ctx.Arqueos_Caja.OrderByDescending(x => x.fecha).Include(x => x.Usuario).ToList<Arqueos_Caja>();
                 }
                 return lista;
             }
@@ -122,5 +118,54 @@ namespace Infraestructure.Repository
                 throw new Exception(mensaje);
             }
         }
+
+        public Arqueos_Caja GetArqueoLast()
+        {
+            Arqueos_Caja oCaja = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                oCaja = ctx.Arqueos_Caja.OrderByDescending(x => x.fecha).First();
+            }
+            return oCaja;
+        }
+
+        public void SaveArqueo(Arqueos_Caja caja)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                Caja_Chica chica = GetCajaChicaLast();
+                Arqueos_Caja ultima = GetArqueoLast();
+                string state;
+                try
+                {
+                    if(ultima.estado == true)
+                    {
+                        caja.estado = false;
+                        state = "Cerrada";
+                    }
+                    else
+                    {
+                        caja.estado = true;
+                        state = "Abierta";
+                    }
+                    caja.saldo = chica.saldo;
+                    cdt.Arqueos_Caja.Add(caja);
+
+                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + " Saldo: ₡" + caja.saldo);
+                    cdt.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "Error" + e.Message;
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
     }
+
+
 }
