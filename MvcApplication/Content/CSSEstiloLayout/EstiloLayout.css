@@ -197,3 +197,13 @@ nav li {
         color:black;
         font-weight:bold;
     }
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+
+    .sec-footer .desc-box .card-text {
+        font-family: 'Times New Roman', Times, serif;
+        text-align: justify;
+        font-size: 10.5px;
+    }
+}

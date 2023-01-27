@@ -53,60 +53,6 @@
     border-radius: 6px;
 }
 
-/*Elementos 2----------------------------------------------*/
-
-.about-services {
-    background: #ffffff;
-    padding-bottom: 30px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: 80%;
-    margin: auto;
-}
-
-.contenedor .servicio-cont {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin:auto;
-}
-
-.servicio-ind {
-    padding: 10px;
-    border-radius: 5%;
-    width: 27%;
-    text-align: center;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-    background: #191818;
-    color: white;
-}
-
-.servicio-ind img {
-    width: 90%;
-    height:300px;
-    border-radius: 10%;
-}
-
-.servicio-ind h3 {
-    margin: 10px 0;
-    font-size: 20px;
-    
-}
-
-.servicio-ind:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.6);
-
-}
-
-.contenedor .titulo {
-    background-color: #D13210;
-    color: white;
-    font-family: 'Agency FB';
-    font-size: 40px;
-    font-weight: bold;
-    width: 15%;
-    border-radius: 10px;
-}
 
 
 /*Seccion About*/
@@ -146,4 +92,48 @@
     justify-content: space-between;
     font-weight: 700;
     font-size: 13px;
+}
+
+
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+
+
+    .slide, .slide .carousel-inner .active, .slide .carousel-inner .active > img {
+        height: 170px;
+    }
+
+    .about-section {
+        background: url(../pic4.png) no-repeat left;
+        padding: 50px 0;
+    }
+
+    .inner-container {
+        width: 80%;
+        float: initial;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+        .inner-container h1 {
+            font-size: 20px;
+        }
+
+    .text {
+        font-size: 9px;
+        line-height: 15px;
+    }
+
+    .carousel-caption h5 {
+        font-size: 13px;
+        text-shadow: 0px 2px 4px rgba(0,0,0,0.9);
+    
+    }
+
+    .carousel-caption p {
+        font-size: 10px;
+        text-shadow: 0px 2px 10px rgba(0,0,0,0.9);
+    
+    }
 }
