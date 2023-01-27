@@ -6,6 +6,7 @@
     background-size: cover;
     background-attachment: fixed;
     position: relative;
+   
 }
 
 .wave {
@@ -122,4 +123,78 @@ main{
     color: white;
 }
 
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+
+    .section_header {
+        height: 190px;
+        background-color: white;
+     
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 15%;
+    }
+
+    .derechoHeader img {
+        margin-top:20px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Login---------------------------------------*/
+
+
+    .formulario {
+        width: 70%;
+    }
+
+    .formulario h2 {
+        font-size: 24px;
+    }
+
+    .formulario h4 {
+        font-size: 14px;
+    }
+
+    .form-group .col-md-10 {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 25px;
+    }
+
+    .form-control {
+        width: 80%;
+        font-size: 14px;
+    }
+    .btn-default {
+        padding: 8px;
+        height: 40px;
+        font-size: 16px;
+        width: 50%;
+    }
+
+    .formulario h4{
+        font-size:13px;
+    }
+
+    .wave {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        
+    }
+
+
+    
+}
 
