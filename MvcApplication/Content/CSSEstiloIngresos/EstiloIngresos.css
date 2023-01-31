@@ -301,10 +301,7 @@ main {
         font-weight: 500;
     }
 
-.columnabotones {
-    display: flex;
-    justify-content: space-around;
-}
+
 
 .boton2 {
     padding-left:7px;
@@ -572,7 +569,7 @@ main {
 
     /*Formulario-----------------------------------------------------------*/
     .formulario {
-        width: 95%;
+        width: 90%;
     }
     
     
@@ -582,7 +579,7 @@ main {
 
     }
     .formulario strong{
-        font-size:14px;
+        font-size:13px;
     }
 
     .formulario .alert{
@@ -650,27 +647,19 @@ main {
     .desarrollo .table th {
        font-size: 8px;
 
-       border:solid;
-       border-color:blue;
+     
     }
     .desarrollo .table td {
-       font-weight: 500;
-       font-size:8px;
+        font-weight: 500;
+        font-size: 8px;
+        text-align:center;
+
     }
 
     .boton2 {
         padding:3px;
         height: 20px;
-        box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-        border: unset;
-        z-index: 1;
-        position: relative;
-        font-weight: 1000;
-        font-size: 13px;
-        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-        transition: all 250ms;
-        overflow: hidden;
-        color: #ffffff;
+        font-size: 13px;   
     }
 
     .boton2 a {
