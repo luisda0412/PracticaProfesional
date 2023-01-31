@@ -31,7 +31,7 @@
                         @Html.HiddenFor(modelItem => item.articulo.id)
                         @Html.DisplayFor(modelItem => item.articulo.nombre)
                     </td>
-                    <td class="center" style="width:1.5em">
+                    <td class="center" style="width:1.2em">
                         @Html.EditorFor(modelItem => item.cantidad, new { htmlAttributes = new { @class = "form-control changeCantidad", data_productoid = item.articulo.id, onchange = "updateCantidadC(this)" } })
                     </td>
                     <td class="right" style="text-align:right">
@@ -84,7 +84,7 @@
                             <strong>Total</strong>
                         </td>
                         <td class="right" style="width:49%">
-                            <strong>₡ @((Web.ViewModel.Cotizacion.Instancia.tirarSubtotal()))</strong>
+                            <strong>₡ @((Web.ViewModel.Cotizacion.Instancia.tirarTotal()))</strong>
                         </td>
 
                     </tr>

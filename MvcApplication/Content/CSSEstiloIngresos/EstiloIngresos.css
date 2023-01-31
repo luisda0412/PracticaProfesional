@@ -167,13 +167,6 @@
 }
 
 
-
-
-
-
-
-
-
 /*Desarrollo---------------------------------------*/
 
 main {
@@ -549,3 +542,140 @@ main {
         background-color: white;
         color: black
     }
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 15%;
+    }
+
+    .derechoHeader img {
+        margin-top: 20px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Formulario-----------------------------------------------------------*/
+    .formulario {
+        width: 95%;
+    }
+    
+    
+    #titulo {
+        font-size: 24px;
+        width: 40%;
+
+    }
+    .formulario strong{
+        font-size:14px;
+    }
+
+    .formulario .alert{
+        font-size:13px;
+    }
+
+    .formulario h4 {
+        font-family: 'Agency FB';
+        font-size: 29px;
+    }
+
+    .formulario .abajo h5{
+        font-size:15px;
+    }
+
+    /*Tabla de Articulos agregados------------------------------------*/
+    .table-responsive-sm tr th{
+        font-size:10px;
+        text-align:center;
+
+    }
+
+    .table-responsive-sm tr td {
+        font-size: 10.5px;
+        text-align: center;
+    }
+
+    .table-responsive-sm .form-control {
+        font-size: 12px;
+        text-align:center;
+    }
+
+    /*Tabla de Totales------------------------------------------------*/
+    .col-lg-7{
+       width:80%;
+       margin:auto;
+    }
+    .col-lg-7 tr{
+        text-align:center;
+    }
+    .col-lg-7 table .left{
+        text-align: right;
+    }
+    .col-lg-7 table .left strong, .right strong {
+        font-size: 11px;
+    }
+    /*Tabla de Articulos----------------------------------------------*/
+    .elementos1 .elementoizquierdo {
+        width: 60%;
+    }
+    .titulo {
+       font-size: 23px;   
+    }
+    /*TABLA---------------------------------------------------------------------*/
+    .desarrollo {
+        width: 95%;
+        margin:auto;
+    }
+
+    .desarrollo .container {
+         width: 100%;
+       
+    }
+
+    .desarrollo .table th {
+       font-size: 8px;
+
+       border:solid;
+       border-color:blue;
+    }
+    .desarrollo .table td {
+       font-weight: 500;
+       font-size:8px;
+    }
+
+    .boton2 {
+        padding:3px;
+        height: 20px;
+        box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
+        border: unset;
+        z-index: 1;
+        position: relative;
+        font-weight: 1000;
+        font-size: 13px;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms;
+        overflow: hidden;
+        color: #ffffff;
+    }
+
+    .boton2 a {
+        font-size: 12px;    
+    }
+
+      
+}
