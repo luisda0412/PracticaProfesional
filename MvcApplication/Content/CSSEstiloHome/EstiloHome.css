@@ -62,7 +62,7 @@
     background-size: 55%;
     background-color: #fdfdfd;
     overflow: hidden;
-    padding: 100px 0;
+    padding: 40px 0;
 }
 
 .inner-container {
@@ -92,6 +92,28 @@
     justify-content: space-between;
     font-weight: 700;
     font-size: 13px;
+}
+
+/*Section Tarjetas------------------------------*/
+.tarjetas-section {
+    background-color: #fdfdfd;
+}
+
+    .tarjetas-section h1 {
+        padding-top: 20px;
+        font-size: 28px;
+        font-weight: 900;
+    }
+
+.tarjetas{
+    display:flex;
+    justify-content:space-evenly;
+    width:95%;
+}
+
+.tarjetas .card{
+    padding-left:4px;
+    padding-right:4px;
 }
 
 
