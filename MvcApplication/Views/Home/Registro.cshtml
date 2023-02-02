@@ -14,7 +14,7 @@
             </div>
             <br />
             <h2>
-                Registrar una nueva cuenta
+                Registrar su cuenta
             </h2>
 
         </div>
@@ -48,7 +48,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control", @placeholder = "Su Nombre..." } })
                                 @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -56,26 +56,25 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.apellidos, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.apellidos, new { htmlAttributes = new { @class = "form-control", @placeholder = "Sus apellidos..." } })
                                 @Html.ValidationMessageFor(model => model.apellidos, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.clave, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.PasswordFor(model => model.clave, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.PasswordFor(model => model.clave, new { htmlAttributes = new { @class = "formcontrol3", @placeholder = "*********" } })
                                 @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                     
-
+                    
                     </section>
                     <section class="cuerporight">
 
                         <div class="form-group">
                             @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.telefono, new { htmlAttributes = new { @class = "form-control", @placeholder = "#Num Telefónico" } })
                                 @Html.ValidationMessageFor(model => model.telefono, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -83,13 +82,14 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.correo_electronico, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.correo_electronico, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.correo_electronico, new { htmlAttributes = new { @class = "form-control", @placeholder = "ejemplo@gmail.com" }})
                                 @Html.ValidationMessageFor(model => model.correo_electronico, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <br />
-                        <br />
+                      
+                     
                         <div class="form-group2">
+  
                             <input type="submit" value="Crear Cuenta" class="btn" />
                             <button class="btn">@Html.ActionLink("<- Volver Atrás", "Loguearse")</button>
                         </div>

@@ -1,6 +1,7 @@
 ﻿main {
     background-color: white;
     margin:auto;
+    padding-top:5px;
 }
 
 
@@ -71,6 +72,7 @@
     width: 50%;
     box-shadow: 1px 10px 10px 5px rgba(56,56,56,0.42);
     border-radius: 10px;
+
 }
 
 .seccion1 {
@@ -113,6 +115,10 @@
             font-size: 19px;
         }
 
+input[type="password"] {
+    width: 100% !important;
+}
+
 
 
 /*Cuerpo derecho--------------------------------------------------------*/
@@ -139,10 +145,6 @@
             padding: 0%;
         }
 
-
-
-
-
 /*Botones*/
 .form-group2 {
     font-family: 'Agency FB';
@@ -150,6 +152,7 @@
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    margin-top:15%;
 }
 
 
@@ -204,5 +207,90 @@
             width: 100%;
         }
 
-/*Input*/
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 160px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 15%;
+    }
+
+    .derechoHeader img {
+        margin-top: unset;
+        max-height: 50%;
+        max-width: 100%;
+    }
+ 
+    /*Cuerpo------------------------------------------------------------------------*/
+
+    .secciones {
+        width: 85%;
+        margin:auto;
+    }
+
+    .seccion1 {
+        width: 98%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #titulo {     
+        font-size: 22px;
+        width: 40%;
+    }
+    .form-control{
+        font-size:12px;
+    }
+
+    input[type="password"] {
+        width: 100% !important;
+        font-size: 12px;
+    }
+    /*Cuerpo izquierdo------------------------------------------------*/
+    .cuerpoleft {
+        width: 45%;
    
+    }
+    .cuerpoleft .form-group .col-md-2 {      
+        font-size: 16px;
+    }
+
+  
+    /*Cuerpo derecho--------------------------------------------------------*/
+    .cuerporight {
+        width: 45%;
+    
+    }
+    .cuerporight .form-group .col-md-2 {
+        font-size: 16px;
+    }
+
+
+    /*Botones*/
+    .form-group2 {
+        font-family: 'Agency FB';
+        font-size: 14px;
+        display: unset;
+        width: 90%;
+        margin-top: 15%;
+    }
+
+    .form-group2 .btn {         
+        font-size:14px; 
+        margin-top:5px;
+    }
+}
