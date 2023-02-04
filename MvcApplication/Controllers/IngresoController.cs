@@ -15,6 +15,7 @@ namespace MvcApplication.Controllers
 {
     public class IngresoController: Controller
     {
+         
         public ActionResult IndexIngreso()
         {
             //IEnumerable<Articulo> lista = null;
@@ -34,7 +35,8 @@ namespace MvcApplication.Controllers
             return View();
         }
 
-        public ActionResult Comprar(int? id)
+      
+            public ActionResult Comprar(int? id)
         {
           
             int cantidadCompra = Comprita.Instancia.Items.Count();

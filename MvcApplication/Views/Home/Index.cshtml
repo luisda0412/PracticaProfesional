@@ -44,7 +44,39 @@
 
     </a>
 </div>
-<br />
+<div style="padding-top:10px;" class="tarjetas-section">
+    <center>
+        <h1>Algunos de nuestros artículos que te pueden interesar!</h1>
+        <br />
+        <div class="tarjetas">
+            @{
+                List<Infraestructure.Models.Articulo> listaArticulo = ViewBag.listaArticulos;
+            }
+            @foreach (var arti in listaArticulo)
+            {
+                <div class="card mb-3">
+                    <div class="card-body" style="border:1px solid lightgray;">
+                        <h5 style="font-weight:500;" class="card-title">@arti.nombre</h5>
+                        <h6 class="card-subtitle text-muted">@arti.Categoria.nombre</h6>
+                    </div>
+                    <div class="divimagen">
+                        <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(arti.imagen)" role="img">
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@arti.Categoria.descripcion</p>
+                    </div>
+                    <div class="card-body" style="border:1px solid lightgray;">
+                        <p class="card-text">Unidades:@arti.stock</p>
+                    </div>
+                    <div class="card-footer text-black-50">
+                        ₡@arti.precio.Value.ToString("N")
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+    </center>
+</div>
 <br />
 <div class="about-section">
     <center>
@@ -61,71 +93,6 @@
                 <span>Estuches</span>
                 <span>Entretenimiento</span>
                 <span>Celulares</span>
-            </div>
-        </div>
-    </center>
-</div>
-<br />
-<div class="tarjetas-section">
-    <center>
-        <h1>Algunos de nuestros artículos que te pueden interesar!</h1>
-        <div class="tarjetas">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
-                <div class="card-body">
-                    <p class="card-text">El que quiera perder su tiempo que lo pieda!</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                </ul>
-                <div class="card-footer text-muted">
-                    2 days ago
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
-                <div class="card-body">
-                    <p class="card-text">El que quiera perder su tiempo que lo pieda!</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                </ul>
-                <div class="card-footer text-muted">
-                    2 days ago
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                </div>
-                <svg xmlns="http://www.w3.org/2000/svg" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
-                    <text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text>
-                </svg>
-                <div class="card-body">
-                    <p class="card-text">El que quiera perder su tiempo que lo pieda!</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Cras justo odio</li>
-                </ul>
-                <div class="card-footer text-muted">
-                    2 days ago
-                </div>
             </div>
         </div>
     </center>

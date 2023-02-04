@@ -6,17 +6,52 @@ using System.Web.Mvc;
 using MvcApplication.Util;
 using System.IO;
 using System.Data.Entity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MvcApplication.Controllers
 {
     public class HomeController : Controller
     {
         IServiceUsuario iserviceU = new ServiceUsuario();
+        IServiceArticulo _ServiceArticulo = new ServiceArticulo();
         public ActionResult Index()
         {
-            if (TempData["mensaje"] != null)
-                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            try
+            {             
+                ViewBag.listaArticulos = GetRandomList();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+
+            }
+            catch (Exception e)
+            {
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
+            }
             return View();      
+        }
+
+        public List<Articulo> GetRandomList()
+        {
+            IEnumerable<Articulo> listaTemporal = _ServiceArticulo.GetArticuloMante();
+            int maxItems = 3;
+            List<Articulo> list = listaTemporal.ToList();
+            if (list.Count == 0)
+            {
+                return new List<Articulo>();
+            }
+
+            int count = Math.Min(maxItems, list.Count);
+            List<Articulo> result = new List<Articulo>(count);
+            Random rand = new Random();
+            for (int i = 0; i < count; i++)
+            {
+                int randomIndex = rand.Next(0, list.Count);
+                result.Add(list[randomIndex]);
+                list.RemoveAt(randomIndex);
+            }
+
+            return result;
         }
 
         public ActionResult IndexAdmin()
