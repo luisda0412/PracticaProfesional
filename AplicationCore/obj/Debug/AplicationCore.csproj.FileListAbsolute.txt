@@ -35,3 +35,17 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\AplicationCore\obj\Deb
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.CopyComplete
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.dll
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.pdb
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\AplicationCore.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\AplicationCore.pdb
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\log4net.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\EntityFramework.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.pdb
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\Infraestructure.dll.config
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\log4net.xml
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\bin\Debug\EntityFramework.xml
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.AssemblyReference.cache
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.csproj.CopyComplete
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\AplicationCore\obj\Debug\AplicationCore.pdb

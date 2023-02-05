@@ -32,3 +32,17 @@ C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\De
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.pdb
 C:\Users\Usuario\Desktop\ProyectoRepo\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csprojAssemblyReference.cache
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.dll.config
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\Infraestructure.pdb
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\log4net.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.xml
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\bin\Debug\log4net.xml
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.AssemblyReference.cache
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.csproj.CopyComplete
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.dll
+C:\Users\Luisda\Desktop\PracticaProfesional\PracticaProfesional\Infraestructure\obj\Debug\Infraestructure.pdb
