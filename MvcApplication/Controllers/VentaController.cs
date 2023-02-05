@@ -272,7 +272,7 @@ namespace MvcApplication.Controllers
                             XmlNode tarifa = xml.CreateElement("Tarifa");
                             tarifa.InnerText = Convert.ToString(13.00);
                             XmlNode montoImpuesto = xml.CreateElement("Monto");
-                            tarifa.InnerText = Convert.ToString(venta.impuesto);
+                            montoImpuesto.InnerText = Convert.ToString(venta.impuesto);
 
                             impuestoDetalle.AppendChild(codigoImpuesto);
                             impuestoDetalle.AppendChild(codigoTarifa);
@@ -338,7 +338,7 @@ namespace MvcApplication.Controllers
                         XmlNode codigoMoneda = xml.CreateElement("CodigoMoneda");
                         codigoMoneda.InnerText = "CRC";
                         XmlNode tipoCambio = xml.CreateElement("TipoCambio");
-                        codigoMoneda.InnerText = Convert.ToString(1.00);
+                        tipoCambio.InnerText = Convert.ToString(1.00);
 
                         codigoTipoMoneda.AppendChild(codigoMoneda);
                         codigoTipoMoneda.AppendChild(tipoCambio);
