@@ -148,6 +148,16 @@ namespace MvcApplication.Controllers
                         //ASIGNACION DE ELEMENTOS AL NODO DE LA EMPRESA
                         XmlNode nombreEmpresa = xml.CreateElement("Nombre");
                         nombreEmpresa.InnerText = "VYCUZ";
+
+                        XmlNode identificacionEmisor = xml.CreateElement("Identificaion");
+                        XmlNode tipo = xml.CreateElement("Tipo");
+                        tipo.InnerText = "";
+                        XmlNode numeroIdentificacioEmisor = xml.CreateElement("Numero");
+                        numeroIdentificacioEmisor.InnerText = Convert.ToString(user.id);
+
+                        identificacionEmisor.AppendChild(tipo);
+                        identificacionEmisor.AppendChild(numeroIdentificacioEmisor);
+
                         XmlNode nombreComercial = xml.CreateElement("NombreComercial");
                         nombreComercial.InnerText = "VYCUZ";
 
@@ -188,6 +198,7 @@ namespace MvcApplication.Controllers
 
                         //ADJUNTAR ELEMENTOS AL NODO DE LA EMPRESA
                         nodoEmpresa.AppendChild(nombreEmpresa);
+                        nodoEmpresa.AppendChild(identificacionEmisor);
                         nodoEmpresa.AppendChild(nombreComercial);
                         nodoEmpresa.AppendChild(nodoUbicacion);
                         nodoEmpresa.AppendChild(telefonoEmpresa);
@@ -202,6 +213,17 @@ namespace MvcApplication.Controllers
                         nombreCliente.InnerText = nombreForm;
                         XmlNode ApellidoCliente = xml.CreateElement("Apellidos");
                         ApellidoCliente.InnerText = apellidosForm;
+
+                        XmlNode identificacionReceptor = xml.CreateElement("Identificacion");
+                        XmlNode tipoReceptor = xml.CreateElement("Tipo");
+                        tipoReceptor.InnerText = "";
+                        XmlNode numeroIdentificacioReceptor = xml.CreateElement("Numero");
+                        numeroIdentificacioReceptor.InnerText = Convert.ToString("");
+
+                        identificacionReceptor.AppendChild(tipoReceptor);
+                        identificacionReceptor.AppendChild(numeroIdentificacioReceptor);
+
+
                         XmlNode correoCliente = xml.CreateElement("Email");
                         correoCliente.InnerText = emailForm;
                         XmlNode telefonoCliente = xml.CreateElement("Telefono");
@@ -210,8 +232,9 @@ namespace MvcApplication.Controllers
                         //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
                         nodoCliente.AppendChild(nombreCliente);
                         nodoCliente.AppendChild(ApellidoCliente);
-                        nodoCliente.AppendChild(correoCliente);
+                        nodoCliente.AppendChild(identificacionReceptor);
                         nodoCliente.AppendChild(telefonoCliente);
+                        nodoCliente.AppendChild(correoCliente);
                         root.AppendChild(nodoCliente);
 
                         //MAS INFORMACION QUE SE AGREGA AL NODO PRINCIPAL
