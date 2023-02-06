@@ -71,12 +71,14 @@ namespace MvcApplication.Controllers
 
         }
 
+        public static string idForm { get; set; }
         public static string nombreForm { get; set; }
         public static string apellidosForm { get; set; }
         public static string emailForm { get; set; }
         public static string telefonoForm { get; set; }
         public ActionResult obtenerDatosForm()
         {
+            idForm = Request.Form["id"];
             nombreForm = Request.Form["name"];
             apellidosForm = Request.Form["lastname"];
             emailForm = Request.Form["email"];
@@ -170,9 +172,9 @@ namespace MvcApplication.Controllers
                         XmlNode canton = xml.CreateElement("Canton");
                         canton.InnerText = "Alajuela";
                         XmlNode distrito = xml.CreateElement("Distrito");
-                        provincia.InnerText = "Alajuela";
+                        distrito.InnerText = "Alajuela";
                         XmlNode otrasSenas = xml.CreateElement("OtrasSenas");
-                        otrasSenas.InnerText = "Centro Comercial City Mall segundo piso al frente de CellCom";
+                        otrasSenas.InnerText = "Centro Comercial City Mall segundo piso";
 
                         //ASGNACION DE LOS ELEMENTOS DENTRO DEL NODO DE UBICACION
                         nodoUbicacion.AppendChild(provincia);
@@ -218,7 +220,7 @@ namespace MvcApplication.Controllers
                         XmlNode tipoReceptor = xml.CreateElement("Tipo");
                         tipoReceptor.InnerText = "";
                         XmlNode numeroIdentificacioReceptor = xml.CreateElement("Numero");
-                        numeroIdentificacioReceptor.InnerText = Convert.ToString("");
+                        numeroIdentificacioReceptor.InnerText = Convert.ToString(idForm);
 
                         identificacionReceptor.AppendChild(tipoReceptor);
                         identificacionReceptor.AppendChild(numeroIdentificacioReceptor);
@@ -279,6 +281,8 @@ namespace MvcApplication.Controllers
                             cantidad.InnerText = Convert.ToString(linea.cantidad);
                             XmlNode unidadMedida = xml.CreateElement("UnidadMedida");
                             unidadMedida.InnerText = "Unid";
+                            XmlNode detalle = xml.CreateElement("Detalle");
+                            detalle.InnerText = items.articulo.nombre;
                             XmlNode precioUnitario = xml.CreateElement("PrecioUnitario");
                             precioUnitario.InnerText = Convert.ToString(linea.precio);
                             XmlNode montoTotalDetalle = xml.CreateElement("MontoTotal");
@@ -307,6 +311,8 @@ namespace MvcApplication.Controllers
                             //ADJUNTAR LOS ELEMENTOS AL NODO DETALLE VENTA
                             lineaDetalle.AppendChild(numeroLinea);
                             lineaDetalle.AppendChild(cantidad);
+                            lineaDetalle.AppendChild(unidadMedida);
+                            lineaDetalle.AppendChild(detalle);
                             lineaDetalle.AppendChild(precioUnitario);
                             lineaDetalle.AppendChild(montoTotalDetalle);
                             lineaDetalle.AppendChild(subTotal);
