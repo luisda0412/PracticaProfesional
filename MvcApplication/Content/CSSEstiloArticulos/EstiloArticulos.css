@@ -152,7 +152,7 @@
 .cuerpoderecho {
     width: 75%;
     border-left: solid;
-    border-color: #808080;
+    border-color: #b7b7b7;
 }
 
     .cuerpoderecho #resultado {
@@ -167,9 +167,7 @@
 
 
 /*Boton ver detalles*/
-.card-body{
 
-}
 .boton2 a {
     text-decoration: none;
     color: white;
@@ -184,7 +182,7 @@
     z-index: 1;
     background: #1a8623;
     position: relative;
-    font-weight: 1000;
+    font-weight: 900;
     font-size: 16px;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
@@ -220,20 +218,101 @@
         width: 100%;
     }
 
-    .boton3{
-        border-radius:50px;
-        border:none;
-        background-color: #191919;
+
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+
+    .section_header {
+        height: 190px;
+        background-color: white;
     }
 
-        .boton3:hover {
-            background-color: #1a8623;
-        }
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
 
-        .boton3 a{
-            text-decoration:none;
-            font-size:20px;
-            color:white;
-            font-weight:bold;
+    .izquieroHeader img {
+        max-width: 100px;
+    }
 
-        }
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 15%;
+    }
+
+    .derechoHeader img {
+        margin-top: 2px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    .wave {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    
+    /*Categorias y Tarjeta de Articulo-----------------------------------*/
+    .elementos {
+        width: 95%;
+     
+    }
+    .cuerpoizquierdo {
+        width: 28%;
+    }
+
+    .cuerpoizquierdo h2{
+        font-size: 16px;
+        width: 90%;    
+    }
+
+    /*Estilo para la lista de categorias--------------------------------*/
+    .cuerpoizquierdo .list-group {
+        width: 90%;
+    }
+    .list-group-item {     
+        font-size: 15px;
+    }
+
+    /*Cuerpo derecho---------------------------------------------*/
+    .cuerpoderecho {
+        width: 80%;
+    }
+
+    .cuerpoderecho #resultado {
+        width: 95%;
+        margin-top: 8%;
+        height: 570px;
+        overflow-y: scroll;
+    }
+    .col-sm-3 {
+
+        width:50%;
+    }
+    .card-body h5 {
+        font-size: 14px;
+        font-weight:900;
+    }
+    .card-body p {
+        font-size: 12px;
+    }
+    .card-body h6 {
+        font-size: 11px;
+    }
+    /*Boton ver detalles--------------------*/
+    .card-body .card-body {
+        display: flex;
+        justify-content: center;
+        height: 50px;
+    }
+
+    .boton2 {      
+        padding: 2px 17px;
+        border-radius: 10px;      
+        position: center;
+        font-weight: 900;
+        font-size: 13px;
+    }
+}
