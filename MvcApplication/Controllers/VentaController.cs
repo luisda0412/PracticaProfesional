@@ -153,7 +153,7 @@ namespace MvcApplication.Controllers
 
                         XmlNode identificacionEmisor = xml.CreateElement("Identificaion");
                         XmlNode tipo = xml.CreateElement("Tipo");
-                        tipo.InnerText = "";
+                        tipo.InnerText = "02";
                         XmlNode numeroIdentificacioEmisor = xml.CreateElement("Numero");
                         numeroIdentificacioEmisor.InnerText = Convert.ToString(user.id);
 
@@ -168,11 +168,11 @@ namespace MvcApplication.Controllers
 
                         //ASIGNACION DE LOS ELEMENTOS AL NODO DE UBICACION
                         XmlNode provincia = xml.CreateElement("Provincia");
-                        provincia.InnerText = "Alajuela";
+                        provincia.InnerText = "2";
                         XmlNode canton = xml.CreateElement("Canton");
-                        canton.InnerText = "Alajuela";
+                        canton.InnerText = "01";
                         XmlNode distrito = xml.CreateElement("Distrito");
-                        distrito.InnerText = "Alajuela";
+                        distrito.InnerText = "01";
                         XmlNode otrasSenas = xml.CreateElement("OtrasSenas");
                         otrasSenas.InnerText = "Centro Comercial City Mall segundo piso";
 
@@ -218,7 +218,7 @@ namespace MvcApplication.Controllers
 
                         XmlNode identificacionReceptor = xml.CreateElement("Identificacion");
                         XmlNode tipoReceptor = xml.CreateElement("Tipo");
-                        tipoReceptor.InnerText = "";
+                        tipoReceptor.InnerText = "01";
                         XmlNode numeroIdentificacioReceptor = xml.CreateElement("Numero");
                         numeroIdentificacioReceptor.InnerText = Convert.ToString(idForm);
 
@@ -226,10 +226,18 @@ namespace MvcApplication.Controllers
                         identificacionReceptor.AppendChild(numeroIdentificacioReceptor);
 
 
-                        XmlNode correoCliente = xml.CreateElement("Email");
+                        XmlNode correoCliente = xml.CreateElement("CorreoElectronico");
                         correoCliente.InnerText = emailForm;
+
                         XmlNode telefonoCliente = xml.CreateElement("Telefono");
-                        telefonoCliente.InnerText = telefonoForm;
+
+                        XmlNode codigoTelefonoReceptor = xml.CreateElement("CodigoPais");
+                        codigoTelefonoReceptor.InnerText = "506";
+                        XmlNode numTelefonoReceptor = xml.CreateElement("NumTelefono");
+                        numTelefonoReceptor.InnerText = telefonoForm;
+
+                        telefonoCliente.AppendChild(codigoTelefonoReceptor);
+                        telefonoCliente.AppendChild(numTelefonoReceptor);
 
                         //ADJUNTAS LOS ELEMENTOS AL NODO CLIENTE
                         nodoCliente.AppendChild(nombreCliente);
@@ -243,7 +251,10 @@ namespace MvcApplication.Controllers
                         XmlNode condicionVenta = xml.CreateElement("CondicionVenta");
                         condicionVenta.InnerText = "";
                         XmlNode medioPago = xml.CreateElement("MedioPago");
-                        medioPago.InnerText = "";
+                        medioPago.InnerText = venta.tipopago == true ? "01" : "02";
+
+                        root.AppendChild(condicionVenta);
+                        root.AppendChild(medioPago);
 
                         string descuento2="";
                         Detalle_Venta linea = new Detalle_Venta();
@@ -307,6 +318,12 @@ namespace MvcApplication.Controllers
                             impuestoDetalle.AppendChild(montoImpuesto);
 
 
+                            XmlNode impuestoNeto = xml.CreateElement("ImpuestoNeto");
+                            montoImpuesto.InnerText = Convert.ToString(venta.impuesto);
+
+                            XmlNode montoTotalLinea = xml.CreateElement("MontoTotalLinea");
+                            montoImpuesto.InnerText = Convert.ToString(venta.monto_total);
+
 
                             //ADJUNTAR LOS ELEMENTOS AL NODO DETALLE VENTA
                             lineaDetalle.AppendChild(numeroLinea);
@@ -317,6 +334,8 @@ namespace MvcApplication.Controllers
                             lineaDetalle.AppendChild(montoTotalDetalle);
                             lineaDetalle.AppendChild(subTotal);
                             lineaDetalle.AppendChild(impuestoDetalle);
+                            lineaDetalle.AppendChild(impuestoNeto);
+                            lineaDetalle.AppendChild(montoTotalLinea);
 
                             detalleServicio.AppendChild(lineaDetalle);
 
@@ -416,7 +435,7 @@ namespace MvcApplication.Controllers
                         totalOtrosCargos.InnerText = Convert.ToString(0.00);
 
                         XmlNode totalComprobante = xml.CreateElement("TotalComprobante");
-                        totalComprobante.InnerText = Convert.ToString(19000.00);
+                        totalComprobante.InnerText = Convert.ToString("");
 
                         //ADJUNTAT LOS ELEMENTOS AL NODO RESUMEN FACTURA
                         resumenFactura.AppendChild(codigoTipoMoneda);
