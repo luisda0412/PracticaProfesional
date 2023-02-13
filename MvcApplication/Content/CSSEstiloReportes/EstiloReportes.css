@@ -154,3 +154,54 @@ main {
 .foto img {
     object-fit: contain;
 }
+
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 0%;
+    }
+
+    .derechoHeader img {
+        margin-top: 5px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+    /*TABLA---------------------------------------------------------------------*/
+    .desarrollo {
+        width: 95%;
+        margin: auto;
+    }
+
+        .desarrollo .container {
+            width: 100%;
+        }
+
+        .desarrollo .table th {
+            width: 20%;
+            font-size: 8px;
+            text-align: center;
+        }
+
+        .desarrollo .table td {
+            font-weight: 500;
+            font-size: 9px;
+            text-align: center;
+        }
+
+}

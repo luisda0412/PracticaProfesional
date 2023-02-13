@@ -119,13 +119,17 @@
 /*TABLA---------------------------------------------------------------------*/
 
 .table {
-    width: 90%;
+    width: 95%;
     box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
     text-align: left;
     border-radius: 8px;
     
 }
 
+.desarrollo .table {
+  
+    text-align: center;
+}
 .table td{
        font-weight:500;
 }
@@ -338,33 +342,91 @@
     margin: 0 16px;
 }
 
- 
-
-/*Tarjeta de buscar*/
-.card-header {
-    font-family: 'Agency FB';
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.my-4 {
-    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-}
-
-.boton3 {
-    font-family: 'Agency FB';
-   
-    background-color: #1a8623;
-    border-radius: 0px;
-    border: 2px solid #000000;
-    box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.75);
-    font-weight: bold;
-    font-size: 20px;
-    color: #ffffff;
-    width: 30%;
-}
-
-    .boton3:hover {
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
         background-color: white;
-        color: black
     }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 5%;
+    }
+
+    .derechoHeader img {
+        margin-top: 5px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Tabla-----------------------------------------------------------*/
+    .elementos1 {
+        display: initial;
+    }
+
+        .elementos1 .elementoizquierdo {
+            width: 80%;
+        }
+
+    .titulo {
+        font-size: 20px;
+    }
+
+    .boton1 a {
+        font-size: 18px;
+    }
+
+
+    /*TABLA---------------------------------------------------------------------*/
+    .desarrollo {
+        width: 98%;
+        margin: auto;
+    }
+
+        .desarrollo .container {
+            width: 100%;
+        }
+
+        .desarrollo .table th {
+            width: 20%;
+            font-size: 8px;
+            text-align: center;
+        }
+
+        .desarrollo .table td {
+            font-weight: 500;
+            font-size: 9px;
+            text-align: center;
+        }
+
+    .boton2 {
+        padding: 3px;
+        height: 20px;
+        font-size: 13px;
+    }
+
+        .boton2 a {
+            font-size: 12px;
+        }
+
+    .columnabotones .boton2 {
+        padding: 3px;
+        height: auto;
+        font-size: 11px;
+    }
+
+        .columnabotones .boton2 a {
+            font-size: 11px;
+        }
+}
+

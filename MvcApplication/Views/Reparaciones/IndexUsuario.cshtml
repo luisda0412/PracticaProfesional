@@ -9,8 +9,6 @@
     <br />
     <div class="contenidoHeader">
         <div class="izquieroHeader">
-            <br />
-            <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
@@ -24,7 +22,7 @@
             <img src="~/Imagenes/Visuals/wallpaper6.png" />
         </div>
     </div>
-    <div class="wave" style="height: 135px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -40,7 +38,6 @@
                     <h2 class="titulo">Reparaciones registradas con su cédula</h2>
                 </div>
             </div>
-            <br />
             <br />
             <center>
                 <div id="ajaxLoader" class="loader" ; style="display:none">
@@ -96,7 +93,7 @@
                                     @*.fecha.ToString("dd/MM/yyyy")*@
                                 </td>
                                 <td>
-                                    @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+                                    @{ string isActive = item.estado == true ? "En Mantenimiento" : "Terminado"; }
                                     @isActive
                                 </td>
                                 <td class="columnabotones">

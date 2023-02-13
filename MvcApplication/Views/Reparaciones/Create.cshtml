@@ -8,7 +8,7 @@
     <br />
     <div class="contenidoHeader">
         <div class="izquieroHeader">
-            <br />
+         
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
@@ -22,7 +22,7 @@
             <img src="~/Imagenes/Visuals/wallpaper12.png" />
         </div>
     </div>
-    <div class="wave" style="height: 150px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -63,16 +63,14 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Servicio_Reparacion, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-
-
-                                @Html.DropDownListFor(model => model.servicio_reparacion_id, (SelectList)ViewBag.ServiciosLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
+                                @Html.DropDownListFor(model => model.servicio_reparacion_id, (SelectList)ViewBag.ServiciosLista, "Seleccione acá", new { @class = "combo" })
                                 @Html.ValidationMessageFor(model => model.servicio_reparacion_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.descripcion_articulo, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.descripcion_articulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.descripcion_articulo, new { @class = "area" })
                                 @Html.ValidationMessageFor(model => model.descripcion_articulo, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -96,7 +94,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.descripcion_problema, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.TextAreaFor(model => model.descripcion_problema, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.TextAreaFor(model => model.descripcion_problema, new { @class = "area"})
                                 @Html.ValidationMessageFor(model => model.descripcion_problema, "", new { @class = "text-danger" })
                             </div>
                         </div>

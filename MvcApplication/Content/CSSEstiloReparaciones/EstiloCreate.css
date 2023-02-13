@@ -212,5 +212,132 @@
             width: 100%;
         }
 
-/*Input*/
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 160px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 13px;
+        margin-left: 0%;
+    }
+
+    .derechoHeader img {
+        margin-top: unset;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Cuerpo------------------------------------------------------------------------*/
+
+    .secciones {
+        width: 95%;
+        margin: auto;
+    }
+
+    .seccion1 {
+        width: 98%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #titulo {
+        font-size: 18px;
+        width: 80%;
+    }
+
+    .form-control {
+        font-size: 12px;
+    }
+
+    .cuerpoleft .form-group{
+        display:initial;
+    }
+
+    .cuerporight .form-group {
+        display: initial;
+    }
+    /*Cuerpo izquierdo------------------------------------------------*/
+    .cuerpoleft {
+        display:initial;
+        width: 43%;
+    }
+
+    .cuerpoleft .form-group .col-md-2 {
+        width: 100%;
+        font-family: 'Agency FB';
+        font-size: 15px;
+        text-align:left;
+     }
+
+    .cuerpoleft .form-group .col-md-10 {
+        width:100%; 
+        font-size: 17px;
+    }
+
+        .cuerpoleft .col-md-10 .combo {
+            max-width: 95%;
+            font-size: 15px;
+            font-family: 'Agency FB';
+        }
+
+         .area {
+            max-width: 100%;
+            font-size: 15px;
+            font-family: 'Agency FB';
+        }
+  
+    /*Cuerpo derecho--------------------------------------------------------*/
+    .cuerporight {
+        width: 45%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .cuerporight .form-group .col-md-2 {
+        width: 100%;
+        font-family: 'Agency FB';
+        font-size: 14px;
+        text-align: left;
+    }
+
+    .cuerporight .form-group .col-md-10 {
+        width: 95%;
+        font-size: 17px;
+    }
+
+    /*Cuerpo derecho--------------------------------------------------------*/
+    .cuerporight {
+        width: 43%;
+        display: initial;
+    }
+
+     
+
+    /*Botones*/
+    .form-group2 {
+        display: initial;
+        justify-content:initial;
+        width: 90%;
+        margin-top: 5%;
+        font-family: 'Agency FB';
+        font-size: 14px;
+    }
+
+        .form-group2 .btn {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+}
    

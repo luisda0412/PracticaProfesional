@@ -143,11 +143,11 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                 }
 
-                int numberOfPages = pdfDocument.GetNumberOfPages();
-                for (int i = 1; i <= numberOfPages; i++)
-                {
-                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 540, 100, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                }
+                //int numberOfPages = pdfDocument.GetNumberOfPages();
+                //for (int i = 1; i <= numberOfPages; i++)
+                //{
+                 //   doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 540, 100, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                //}
 
                 doc.Add(_table);
 
@@ -163,7 +163,7 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
-                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
+               // TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
 
                 return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
             }
