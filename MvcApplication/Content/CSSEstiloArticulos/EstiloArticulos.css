@@ -218,6 +218,59 @@
         width: 100%;
     }
 
+    /*Boton ver detalles*/
+
+    .boton3 a {
+        text-decoration: none;
+        color: white;
+    }
+
+.boton3 {
+    text-decoration: none;
+    padding: 5px 15px;
+    border: unset;
+    border-radius: 15px;
+    color: white;
+    z-index: 1;
+    background: #1a8623;
+    position: relative;
+    font-weight: 900;
+    font-size: 16px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+    .boton3::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        border-radius: 15px;
+        background-color: #212121;
+        z-index: -1;
+        -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+        transition: all 250ms
+    }
+
+    .boton3:hover {
+        background-color: #1a8623;
+        color: white;
+    }
+
+    .boton3 a:hover {
+        color: white;
+    }
+
+    .boton3:hover::before {
+        width: 100%;
+    }
+
+
 
 
 /*Para hacerle diseño Responsivo*/
@@ -314,5 +367,17 @@
         position: center;
         font-weight: 900;
         font-size: 13px;
+    }
+
+    .boton3 {
+        padding: 2px 17px;
+        border-radius: 10px;
+        position: center;
+        font-weight: 900;
+        font-size: 13px;
+    }
+
+    .botonera{
+        display:initial;
     }
 }

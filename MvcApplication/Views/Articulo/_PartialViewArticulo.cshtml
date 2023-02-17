@@ -10,26 +10,29 @@
                 <p class="card-text">   @Html.DisplayNameFor(model => model.precio):  @Html.DisplayFor(modelItem => item.precio)</p>
                 <h6 class="card-subtitle mb-2 text-muted"> @Html.DisplayNameFor(model => model.stock): @Html.DisplayFor(modelItem => item.stock)</h6>
                 <div class="card-body" style="display:flex; justify-content:space-evenly">
-                    <button class="boton2">@Html.ActionLink("Ver :)", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
-                    <button style="margin-left: 5px" class="boton3" id="carrito">
-                        @Ajax.ActionLink("+",//Texto para el usuario
-                       "ordenarProducto",//Acción a llamar
-                       "Articulo",
-                       new
-                       {
-                           idArticulo = item.id
-                       },//Parámetros a enviar
-                       new AjaxOptions
-                       {
-                           UpdateTargetId = "cantidadLibros",
-                           InsertionMode = InsertionMode.Replace,
-                           HttpMethod = "GET",
-                       }, new { }
-                       )
+                    <center class="botonera">
+                        <button class="boton2">@Html.ActionLink("Ver", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                        <button style="margin-left: 5px" class="boton3" id="carrito">
+                            @Ajax.ActionLink("+",//Texto para el usuario
+                           "ordenarProducto",//Acción a llamar
+                           "Articulo",
+                           new
+                           {
+                               idArticulo = item.id
+                           },//Parámetros a enviar
+                           new AjaxOptions
+                           {
+                               UpdateTargetId = "cantidadLibros",
+                               InsertionMode = InsertionMode.Replace,
+                               HttpMethod = "GET",
+                           }, new { }
+                           )
 
 
-                    </button>
+                        </button>
+                    </center>
                 </div>
+                <br />
             </div>
         </div>
     </div>
