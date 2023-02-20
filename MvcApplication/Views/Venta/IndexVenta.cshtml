@@ -10,7 +10,6 @@
     <br />
     <div class="contenidoHeader">
         <div class="izquieroHeader">
-            <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
@@ -23,7 +22,7 @@
             <img src="~/Imagenes/Visuals/wallpaper8.png" />
         </div>
     </div>
-    <div class="wave" style="height: 150px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -53,7 +52,7 @@
                                 <br />
                                 @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.TextBox(" "," ", htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("dd-MM-yyyy"), @readonly = "readonly" })
+                                    @Html.TextBox(" ", " ", htmlAttributes: new { @class = "form-control", @Value = DateTime.Now.ToString("dd-MM-yyyy"), @readonly = "readonly" })
 
                                 </div>
                             </div>
@@ -91,12 +90,12 @@
                         <div class="col-md-6">
                             <div class="form-group3">
                                 <h5>Nombre del cliente</h5>
-                                @Html.EditorFor(x => x.nombre_cliente)
-
+                                <div class="col-md-10">
+                                    @Html.EditorFor(x => x.nombre_cliente, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
                             </div>
                             @Html.ValidationMessageFor(model => model.nombre_cliente, "", new { @class = "text-danger" })
                         </div>
-
                     </div>
                 </div>
 
@@ -121,7 +120,7 @@
                 </div>
                 <hr />
                 <section class="abajo">
-                    <!-- Submit -->
+  
                     <button class="boton1" id="btnOrdenar">Registrar Venta</button>
                 </section>
 

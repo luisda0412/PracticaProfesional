@@ -158,6 +158,7 @@ main {
     width: 45%;
    
 }
+
 /*----------------------------*/
 .form-group2 {
   
@@ -248,3 +249,134 @@ main {
         background-color: #2acf5b;
     }
 
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 5%;
+    }
+
+    .derechoHeader img {
+        margin-top: 10px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Formulario-----------------------------------------------------------*/
+    .formulario {
+        width: 95%;
+    }
+
+    #titulo {
+        font-size: 24px;
+        width: 40%;
+    }
+
+    .form-group3 .col-md-2 {
+        font-size: 19px;
+        width: 45%;
+        margin-top: 10px;
+    }
+
+    .form-group3 h5 {
+        margin-top: 10px;
+        font-size: 19px;
+        width: 45%;
+        text-align: left;
+    }
+
+    .formulario strong {
+        font-size: 13px;
+    }
+
+    .formulario .alert {
+        font-size: 13px;
+    }
+
+    .formulario h4 {
+        font-family: 'Agency FB';
+        font-size: 29px;
+    }
+
+    .formulario .abajo h5 {
+        font-size: 15px;
+        
+    }
+
+    .formulario .form-group3 {
+        margin-top: 5%;
+        display: flex;
+        justify-content: space-around;
+        text-align: justify;
+        width: 95%;
+        padding-left: 2%;
+    }
+
+    .form-group3 .col-md-10 {
+        width: 55%;
+        font-size:15px;
+    }
+
+    /*Tabla de Articulos agregados------------------------------------*/
+    .table-responsive-sm tr th {
+        font-size: 10px;
+        text-align: center;
+      
+    }
+
+    .table-responsive-sm tr td {
+        font-size: 9px;
+        text-align: center;
+        width:20%;
+    }
+
+    .table-responsive-sm .form-control {
+        font-size: 12px;
+        text-align: center;
+    }
+
+
+    /*Tabla de Totales------------------------------------------------*/
+    .col-lg-7 {
+        width: 80%;
+        margin: auto;
+    }
+
+        .col-lg-7 tr {
+            text-align: center;
+        }
+
+        .col-lg-7 table .left {
+            text-align: right;
+        }
+
+            .col-lg-7 table .left strong, .right strong {
+                font-size: 11px;
+            }
+    /*Boton Registrar--------------------------------------*/
+    .abajo {
+        display: flex;
+        justify-content: center;  
+    }
+
+    .boton1 {
+ 
+        padding: 10px 15px;
+        font-size: 17px;
+  
+    }
+}
