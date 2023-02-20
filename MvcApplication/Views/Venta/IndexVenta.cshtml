@@ -37,7 +37,7 @@
         <center>
             <br />
             <h2 id="titulo">Nueva Venta</h2>
-            <p>El tipo de cambio actual es: <span>@ViewBag.ExchangeRate</span></p>
+            <p>El tipo de cambio actual @DateTime.Today es: <span>@ViewBag.ExchangeRate</span></p>
             <br />
             @using (Html.BeginForm("Save", "Venta", FormMethod.Post))
             {
