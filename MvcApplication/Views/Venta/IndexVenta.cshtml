@@ -37,8 +37,7 @@
         <center>
             <br />
             <h2 id="titulo">Nueva Venta</h2>
-            @Html.ActionLink("Consultar tipo de cambio", "API", "Venta")
-            @ViewBag.tipoCambio
+            <p>El tipo de cambio actual es: <span>@ViewBag.ExchangeRate</span></p>
             <br />
             @using (Html.BeginForm("Save", "Venta", FormMethod.Post))
             {

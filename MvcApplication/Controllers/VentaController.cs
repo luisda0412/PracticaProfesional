@@ -10,6 +10,8 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MvcApplication.Util;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -618,28 +620,17 @@ namespace MvcApplication.Controllers
 
         public static string hilera { get; set; }
 
-        public async Task API()
-        {
-            var c = new HttpClient();
-            var r = await c.GetAsync("https://tipodecambio.paginasweb.cr/api");
-            var json = await r.Content.ReadAsStringAsync();
-
-            hilera = json;
-
-            string MainString = json;
-            //replace special characters with space
-            hilera = Regex.Replace(MainString, @"[^0-9a-zA-Z./]+", " ");
-
-        }
-
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
 
-        public ActionResult IndexVenta()
+        public async Task<ActionResult> IndexVenta()
         {
             if (TempData["mensaje"] != null)
             ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
-            ViewBag.tipoCambio = hilera;
+
+            var rate = await GetExchangeRate();
+            ViewBag.ExchangeRate = rate;
+
             return View();
         }
 
@@ -713,7 +704,33 @@ namespace MvcApplication.Controllers
         //    string hilera = fecha + " " +compra+ " " + venta;
 
         //    ViewBag.tipoCambio = hilera;
-          
+
         //}
+
+        public async Task<decimal> GetExchangeRate()
+        {
+            // URL del API que proporciona el tipo de cambio de colón costarricense a dólar estadounidense
+            var apiUrl = "https://api.exchangerate-api.com/v4/latest/USD";
+
+            // Crear un cliente HTTP
+            using (var httpClient = new HttpClient())
+            {
+                // Realizar una solicitud GET al API
+                using (var response = await httpClient.GetAsync(apiUrl))
+                {
+                    // Si la solicitud fue exitosa, obtener el tipo de cambio
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var result = await response.Content.ReadAsStringAsync();
+                        var json = JsonConvert.DeserializeObject<JObject>(result);
+                        var rate = (decimal)json["rates"]["CRC"];
+                        return rate;
+                    }
+                }
+            }
+
+            // Si hubo algún problema, retornar un valor predeterminado
+            return 0m;
+        }
     }
 }
