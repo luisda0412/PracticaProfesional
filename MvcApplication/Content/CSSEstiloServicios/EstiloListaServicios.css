@@ -117,9 +117,13 @@
     }
 
 /*TABLA---------------------------------------------------------------------*/
-
+.desarrollo .container {
+    height: 400px;
+    overflow-y: scroll;
+    width: 80%;
+}
 .table {
-    width: 75%;
+    width: 100%;
     box-shadow: 0px 10px 17px -2px rgba(128,119,128,1);
     text-align: left;
     border-radius: 8px;
@@ -362,6 +366,106 @@
 .loader {
     display: inline-block;
     margin: 0 16px;
+}
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .desarrollo {
+        width: 100%;
+    }
+
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 5%;
+    }
+
+    .derechoHeader img {
+        margin-top: 10px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+    /*Elementos arriba de la Tabla------------------------------------------------*/
+    .elementos1 .elementoizquierdo {
+        width: 48%;
+        padding-top: 25px;
+    }
+
+    .titulo {
+        font-size: 17px;
+        margin-top: 3%;
+    }
+
+    .boton1 {
+        padding: 10px;
+        margin-top: 6%;
+    }
+
+        .boton1 a {
+            font-size: 12px;
+        }
+    /*Tarjeta de buscar*/
+    .col-md-4 {
+        width: 48%;
+    }
+
+    .card-header {
+        font-size: 17px;
+    }
+
+    .boton3 {
+        font-size: 12px;
+        width: 35%;
+    }
+
+    .input-group .form-control {
+        font-size: 13px;
+    }
+    /*TABLA---------------------------------------------------------------------*/
+    .desarrollo .container {
+        width: 100%;
+    }
+
+    .desarrollo .table {
+        width: 95%;
+    }
+
+        .desarrollo .table th {
+            font-size: 9px;
+        }
+
+        .desarrollo .table td {
+            font-weight: 500;
+            font-size: 9px;
+            text-align: center;
+        }
+
+    .columnabotones {
+        display: block;
+    }
+
+    .boton2 {
+        padding: 2px;
+        height: 20px;
+        font-size: 10px;
+    }
+
+        .boton2 a {
+            font-size: 10px;
+        }
 }
 
  

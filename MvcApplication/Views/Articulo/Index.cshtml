@@ -11,7 +11,6 @@
     <div class="contenidoHeader">
         <div class="izquieroHeader">
             <br />
-            <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
@@ -25,7 +24,7 @@
             <img src="~/Imagenes/Visuals/wallpaper6.png" />
         </div>
     </div>
-    <div class="wave" style="height: 135px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -65,7 +64,6 @@
                 </div>
             </div>
             <br />
-            <br />
             <center>
                 <div id="ajaxLoader" class="loader"; style="display:none">
                     <svg viewBox="0 0 80 80">
@@ -84,50 +82,54 @@
                         <rect x="8" y="8" width="64" height="64"></rect>
                     </svg>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.nombre)
-                            </th>
-                            <th style="text-align:right">
-                                @Html.DisplayNameFor(model => model.precio)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Categoria)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.stock)
-                            </th>
-                            <th style="text-align:center; padding:0%;"><p>Opciones</p></th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultado">
-                        @foreach (var item in Model)
-                        {
+                <div class="container">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.nombre)
-                                </td>
-                                <td style="text-align:right">
-                                    ₡@Html.DisplayFor(modelItem => item.precio)
-                                </td>
-                                <td >
-                                    @Html.DisplayFor(modelItem => item.Categoria.descripcion)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.stock)
-                                </td>
-                                <td class="columnabotones">
-                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
-                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
-                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del artículo" })</button>
-                           
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </th>
+                                <th style="text-align:right">
+                                    @Html.DisplayNameFor(model => model.precio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Categoria)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.stock)
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Opciones")
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="resultado">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nombre)
+                                    </td>
+                                    <td style="text-align:right">
+                                        ₡@Html.DisplayFor(modelItem => item.precio)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Categoria.descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.stock)
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+                                        <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                        <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del artículo" })</button>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </center>
         </section>
     </center>

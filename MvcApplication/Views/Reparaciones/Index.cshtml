@@ -10,7 +10,6 @@
     <div class="contenidoHeader">
         <div class="izquieroHeader">
             <br />
-            <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
@@ -24,7 +23,7 @@
             <img src="~/Imagenes/Visuals/wallpaper6.png" />
         </div>
     </div>
-    <div class="wave" style="height: 135px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -64,7 +63,6 @@
                 </div>
             </div>
             <br />
-            <br />
             <center>
                 <div id="ajaxLoader" class="loader" ; style="display:none">
                     <svg viewBox="0 0 80 80">
@@ -83,6 +81,7 @@
                         <rect x="8" y="8" width="64" height="64"></rect>
                     </svg>
                 </div>
+                <div class="container">
                 <table class="table">
                     <thead>
                         <tr>
@@ -101,7 +100,9 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.estado)
                             </th>
-                            <th style="text-align:center; padding:0%;"><p>Opciones</p></th>
+                            <th style="text-align:center">
+                                @Html.DisplayName("Opciones")
+                            </th>
                         </tr>
                     </thead>
                     <tbody id="resultado">
@@ -137,6 +138,7 @@
                         }
                     </tbody>
                 </table>
+                </div>
             </center>
         </section>
     </center>

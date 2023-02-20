@@ -418,6 +418,23 @@
         font-size: 18px;
     }
 
+    /*Tarjeta de buscar*/
+    .col-md-4 {
+        width: 80%;
+    }
+
+    .card-header {
+        font-size: 22px;
+    }
+
+    .boton3 {
+        font-size: 16px;
+        width: 35%;
+    }
+
+    .input-group .form-control {
+        font-size: 15px;
+    }
 
     /*TABLA---------------------------------------------------------------------*/
     .desarrollo {
