@@ -4,7 +4,7 @@
     ViewBag.Title = "Agregar Usuario";
 }
 
-<link rel="stylesheet" href="~/Content/CSSEstiloArticulos/EstiloCreate.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloUsuarios/EstiloCreate.css">
 <section class="section_header">
     <br />
     <div class="contenidoHeader">
@@ -13,7 +13,6 @@
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
-            <br />
             <h2>
                 Agregar un nuevo usuario
             </h2>
@@ -23,7 +22,7 @@
             <img src="~/Imagenes/Visuals/wallpaper12.png" />
         </div>
     </div>
-    <div class="wave" style="height: 150px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -95,7 +94,7 @@
                         <div class="form-group">
                             @Html.LabelFor(model => model.Rol, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
-                                @Html.DropDownListFor(model => model.rol_id, (SelectList)ViewBag.RolesLista, "Seleccione acá", new { htmlAttributes = new { @class = "combo" } })
+                                @Html.DropDownListFor(model => model.rol_id, (SelectList)ViewBag.RolesLista, "Seleccione acá", new { @class = "combo" })
                                 @Html.ValidationMessageFor(model => model.rol_id, "", new { @class = "text-danger" })
                             </div>
                         </div>
