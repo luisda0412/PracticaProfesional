@@ -47,6 +47,7 @@
     font-size: 29px;
     margin-left: 18%;
     color: white;
+    margin-top:5%;
 }
 
 .derechoHeader {
@@ -176,3 +177,73 @@
     .boton1:hover::before {
         width: 100%;
     }
+
+/*Para hacerle diseño Responsivo*/
+@media screen and (max-width: 425px) {
+    .desarrollo {
+        width: 100%;
+    }
+
+    .section_header {
+        height: 190px;
+        background-color: white;
+    }
+
+    .contenidoHeader {
+        width: 80%;
+        height: 180px;
+    }
+
+    .izquieroHeader img {
+        max-width: 100px;
+    }
+
+    .izquieroHeader > h2 {
+        font-size: 15px;
+        margin-left: 5%;
+    }
+
+    .derechoHeader img {
+        margin-top: 10px;
+        max-height: 50%;
+        max-width: 100%;
+    }
+
+    /*Detalles-----------------------------------------------------------*/
+    .desarrollo {
+        width: 95%;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+    /*LADO IZQUIERDO DE TARJETA-----------------------------------------------------*/
+    .ladoizquierdo h3 {
+        font-size: 24px;
+    }
+
+    .ladoizquierdo .texto {
+        margin-left: 5%;
+        font-size: 12px;
+    }
+    /*BOTONES----------------------------------------------------------------------*/
+    .botones_producto {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+    }
+
+    .boton1 img {
+        height: 30px;
+        margin-left: 5px;
+    }
+
+    .boton1 a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .boton1 {
+        padding: 10px 15px;
+        font-size: 15px;
+    }
+}

@@ -12,13 +12,12 @@
     <div class="contenidoHeader">
         <div class="izquieroHeader">
             <br />
-            <br />
             <div class="logo">
                 <img src="~/Imagenes/Logos/logo1.png" />
             </div>
             <br />
             <h2>
-                Lista de usuarios del sistema...
+                Usuarios en sistema
             </h2>
 
         </div>
@@ -26,7 +25,7 @@
             <img src="~/Imagenes/Visuals/wallpaper6.png" />
         </div>
     </div>
-    <div class="wave" style="height: 135px; overflow: hidden;">
+    <div class="wave" style="height: 110px; overflow: hidden;">
         <svg viewBox="0 0 500 150" preserveAspectRatio="none"
              style="height: 100%; width: 100%;">
             <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
@@ -62,51 +61,55 @@
                         <rect x="8" y="8" width="64" height="64"></rect>
                     </svg>
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.nombre)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.correo_electronico)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Rol)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.estado)
-                            </th>
-                            <th><p>Opciones</p></th>
-                        </tr>
-                    </thead>
-                    <tbody id="resultado">
-                        @foreach (var item in Model)
-                        {
+                <div class="container">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.nombre)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.correo_electronico)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Rol.tipo)
-                                </td>
-                                <td>
-                                    @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
-                                    @isActive
-                                </td>
-                                <td class="columnabotones">
-                                    <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
-                                    <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
-                                    <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del usuario" })</button>
-
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nombre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.telefono)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Rol)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.estado)
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Opciones")
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody id="resultado">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nombre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.telefono)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Rol.tipo)
+                                    </td>
+                                    <td>
+                                        @{ string isActive = item.estado == true ? "Activo" : "Inactivo"; }
+                                        @isActive
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Editar", "Edit", new { id = item.id }, new { title = "Editar la información" })</button>
+                                        <button class="boton2">@Html.ActionLink("Detalles", "Details", new { id = item.id }, new { title = "Ver sus detalles" })</button>
+                                        <button class="boton2">@Html.ActionLink("Habilitar/Desabilitar", "desabilitar", new { id = item.id }, new { title = "Modificar el estado del usuario" })</button>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </center>
         </section>
     </center>
