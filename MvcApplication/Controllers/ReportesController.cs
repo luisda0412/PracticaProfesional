@@ -166,7 +166,7 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
-               // TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
+              
 
                 return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
             }
@@ -296,7 +296,7 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
-                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
+               
                 return File(ms.ToArray(), "application/pdf", "Reporte de ingresos.pdf");
             }
             catch (Exception ex)
@@ -490,7 +490,7 @@ namespace MvcApplication.Controllers
                     .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
                     .SetTextAlignment(TextAlignment.CENTER);
 
-                Table _table = new Table(4).UseAllAvailableWidth();
+                Table _table = new Table(6).UseAllAvailableWidth();
                 //2 filas y 1 celda
                 Cell _cell = new Cell().Add(new Paragraph("#"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
@@ -498,10 +498,14 @@ namespace MvcApplication.Controllers
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Fecha"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Impuesto"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Monto Total"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Tipo de Venta"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
 
-                List<Ingreso> model = dbVentas.Ingreso.ToList();
+                List<Venta> model = dbVentas.Venta.ToList();
 
                 int x = 0;
                 foreach (var item in model)
@@ -513,9 +517,14 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                     _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
+                    string impuesto = (String.Format("{0:N2}", item.impuesto));
+                    _cell = new Cell().Add(new Paragraph(impuesto)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
                     string precio = (String.Format("{0:N2}", item.monto_total));
                     _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
-
+                    _table.AddCell(_cell);
+                    string isActive = item.tipopago == true ? "Efectivo" : "Tarjeta";
+                    _cell = new Cell().Add(new Paragraph(isActive)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
                 }
 
@@ -526,8 +535,8 @@ namespace MvcApplication.Controllers
                 ms.Write(bytesStream, 0, bytesStream.Length);
                 ms.Position = 0;
 
-                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte generado!", "el documento se ha creado con éxito!", SweetAlertMessageType.success);
-                return File(ms.ToArray(), "application/pdf", "Reporte de ingresos.pdf");
+               
+                return File(ms.ToArray(), "application/pdf", "Reporte de Ventas.pdf");
             }
             catch (Exception ex)
             {

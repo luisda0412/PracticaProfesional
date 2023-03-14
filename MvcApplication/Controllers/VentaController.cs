@@ -278,6 +278,7 @@ namespace MvcApplication.Controllers
                             venta.estado = true;
                             linea.venta_id = venta.id;
                             linea.precio = items.precio;
+                            venta.fecha = System.DateTime.Now;
                             //DESCUENTO POR MAS DE 3 PRODUCTOS Y QUE EL TOTAL A PAGAR SEA MAYOR A 30000
                             linea.descuento= (listaLinea.Count() >= 3 || items.cantidad >=3) && (double?)Carrito.Instancia.GetTotal() > 30000? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.10: linea.descuento=0;
                             descuento2 = Convert.ToString(linea.descuento);
