@@ -351,6 +351,7 @@
     <Content Include="Content\CSSEstiloReparaciones\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloDetalleReparaciones.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloListaReparaciones.css" />
+    <Content Include="Content\CSSEstiloReportes\EstiloMenuReportes.css" />
     <Content Include="Content\CSSEstiloReportes\EstiloReportes.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloDetalleResenas.css" />
@@ -693,6 +694,7 @@
     <Content Include="Views\Cotizacion\Index.cshtml" />
     <Content Include="Views\Cotizacion\_PartialViewVistaxNombr.cshtml" />
     <Content Include="Views\CajaChica\IndexArqueos.cshtml" />
+    <Content Include="Views\Reportes\MenuReportes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

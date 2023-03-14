@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Reportes del sistema";
+}
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloReportes/EstiloMenuReportes.css">
+
+
+
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Reportes del sistema
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper4.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 110px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="ag-format-container">
+            <div class="ag-courses_box">
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Inventario actual
+                        </div>
+
+
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+
+                                @Html.ActionLink("Generar reporte ", "CreatePdfPrueba", "Reportes")<i class="fa fa-download"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Compras realizadas
+                        </div>
+
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+                                @Html.ActionLink("Generar reporte ", "CreatePdfIngresos", "Reportes")<i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Ventas del local
+                        </div>
+
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+                                Generar <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Proveedores actuales
+                        </div>
+
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+                                Generar <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Arqueos de Caja Chica
+                        </div>
+
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+                                Generar <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ag-courses_item">
+                    <div href="#" class="ag-courses-item_link">
+                        <div class="ag-courses-item_bg"></div>
+
+                        <div class="ag-courses-item_title">
+                            Reporte de Artículos más vendidos
+                        </div>
+                        <div class="ag-courses-item_date-box">
+                            <button class="btncard">
+                                Generar <i class="fa fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Tomar el usuario Logueado-->
+    @{
+        string nombre = "Sesión no iniciada";
+        string email = "Perfil";
+        int id = 0;
+        Infraestructure.Models.Usuario oUsuario;
+        //Validar si existe en la sesión
+        if (Session["User"] != null)
+        {
+            oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+            if (oUsuario != null)
+            {
+                nombre = $"{oUsuario.nombre}";
+                email = oUsuario.correo_electronico;
+                id = oUsuario.id;
+                ViewBag.idUser = id;
+
+                TempData["idUser"] = id;
+
+            }
+        }
+    }
+</main>
+
+
+
