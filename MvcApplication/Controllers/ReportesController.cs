@@ -251,8 +251,12 @@ namespace MvcApplication.Controllers
                   
                     _table.AddCell(_cell);
                 }
-
                 doc.Add(_table);
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                 .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                 .SetFontSize(14)
+                 .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
                 doc.Close();
                 byte[] bytesStream = ms.ToArray();
                 ms = new MemoryStream();
@@ -358,6 +362,11 @@ namespace MvcApplication.Controllers
                 }
 
                 doc.Add(_table);
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                 .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                 .SetFontSize(14)
+                 .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
                 doc.Close();
                 byte[] bytesStream = ms.ToArray();
                 ms = new MemoryStream();
@@ -381,8 +390,8 @@ namespace MvcApplication.Controllers
         // REPORTE DE VENTAS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public ActionResult CreatePdfVentas()
         {
-            string FONT = "c:/windows/fonts/arial.ttf";
-            PdfFont fuente = PdfFontFactory.CreateFont(FONT);
+            string FONT = "c:/windows/fonts/arial-unicode-ms.ttf";         
+            PdfFont font = PdfFontFactory.CreateFont(FONT);
 
 
             Registro_Inventario_VYCUZEntities dbVentas = new Registro_Inventario_VYCUZEntities();
@@ -463,11 +472,13 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                     _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
-                    string impuesto = (String.Format("{0:N2}", item.impuesto));
+                    string impuesto = "\u20A1" + (String.Format("{0:N2}", item.impuesto));
                     _cell = new Cell().Add(new Paragraph(impuesto)).SetTextAlignment(TextAlignment.CENTER);
+                    _cell.SetFont(font);
                     _table.AddCell(_cell);
-                    string precio = (String.Format("{0:N2}", item.monto_total));
+                    string precio = "\u20A1" + (String.Format("{0:N2}", item.monto_total));
                     _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
+                    _cell.SetFont(font);
                     _table.AddCell(_cell);
                     string isActive = item.tipopago == true ? "Efectivo" : "Tarjeta";
                     _cell = new Cell().Add(new Paragraph(isActive)).SetTextAlignment(TextAlignment.CENTER);
@@ -475,6 +486,11 @@ namespace MvcApplication.Controllers
                 }
 
                 doc.Add(_table);
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                 .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                 .SetFontSize(14)
+                 .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
                 doc.Close();
                 byte[] bytesStream = ms.ToArray();
                 ms = new MemoryStream();
