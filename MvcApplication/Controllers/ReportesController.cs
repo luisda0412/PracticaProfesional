@@ -272,117 +272,100 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public ActionResult CreatePdfArqueosCaja()
+        public ActionResult CreatePdfArqueos()
         {
-            //Ejemplos IText7 https://kb.itextpdf.com/home/it7kb/examples
-            IEnumerable<Articulo> lista = null;
+            string FONT = "c:/windows/fonts/arial.ttf";
+            PdfFont fuente = PdfFontFactory.CreateFont(FONT);
+
+
+            Registro_Inventario_VYCUZEntities dbCaja = new Registro_Inventario_VYCUZEntities();
+
+            IEnumerable<Arqueos_Caja> lista = null;
             Usuario user = null;
             try
             {
-                // Extraer informacion
-                IServiceArticulo _ServiceArticulo = new ServiceArticulo();
-                lista = _ServiceArticulo.GetArticulo();
+            
+                IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+                lista = _ServiceCaja.GetArqueos();
 
-                //Extraer Usuario
+        
                 IServiceUsuario _ServiceUsuario = new ServiceUsuario();
                 Usuario usuario = (Infraestructure.Models.Usuario)Session["User"];
                 user = _ServiceUsuario.GetUsuarioByID(usuario.id);
 
-                // Crear stream para almacenar en memoria el reporte 
                 MemoryStream ms = new MemoryStream();
-                //Initialize writer
                 PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 35, 70, 35);
 
-                //Initialize document
-                PdfDocument pdfDoc = new PdfDocument(writer);
-                Document doc = new Document(pdfDoc, PageSize.A4, false);
-
-
-                //Titulo
-                Paragraph header = new Paragraph("Reporte de Artículos")
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(14)
-                                   .SetFontColor(ColorConstants.GREEN);
-
-                //Imagen de la empresa
                 Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
                 logo = logo.SetHeight(50).SetWidth(120);
 
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
+                pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
 
-                //Nombre y apellidos del usuario
-                Paragraph cadenanombre = new Paragraph("Usuario:" + user.nombre)
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(12)
-                                   .SetFontColor(ColorConstants.BLACK);
+                Table table = new Table(1).UseAllAvailableWidth();
+                Cell cell = new Cell().Add(new Paragraph("Reporte de Arqueos de Caja Chica").SetFontSize(14))
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetBorder(Border.NO_BORDER);
+                table.AddCell(cell);
 
-                //Para la fecha del sistema
-                Paragraph fecha = new Paragraph(DateTime.Now.ToString())
-                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                                   .SetFontSize(10)
-                                   .SetFontColor(ColorConstants.BLACK);
+                cell = new Cell().Add(new Paragraph("Cierres y aperturas de Caja Chica"))
+                      .SetTextAlignment(TextAlignment.CENTER)
+                      .SetBorder(Border.NO_BORDER); ;
+                table.AddCell(cell);
 
-
-                doc.Add(cadenanombre);
-                doc.Add(fecha);
-                doc.Add(logo);
-                doc.Add(header);
-
-
-
-                // Crear tabla con 5 columnas 
-                Table table = new Table(5, true);
-
-                table.AddHeaderCell("Nombre");
-                table.AddHeaderCell("Precio");
-                table.AddHeaderCell("Disponibles");
-                table.AddHeaderCell("Descripción");
-                table.AddHeaderCell("Imagen");
-
-                foreach (var item in lista)
-                {
-
-                    // Agregar datos a las celdas
-                    // table.AddCell(new Paragraph(item.id));
-                    table.AddCell(new Paragraph(item.nombre));
-                    // double preciobien =  Convert.ToDouble(String.Format("%1$,.2f", (double)item.precio);)String.Format("%1$,.2f",(double)item.precio);
-
-                    string preciobien = "₡" + item.precio.ToString();
-                    table.AddCell(new Paragraph(preciobien));
-                    table.AddCell(new Paragraph(item.stock.ToString()));
-                    // table.AddCell(new Paragraph(item.cantidadMinima.ToString()));
-                    //  table.AddCell(new Paragraph(item.cantidadMaxima.ToString()));
-                    table.AddCell(new Paragraph(item.Categoria.descripcion));
-                    // Convierte la imagen que viene en Bytes en imagen para PDF
-                    Image image = new Image(ImageDataFactory.Create(item.imagen));
-                    // Tamaño de la imagen
-                    image = image.SetHeight(50).SetWidth(50);
-                    table.AddCell(image);
-                }
                 doc.Add(table);
 
 
+                Style styleCell = new Style()
+                    .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                // Colocar número de páginas
-                int numberOfPages = pdfDoc.GetNumberOfPages();
-                for (int i = 1; i <= numberOfPages; i++)
+                Table _table = new Table(5).UseAllAvailableWidth();
+       
+
+                Cell _cell = new Cell().Add(new Paragraph("#"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Usuario encargado"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Fecha"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Saldo"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Estado"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+
+                List<Arqueos_Caja> model = dbCaja.Arqueos_Caja.ToList();
+
+                int x = 0;
+                foreach (var item in model)
                 {
-
-                    // Write aligned text to the specified by parameters point
-
-
-
-                    Paragraph p = new Paragraph("Reporte del catálogo de productos");
-                    doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 559, 826, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
+                    x++;
+                    _cell = new Cell().Add(new Paragraph(x.ToString()));
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.Usuario.nombre)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    string saldo= (String.Format("{0:N2}", item.saldo));
+                    _cell = new Cell().Add(new Paragraph(saldo)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    string isActive = item.estado == true ? "Abierta" : "Cerrada";
+                    _cell = new Cell().Add(new Paragraph(isActive)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
                 }
 
-
-                //Close document
+                doc.Add(_table);
                 doc.Close();
-                // Retorna un File
-                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Creación del reporte", "Reporte del catálogo realizado con éxito!", SweetAlertMessageType.success);
-                return File(ms.ToArray(), "application/pdf", "Reporte de artículos.pdf");
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+                ms.Position = 0;
 
 
+                return File(ms.ToArray(), "application/pdf", "Reporte de Arqueos.pdf");
             }
             catch (Exception ex)
             {
@@ -511,6 +494,121 @@ namespace MvcApplication.Controllers
             }
         }
 
+        //Crear reporte de proveedores
+        public ActionResult CreatePdfProveedores()
+        {
+            Registro_Inventario_VYCUZEntities dbProveedores = new Registro_Inventario_VYCUZEntities();
+
+        
+            IEnumerable<Proveedor> listaproveedores = null;
+            Usuario user = null;
+            try
+            {
+                // Extraer  informacion
+                IServiceProveedor _ServiceProvee = new ServiceProveedor();
+                listaproveedores = _ServiceProvee.GetProveedor();
+
+                //Extraer Usuario
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario usuario = (Infraestructure.Models.Usuario)Session["User"];
+                user = _ServiceUsuario.GetUsuarioByID(usuario.id);
+
+                // Crear stream para almacenar en memoria el reporte 
+                MemoryStream ms = new MemoryStream();
+                //Initialize writer
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 35, 70, 35);
+
+                //Imagen de la empresa
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
+                logo = logo.SetHeight(50).SetWidth(120);
+
+
+
+
+                //Eventos de pie y encabezado de pagina
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
+                pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
+
+                Table table = new Table(1).UseAllAvailableWidth();
+                Cell cell = new Cell().Add(new Paragraph("Reporte de Proveedores").SetFontSize(14))
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetBorder(Border.NO_BORDER);
+                table.AddCell(cell);
+
+                cell = new Cell().Add(new Paragraph("Proveedores de artículos"))
+                      .SetTextAlignment(TextAlignment.CENTER)
+                      .SetBorder(Border.NO_BORDER); ;
+                table.AddCell(cell);
+
+                doc.Add(table);
+
+
+                Style styleCell = new Style()
+                    .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
+
+                Table _table = new Table(5).UseAllAvailableWidth();
+                //2 filas y 1 celda
+                Cell _cell = new Cell().Add(new Paragraph("#"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Proveedor"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Teléfono"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Dirección"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Estado"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+
+                List<Proveedor> model = dbProveedores.Proveedor.ToList();
+
+                int x = 0;
+                foreach (var item in model)
+                {
+                    x++;
+                    _cell = new Cell().Add(new Paragraph(x.ToString()));
+                    _table.AddCell(_cell.SetBackgroundColor(ColorConstants.GREEN));
+                    _cell = new Cell().Add(new Paragraph(item.descripcion)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.telefono)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.direccion)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    string isActive = item.estado == true ? "Activo" : "Inactivo";
+                    _cell = new Cell().Add(new Paragraph(isActive)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                }
+                doc.Add(_table);
+
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                                  .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                  .SetFontSize(14)
+                                  .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
+
+                doc.Close();
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+                ms.Position = 0;
+
+
+
+                return File(ms.ToArray(), "application/pdf", "Reporte de Proveedores.pdf");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+
+        }
 
 
         // -----------------------------------------------------------------------------------------------------------------
