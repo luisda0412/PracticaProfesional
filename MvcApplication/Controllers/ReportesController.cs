@@ -34,24 +34,7 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
-        public ActionResult ProductosLista()
-        {
-            IEnumerable<Articulo> lista = null;
-            try
-            {
-                IServiceArticulo _ServiceProducto = new ServiceArticulo();
-                lista = _ServiceProducto.GetArticulo();
-                if (TempData["mensaje"] != null)
-                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
-                return View(lista);
-            }
-            catch (Exception ex)
-            {
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;      
-                return RedirectToAction("Default", "Error");
-            }
-        }
-
+       
 
         public ActionResult CreatePdfPrueba()
         {
@@ -183,26 +166,6 @@ namespace MvcApplication.Controllers
 
 
         //Reporte de compras/ingresos
-
-        public ActionResult IngresosLista()
-        {
-            IEnumerable<Ingreso> lista = null;
-            try
-            {
-
-                IServiceIngreso _ServiceIngreso = new ServiceIngreso();
-                lista = _ServiceIngreso.GetIngresos();
-                if (TempData["mensaje"] != null)
-                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
-                return View(lista);
-            }
-            catch (Exception ex)
-            {
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                return RedirectToAction("Default", "Error");
-            }
-        }
-
         public ActionResult CreatePdfIngresos()
         {
             string FONT = "c:/windows/fonts/arial.ttf";

@@ -680,13 +680,11 @@
     <Content Include="Views\Shared\MovimientoCantidad.cshtml" />
     <Content Include="Views\Shared\ResenaArticulo.cshtml" />
     <Content Include="Views\Articulo\DetailsCliente.cshtml" />
-    <Content Include="Views\Reportes\ProductosLista.cshtml" />
     <Content Include="Views\Venta\Detalle.cshtml" />
     <Content Include="Views\Venta\IndexVenta.cshtml" />
     <Content Include="Views\Ingreso\IndexIngreso.cshtml" />
     <Content Include="Views\Ingreso\_PartialViewDetalle.cshtml" />
     <Content Include="Views\Contacto\Index.cshtml" />
-    <Content Include="Views\Reportes\IngresosLista.cshtml" />
     <Content Include="Views\Reparaciones\IndexUsuario.cshtml" />
     <Content Include="Views\Reparaciones\ReportesTecnicosUsuario.cshtml" />
     <Content Include="Views\Home\IndexAdmin.cshtml" />
