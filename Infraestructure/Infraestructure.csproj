@@ -130,6 +130,7 @@
     <Compile Include="Repository\IRepositoryEmpresa.cs" />
     <Compile Include="Repository\IRepositoryFactura.cs" />
     <Compile Include="Repository\IRepositoryIngreso.cs" />
+    <Compile Include="Repository\IRepositoryNotas.cs" />
     <Compile Include="Repository\IRepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositoryReparaciones.cs" />
     <Compile Include="Repository\IRepositoryResena.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Repository\RepositoryEmpresa.cs" />
     <Compile Include="Repository\RepositoryFactura.cs" />
     <Compile Include="Repository\RepositoryIngreso.cs" />
+    <Compile Include="Repository\RepositoryNotas.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositoryReparaciones.cs" />
     <Compile Include="Repository\RepositoryResena.cs" />
