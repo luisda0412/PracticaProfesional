@@ -90,13 +90,12 @@ namespace MvcApplication.Controllers
                     doc.Add(header3);
                     doc.Add(header4);
 
-                    // Crear tabla con 4 columnas 
-                    Table table = new Table(4, true);
+                    // Crear tabla con 3 columnas 
+                    Table table = new Table(3, true);
 
-                    table.AddHeaderCell("#");
-                    table.AddHeaderCell("Motivo");
+                    table.AddHeaderCell("ID de la factura");
+                    table.AddHeaderCell("Motivo de la nota de crédito");
                     table.AddHeaderCell("Monto");
-                    table.AddHeaderCell("Precio Unidad");
 
                     
                     table.AddCell(new Paragraph(factura.id.ToString()));
