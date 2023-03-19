@@ -12,7 +12,8 @@ namespace AplicationCore.Services
     {
         public Venta GetVentaByID(long id)
         {
-            throw new NotImplementedException();
+            IRepositoryVenta repository = new RepositoryVenta();
+            return repository.GetVentaByID(id);
         }
 
         public void GetVentaCountDate(out string etiquetas, out string valores, DateTime fechainicial, DateTime fechafinal)
