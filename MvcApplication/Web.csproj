@@ -695,6 +695,7 @@
     <Content Include="Views\CajaChica\IndexArqueos.cshtml" />
     <Content Include="Views\Reportes\MenuReportes.cshtml" />
     <Content Include="Views\Notas\CrearNotaCredito.cshtml" />
+    <Content Include="Views\Notas\CrearNotaDebito.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
