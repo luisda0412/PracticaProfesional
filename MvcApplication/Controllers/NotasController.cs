@@ -34,6 +34,34 @@ namespace MvcApplication.Controllers
 {
     public class NotasController : Controller
     {
+
+        public ActionResult FrameNotas()
+        {
+            IEnumerable<Facturas> lista = null;
+            return View(lista);
+        }
+        public ActionResult buscarFacturaxID(string filtro)
+        {
+            IEnumerable<Facturas> lista = null;
+            IServiceFactura _ServiceFactura = new ServiceFactura();
+        
+
+            
+            if (string.IsNullOrEmpty(filtro))
+            {
+                lista = null;
+            }
+            else
+            {
+                lista = _ServiceFactura.GetListaFacturaID(Convert.ToInt32(filtro));
+               
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewFactura", lista);
+        }
+
         public static string idFactura { get; set; }
         public static string email { get; set; }
         public static string nuevoMonto { get; set; }

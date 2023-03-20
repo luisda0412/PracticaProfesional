@@ -66,6 +66,9 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Arqueo Caja", "IndexArqueos", "CajaChica", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
                             </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Notas Factura", "FrameNotas", "Notas", new { title = "Acciones para facturas" }, new { @class = "nav-link" })
+                            </li>
                             <li class="nav-item" id="cantidadLibros">
                                 @Html.Partial("MovimientoCantidad")
                             </li>

@@ -21,6 +21,12 @@ namespace AplicationCore.Services
             return repository.GetFacturaByID(id);
         }
 
+        public IEnumerable<Facturas> GetListaFacturaID(int id)
+        {
+            IRepositoryFactura repository = new RepositoryFactura();
+            return repository.GetListaFacturaID(id);
+        }
+
         public Facturas Save(Facturas factura)
         {
             IRepositoryFactura repository = new RepositoryFactura();

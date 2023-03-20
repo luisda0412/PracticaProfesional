@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Infraestructure.Models.Facturas>
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venta.nombre_cliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Venta.fecha)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayName("Opciones")
+        </th>
+    </tr>
+</thead>
+<tbody id="resultado">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Venta.nombre_cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Venta.fecha)
+            </td>
+            <td class="columnabotones">
+                <button class="boton2">@Html.ActionLink("Crédito", "CrearNotaCredito", new { id = item.id }, new { title = "Crear Nota" })</button>
+                <button class="boton2">@Html.ActionLink("Débito", "CrearNotaDebito", new { id = item.id }, new { title = "Crear Nota" })</button>
+            </td>
+        </tr>
+    }
+</tbody>
+
+

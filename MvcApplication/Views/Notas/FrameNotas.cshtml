@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Infraestructure.Models.Facturas>
+@{
+    ViewBag.Title = "FrameNotas";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloFrame.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Crear notas de facturas
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper14.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 110px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <center>
+        <section class="desarrollo">
+            <div class="elementos1">
+                <div class="elementoizquierdo">
+                    <h2 class="titulo">Consulte acá la factura correspondiente para la nota de crédito o débito</h2>
+                </div>
+                <div class="col-md-4">
+                    <div class="card my-4">
+                        <h5 class="card-header">Digíte el código de la factura</h5>
+                        @using (Ajax.BeginForm("buscarFacturaxID", "Notas", new AjaxOptions
+                        {
+                            UpdateTargetId = "resultado",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            LoadingElementId = "ajaxLoader"
+                        }))
+                        {
+                            <div class="card-body">
+                                <div class="input-group">
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Digíte..." })
+                                    <button type="submit" class="boton3" title="Buscar Factura">Buscar</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <center>
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle" ; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
+                </div>
+                <div class="container">
+                    <table id="resultado" class="table">
+                        
+                    </table>
+                </div>
+            </center>
+        </section>
+    </center>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}
+

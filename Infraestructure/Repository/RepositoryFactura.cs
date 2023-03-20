@@ -45,6 +45,18 @@ namespace Infraestructure.Repository
             }
         }
 
+        public IEnumerable<Facturas> GetListaFacturaID(int id)
+        {
+            IEnumerable< Facturas> lista = null;
+            using (MyContext ctx = new MyContext())
+            {
+                ctx.Configuration.LazyLoadingEnabled = false;
+                lista = ctx.Facturas.Where(x => x.id == id).Include(x => x.Venta).ToList();
+                  
+            }
+            return lista;
+        }
+
         public Facturas Save(Facturas factura)
         {
             int retorno = 0;
