@@ -347,6 +347,7 @@
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloNotas\EstiloFrame.css" />
+    <Content Include="Content\CSSEstiloNotas\EstiloNotas.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloDetalleProveedores.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloListaproveedores.css" />

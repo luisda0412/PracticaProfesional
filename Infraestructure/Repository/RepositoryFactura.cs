@@ -26,7 +26,10 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    factura = ctx.Facturas.Find(id);
+                    factura = ctx.Facturas.Include(f => f.Venta)
+                         .Include(f => f.Venta.Usuario)
+                         .Include(f => f.Venta.Detalle_Venta.Select(dv => dv.Articulo))
+                         .FirstOrDefault(f => f.id == id);
                 }
 
                 return factura;

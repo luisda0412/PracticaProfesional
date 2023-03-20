@@ -3,33 +3,125 @@
     ViewBag.Title = "CrearNotaCredito";
 }
 
-<h2>Crear Nota de Crédito</h2>
+<link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloNotas.css">
 
-@using (Html.BeginForm("obtenerDatosFormNotaCredito", "Notas"))
-{
-    <form>
-        <div class="modal-body">
-            <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Ingrese el ID de la factura:</label>
-                <input type="number" class="form-control" id="id" style="max-width:100%" name="id">
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
             </div>
-            <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Ingrese el correo electrónico del usuario:</label>
-                <input type="email" class="form-control" id="email" style="max-width:100%" name="email">
-            </div>
-            <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Ingrese el monto:</label>
-                <input type="number" class="form-control" id="monto" style="max-width:100%" name="monto">
-            </div>
-            <div class="mb-3">
-                <label for="recipient-name" class="col-form-label">Ingrese el motivo de la nota de crédito:</label>
-                <input type="text" class="form-control" id="motivo" style="max-width:100%" name="motivo">
-            </div>
+            <br />
+            <h2>
+                Crear Nota Crédito
+            </h2>
         </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 80px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="cards">
+            @{
+                Infraestructure.Models.Facturas facturita = ViewBag.Factura;
+            }
+            <article class="information [ card ]">
+                <span class="tag">Factura #@facturita.id</span>
+                <h2 class="title">Información de la factura seleccionada</h2>
+                <p class="info">Empleado: @facturita.Venta.Usuario.nombre @facturita.Venta.Usuario.apellidos</p>
+                <p class="info">Cliente: @facturita.Venta.nombre_cliente</p>
+                <p class="info">Fecha registrada: @facturita.Venta.fecha</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Cantidad</th>
+                            <th  style="text-align:right">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int contador = 1;
+                        }
+                        @foreach (var detalle in facturita.Venta.Detalle_Venta)
+                        {
+                            <tr>
+                                <td>@contador</td>
+                                <td>@detalle.Articulo.nombre</td>
+                                <td>@detalle.cantidad</td>
+                                <td  style="text-align:right">₡@detalle.precio</td>
+                            </tr>
+                            contador++;
+                            
+                        }
+                    </tbody>
+                </table>
+                <p style="text-align:right" class="info">Subtotal: ₡<span id="subtotal"></span></p>
+                <p  style="text-align:right" class="info">Impuesto:<span> ₡@facturita.Venta.impuesto</span></p>
+                <p  style="text-align:right" class="info">Total:<span> ₡@facturita.Venta.monto_total</span></p>
+                <p class="info">
+                    Tipo de pago:  @{ string isActive = facturita.Venta.tipopago == true ? "Efectivo" : "Tarjeta"; }
+                    @isActive
+                </p>
+            </article>
+            <script>
+                var montoTotal = @facturita.Venta.monto_total;
+                var impuesto = @facturita.Venta.impuesto;
+                var subtotal = montoTotal - impuesto;
+                document.getElementById("subtotal").innerHTML = subtotal;
+            </script>
+        </div>
+        <div class="formulario">
+            @using (Html.BeginForm("obtenerDatosFormNotaCredito", "Notas"))
+            {
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ingrese el ID de la factura:</label>
+                            <input type="number" class="form-control" id="id" style="max-width:100%" name="id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ingrese el correo electrónico del usuario:</label>
+                            <input type="email" class="form-control" id="email" style="max-width:100%" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ingrese el monto:</label>
+                            <input type="number" class="form-control" id="monto" style="max-width:100%" name="monto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Seleccione el tipo de nota de crédito:</label>
+                            <select class="form-control" id="tipoNota" name="tipoNota">
+                                <option value="0">Seleccione el motivo...</option>
+                                <option value="1">Por devolución de producto</option>
+                                <option value="2">Por error en el monto</option>
+                                <option value="3">Por descuento no aplicado</option>
+                                <option value="4">Por otros motivos</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Ingrese un comentario:</label>
+                            <input type="text" class="form-control" id="motivo" style="max-width:100%" name="motivo">
+                        </div>
+                    </div>
 
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                    </div>
+                </form>
+            }
         </div>
-    </form>
-}
+    </section>
+</main>

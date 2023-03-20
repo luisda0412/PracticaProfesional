@@ -1,0 +1,186 @@
+﻿main {
+    background-color: white;
+    margin:auto;
+}
+
+.desarrollo {
+    width: 85%;
+    margin: auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-evenly;
+
+    border:solid;
+    border-color:red;
+}
+
+
+/*Header------------------------------------*/
+.section_header {
+    height: 300px;
+    background-image: url(../fondo1.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.contenidoHeader {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    height: 360px;
+}
+
+.izquieroHeader {
+    width: 46%;
+    text-align: justify;
+}
+
+.izquieroHeader img {
+        justify-content: center;
+  
+}
+
+
+.logo {
+    width: 80%;
+    display: flex;
+}
+
+.izquieroHeader > h2 {
+    font-family: 'Agency FB';
+    font-size: 29px;
+    margin-left: 18%;
+    color: white;
+}
+
+.derechoHeader {
+    width: 45%;
+}
+
+    .derechoHeader img {
+        margin-top: 5%;
+        height: 210px;
+        width: 100%;
+        transition: .3s ease-in-out;
+    }
+
+        .derechoHeader img:hover {
+            -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+
+
+/*Seccion de Formulario y Factura--------------------------------------------------------------------*/
+.cards {
+    border: solid;
+    border-color: green;
+    max-width:58%;
+}
+
+.formulario {
+    border: solid;
+    max-width: 38%;
+    border-color: blue;
+}
+
+/*---------------------------------------------------------------------------------------------------*/
+/*-----------CSS para la Card------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------*/
+
+@import url("https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700&display=swap");
+
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+.cards {
+    font-family: "Spline Sans", sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+    height:580px;
+}
+
+.card {
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+   
+}
+
+.information {
+    background-color: var(--c-white);
+    padding: 1.5rem;
+}
+
+:root {
+   --c-white: #fff;
+    --c-black: #000;
+    --c-ash: #eaeef6;
+    --c-charcoal: #555555;
+    --c-void: #141b22;
+     --c-fair-pink: #FFEDEC;
+    --c-apricot: #FBC8BE;
+    --c-coffee: #754D42;
+    --c-del-rio: #917072;
+     --c-java: #1FCAC5;
+    --c-titan-white: #8ff39d;
+    --c-cold-purple: #a69fd6;
+    --c-indigo: #6558d3;
+    --c-governor: #4133B7;
+}
+
+.tag {
+    display: inline-block;
+    background-color: var(--c-titan-white);
+    color: var(--c-white);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5em 0.75em;
+    line-height: 1;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    color: var(--c-void);
+    line-height: 1.25;
+    margin-top: 1rem;
+}
+
+.info {
+    color: var(--c-charcoal);
+}
+
+.card table {
+    max-width: 100%;
+    color: var(--c-charcoal);
+    border-radius: 5px;
+    -webkit-box-shadow: inset -1px -5px 14px -9px rgba(150,150,150,1);
+    -moz-box-shadow: inset -1px -5px 14px -9px rgba(150,150,150,1);
+    box-shadow: inset -1px -5px 14px -9px rgba(150,150,150,1);
+    margin-bottom:5px;
+}
+
+/*---------------------------------------------------------------------------------------------------*/
+/*-----------CSS para el Formulario------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------*/
+form label {
+    font-family: "Spline Sans", sans-serif;
+}
+
