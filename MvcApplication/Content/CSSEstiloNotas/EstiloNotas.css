@@ -8,12 +8,12 @@
     margin: auto;
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-bottom:15px;
-    display:flex;
-    justify-content:space-evenly;
-
-    border:solid;
-    border-color:red;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-evenly;
+    -webkit-box-shadow: -1px 9px 26px 0px rgba(199,199,199,1);
+    -moz-box-shadow: -1px 9px 26px 0px rgba(199,199,199,1);
+    box-shadow: -1px 9px 26px 0px rgba(199,199,199,1);
 }
 
 
@@ -83,15 +83,15 @@
 
 /*Seccion de Formulario y Factura--------------------------------------------------------------------*/
 .cards {
-    border: solid;
-    border-color: green;
+  
     max-width:58%;
 }
 
 .formulario {
-    border: solid;
+  
     max-width: 38%;
-    border-color: blue;
+    
+ 
 }
 
 /*---------------------------------------------------------------------------------------------------*/
@@ -184,3 +184,9 @@ form label {
     font-family: "Spline Sans", sans-serif;
 }
 
+form {
+    border-radius: 16px;
+    box-shadow: 0 30px 30px -25px rgba(#4133B7, .25);
+    border: medium;
+    border-color: #8a8a8a;
+}

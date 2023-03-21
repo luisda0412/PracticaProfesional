@@ -263,10 +263,11 @@ namespace MvcApplication.Controllers
                         root.AppendChild(medioPago);
 
                         string descuento2="";
-                        Detalle_Venta linea = new Detalle_Venta();
+                        
                         
                         foreach (var items in listaLinea)
                         {
+                            Detalle_Venta linea = new Detalle_Venta();
                             int contador= 0;
 
                             contador++;
@@ -280,9 +281,10 @@ namespace MvcApplication.Controllers
                             linea.precio = items.precio;
                             venta.fecha = System.DateTime.Now;
                             //DESCUENTO POR MAS DE 3 PRODUCTOS Y QUE EL TOTAL A PAGAR SEA MAYOR A 30000
-                            linea.descuento= (listaLinea.Count() >= 3 || items.cantidad >=3) && (double?)Carrito.Instancia.GetTotal() > 30000? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.10: linea.descuento=0;
-                            descuento2 = Convert.ToString(linea.descuento);
-                            venta.monto_total = (double?)Carrito.Instancia.GetTotal() - linea.descuento;
+                            //linea.descuento= (listaLinea.Count() >= 3 || items.cantidad >=3) && (double?)Carrito.Instancia.GetTotal() > 30000? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.10: linea.descuento=0;
+                            //descuento2 = Convert.ToString(linea.descuento);
+                            linea.descuento = 0;
+                            venta.monto_total = (double?)Carrito.Instancia.GetTotal();
                             venta.Detalle_Venta.Add(linea);
 
                             descuento2 = Convert.ToString(linea.descuento);
@@ -356,8 +358,7 @@ namespace MvcApplication.Controllers
                             root.AppendChild(detalleServicio);
                         }
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Venta exitosa", "Una nueva venta ha sido registrada", SweetAlertMessageType.success);
-                        //venta.impuesto = (double)Carrito.Instancia.GetSubTotal();
-                        //venta.monto_total = (double?)Carrito.Instancia.GetTotal() + ((double?)Carrito.Instancia.GetTotal() * venta.impuesto);
+                      
                         //CREAR EL XML
 
                         //SI TODO ESTA BIEN SE GUARDA LA VENTA

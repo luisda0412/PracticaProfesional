@@ -155,13 +155,7 @@ namespace Web.ViewModel
         /*Sacar el impuesto total de la venta*/
         public decimal GetImpuesto()
         {
-            long impuesto = 0;
-
-            foreach (var i in Items)
-            {
-                    impuesto = impuesto + (long)((0.13 * i.articulo.precio) * i.cantidad);
-            }
-
+            decimal impuesto = Convert.ToDecimal(GetSubTotal()) * 0.13M;
             return impuesto;
         }
 
