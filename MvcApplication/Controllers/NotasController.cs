@@ -197,34 +197,7 @@ namespace MvcApplication.Controllers
         }
 
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult Details(int? id)
-        {
-            ServiceArticulo _ServiceArticulo = new ServiceArticulo();
-            Articulo articulo = null;
-
-            try
-            {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
-
-                articulo = _ServiceArticulo.GetArticuloByID(id.Value);
-
-                if (articulo == null)
-                {
-                    return RedirectToAction("Index");
-                }
-                return View(articulo);
-
-            }
-            catch (Exception e)
-            {
-                TempData["Message"] = "Error al procesar los datos! " + e.Message;
-                return RedirectToAction("Index");
-            }
-        }
+      
         public ActionResult CrearNotaCredito(int? id)
         {
             ServiceFactura _ServiceFact = new ServiceFactura();
@@ -377,9 +350,27 @@ namespace MvcApplication.Controllers
             return View("CrearNotaDeCredito");
         }
 
-        public ActionResult CrearNotaDebito()
+        public ActionResult CrearNotaDebito(int?id )
         {
-            return View();
+            ServiceFactura _ServiceFact = new ServiceFactura();
+            Facturas fact = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                fact = _ServiceFact.GetFacturaByID(id.Value);
+                ViewBag.Factura = fact;
+                return View();
+
+            }
+            catch (Exception e)
+            {
+                TempData["Message"] = "Error al procesar los datos! " + e.Message;
+                return RedirectToAction("Index");
+            }
         }
     }
 }

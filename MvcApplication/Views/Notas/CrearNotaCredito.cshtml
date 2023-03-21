@@ -19,7 +19,7 @@
             </h2>
         </div>
         <div class="derechoHeader">
-            <img src="~/Imagenes/Visuals/wallpaper7.png" />
+            <img src="~/Imagenes/Visuals/wallpaper16.png" />
         </div>
     </div>
     <div class="wave" style="height: 80px; overflow: hidden;">
@@ -46,9 +46,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nombre</th>
+                            <th>Artículo</th>
                             <th>Cantidad</th>
-                            <th  style="text-align:right">Precio</th>
+                            <th style="text-align:right">Precio</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,28 +59,26 @@
                         {
                             <tr>
                                 <td>@contador</td>
-                                <td>@detalle.Articulo.nombre</td>
-                                <td>@detalle.cantidad</td>
-                                <td  style="text-align:right">₡@detalle.precio</td>
+                                <td>@Html.DisplayFor(modelItem => detalle.Articulo.nombre)</td>
+                                <td>@Html.DisplayFor(modelItem => detalle.cantidad)</td>
+                                <td style="text-align:right">₡@Html.DisplayFor(modelItem => detalle.precio)</td>
                             </tr>
                             contador++;
-                            
+
                         }
                     </tbody>
                 </table>
                 <p style="text-align:right" class="info">Subtotal: ₡<span id="subtotal"></span></p>
-                <p  style="text-align:right" class="info">Impuesto:<span> ₡@facturita.Venta.impuesto</span></p>
-                <p  style="text-align:right" class="info">Total:<span> ₡@facturita.Venta.monto_total</span></p>
+                <p style="text-align:right" class="info">Impuesto:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.impuesto)</span></p>
+                <p style="text-align:right" class="info">Total:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.monto_total)</span></p>
                 <p class="info">
                     Tipo de pago:  @{ string isActive = facturita.Venta.tipopago == true ? "Efectivo" : "Tarjeta"; }
                     @isActive
                 </p>
             </article>
             <script>
-                var montoTotal = @facturita.Venta.monto_total;
-                var impuesto = @facturita.Venta.impuesto;
-                var subtotal = montoTotal - impuesto;
-                document.getElementById("subtotal").innerHTML = subtotal;
+                var subtotal = @facturita.Venta.monto_total - @facturita.Venta.impuesto;
+                document.getElementById("subtotal").innerHTML = subtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.', ',');
             </script>
         </div>
         <div class="formulario">

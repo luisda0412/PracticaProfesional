@@ -108,9 +108,17 @@ namespace Infraestructure.Models
         public int venta_id { get; set; }
         public int articulo_id { get; set; }
 
+    
+        [Display(Name = "Monto")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> precio { get; set; }
+
+        [Display(Name = "Descuento")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> descuento { get; set; }
+       
+        [Display(Name = "Cantidad")]
+   
         public Nullable<int> cantidad { get; set; }
 
         public virtual Articulo Articulo { get; set; }
@@ -134,9 +142,11 @@ namespace Infraestructure.Models
 
     internal partial class FacturaMetadata
     {
+        [Display(Name = "Factura  #")]
         public int id { get; set; }
         public Nullable<int> venta_id { get; set; }
         public Nullable<int> empresa_id { get; set; }
+        [Display(Name = "Tipo de Factura")]    
         public Nullable<bool> tipoFactura { get; set; }
 
         public virtual Empresa Empresa { get; set; }
