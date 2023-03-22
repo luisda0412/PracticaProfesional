@@ -72,7 +72,14 @@ namespace MvcApplication.Controllers
             return RedirectToAction("IndexVenta");
 
         }
+        public JsonResult ActualizarCheckBox(bool isChecked)
+        {
+            //Actualiza la variable de sesión con el estado actual del CheckBox
+            Session["Facturar"] = isChecked;
 
+            //Devuelve el nuevo estado del CheckBox al cliente
+            return Json(isChecked, JsonRequestBehavior.AllowGet);
+        }
         public static string idForm { get; set; }
         public static string nombreForm { get; set; }
         public static string apellidosForm { get; set; }
@@ -80,12 +87,17 @@ namespace MvcApplication.Controllers
         public static string telefonoForm { get; set; }
         public ActionResult obtenerDatosForm()
         {
-            idForm = Request.Form["id"];
-            nombreForm = Request.Form["name"];
-            apellidosForm = Request.Form["lastname"];
-            emailForm = Request.Form["email"];
-            telefonoForm = Request.Form["phone"];
+            //Obtiene los datos del formulario y los guarda en variables
+            string idForm = Request.Form["id"];
+            string nombreForm = Request.Form["name"];
+            string apellidosForm = Request.Form["lastname"];
+            string emailForm = Request.Form["email"];
+            string telefonoForm = Request.Form["phone"];
 
+            //Actualiza la variable de sesión con el resultado del formulario
+            Session["Facturar"] = true;
+
+            //Redirige al usuario a la página de venta
             return RedirectToAction("IndexVenta");
         }
 
@@ -632,6 +644,12 @@ namespace MvcApplication.Controllers
 
             var rate = await GetExchangeRate();
             ViewBag.ExchangeRate = rate;
+            
+            //Obtiene el estado actual del CheckBox desde la variable de sesión
+            bool facturar = (bool)(Session["Facturar"] ?? false);
+
+            //Asigna el valor de la variable al ViewBag
+            ViewBag.Facturar = facturar;
 
             return View();
         }
