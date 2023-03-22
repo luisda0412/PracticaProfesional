@@ -34,7 +34,8 @@
     <section class="desarrollo">
         <div class="cards">
             @{
-                Infraestructure.Models.Facturas facturita = ViewBag.Factura;
+                Infraestructure.Models.Facturas facturita = ViewBag.Factura; 
+                TempData["idFacturaCredito"] = facturita.id;
             }
             <article class="information [ card ]">
                 <span class="tag">Factura #@facturita.id</span>
@@ -86,10 +87,6 @@
             {
                 <form>
                     <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Ingrese el ID de la factura:</label>
-                            <input type="number" class="form-control" id="id" style="max-width:100%" name="id">
-                        </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Ingrese el correo electrónico del usuario:</label>
                             <input type="email" class="form-control" id="email" style="max-width:100%" name="email">

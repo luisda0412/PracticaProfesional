@@ -62,13 +62,11 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewFactura", lista);
         }
 
-        public static string idFactura { get; set; }
         public static string email { get; set; }
         public static string nuevoMonto { get; set; }
         public static string motivo { get; set; }
         public ActionResult obtenerDatosFormNotaCredito()
         {
-            idFactura = Request.Form["id"];
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
@@ -78,7 +76,7 @@ namespace MvcApplication.Controllers
             IServiceFactura serviceFactura = new ServiceFactura();
             IServiceVenta serviceVenta = new ServiceVenta();
 
-            Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(idFactura));
+            Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(TempData["idFacturaCredito"]));
             venta = serviceVenta.GetVentaByID((long)factura.venta_id);
 
 
@@ -188,12 +186,11 @@ namespace MvcApplication.Controllers
                 oSmtpClient.Dispose();
             }
 
-            idFactura = "";
             email = "";
             nuevoMonto = "";
             motivo = "";
 
-            return View("CrearNotaDeCredito");
+            return View("FrameNotas");
         }
 
 
@@ -223,7 +220,6 @@ namespace MvcApplication.Controllers
 
         public ActionResult obtenerDatosFormNotaDebito()
         {
-            idFactura = Request.Form["id"];
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
@@ -233,7 +229,7 @@ namespace MvcApplication.Controllers
             IServiceFactura serviceFactura = new ServiceFactura();
             IServiceVenta serviceVenta = new ServiceVenta();
 
-            Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(idFactura));
+            Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(TempData["idFacturaDebito"]));
             venta = serviceVenta.GetVentaByID((long)factura.venta_id);
 
 
@@ -343,11 +339,10 @@ namespace MvcApplication.Controllers
                 oSmtpClient.Dispose();
             }
 
-            idFactura = "";
             email = "";
             nuevoMonto = "";
             motivo = "";
-            return View("CrearNotaDeCredito");
+            return View("FrameNotas");
         }
 
         public ActionResult CrearNotaDebito(int?id )
