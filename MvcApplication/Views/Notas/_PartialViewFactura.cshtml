@@ -35,5 +35,13 @@
         </tr>
     }
 </tbody>
-
+<script>
+    // Recargar la página principal si se ha producido un error
+    @if (ViewBag.ReloadPage != null && ViewBag.ReloadPage)
+    {
+        <text>
+            window.location.reload();
+        </text>
+    }
+</script>
 

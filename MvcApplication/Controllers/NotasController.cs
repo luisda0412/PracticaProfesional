@@ -38,25 +38,27 @@ namespace MvcApplication.Controllers
         public ActionResult FrameNotas()
         {
             IEnumerable<Facturas> lista = null;
+      
             return View(lista);
+
         }
         public ActionResult buscarFacturaxID(string filtro)
         {
-            IEnumerable<Facturas> lista = null;
+            IEnumerable<Facturas> lista;
             IServiceFactura _ServiceFactura = new ServiceFactura();
-        
 
-            
-            if (string.IsNullOrEmpty(filtro))
+            if (string.IsNullOrEmpty(filtro) || filtro == "0")
             {
-                lista = null;
+                filtro = "0";
+                lista = _ServiceFactura.GetListaFacturaID(Convert.ToInt32(filtro));
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Error en la búsqueda", "Digíte un número válido", SweetAlertMessageType.error);
+                // Redirigir a la vista principal en caso de error
+                ViewBag.ReloadPage = true;
             }
             else
             {
                 lista = _ServiceFactura.GetListaFacturaID(Convert.ToInt32(filtro));
-               
             }
-
 
             // Retorna un Partial View
             return PartialView("_PartialViewFactura", lista);

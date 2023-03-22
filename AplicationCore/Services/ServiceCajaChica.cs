@@ -16,6 +16,12 @@ namespace AplicationCore.Services
             repository.Eliminar(id);
         }
 
+        public Arqueos_Caja GetArqueoLast()
+        {
+            IRepositoryCajaChica repository = new RepositoryCajaChica();
+            return repository.GetArqueoLast();
+        }
+
         public IEnumerable<Arqueos_Caja> GetArqueos()
         {
             IRepositoryCajaChica repository = new RepositoryCajaChica();

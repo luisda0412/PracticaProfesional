@@ -16,6 +16,7 @@ namespace Infraestructure.Repository
         void Save(Caja_Chica caja);
         void SaveArqueo(Arqueos_Caja arq);
         void Eliminar(int id);
+        Arqueos_Caja GetArqueoLast();
 
     }
 }

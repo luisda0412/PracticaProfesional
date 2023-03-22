@@ -16,6 +16,8 @@ namespace AplicationCore.Services
         void Save(Caja_Chica caja);
         void SaveArqueo(Arqueos_Caja arq);
 
+        Arqueos_Caja GetArqueoLast();
+
 
         void Eliminar(int id);
     }

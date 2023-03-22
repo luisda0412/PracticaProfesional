@@ -104,7 +104,7 @@ namespace MvcApplication.Controllers
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Save(Venta venta)
         {
-             IServiceUsuario serviceUsuario = new ServiceUsuario();
+            IServiceUsuario serviceUsuario = new ServiceUsuario();
             try
             {
                 if (Carrito.Instancia.Items.Count() <= 0)
@@ -638,6 +638,15 @@ namespace MvcApplication.Controllers
 
         public async Task<ActionResult> IndexVenta()
         {
+            //Mostrar Mensaje de abrir la caja si esta cerrada
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja caja = new Arqueos_Caja();
+            caja = _ServiceCaja.GetArqueoLast();
+            if (caja.estado == false)
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Mensaje importante!", "La caja chica se encuentra cerrada, antes de registrar la venta diríjase a la página de arqueos y abra la caja.", SweetAlertMessageType.info);
+            }
+
             if (TempData["mensaje"] != null)
             ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             ViewBag.DetalleOrden = Carrito.Instancia.Items;
