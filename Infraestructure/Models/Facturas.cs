@@ -14,6 +14,7 @@ namespace Infraestructure.Models
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(FacturaMetadata))]
+
     public partial class Facturas
     {
         public int id { get; set; }

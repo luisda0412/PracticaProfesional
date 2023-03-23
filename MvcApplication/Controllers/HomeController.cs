@@ -129,11 +129,9 @@ namespace MvcApplication.Controllers
                         {
                             TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Bienvenido a VYCUZ", "Un gusto tenerte por acá " + oUsuario.nombre, SweetAlertMessageType.info);
                             Session["User"] = oUsuario;
-
-
                             Infraestructure.Util.Log.Info("\n");
-                            string msj = "Nuevo inicio de sesión (administrador) por: ";                          
-                            Infraestructure.Util.Log.Info(msj + usuario.clave + " " + usuario.correo_electronico);
+                            string msj = "Nuevo inicio de sesión por: ";                          
+                            Infraestructure.Util.Log.Info(msj + usuario.clave + " Correo:" + usuario.correo_electronico);
                             return RedirectToAction("IndexAdmin");
                         }
                         Session["User"] = oUsuario;

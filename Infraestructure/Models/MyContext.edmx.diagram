@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e4add9de32014f8da9a539cf6a2edda5" Name="Diagram1">
+      <Diagram DiagramId="5ba3fd0215ed4f8ca99d03a607579fe4" Name="Diagram1">
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Arqueos_Caja" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Articulo" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Caja_Chica" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />

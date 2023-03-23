@@ -401,6 +401,10 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
+    <Content Include="Imagenes\Visuals\carrusel5.jpg" />
+    <Content Include="Imagenes\Visuals\carrusel6.jpg" />
+    <Content Include="Imagenes\Visuals\carrusel7.jpeg" />
+    <Content Include="Imagenes\Visuals\carrusel8.jpg" />
     <Content Include="Imagenes\Visuals\wallpaper16.png" />
     <Content Include="PDF\Manual de usuario VYCUZ.pdf" />
     <None Include="README.md" />
@@ -432,9 +436,6 @@
     <Content Include="Imagenes\Logos\logomenu.png" />
     <Content Include="Imagenes\Logos\logoPestaña.png" />
     <Content Include="Imagenes\Visuals\caja-chica.jpg" />
-    <Content Include="Imagenes\Visuals\carrusel1.jpg" />
-    <Content Include="Imagenes\Visuals\carrusel2.jpg" />
-    <Content Include="Imagenes\Visuals\carrusel3.jpg" />
     <Content Include="Imagenes\Visuals\categorias.jpg" />
     <Content Include="Imagenes\Visuals\contacto2.jpeg" />
     <Content Include="Imagenes\Visuals\pic.jpg" />

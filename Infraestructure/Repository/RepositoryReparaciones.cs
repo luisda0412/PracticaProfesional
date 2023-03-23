@@ -129,6 +129,8 @@ namespace Infraestructure.Repository
                         reparacion.estado = true;
                         cdt.Reparaciones.Add(reparacion);
                         cdt.SaveChanges();
+                        string msj = "Se ha registrado una nueva reparación:";
+                        Infraestructure.Util.Log.Info(msj + reparacion.Servicio_Reparacion.descripcion);
                     }
                     else
                     {

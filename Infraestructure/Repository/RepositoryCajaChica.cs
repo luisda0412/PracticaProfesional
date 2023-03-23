@@ -153,7 +153,7 @@ namespace Infraestructure.Repository
                     caja.saldo = chica.saldo;
                     cdt.Arqueos_Caja.Add(caja);
 
-                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + " Saldo: ₡" + caja.saldo);
+                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + ", Saldo: ₡" + caja.saldo);
                     cdt.SaveChanges();
                 }
                 catch (Exception e)

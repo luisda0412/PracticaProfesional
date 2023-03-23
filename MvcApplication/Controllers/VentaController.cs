@@ -88,14 +88,14 @@ namespace MvcApplication.Controllers
         public ActionResult obtenerDatosForm()
         {
             //Obtiene los datos del formulario y los guarda en variables
-            string idForm = Request.Form["id"];
-            string nombreForm = Request.Form["name"];
-            string apellidosForm = Request.Form["lastname"];
-            string emailForm = Request.Form["email"];
-            string telefonoForm = Request.Form["phone"];
+            idForm = Request.Form["id"];
+            nombreForm = Request.Form["name"];
+            apellidosForm = Request.Form["lastname"];
+            emailForm = Request.Form["email"];
+            telefonoForm = Request.Form["phone"];
 
             //Actualiza la variable de sesión con el resultado del formulario
-            Session["Facturar"] = true;
+             Session["Facturar"] = true;
 
             //Redirige al usuario a la página de venta
             return RedirectToAction("IndexVenta");
@@ -378,6 +378,7 @@ namespace MvcApplication.Controllers
                         IServiceVenta _ServiceVenta = new ServiceVenta();
                         Venta ven = _Serviceventa.Save(venta);
 
+                       
                         //FACTURA
                         factura.venta_id = venta.id;
                         factura.empresa_id = 1;

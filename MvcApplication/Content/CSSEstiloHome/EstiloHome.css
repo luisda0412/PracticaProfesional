@@ -10,7 +10,16 @@
 .slide{
     height:350px;
 }
+.carousel-caption h5 {
+    font-size: 20px;
+    font-weight:bold;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.9);
+}
 
+.carousel-caption p {
+    font-size: 18px;
+    text-shadow: 0px 2px 10px rgba(0,0,0,0.9);
+}
 .elementos{
     width:100%;
     background-color:whitesmoke;

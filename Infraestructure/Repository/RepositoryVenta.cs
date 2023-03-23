@@ -77,7 +77,8 @@ namespace Infraestructure.Repository
                             cdt.Entry(oArticulo).State = EntityState.Modified;
                             resultado = cdt.SaveChanges();
                         }
-
+                        string msj = "Se ha registrado una nueva venta por el monto de: ₡";
+                        Infraestructure.Util.Log.Info(msj + venta.monto_total + " ," + "A nombre de: " + venta.nombre_cliente);
                         transaccion.Commit();
                     }
                 }

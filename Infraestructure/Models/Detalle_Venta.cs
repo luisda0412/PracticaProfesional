@@ -14,6 +14,7 @@ namespace Infraestructure.Models
     using System.ComponentModel.DataAnnotations;
 
     [MetadataType(typeof(Detalle_VentaMetadata))]
+
     public partial class Detalle_Venta
     {
         public int venta_id { get; set; }
