@@ -331,7 +331,7 @@ namespace MvcApplication.Controllers
                             precioUnitario.InnerText = precioUnitarioDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                             XmlNode montoTotalDetalle = xml.CreateElement("MontoTotal");
-                            double montoTotalDetalleDouble = (double)(venta.monto_total);
+                            double montoTotalDetalleDouble = (double)(venta.monto_total - venta.impuesto);
                             montoTotalDetalle.InnerText = montoTotalDetalleDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                             XmlNode subTotal = xml.CreateElement("SubTotal");
