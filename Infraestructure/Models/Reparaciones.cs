@@ -31,7 +31,7 @@ namespace Infraestructure.Models
         public string descripcion_problema { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> monto_total { get; set; }
-        public string entregaestimada { get; set; }
+        public Nullable<System.DateTime> entregaestimada { get; set; }
         public Nullable<bool> estado { get; set; }
     
         public virtual Servicio_Reparacion Servicio_Reparacion { get; set; }

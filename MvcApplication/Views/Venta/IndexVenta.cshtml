@@ -300,36 +300,6 @@
 
         </script>
         <script>
-            $(document).ready(function () {
-                var efectivoRadio = $('#married-true');
-                var entradaEfectivoInput = $('input[name="entrada"]');
-
-                // Al cargar la página, si el radio button de efectivo está seleccionado,
-                // habilitar el input de entrada de efectivo
-                if (efectivoRadio.prop('checked')) {
-                    entradaEfectivoInput.prop('disabled', false);
-                }
-
-                // Manejar el evento de cambio del radio button de efectivo
-                efectivoRadio.change(function () {
-                    if ($(this).prop('checked')) {
-                        entradaEfectivoInput.prop('disabled', false);
-                    } else {
-                        entradaEfectivoInput.prop('disabled', true);
-                    }
-                });
-
-                // Manejar el evento de cambio del radio button de tarjeta
-                $('#married-false').change(function () {
-                    if ($(this).prop('checked')) {
-                        entradaEfectivoInput.prop('disabled', true);
-                    } else {
-                        entradaEfectivoInput.prop('disabled', false);
-                    }
-                });
-            });
-        </script>
-        <script>
             $('#facturarCheckBox').click(function () {
                  var isChecked = $(this).is(':checked');
                  $.ajax({

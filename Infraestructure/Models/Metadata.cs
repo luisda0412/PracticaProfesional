@@ -71,11 +71,11 @@ namespace Infraestructure.Models
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> saldo { get; set; }
 
-        [Display(Name = "Efectivo Entrante")]
+        [Display(Name = "Dinero Entrante")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> entrada { get; set; }
 
-        [Display(Name = "Efectivo Saliente")]
+        [Display(Name = "Dinero Saliente")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
         public Nullable<double> salida { get; set; }
     }

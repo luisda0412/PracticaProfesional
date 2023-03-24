@@ -384,9 +384,8 @@ namespace MvcApplication.Controllers
                         factura.empresa_id = 1;
                         factura.tipoFactura = user.rol_id == 1 || user.rol_id == 2 ? factura.tipoFactura = true : factura.tipoFactura = false;
 
+                        
                         //LLENAR DATOS DE CAJA CHICA
-                        if (venta.tipopago==true)
-                        {
                             IServiceCajaChica servicio  = new ServiceCajaChica();
                             Caja_Chica ultimacaja = new Caja_Chica();
                             ultimacaja = servicio.GetCajaChicaLast();
@@ -401,7 +400,7 @@ namespace MvcApplication.Controllers
 
                             IServiceCajaChica caja = new ServiceCajaChica();
                             caja.Save(cajaChica);
-                        }
+                        
 
                         IServiceFactura serviceFactura = new ServiceFactura();
                         Facturas fac = serviceFactura.Save(factura);
@@ -537,8 +536,8 @@ namespace MvcApplication.Controllers
                                 {
                                     x++;
                                     table.AddCell(new Paragraph(x.ToString()));
-                                    IServiceArticulo servicio = new ServiceArticulo();
-                                    Articulo arti = servicio.GetArticuloByID((int)item.idArticulo);
+                                    IServiceArticulo servicioArti = new ServiceArticulo();
+                                    Articulo arti = servicioArti.GetArticuloByID((int)item.idArticulo);
                                     table.AddCell(new Paragraph(arti.nombre));
                                     table.AddCell(new Paragraph(item.cantidad.ToString()));
 
@@ -557,7 +556,7 @@ namespace MvcApplication.Controllers
 
                                 table2.AddHeaderCell("Subtotal");
                                 table2.AddHeaderCell("Impuesto IVA");
-                                table2.AddHeaderCell("Total");
+                                table2.AddHeaderCell("Total en Colones");
 
                                 table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarSubtotal()));
                                 table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarImpuesto()));

@@ -101,7 +101,7 @@ namespace MvcApplication.Controllers
                 _table.AddHeaderCell(_cell.AddStyle(styleCell)); 
                 _cell = new Cell().Add(new Paragraph("Nombre"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
-                _cell = new Cell().Add(new Paragraph("Precio Unitario"));
+                _cell = new Cell().Add(new Paragraph("Precio en Colones"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Imagen"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
@@ -231,7 +231,7 @@ namespace MvcApplication.Controllers
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Fecha"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
-                _cell = new Cell().Add(new Paragraph("Monto Total"));
+                _cell = new Cell().Add(new Paragraph("Monto Total Colones"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
 
                 List<Ingreso> model = dbIngresos.Ingreso.ToList();
@@ -336,7 +336,7 @@ namespace MvcApplication.Controllers
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Fecha"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
-                _cell = new Cell().Add(new Paragraph("Saldo"));
+                _cell = new Cell().Add(new Paragraph("Saldo en Colones"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Estado"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
@@ -455,7 +455,7 @@ namespace MvcApplication.Controllers
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Impuesto"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
-                _cell = new Cell().Add(new Paragraph("Monto Total"));
+                _cell = new Cell().Add(new Paragraph("Monto Total Colones"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Tipo de Venta"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
