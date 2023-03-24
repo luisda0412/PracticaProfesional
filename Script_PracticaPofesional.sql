@@ -145,7 +145,7 @@ correo_electronico nvarchar(max),
 telefono nvarchar(50),
 rol_id int,
 estado bit,
-tokenRecuperacion nvarchar(max)
+tokenRecuperacion nvarchar(max) NULL
 
 CONSTRAINT Usuario_PK PRIMARY KEY (id)
 );
