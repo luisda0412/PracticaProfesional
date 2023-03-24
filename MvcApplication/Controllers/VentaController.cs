@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -316,28 +317,42 @@ namespace MvcApplication.Controllers
                             codigoProductoLinea.InnerText = Convert.ToString(4529000000000);
 
                             XmlNode cantidad = xml.CreateElement("Cantidad");
-                            cantidad.InnerText = Convert.ToString(linea.cantidad);
+                            double cantidadDouble = (double)linea.cantidad;
+                            cantidad.InnerText = cantidadDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
+
                             XmlNode unidadMedida = xml.CreateElement("UnidadMedida");
                             unidadMedida.InnerText = "Unid";
+
                             XmlNode detalle = xml.CreateElement("Detalle");
                             detalle.InnerText = items.articulo.nombre;
+
                             XmlNode precioUnitario = xml.CreateElement("PrecioUnitario");
-                            precioUnitario.InnerText = Convert.ToString(linea.precio);
+                            double precioUnitarioDouble = (double)linea.precio;
+                            precioUnitario.InnerText = precioUnitarioDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
+
                             XmlNode montoTotalDetalle = xml.CreateElement("MontoTotal");
-                            montoTotalDetalle.InnerText = Convert.ToString(venta.monto_total - venta.impuesto);
+                            double montoTotalDetalleDouble = (double)(venta.monto_total);
+                            montoTotalDetalle.InnerText = montoTotalDetalleDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
+
                             XmlNode subTotal = xml.CreateElement("SubTotal");
-                            subTotal.InnerText = Convert.ToString(venta.monto_total - venta.impuesto);
+                            double subTotalDouble = (double)(venta.monto_total - venta.impuesto);
+                            subTotal.InnerText = subTotalDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                             XmlNode impuestoDetalle = xml.CreateElement("Impuesto");
 
                             XmlNode codigoImpuesto = xml.CreateElement("Codigo");
                             codigoImpuesto.InnerText = "01";
+
                             XmlNode codigoTarifa = xml.CreateElement("CodigoTarifa");
                             codigoTarifa.InnerText = "08";
+
                             XmlNode tarifa = xml.CreateElement("Tarifa");
-                            tarifa.InnerText = Convert.ToString(13.00);
+                            double tarifaDouble = 13.00;
+                            tarifa.InnerText = tarifaDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
+
                             XmlNode montoImpuesto = xml.CreateElement("Monto");
-                            montoImpuesto.InnerText = Convert.ToString(venta.impuesto);
+                            double montoImpuestoDouble = (double)venta.impuesto;
+                            montoImpuesto.InnerText = montoImpuestoDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                             impuestoDetalle.AppendChild(codigoImpuesto);
                             impuestoDetalle.AppendChild(codigoTarifa);
@@ -346,10 +361,12 @@ namespace MvcApplication.Controllers
 
 
                             XmlNode impuestoNeto = xml.CreateElement("ImpuestoNeto");
-                            montoImpuesto.InnerText = Convert.ToString(venta.impuesto);
+                            double impuestoNetoDouble = (double)venta.impuesto;
+                            impuestoNeto.InnerText = impuestoNetoDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                             XmlNode montoTotalLinea = xml.CreateElement("MontoTotalLinea");
-                            montoImpuesto.InnerText = Convert.ToString(venta.monto_total);
+                            double montoTotalLineaDouble = (double)venta.monto_total;
+                            montoTotalLinea.InnerText = montoTotalLineaDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
 
                             //ADJUNTAR LOS ELEMENTOS AL NODO DETALLE VENTA
@@ -414,56 +431,72 @@ namespace MvcApplication.Controllers
                         codigoMoneda.InnerText = "CRC";
 
                         XmlNode tipoCambio = xml.CreateElement("TipoCambio");
-                        tipoCambio.InnerText = Convert.ToString(1.00);
+                        double tipoCambioDouble = 1.00;
+                        tipoCambio.InnerText = tipoCambioDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         codigoTipoMoneda.AppendChild(codigoMoneda);
                         codigoTipoMoneda.AppendChild(tipoCambio);
 
 
                         XmlNode totalServGravados = xml.CreateElement("TotalSerGravados");
-                        totalServGravados.InnerText = Convert.ToString(0.00);
+                        double totalServGravadosDouble = 0.00;
+                        totalServGravados.InnerText = totalServGravadosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalServExentos = xml.CreateElement("TotalSerExentos");
-                        totalServExentos.InnerText = Convert.ToString(0.00);
+                        double totalServExentosDouble = 0.00;
+                        totalServExentos.InnerText = totalServExentosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalServExonerados = xml.CreateElement("TotalServExonerados");
-                        totalServExonerados.InnerText = Convert.ToString(0.00);
+                        double totalServExoneradosDouble = 0.00;
+                        totalServExonerados.InnerText = totalServExoneradosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalMercanciasGravadas = xml.CreateElement("TotalMercanciasGravadas");
-                        totalMercanciasGravadas.InnerText = Convert.ToString(venta.monto_total);
+                        double totalMercanciasGravadasDouble = (double)venta.monto_total;
+                        totalMercanciasGravadas.InnerText = totalMercanciasGravadasDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalMercanciasExentas = xml.CreateElement("TotalMercanciasExentas");
-                        totalMercanciasExentas.InnerText = Convert.ToString(0.00);
+                        double totalMercanciasExentasDouble = 0.00;
+                        totalMercanciasExentas.InnerText = totalMercanciasExentasDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalMercExonerada = xml.CreateElement("TotalMercExonerada");
-                        totalMercExonerada.InnerText = Convert.ToString(0.00);
+                        double totalMercExoneradaDouble = 0.00;
+                        totalMercExonerada.InnerText = totalMercExoneradaDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalGravados = xml.CreateElement("TotalGravados");
-                        totalGravados.InnerText = Convert.ToString(venta.monto_total - venta.impuesto);
+                        double totalGravadosDouble = (double)(venta.monto_total - venta.impuesto);
+                        totalGravados.InnerText = totalGravadosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalExento = xml.CreateElement("TotalExento");
-                        totalExento.InnerText = Convert.ToString(0.00);
+                        double totalExentoDouble = 0.00;
+                        totalExento.InnerText = totalExentoDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalExonerado = xml.CreateElement("TotalExonerado");
-                        totalExonerado.InnerText = Convert.ToString(0.00);
+                        double totalExoneradoDouble = 0.00;
+                        totalExonerado.InnerText = totalExoneradoDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalVenta = xml.CreateElement("TotalVenta");
-                        totalVenta.InnerText = Convert.ToString(venta.monto_total - venta.impuesto);
+                        double totalVentaDouble = (double)(venta.monto_total - venta.impuesto);
+                        totalVenta.InnerText = totalVentaDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalDescuentos = xml.CreateElement("TotalDescuentos");
-                        totalDescuentos.InnerText = Convert.ToString(descuento2);
+                        double totalDescuentosDouble = Convert.ToDouble(descuento2);
+                        totalDescuentos.InnerText = totalDescuentosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalVentaNeta = xml.CreateElement("TotalVentaNeta");
-                        totalVentaNeta.InnerText = Convert.ToString(venta.monto_total - venta.impuesto);
+                        double totalVentaNetaDouble = (double)(venta.monto_total - venta.impuesto);
+                        totalVentaNeta.InnerText = totalVentaNetaDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalImpuesto = xml.CreateElement("TotalImpuesto");
-                        totalImpuesto.InnerText = Convert.ToString(venta.impuesto);
+                        double totalImpuestoDouble = (double)venta.impuesto;
+                        totalImpuesto.InnerText = totalImpuestoDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalOtrosCargos = xml.CreateElement("TotalOtrosCargos");
-                        totalOtrosCargos.InnerText = Convert.ToString(0.00);
+                        double totalOtrosCargosDouble = 0.00;
+                        totalOtrosCargos.InnerText = totalOtrosCargosDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         XmlNode totalComprobante = xml.CreateElement("TotalComprobante");
-                        totalComprobante.InnerText = Convert.ToString(venta.monto_total);
+                        double totalComprobanteDouble = (double)venta.monto_total;
+                        totalComprobante.InnerText = totalComprobanteDouble.ToString("0.00", CultureInfo.GetCultureInfo("en-US"));
 
                         //ADJUNTAT LOS ELEMENTOS AL NODO RESUMEN FACTURA
                         resumenFactura.AppendChild(codigoTipoMoneda);
