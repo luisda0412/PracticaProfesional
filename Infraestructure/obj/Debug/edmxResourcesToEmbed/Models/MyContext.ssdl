@@ -113,7 +113,7 @@
     <Property Name="descripcion_problema" Type="nvarchar" MaxLength="50" />
     <Property Name="fecha" Type="datetime" />
     <Property Name="monto_total" Type="float" />
-    <Property Name="entregaestimada" Type="nvarchar" MaxLength="30" />
+    <Property Name="entregaestimada" Type="datetime" />
     <Property Name="estado" Type="bit" />
   </EntityType>
   <EntityType Name="Reportes_Tecnicos">

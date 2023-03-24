@@ -240,6 +240,8 @@ namespace MvcApplication.Controllers
             IServiceUsuario service = new ServiceUsuario();
             try
             {
+                token = token == null ? "" : token;
+
                 if (token == null || token.Trim().Equals(""))
                 {
                     return View("Index");
@@ -278,7 +280,7 @@ namespace MvcApplication.Controllers
                     aux.tokenRecuperacion = null;
                     service.Save(aux);
                 }
-                return View("Index");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

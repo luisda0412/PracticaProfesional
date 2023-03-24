@@ -130,7 +130,7 @@
     <Property Name="descripcion_problema" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="monto_total" Type="Double" />
-    <Property Name="entregaestimada" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="entregaestimada" Type="DateTime" Precision="3" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Servicio_Reparacion" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Reparaciones" ToRole="Servicio_Reparacion" />
     <NavigationProperty Name="Usuario" Relationship="Self.Reparaciones_Usuario_FK" FromRole="Reparaciones" ToRole="Usuario" />
