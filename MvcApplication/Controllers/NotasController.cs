@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -37,6 +38,8 @@ namespace MvcApplication.Controllers
 
         public ActionResult FrameNotas()
         {
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             IEnumerable<Facturas> lista = null;
       
             return View(lista);
@@ -81,12 +84,8 @@ namespace MvcApplication.Controllers
             Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(TempData["idFacturaCredito"]));
             venta = serviceVenta.GetVentaByID((long)factura.venta_id);
 
-
-
-
-
             //------------------------------------------------------------------------------------------------------------------------
-            //Crear el pdf de la factura--------------------------------------------------------------------------------------
+            //Crear el pdf de la Nota--------------------------------------------------------------------------------------
             //------------------------------------------------------------------------------------------------------------------------
             MemoryStream ms = new MemoryStream();
             FileContentResult FileFact = null;
@@ -99,47 +98,66 @@ namespace MvcApplication.Controllers
                     PdfDocument pdfDoc = new PdfDocument(writer);
                     Document doc = new Document(pdfDoc, PageSize.A4, false);
 
-                    Paragraph header = new Paragraph("Nota de Crédito").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(20);
+                        // Definir los estilos a utilizar
+                        Style titleStyle = new Style()
+                            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                            .SetFontSize(20);
 
-                    //Imagen de la empresa
-                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
-                    logo = logo.SetHeight(50).SetWidth(120);
+                        Style subtitleStyle = new Style()
+                            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                            .SetFontSize(14);
 
-                    Paragraph header2 = new Paragraph("2ndo Piso, City Mall").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
-                    Paragraph header4 = new Paragraph("Cliente " + venta.nombre_cliente).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
-                    Paragraph header5 = new Paragraph("-------------------------").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(10).SetFontColor(ColorConstants.BLACK);
+                        Style smallTextStyle = new Style()
+                            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                            .SetFontSize(10)
+                            .SetFontColor(ColorConstants.BLACK);
 
-                    doc.Add(header);
-                    doc.Add(fecha);
-                    doc.Add(logo);
-                    doc.Add(header2);
-                    doc.Add(header3);
-                    doc.Add(header4);
+                        Style tableHeaderStyle = new Style()
+                            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                            .SetFontSize(12);
 
-                    // Crear tabla con 3 columnas 
-                    Table table = new Table(3, true);
+                        Style tableCellStyle = new Style()
+                            .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                            .SetFontSize(12)
+                            .SetFontColor(ColorConstants.BLACK);
 
-                    table.AddHeaderCell("ID de la factura");
-                    table.AddHeaderCell("Motivo de la nota de crédito");
-                    table.AddHeaderCell("Monto");
+                        // Agregar el encabezado
+                        Paragraph header = new Paragraph("Nota de Crédito").AddStyle(titleStyle);
+                        doc.Add(header);
 
-                    
-                    table.AddCell(new Paragraph(factura.id.ToString()));
-                    IServiceArticulo servicio = new ServiceArticulo();
-                    table.AddCell(new Paragraph(motivo.ToString()));
+                        // Agregar la información de la empresa
+                        Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                            .SetHeight(50)
+                            .SetWidth(120);
+                        doc.Add(logo);
 
-                    string montoCantidad = (String.Format("{0:N2}", nuevoMonto));
-                    table.AddCell(new Paragraph("¢" + montoCantidad));
+                        Paragraph header2 = new Paragraph("2ndo Piso, City Mall").AddStyle(subtitleStyle);
+                        Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
+                        doc.Add(header2);
+                        doc.Add(header3);
+
+                        // Agregar la información del cliente y la fecha
+                        Paragraph cliente = new Paragraph("Cliente: " + venta.nombre_cliente).AddStyle(smallTextStyle);
+                        Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
+                        doc.Add(cliente);
+                        doc.Add(fecha);
+
+                    // Agregar la tabla con la información de la nota de crédito
+                    Table table = new Table(new float[] { 1, 3, 1 })
+                    .SetWidth(UnitValue.CreatePercentValue(100))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Número de Factura")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Motivo de la nota")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
+
+                    table.AddCell(new Paragraph(factura.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                    table.AddCell(new Paragraph(motivo.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+
+
+                    double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
+                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
+                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
 
                     doc.Add(table);
-
-
-                    doc.Add(header5);
-
-
-                    doc.Add(header5);
 
                     doc.Close();
 
@@ -191,8 +209,8 @@ namespace MvcApplication.Controllers
             email = "";
             nuevoMonto = "";
             motivo = "";
-
-            return View("FrameNotas");
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Creada", "La nota de crédito se ha enviado al cliente", SweetAlertMessageType.success);
+            return RedirectToAction("FrameNotas");
         }
 
 
@@ -252,47 +270,66 @@ namespace MvcApplication.Controllers
                     PdfDocument pdfDoc = new PdfDocument(writer);
                     Document doc = new Document(pdfDoc, PageSize.A4, false);
 
-                    Paragraph header = new Paragraph("Nota de Débito").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(20);
+                    // Definir los estilos a utilizar
+                    Style titleStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                        .SetFontSize(20);
 
-                    //Imagen de la empresa
-                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
-                    logo = logo.SetHeight(50).SetWidth(120);
+                    Style subtitleStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(14);
 
-                    Paragraph header2 = new Paragraph("2ndo Piso, City Mall").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
-                    Paragraph header4 = new Paragraph("Cliente " + venta.nombre_cliente).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
-                    Paragraph header5 = new Paragraph("-------------------------").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(10).SetFontColor(ColorConstants.BLACK);
+                    Style smallTextStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(10)
+                        .SetFontColor(ColorConstants.BLACK);
 
+                    Style tableHeaderStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                        .SetFontSize(12);
+
+                    Style tableCellStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(12)
+                        .SetFontColor(ColorConstants.BLACK);
+
+                    // Agregar el encabezado
+                    Paragraph header = new Paragraph("Nota de Débito").AddStyle(titleStyle);
                     doc.Add(header);
-                    doc.Add(fecha);
+
+                    // Agregar la información de la empresa
+                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                        .SetHeight(50)
+                        .SetWidth(120);
                     doc.Add(logo);
+
+                    Paragraph header2 = new Paragraph("2ndo Piso, City Mall").AddStyle(subtitleStyle);
+                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
                     doc.Add(header2);
                     doc.Add(header3);
-                    doc.Add(header4);
 
-                    // Crear tabla con 3 columnas 
-                    Table table = new Table(3, true);
+                    // Agregar la información del cliente y la fecha
+                    Paragraph cliente = new Paragraph("Cliente: " + venta.nombre_cliente).AddStyle(smallTextStyle);
+                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
+                    doc.Add(cliente);
+                    doc.Add(fecha);
 
-                    table.AddHeaderCell("ID de la factura");
-                    table.AddHeaderCell("Motivo de la nota de débito");
-                    table.AddHeaderCell("Monto");
+                    // Agregar la tabla con la información de la nota de crédito
+                    Table table = new Table(new float[] { 1, 3, 1 })
+                    .SetWidth(UnitValue.CreatePercentValue(100))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Número de Factura")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Motivo de la nota")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
+
+                    table.AddCell(new Paragraph(factura.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                    table.AddCell(new Paragraph(motivo.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
 
 
-                    table.AddCell(new Paragraph(factura.id.ToString()));
-                    IServiceArticulo servicio = new ServiceArticulo();
-                    table.AddCell(new Paragraph(motivo.ToString()));
-
-                    string montoCantidad = (String.Format("{0:N2}", nuevoMonto));
-                    table.AddCell(new Paragraph("¢" + montoCantidad));
+                    double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
+                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
+                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
 
                     doc.Add(table);
-
-
-                    doc.Add(header5);
-
-
-                    doc.Add(header5);
 
                     doc.Close();
 
@@ -344,7 +381,8 @@ namespace MvcApplication.Controllers
             email = "";
             nuevoMonto = "";
             motivo = "";
-            return View("FrameNotas");
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Creada", "La nota de débito se ha enviado al cliente", SweetAlertMessageType.success);
+            return RedirectToAction("FrameNotas");
         }
 
         public ActionResult CrearNotaDebito(int?id )
