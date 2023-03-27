@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Cobrar Reparación";
+}
+
+<link rel="stylesheet" href="~/Content/CSSEstiloReparaciones/EstiloCobros.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Registrar pagos de reparación
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper16.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 80px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <section class="desarrollo">
+        <div class="cards">
+            @{
+                Infraestructure.Models.Reparaciones rep = ViewBag.Reparacion;
+                TempData["idReparacion"] = rep.id;
+            }
+            <article class="information [ card ]">
+                <span class="tag">Reparación #@rep.id</span>
+                <h2 class="title">Información de la reparación seleccionada</h2>
+                <p class="info">Fecha ingreso: @rep.fecha</p>
+                <p class="info">Cédula cliente: @rep.cliente_id</p>
+                <p class="info">Número telefónico: @rep.telefono</p>
+                <p class="info">Artículo recibido: @rep.descripcion_articulo</p>
+                <p class="info">Descripción del problema: @rep.descripcion_problema</p>
+                <p class="info" style="text-align:center; font-weight:bold;">Procedimientos realizados</p>
+                <div class="container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descripción</th>
+                                <th>Fecha Registrada</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var reporte in rep.Reportes_Tecnicos)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => reporte.reporte)</td>
+                                    <td>@Html.DisplayFor(modelItem => reporte.fecha)</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <p class="info">Monto Total: @rep.monto_total</p>
+            </article>
+        </div>
+        <div class="formulario">
+            <br />
+            <br />
+            <h2 style="font-weight:600; font-size:20px;">Digíte los datos del pago</h2>
+            @using (Html.BeginForm("obtenerDatosFormCobros", "Reparaciones"))
+            {
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="pago" class="col-form-label">Tipo de Pago:</label><br>
+                            <input type="radio" id="efectivo" name="pago" value="efectivo" checked>
+                            <label for="efectivo">Efectivo</label><br>
+                            <input type="radio" id="tarjeta" name="pago" value="tarjeta">
+                            <label for="tarjeta">Tarjeta</label><br>
+                        </div>
+                        <div class="mb-3">
+                            <label for="monto" class="col-form-label">Ingrese el monto:</label>
+                            <input type="number" class="form-control" id="monto" style="max-width:100%" name="monto">
+                        </div>
+                        <div class="mb-3">
+                            <label for="comentario" class="col-form-label">Ingrese un comentario:</label>
+                            <input type="text" class="form-control" id="comentario" style="max-width:100%" name="comentario">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </section>
+    <br />
+</main>

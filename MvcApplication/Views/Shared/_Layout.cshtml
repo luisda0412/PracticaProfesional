@@ -60,8 +60,12 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                             </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Reparaciónes", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver reparaciones" aria-haspopup="true" aria-expanded="false">Reparaciones</a>
+                                <div class="dropdown-menu">
+                                    @Html.ActionLink("Registrar Nueva", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Registrar Pagos", "IndexCobros", "Reparaciones", new { title = "Cobrar las reparaciones" }, new { @class = "dropdown-item" })
+                                </div>
                             </li>
                             <li class="nav-item">
                                 @Html.ActionLink("Arqueo Caja", "IndexArqueos", "CajaChica", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
@@ -93,22 +97,22 @@
                         @Html.ActionLink("Cotizar", "Index", "Cotizacion", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
                     </li>
                     @{
-                        if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2))
-                        {
-                            <li class="nav-item">
-                                @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ir al formulario de contacto" }, new { @class = "nav-link" })
-                            </li>
-                        }
+                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2)
+                                    {
+                                        < li class="nav-item">
+                                            @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ver sus reparaciónes" }, new { @class = "nav-link" })
+                                        </ li >
+                                    }
                     }
                     <!--Para el Login VYCUZ-->
                     @{
-                        string nombre = "Iniciar Sesión";
-                        string email = "Perfil";
-                        int id = 0;
-                        Infraestructure.Models.Usuario oUsuario;
-                        //Validar si existe en la sesión
-                        if (Session["User"] != null)
-                        {
+                                                string nombre = "Iniciar Sesión";
+string email = "Perfil";
+int id = 0;
+Infraestructure.Models.Usuario oUsuario;
+//Validar si existe en la sesión
+if (Session["User"] != null)
+{
                             oUsuario = (Infraestructure.Models.Usuario)Session["User"];
                             if (oUsuario != null)
                             {
@@ -117,30 +121,30 @@
                                 id = oUsuario.id;
                                 TempData["idUser"] = id;
                             }
-                        }
+}
                     }
                     <li class="nav-item dropdown me-auto" id="login">
                         <a class=" btn btn-success nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@nombre</a>
 
                         <div class="dropdown-menu" id="login">
                             @if (Session["User"] != null)
-                            {
+{
                                 <div class="login">
                                     @* Nombre Usuario *@
                                     Usuario: @nombre
                                 </div>
-                            }
+}
 
                             <div class="dropdown-divider"></div>
                             @if (Session["User"] == null)
-                            {
+{
                                 @Html.ActionLink("Login VYCUZ", "Loguearse", "Home", null, new { @class = "dropdown-item" })
-                            }
-                            else
-                            {
+}
+else
+{
 
                                 @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "dropdown-item" })
-                            }
+}
 
                         </div>
                     </li>

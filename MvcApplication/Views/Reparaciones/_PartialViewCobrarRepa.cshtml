@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Infraestructure.Models.Reparaciones>
+<thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cliente_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.servicio_reparacion_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>
+        <th style="text-align:center">
+            @Html.DisplayName("Opciones")
+        </th>
+    </tr>
+</thead>
+<tbody id="resultado">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Servicio_Reparacion.descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha)
+            </td>
+            <td>
+                @{ string isActive = item.estado == true ? "Activa" : "Inactiva";}
+                @isActive
+            </td>
+             <td class="columnabotones">
+            <button class="boton2">@Html.ActionLink("Registrar Pago", "IndexCrearCobros", new { id = item.id }, new { title = "Crear Cobro de Reparación" })</button>
+        </td>
+     </tr>
+
+    }
+</tbody>
+<script>
+    // Recargar la página principal si se ha producido un error
+    @if (ViewBag.ReloadPage != null && ViewBag.ReloadPage)
+    {
+        <text>
+            window.location.reload();
+        </text>
+    }
+</script>

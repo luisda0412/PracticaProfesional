@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Infraestructure.Models.Facturas>
+﻿@model IEnumerable<Infraestructure.Models.Reparaciones>
 @{
-    ViewBag.Title = "Notas de Factura";
+    ViewBag.Title = "Cobrar Reparaciones";
 }
 
 <link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloFrame.css">
@@ -14,7 +14,7 @@
             </div>
             <br />
             <h2>
-                Crear notas de facturas
+                Cobrar las reparaciones
             </h2>
         </div>
         <div class="derechoHeader">
@@ -34,12 +34,12 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Consulte acá la factura correspondiente para la nota de crédito o débito</h2>
+                    <h2 class="titulo">Consulte acá la reparación correspondiente para el pago de la misma</h2>
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
-                        <h5 class="card-header">Digíte el código de la factura</h5>
-                        @using (Ajax.BeginForm("buscarFacturaxID", "Notas", new AjaxOptions
+                        <h5 class="card-header">Digíte la cédula del cliente</h5>
+                        @using (Ajax.BeginForm("buscarReparacionxID", "Reparaciones", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -50,7 +50,7 @@
                             <div class="card-body">
                                 <div class="input-group">
                                     @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Digíte...", type = "number", step = "1" })
-                                    <button type="submit" class="boton3" title="Buscar Factura">Buscar</button>
+                                    <button type="submit" class="boton3" title="Buscar Reparación">Buscar</button>
                                 </div>
                             </div>
                         }

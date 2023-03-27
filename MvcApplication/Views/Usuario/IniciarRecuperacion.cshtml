@@ -5,10 +5,9 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/CSSEstiloLogin/EstiloLogin.css">
+<link rel="stylesheet" href="~/Content/CSSEstiloLogin/EstiloRecuperarClave.css">
 
 <section class="section_header">
-    <br />
     <div class="contenidoHeader">
         <div class="izquieroHeader">
             <br />
@@ -33,64 +32,35 @@
     </div>
 </section>
 
-<div class="container">
-    <br />
-    <center><h2 id="formularioTitle">Ingrese el correo asociado a su cuenta</h2></center>
-    <hr style="border-color: #427AA1" />
-    <div class="row">
-        @using (Html.BeginForm("IniciarRecuperacion", "Usuario", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal" id="formulario" align="center">
-
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+<body>
+    <div class="card-container">
+       
+        <main class="main-content">
+            <h1>Ingrese su correo electrónico</h1>
+            <div class="col">
+                @using (Html.BeginForm("IniciarRecuperacion", "Usuario", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal" id="formulario" align="center">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">                 
+                            <div class="col">
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                            <div class="col">
+                                <input type="submit" value="Enviar" class="btn btn-success" style="margin-top:10px;" />
+                            </div>                 
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <input type="submit" value="Enviar" class="btn btn-success" style="margin-top:10px;" />
-                    </div>
-                </div>
+                }
             </div>
-
-
-        }
+            <br />
+            <p>Con este formulario podra solicitar su cambio de contraseña en VYCUZ</p>
+        </main>
     </div>
-</div>
-
-@*<h2 id="formularioTitle" align="center">Ingrese el correo asociado a su cuenta</h2>
-
-    @using (Html.BeginForm("IniciarRecuperacion", "Usuario", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-
-        <div class="form-horizontal" id="formulario" align="center">
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Enviar" class="btn btn-success" />
-                </div>
-            </div>
-        </div>
-
-
-    }*@
+</body>
+<br />
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

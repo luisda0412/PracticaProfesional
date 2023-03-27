@@ -13,6 +13,16 @@ using Infraestructure.Models;
 using System.IO;
 using Web.Security;
 using MvcApplication.Util;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Kernel.Geom;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Colors;
+using iText.Layout.Element;
+using iText.IO.Image;
+using iText.Layout.Properties;
+using System.Globalization;
 
 namespace MvcApplication.Controllers
 {
@@ -21,7 +31,7 @@ namespace MvcApplication.Controllers
         Reportes_Tecnicos re = new Reportes_Tecnicos();
         //Para guardadr la reparacion que se clickee
         int? codigo = 0;
-
+        public static double saldoActual { get; set; }
         //private MyContext db = new MyContext();
         private SelectList listaServicios(long idSer = 0)
         {
@@ -315,9 +325,219 @@ namespace MvcApplication.Controllers
         }
 
 
+        //Para registrar los pagos de las reparaciones
+        public ActionResult IndexCobros()
+        {
+            //Mostrar Mensaje de abrir la caja si esta cerrada
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja caja = new Arqueos_Caja();
+            caja = _ServiceCaja.GetArqueoLast();
+            if (caja.estado == false)
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Mensaje importante!", "La caja chica está cerrada, antes de registrar pagos vaya a la página de arqueos y abra la caja.", SweetAlertMessageType.info);
+            }
+
+            if (TempData["mensaje"] != null)
+                ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            IEnumerable<Reparaciones> lista = null;
+            if (TempData["archivoPDF"] != null)
+            {
+                byte[] pdfBytes = (byte[])TempData["archivoPDF"];
+
+                // Limpiar el TempData
+                TempData["archivoPDF"] = null;
+
+                // Descargar el archivo PDF
+                return File(pdfBytes, "application/pdf", "Factura de Reparación.pdf");
+            }
+
+            // Si no hay un archivo PDF en TempData, simplemente se muestra la página "IndexCobros"
+            return View(lista);
+        }
 
 
+        //Buscar la reparacion que se va a cobrar
+        public ActionResult buscarReparacionxID(string filtro)
+        {
+            IEnumerable<Reparaciones> lista;
+            IServiceReparaciones _ServiceRep = new ServiceReparaciones();
 
+            if (string.IsNullOrEmpty(filtro) || filtro == "0")
+            {
+                filtro = "0";
+                lista = _ServiceRep.GetReparacionByNombre(filtro);
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Error en la búsqueda", "No existen reparaciones registradas bajo la cédula digitada por favor verifíque los datos!", SweetAlertMessageType.error);
+                // Redirigir a la vista principal en caso de error
+                ViewBag.ReloadPage = true;
+            }
+            else
+            {
+                lista = _ServiceRep.GetReparacionByNombre(filtro);
+            }
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewCobrarRepa", lista);
+        }
+
+        //Pagina de registrar los cobros 
+        public ActionResult IndexCrearCobros(int? id)
+        {
+            ServiceReparaciones _ServiceRep = new ServiceReparaciones();
+            Reparaciones rep = null;
+
+            try
+            {
+                if (id == null)
+                {
+                    return RedirectToAction("IndexCobros");
+                }
+                rep = _ServiceRep.GetReparacionByID(id.Value);
+                ViewBag.Reparacion = rep;
+                return View();
+
+            }
+            catch (Exception e)
+            {
+                TempData["Message"] = "Error al procesar los datos! " + e.Message;
+                return RedirectToAction("Index");
+            }
+        }
+
+        //Registrar los pagos de la reparacion
+        public static string nuevoMonto { get; set; }
+        public static string comentario { get; set; }
+        public static string tipopago { get; set; }
+        public ActionResult obtenerDatosFormCobros()
+        {
+            nuevoMonto = Request.Form["monto"];
+            comentario = Request.Form["comentario"];
+            tipopago = Request.Form["pago"];
+
+            IServiceReparaciones serviceRepa = new ServiceReparaciones();
+            Reparaciones reparaciones = serviceRepa.GetReparacionByID(Convert.ToInt32(TempData["idReparacion"]));
+
+            //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
+            IServiceCajaChica servicio = new ServiceCajaChica();
+            Caja_Chica ultimacaja = new Caja_Chica();
+            ultimacaja = servicio.GetCajaChicaLast();
+
+            Caja_Chica cajaChica = new Caja_Chica();
+            cajaChica.fecha = DateTime.Now;
+            cajaChica.entrada = Convert.ToDouble(nuevoMonto);
+            cajaChica.salida = cajaChica.entrada - reparaciones.monto_total;
+
+            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
+            cajaChica.saldo = saldoActual;
+
+            IServiceCajaChica caja = new ServiceCajaChica();
+            caja.Save(cajaChica);
+
+            //------------------------------------------------------------------------------------------------------------------------
+            //Crear el pdf del Pago--------------------------------------------------------------------------------------
+            //------------------------------------------------------------------------------------------------------------------------
+            MemoryStream ms = new MemoryStream();
+            //FileContentResult FileFact = null;
+                try
+                {
+
+                    PdfWriter writer = new PdfWriter(ms);
+                    PdfDocument pdfDoc = new PdfDocument(writer);
+                    Document doc = new Document(pdfDoc, PageSize.A4, false);
+
+                    // Definir los estilos a utilizar
+                    Style titleStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                        .SetFontSize(20);
+
+                    Style subtitleStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(14);
+
+                    Style smallTextStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(10)
+                        .SetFontColor(ColorConstants.BLACK);
+
+                    Style tableHeaderStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                        .SetFontSize(11);
+
+                    Style tableCellStyle = new Style()
+                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                        .SetFontSize(10)
+                        .SetFontColor(ColorConstants.BLACK);
+
+                    // Agregar el encabezado
+                    Paragraph header = new Paragraph("Factura de Reparación").AddStyle(titleStyle);
+                    doc.Add(header);
+
+                    // Agregar la información de la empresa
+                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                        .SetHeight(50)
+                        .SetWidth(120);
+                    doc.Add(logo);
+
+                    Paragraph header2 = new Paragraph("Segundo Piso, City Mall").AddStyle(subtitleStyle);
+                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
+                    doc.Add(header2);
+                    doc.Add(header3);
+
+                    // Agregar la información del cliente y la fecha
+                    Paragraph cliente = new Paragraph("Cédula Cliente: " + reparaciones.cliente_id).AddStyle(smallTextStyle);
+                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
+                    doc.Add(cliente);
+                    doc.Add(fecha);
+
+                        // Agregar la tabla con la información de la nota de crédito
+                        Table table = new Table(new float[] { 1, 2, 1, 1 })
+                        .SetWidth(UnitValue.CreatePercentValue(100)).SetHeight(UnitValue.CreatePercentValue(100));
+
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Número de Reparación")).AddStyle(tableHeaderStyle));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Comentario del Pago")).AddStyle(tableHeaderStyle));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
+                        table.AddHeaderCell(new Cell().Add(new Paragraph("Tipo de Pago")).AddStyle(tableHeaderStyle));
+                
+                    table.AddCell(new Paragraph(reparaciones.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                    table.AddCell(new Paragraph(comentario.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+
+
+                    double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
+                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
+                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
+
+                    table.AddCell(new Paragraph(tipopago.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                    doc.Add(table);
+
+                    doc.Close();
+                    byte[] bytesStream = ms.ToArray();
+                    ms = new MemoryStream();
+                    ms.Write(bytesStream, 0, bytesStream.Length);
+
+                     byte[] pdfBytes = ms.ToArray();
+
+                        // Limpiar el MemoryStream y reposicionar el cursor al inicio
+                        ms.Flush();
+                        ms.Position = 0;
+
+                        // Guardar el archivo PDF en TempData
+                        TempData["archivoPDF"] = pdfBytes;
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago realizado", "Se ha registrado el pago de la reparación efectivamente", SweetAlertMessageType.success);
+
+                nuevoMonto = null;
+                comentario = null;
+                tipopago = null;
+
+                return RedirectToAction("IndexCobros");
+
+                }
+                catch (Exception ex)
+                {
+                    TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
+                }
+
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Error en el pago", "No se ha realizado el pago correspondiente, intente de nuevo", SweetAlertMessageType.error);
+            return RedirectToAction("IndexCobros");
+        }
     }
 
 }

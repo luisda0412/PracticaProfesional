@@ -345,6 +345,7 @@
     <Content Include="Content\CSSEstiloHome\EstiloHome.css" />
     <Content Include="Content\CSSEstiloIngresos\EstiloIngresos.css" />
     <Content Include="Content\CSSEstiloLayout\EstiloLayout.css" />
+    <Content Include="Content\CSSEstiloLogin\EstiloRecuperarClave.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloNotas\EstiloFrame.css" />
     <Content Include="Content\CSSEstiloNotas\EstiloNotas.css" />
@@ -354,6 +355,7 @@
     <Content Include="Content\CSSEstiloReparaciones\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloDetalleReparaciones.css" />
     <Content Include="Content\CSSEstiloReparaciones\EstiloListaReparaciones.css" />
+    <Content Include="Content\CSSEstiloReparaciones\EstiloCobros.css" />
     <Content Include="Content\CSSEstiloReportes\EstiloMenuReportes.css" />
     <Content Include="Content\CSSEstiloReportes\EstiloReportes.css" />
     <Content Include="Content\CSSEstiloResenas\EstiloCreate.css" />
@@ -379,6 +381,7 @@
     <Content Include="Content\fondo1.jpg" />
     <Content Include="Content\fondo2.jpg" />
     <Content Include="Content\fondoauth.jpg" />
+    <Content Include="Content\fondoverde.jpg" />
     <Content Include="Content\pic4.png" />
     <Content Include="Content\Prettify\prettify.css" />
     <Content Include="Content\Prettify\Themes\desert.css" />
@@ -401,6 +404,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
+    <Content Include="Imagenes\fondos\fondoverde.jpg" />
     <Content Include="Imagenes\Visuals\carrusel5.jpg" />
     <Content Include="Imagenes\Visuals\carrusel6.jpg" />
     <Content Include="Imagenes\Visuals\carrusel7.jpeg" />
@@ -429,9 +433,7 @@
     <Content Include="Imagenes\Iconos\tel2.png" />
     <Content Include="Imagenes\Iconos\telegram.png" />
     <Content Include="Imagenes\Iconos\ubi.png" />
-    <Content Include="Imagenes\Logos\iconoVYCUZ.png" />
     <Content Include="Imagenes\Logos\logo1.png" />
-    <Content Include="Imagenes\Logos\logofooter.png" />
     <Content Include="Imagenes\Logos\logoIcono.png" />
     <Content Include="Imagenes\Logos\logomenu.png" />
     <Content Include="Imagenes\Logos\logoPestaña.png" />
@@ -702,6 +704,9 @@
     <Content Include="Views\Notas\CrearNotaDebito.cshtml" />
     <Content Include="Views\Notas\FrameNotas.cshtml" />
     <Content Include="Views\Notas\_PartialViewFactura.cshtml" />
+    <Content Include="Views\Reparaciones\IndexCobros.cshtml" />
+    <Content Include="Views\Reparaciones\_PartialViewCobrarRepa.cshtml" />
+    <Content Include="Views\Reparaciones\IndexCrearCobros.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
