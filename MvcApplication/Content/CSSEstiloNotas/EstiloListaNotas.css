@@ -107,7 +107,7 @@
 
     .boton1 a {
         text-decoration: none;
-        font-weight: 600;
+        font-weight: bold;
         font-size: 20px;
         color: #ffffff;
     }
@@ -156,11 +156,12 @@
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     transition: all 250ms;
     overflow: hidden;
+    color:white;
 }
 
     .boton2 a {
         text-decoration: none;
-        font-weight: 500;
+        font-weight: bold;
         font-size: 16px;
         color: #ffffff;
     }
@@ -177,11 +178,13 @@
         z-index: -1;
         -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
         box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-        transition: all 250ms
+        transition: all 250ms;
+    
+        font-weight: bold;
     }
 
     .boton2:hover {
-        color: #0a0a0a;
+        color: white;
     }
 
         .boton2:hover::before {

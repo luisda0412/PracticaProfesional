@@ -65,13 +65,13 @@ namespace Infraestructure.Models
         [Display(Name = "# Factura")]
         public Nullable<int> idFactura { get; set; }
 
-        [Display(Name = "Nombre Cliente")]
+        [Display(Name = "Cliente")]
         public string nombreCliente { get; set; }
 
         [Display(Name = "Motivo")]
         public string motivo { get; set; }
 
-        [Display(Name = "Monto")]
+        [Display(Name = "Monto de Nota")]
         [DisplayFormat(DataFormatString = "{0:N2}")]
       
         public Nullable<double> monto { get; set; }
@@ -79,7 +79,7 @@ namespace Infraestructure.Models
         [Display(Name = "Tipo de Nota")]
         public Nullable<bool> tipoNota { get; set; }
 
-        [Display(Name = "Fecha y Hora")]
+        [Display(Name = "Fecha Registrada")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> fecha { get; set; }
         

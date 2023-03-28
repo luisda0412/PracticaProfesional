@@ -512,6 +512,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        //Buscar la nota por la fecha
         public ActionResult buscarNotaxFecha(DateTime filtro)
         {
             IEnumerable<NotasDeCreditoYDebito> lista = null;
@@ -530,6 +531,23 @@ namespace MvcApplication.Controllers
 
             // Retorna un Partial View
             return PartialView("_PartialViewVistaxFecha", lista);
+        }
+
+        //Metodo que cobra la de Credito, hace que salga plata de la caja chica 
+        public ActionResult LiquidarNotaCredito(int? id)
+        {
+
+            return RedirectToAction("FrameLiquidar");
+        }
+
+        //Metodo que cobra la de Debito, busca los datos del Modal y mete la plata y saca vuelto si fuese el caso
+        public ActionResult LiquidarNotaDebito()
+        {
+            string id = Request.Form["factura"];//Con este se tiene que ir a buscar a la BD la fatura correspondiente si fuese el caso
+            string montopago = Request.Form["monto"];
+            string tipopago = Request.Form["pago"];
+
+            return RedirectToAction("FrameLiquidar");
         }
     }
 }
