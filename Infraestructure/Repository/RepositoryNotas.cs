@@ -11,13 +11,16 @@ namespace Infraestructure.Repository
 {
     public class RepositoryNotas : IRepositoryNotas
     {
-        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasID(int id)
+        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasFecha(DateTime date)
         {
             IEnumerable<NotasDeCreditoYDebito> lista = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.NotasDeCreditoYDebito.Where(x => x.id == id).Include(x => x.Facturas).ToList();
+                lista = ctx.NotasDeCreditoYDebito
+                           .ToList()
+                           .FindAll(l => l.fecha.Value.Date.Equals(date.Date))
+                           .OrderByDescending(l => l.fecha);
 
             }
             return lista;
@@ -29,7 +32,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.NotasDeCreditoYDebito.Include(x => x.Facturas).ToList<NotasDeCreditoYDebito>();
+                lista = ctx.NotasDeCreditoYDebito.Include(x => x.Facturas).OrderByDescending(x => x.fecha).ToList<NotasDeCreditoYDebito>();
             }
             return lista;
         }

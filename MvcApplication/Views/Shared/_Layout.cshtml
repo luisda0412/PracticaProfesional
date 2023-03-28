@@ -70,9 +70,13 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Arqueo Caja", "IndexArqueos", "CajaChica", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
                             </li>
-                            <li class="nav-item">
-                                @Html.ActionLink("Notas Factura", "FrameNotas", "Notas", new { title = "Acciones para facturas" }, new { @class = "nav-link" })
-                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver reparaciones" aria-haspopup="true" aria-expanded="false">Notas</a>
+                                <div class="dropdown-menu">
+                                    @Html.ActionLink("Crear Notas", "FrameNotas", "Notas", new { title = "Notas de Credito y Debito" }, new { @class = "dropdown-item" })
+                                    @Html.ActionLink("Liquidar Notas", "FrameLiquidar", "Notas", new { title = "Acciones para facturas" }, new { @class = "dropdown-item" })
+                                </div>
+                            </li>                    
                             <li class="nav-item" id="cantidadLibros">
                                 @Html.Partial("MovimientoCantidad")
                             </li>

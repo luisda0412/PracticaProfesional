@@ -105,6 +105,7 @@
           <Property Name="motivo" Type="nvarchar(max)" />
           <Property Name="monto" Type="float" />
           <Property Name="tipoNota" Type="bit" />
+          <Property Name="fecha" Type="datetime" />
           <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="Proveedor">
@@ -626,6 +627,7 @@
           <Property Name="motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="monto" Type="Double" />
           <Property Name="tipoNota" Type="Boolean" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Facturas" Relationship="Self.Notas_FK" FromRole="NotasDeCreditoYDebito" ToRole="Facturas" />
         </EntityType>
@@ -1157,6 +1159,7 @@
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>

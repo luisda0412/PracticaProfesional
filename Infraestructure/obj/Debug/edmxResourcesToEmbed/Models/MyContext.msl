@@ -108,6 +108,7 @@
           <ScalarProperty Name="motivo" ColumnName="motivo" />
           <ScalarProperty Name="monto" ColumnName="monto" />
           <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="estado" ColumnName="estado" />
         </MappingFragment>
       </EntityTypeMapping>

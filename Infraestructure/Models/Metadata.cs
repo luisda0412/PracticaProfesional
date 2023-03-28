@@ -57,6 +57,39 @@ namespace Infraestructure.Models
         public virtual Usuario Usuario { get; set; }
     }
 
+    internal partial class NotasMetadata
+    {
+        [Display(Name = "# Nota")]
+        public int id { get; set; }
+
+        [Display(Name = "# Factura")]
+        public Nullable<int> idFactura { get; set; }
+
+        [Display(Name = "Nombre Cliente")]
+        public string nombreCliente { get; set; }
+
+        [Display(Name = "Motivo")]
+        public string motivo { get; set; }
+
+        [Display(Name = "Monto")]
+        [DisplayFormat(DataFormatString = "{0:N2}")]
+      
+        public Nullable<double> monto { get; set; }
+
+        [Display(Name = "Tipo de Nota")]
+        public Nullable<bool> tipoNota { get; set; }
+
+        [Display(Name = "Fecha y Hora")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy H:mm:ss}", ApplyFormatInEditMode = true)]
+        public Nullable<System.DateTime> fecha { get; set; }
+        
+        [Display(Name = "Condición")]
+        public Nullable<bool> estado { get; set; }
+
+        [Display(Name = "Factura")]
+        public virtual Facturas Facturas { get; set; }
+    }
+
     internal partial class Caja_ChicaMetadata
     {
         [Display(Name = "Identificación")]
@@ -306,6 +339,7 @@ namespace Infraestructure.Models
         
         [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "*La contraseña es un campo obligatorio")]
+        [RegularExpression(@"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "La contraseña debe contener al menos 1 mayúscula, 1 caracter especial y 1 número")]
         public string clave { get; set; }
        
         [Display(Name = "Nombre")]

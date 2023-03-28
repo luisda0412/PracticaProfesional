@@ -1,4 +1,4 @@
-﻿
+﻿@model Infraestructure.Models.NotasDeCreditoYDebito
 @{
     ViewBag.Title = "CrearNotaCredito";
 }
@@ -34,7 +34,7 @@
     <section class="desarrollo">
         <div class="cards">
             @{
-                Infraestructure.Models.Facturas facturita = ViewBag.Factura; 
+                Infraestructure.Models.Facturas facturita = ViewBag.Factura;
                 TempData["idFacturaCredito"] = facturita.id;
             }
             <article class="information [ card ]">
@@ -120,3 +120,34 @@
         </div>
     </section>
 </main>
+<script>
+    function formatMonto(input) {
+        // Obtener el valor ingresado por el usuario
+        let monto = input.value;
+
+        // Remover todos los caracteres que no sean dígitos
+        monto = monto.replace(/[^\d]/g, '');
+
+        // Verificar que el valor ingresado sea válido
+        if (!monto || isNaN(monto)) {
+            // El valor ingresado no es válido
+            input.setCustomValidity('Ingrese un valor válido');
+        } else {
+            // El valor ingresado es válido
+            input.setCustomValidity('');
+        }
+
+        // Convertir el valor a número y dividir por 100
+        let num = parseFloat(monto) / 1000;
+
+        // Agregar separadores de miles y dos decimales
+        num = num.toLocaleString('es-ES', {
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 3,
+        });
+
+        // Colocar el valor formateado en el input
+        input.value = num;
+    }
+</script>
+

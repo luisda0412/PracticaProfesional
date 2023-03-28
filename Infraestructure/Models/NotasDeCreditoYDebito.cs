@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(NotasMetadata))]
     public partial class NotasDeCreditoYDebito
     {
         public int id { get; set; }
@@ -20,6 +22,7 @@ namespace Infraestructure.Models
         public string motivo { get; set; }
         public Nullable<double> monto { get; set; }
         public Nullable<bool> tipoNota { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<bool> estado { get; set; }
     
         public virtual Facturas Facturas { get; set; }

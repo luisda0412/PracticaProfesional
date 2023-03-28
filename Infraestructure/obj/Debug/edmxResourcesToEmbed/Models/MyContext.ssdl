@@ -100,6 +100,7 @@
     <Property Name="motivo" Type="nvarchar(max)" />
     <Property Name="monto" Type="float" />
     <Property Name="tipoNota" Type="bit" />
+    <Property Name="fecha" Type="datetime" />
     <Property Name="estado" Type="bit" />
   </EntityType>
   <EntityType Name="Proveedor">

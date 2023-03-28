@@ -348,6 +348,7 @@
     <Content Include="Content\CSSEstiloLogin\EstiloRecuperarClave.css" />
     <Content Include="Content\CSSEstiloLogin\EstiloLogin.css" />
     <Content Include="Content\CSSEstiloNotas\EstiloFrame.css" />
+    <Content Include="Content\CSSEstiloNotas\EstiloListaNotas.css" />
     <Content Include="Content\CSSEstiloNotas\EstiloNotas.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloCreate.css" />
     <Content Include="Content\CSSEstiloProveedores\EstiloDetalleProveedores.css" />
@@ -707,6 +708,8 @@
     <Content Include="Views\Reparaciones\IndexCobros.cshtml" />
     <Content Include="Views\Reparaciones\_PartialViewCobrarRepa.cshtml" />
     <Content Include="Views\Reparaciones\IndexCrearCobros.cshtml" />
+    <Content Include="Views\Notas\FrameLiquidar.cshtml" />
+    <Content Include="Views\Notas\_PartialViewVistaxFecha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

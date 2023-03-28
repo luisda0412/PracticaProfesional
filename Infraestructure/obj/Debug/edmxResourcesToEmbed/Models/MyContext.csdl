@@ -117,6 +117,7 @@
     <Property Name="motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="monto" Type="Double" />
     <Property Name="tipoNota" Type="Boolean" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Facturas" Relationship="Self.Notas_FK" FromRole="NotasDeCreditoYDebito" ToRole="Facturas" />
   </EntityType>

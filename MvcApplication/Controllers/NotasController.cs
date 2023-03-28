@@ -35,6 +35,23 @@ namespace MvcApplication.Controllers
 {
     public class NotasController : Controller
     {
+        public ActionResult FrameLiquidar()
+        {
+            IEnumerable<NotasDeCreditoYDebito> lista = null;
+            try
+            {
+                IServiceNotas _ServiceNot = new ServiceNotas();
+                lista = _ServiceNot.GetNota();
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+            }
+            catch (Exception e)
+            {
+                Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
+            }
+
+            return View(lista);
+        }
 
         public ActionResult FrameNotas()
         {
@@ -74,17 +91,27 @@ namespace MvcApplication.Controllers
         public static string motivo { get; set; }
         public ActionResult obtenerDatosFormNotaCredito()
         {
+            IServiceNotas _ServiceNota = new ServiceNotas();
+
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
 
-            Venta venta = new Venta();
+       
 
             IServiceFactura serviceFactura = new ServiceFactura();
-            IServiceVenta serviceVenta = new ServiceVenta();
+            NotasDeCreditoYDebito nota = new NotasDeCreditoYDebito();
 
             Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(TempData["idFacturaCredito"]));
-            venta = serviceVenta.GetVentaByID((long)factura.venta_id);
+
+
+            nota.idFactura = factura.id;
+            nota.tipoNota = false;
+            nota.estado = false;
+            nota.nombreCliente = factura.Venta.nombre_cliente;
+            nota.motivo = motivo;
+            nota.monto = Convert.ToDouble(nuevoMonto);
+            nota.fecha = DateTime.Now;
 
             //------------------------------------------------------------------------------------------------------------------------
             //Crear el pdf de la Nota--------------------------------------------------------------------------------------
@@ -139,7 +166,7 @@ namespace MvcApplication.Controllers
                     doc.Add(header3);
 
                     // Agregar la información del cliente y la fecha
-                    Paragraph cliente = new Paragraph("Cliente: " + venta.nombre_cliente).AddStyle(smallTextStyle);
+                    Paragraph cliente = new Paragraph("Cliente: " + factura.Venta.nombre_cliente).AddStyle(smallTextStyle);
                     Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
                     doc.Add(cliente);
                     doc.Add(fecha);
@@ -163,6 +190,7 @@ namespace MvcApplication.Controllers
 
                     doc.Close();
 
+                    _ServiceNota.Save(nota);
 
                     FileFact = File(ms.ToArray(), "application/pdf", "NotaDeCredito.pdf");
 
@@ -240,30 +268,31 @@ namespace MvcApplication.Controllers
             }
         }
 
-        public ActionResult obtenerDatosFormNotaDebito(NotasDeCreditoYDebito nota)
+        public ActionResult obtenerDatosFormNotaDebito()
         {
 
             IServiceNotas _ServiceNota = new ServiceNotas();
+            NotasDeCreditoYDebito nota = new NotasDeCreditoYDebito();
 
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
             string tipoNotaDebitoValue = Request.Form["tipoNotaDebito"];
 
-            Venta venta = new Venta();
+          
 
             IServiceFactura serviceFactura = new ServiceFactura();
-            IServiceVenta serviceVenta = new ServiceVenta();
 
             Facturas factura = serviceFactura.GetFacturaByID(Convert.ToInt32(TempData["idFacturaDebito"]));
-            venta = serviceVenta.GetVentaByID((long)factura.venta_id);
+          
 
             nota.idFactura = factura.id;
             nota.tipoNota = true;
             nota.estado = false;
-            nota.nombreCliente = venta.nombre_cliente;
+            nota.nombreCliente = factura.Venta.nombre_cliente;
             nota.motivo = motivo;
             nota.monto = Convert.ToDouble(nuevoMonto);
+            nota.fecha = DateTime.Now;
 
 
 
@@ -320,7 +349,7 @@ namespace MvcApplication.Controllers
                     doc.Add(header3);
 
                     // Agregar la información del cliente y la fecha
-                    Paragraph cliente = new Paragraph("Cliente: " + venta.nombre_cliente).AddStyle(smallTextStyle);
+                    Paragraph cliente = new Paragraph("Cliente: " + factura.Venta.nombre_cliente).AddStyle(smallTextStyle);
                     Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
                     doc.Add(cliente);
                     doc.Add(fecha);
@@ -481,6 +510,26 @@ namespace MvcApplication.Controllers
                 TempData["Message"] = "Error al procesar los datos! " + e.Message;
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult buscarNotaxFecha(DateTime filtro)
+        {
+            IEnumerable<NotasDeCreditoYDebito> lista = null;
+            IServiceNotas _ServiceNota = new ServiceNotas();
+
+            // Error porque viene en blanco 
+            if (filtro == null)
+            {
+                lista = _ServiceNota.GetNota();
+            }
+            else
+            {
+                lista = _ServiceNota.GetListaNotasByFecha(filtro);
+            }
+
+
+            // Retorna un Partial View
+            return PartialView("_PartialViewVistaxFecha", lista);
         }
     }
 }

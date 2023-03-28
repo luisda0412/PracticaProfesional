@@ -5,11 +5,6 @@
 
 <link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloNotas.css">
 
-
-
-@using (Html.BeginForm("obtenerDatosFormNotaDebito", "Notas", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
     <section class="section_header">
         <br />
         <div class="contenidoHeader">
@@ -127,4 +122,33 @@
         </section>
     </main>
 
-}
+<script>
+    function formatMonto(input) {
+        // Obtener el valor ingresado por el usuario
+        let monto = input.value;
+
+        // Remover todos los caracteres que no sean dígitos
+        monto = monto.replace(/[^\d]/g, '');
+
+        // Verificar que el valor ingresado sea válido
+        if (!monto || isNaN(monto)) {
+            // El valor ingresado no es válido
+            input.setCustomValidity('Ingrese un valor válido');
+        } else {
+            // El valor ingresado es válido
+            input.setCustomValidity('');
+        }
+
+        // Convertir el valor a número y dividir por 100
+        let num = parseFloat(monto) /1000;
+
+        // Agregar separadores de miles y dos decimales
+        num = num.toLocaleString('es-ES', {
+            minimumFractionDigits: 3,
+            maximumFractionDigits: 3,
+        });
+
+        // Colocar el valor formateado en el input
+        input.value = num;
+    }
+</script>

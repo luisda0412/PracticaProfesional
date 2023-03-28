@@ -1,0 +1,148 @@
+﻿@model IEnumerable<Infraestructure.Models.NotasDeCreditoYDebito>
+@{
+    ViewBag.Title = "Cancelar Notas";
+
+}
+<link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloListaNotas.css">
+
+<section class="section_header">
+    <br />
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Lista de notas de facturas
+            </h2>
+
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper9.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 110px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+<main>
+    <center>
+        <section class="desarrollo">
+            <div class="elementos1">
+                <div class="elementoizquierdo">
+                    <h2 class="titulo">Notas creadas en el sistema</h2>
+                 </div>  
+                <div class="col-md-4">
+                    <div class="card my-4">
+                        <h5 class="card-header">Buscar nota por fecha</h5>
+                        @using (Ajax.BeginForm("buscarNotaxFecha", "Notas", new AjaxOptions
+                        {
+                            UpdateTargetId = "resultado",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            LoadingElementId = "ajaxLoader"
+                        }))
+                        {
+                            <div class="card-body">
+                                <div class="input-group">
+     
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @type = "date", @placeholder = "02/01/2023" })
+                                    <button type="submit" class="boton3" title="Buscar la nota en la lista">Buscar</button>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+            <center>
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <circle id="test" cx="40" cy="40" r="32"></circle>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader triangle" ; style="display:none">
+                    <svg viewBox="0 0 86 80">
+                        <polygon points="43 8 79 72 7 72"></polygon>
+                    </svg>
+                </div>
+
+                <div id="ajaxLoader" class="loader" ; style="display:none">
+                    <svg viewBox="0 0 80 80">
+                        <rect x="8" y="8" width="64" height="64"></rect>
+                    </svg>
+                </div>
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.idFactura)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.fecha)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.nombreCliente)
+                                </th>
+                                <th style="text-align:right">
+                                    @Html.DisplayNameFor(model => model.monto)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.tipoNota)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.estado)
+                                </th>
+                                <th style="text-align:center">
+                                    @Html.DisplayName("Opciones")
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultado">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.idFactura)
+                                    </td>
+                                    <td >
+                                        @Html.DisplayFor(modelItem => item.fecha)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.nombreCliente)
+                                    </td>
+                                    <td style="text-align:right">
+                                        ₡@Html.DisplayFor(modelItem => item.monto)
+                                    </td>
+                                    <td>
+                                        @{ string isTipo = item.tipoNota == true ? "Débito" : "Crédito"; }
+                                        @isTipo
+                                    </td>
+                                     <td>
+                                        @{ string isActive = item.estado == true ? "Cancelada" : "Pendiente"; }
+                                        @isActive
+                                    </td>
+                                    <td class="columnabotones">
+                                        <button class="boton2">@Html.ActionLink("Liquidar Nota", "Edit", new { id = item.id }, new { title = "Cobrar la Nota" })</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </center>
+        </section>
+    </center>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+}

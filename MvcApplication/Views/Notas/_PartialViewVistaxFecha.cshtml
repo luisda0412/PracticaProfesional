@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Infraestructure.Models.NotasDeCreditoYDebito>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idFactura)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreCliente)
+        </td>
+        <td style="text-align:right">
+            ₡@Html.DisplayFor(modelItem => item.monto)
+        </td>
+        <td>
+            @{ string isTipo = item.tipoNota == true ? "Débito" : "Crédito"; }
+            @isTipo
+        </td>
+        <td>
+            @{ string isActive = item.estado == true ? "Cancelada" : "Pendiente"; }
+            @isActive
+        </td>
+        <td class="columnabotones">
+            <button class="boton2">@Html.ActionLink("Liquidar Nota", "Edit", new { id = item.id }, new { title = "Cobrar la Nota" })</button>
+        </td>
+    </tr>
+}

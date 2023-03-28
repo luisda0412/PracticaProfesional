@@ -10,10 +10,10 @@ namespace AplicationCore.Services
 {
     public class ServiceNotas : IServiceNotas
     {
-        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasID(int id)
+        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasByFecha(DateTime date )
         {
             IRepositoryNotas repository = new RepositoryNotas();
-            return repository.GetListaNotasID(id);
+            return repository.GetListaNotasFecha(date);
         }
 
         public IEnumerable<NotasDeCreditoYDebito> GetNota()
