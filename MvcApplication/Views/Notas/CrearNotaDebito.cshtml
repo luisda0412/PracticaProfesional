@@ -1,123 +1,130 @@
-﻿
+﻿@model Infraestructure.Models.NotasDeCreditoYDebito
 @{
     ViewBag.Title = "CrearNotaDebito";
 }
 
 <link rel="stylesheet" href="~/Content/CSSEstiloNotas/EstiloNotas.css">
 
-<section class="section_header">
-    <br />
-    <div class="contenidoHeader">
-        <div class="izquieroHeader">
-            <br />
-            <div class="logo">
-                <img src="~/Imagenes/Logos/logo1.png" />
+
+
+@using (Html.BeginForm("obtenerDatosFormNotaDebito", "Notas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <section class="section_header">
+        <br />
+        <div class="contenidoHeader">
+            <div class="izquieroHeader">
+                <br />
+                <div class="logo">
+                    <img src="~/Imagenes/Logos/logo1.png" />
+                </div>
+                <br />
+                <h2>
+                    Crear Nota Débito
+                </h2>
             </div>
-            <br />
-            <h2>
-                Crear Nota Débito
-            </h2>
+            <div class="derechoHeader">
+                <img src="~/Imagenes/Visuals/wallpaper16.png" />
+            </div>
         </div>
-        <div class="derechoHeader">
-            <img src="~/Imagenes/Visuals/wallpaper16.png" />
-        </div>
-    </div>
-    <div class="wave" style="height: 80px; overflow: hidden;">
-        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
-             style="height: 100%; width: 100%;">
-            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
-                  style="stroke: none; fill: white;"></path>
-        </svg>
-    </div>
-</section>
-<main>
-    <section class="desarrollo">
-        <div class="cards">
-            @{
-                Infraestructure.Models.Facturas facturita = ViewBag.Factura;
-                TempData["idFacturaDebito"]= facturita.id;
-            }
-            <article class="information [ card ]">
-                <span class="tag">Factura #@facturita.id</span>
-                <h2 class="title">Información de la factura seleccionada</h2>
-                <p class="info">Empleado: @facturita.Venta.Usuario.nombre @facturita.Venta.Usuario.apellidos</p>
-                <p class="info">Cliente: @facturita.Venta.nombre_cliente</p>
-                <p class="info">Fecha registrada: @facturita.Venta.fecha</p>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Artículo</th>
-                            <th>Cantidad</th>
-                            <th style="text-align:right">Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            int contador = 1;
-                        }
-                        @foreach (var detalle in facturita.Venta.Detalle_Venta)
-                        {
-                            <tr>
-                                <td>@contador</td>
-                                <td>@Html.DisplayFor(modelItem => detalle.Articulo.nombre)</td>
-                                <td>@Html.DisplayFor(modelItem => detalle.cantidad)</td>
-                                <td style="text-align:right">₡@Html.DisplayFor(modelItem => detalle.precio)</td>
-                            </tr>
-                            contador++;
-
-                        }
-                    </tbody>
-                </table>
-                <p style="text-align:right" class="info">Subtotal: ₡<span id="subtotal"></span></p>
-                <p style="text-align:right" class="info">Impuesto:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.impuesto)</span></p>
-                <p style="text-align:right" class="info">Total:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.monto_total)</span></p>
-                <p class="info">
-                    Tipo de pago:  @{ string isActive = facturita.Venta.tipopago == true ? "Efectivo" : "Tarjeta"; }
-                    @isActive
-                </p>
-            </article>
-            <script>
-                var subtotal = @facturita.Venta.monto_total - @facturita.Venta.impuesto;
-                document.getElementById("subtotal").innerHTML = subtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.', ',');
-            </script>
-        </div>
-        <div class="formulario">
-            @using (Html.BeginForm("obtenerDatosFormNotaDebito", "Notas"))
-            {
-                <form>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Ingrese el correo electrónico del usuario:</label>
-                            <input type="email" class="form-control" id="email" style="max-width:100%" name="email">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Ingrese el monto:</label>
-                            <input type="number" class="form-control" id="monto" style="max-width:100%" name="monto">
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Seleccione el tipo de nota de débito:</label>
-                            <select class="form-control" id="tipoNota" name="tipoNota">
-                                <option value="0">Seleccione el motivo...</option>
-                                <option value="1">Por aumento de precio del artículo/servicio</option>                            
-                                <option value="2">Por cargos no incluidos en la factura original</option>                           
-                                <option value="3">Por intereses o cargos por pagos atrasados</option>                             
-                                <option value="4">Por impuestos o tasas adicionales</option>
-                                <option value="5">Por otros motivos</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label">Ingrese un comentario:</label>
-                            <input type="text" class="form-control" id="motivo" style="max-width:100%" name="motivo">
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
-                    </div>
-                </form>
-            }
+        <div class="wave" style="height: 80px; overflow: hidden;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+                 style="height: 100%; width: 100%;">
+                <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                      style="stroke: none; fill: white;"></path>
+            </svg>
         </div>
     </section>
-</main>
+    <main>
+        <section class="desarrollo">
+            <div class="cards">
+                @{
+                    Infraestructure.Models.Facturas facturita = ViewBag.Factura;
+                    TempData["idFacturaDebito"] = facturita.id;
+                }
+                <article class="information [ card ]">
+                    <span class="tag">Factura #@facturita.id</span>
+                    <h2 class="title">Información de la factura seleccionada</h2>
+                    <p class="info">Empleado: @facturita.Venta.Usuario.nombre @facturita.Venta.Usuario.apellidos</p>
+                    <p class="info">Cliente: @facturita.Venta.nombre_cliente</p>
+                    <p class="info">Fecha registrada: @facturita.Venta.fecha</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Artículo</th>
+                                <th>Cantidad</th>
+                                <th style="text-align:right">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int contador = 1;
+                            }
+                            @foreach (var detalle in facturita.Venta.Detalle_Venta)
+                            {
+                                <tr>
+                                    <td>@contador</td>
+                                    <td>@Html.DisplayFor(modelItem => detalle.Articulo.nombre)</td>
+                                    <td>@Html.DisplayFor(modelItem => detalle.cantidad)</td>
+                                    <td style="text-align:right">₡@Html.DisplayFor(modelItem => detalle.precio)</td>
+                                </tr>
+                                contador++;
+
+                            }
+                        </tbody>
+                    </table>
+                    <p style="text-align:right" class="info">Subtotal: ₡<span id="subtotal"></span></p>
+                    <p style="text-align:right" class="info">Impuesto:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.impuesto)</span></p>
+                    <p style="text-align:right" class="info">Total:<span> ₡@Html.DisplayFor(modelItem => facturita.Venta.monto_total)</span></p>
+                    <p class="info">
+                        Tipo de pago:  @{ string isActive = facturita.Venta.tipopago == true ? "Efectivo" : "Tarjeta"; }
+                        @isActive
+                    </p>
+                </article>
+                <script>
+                var subtotal = @facturita.Venta.monto_total - @facturita.Venta.impuesto;
+                document.getElementById("subtotal").innerHTML = subtotal.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').replace('.', ',');
+                </script>
+            </div>
+            <div class="formulario">
+                @using (Html.BeginForm("obtenerDatosFormNotaDebito", "Notas"))
+                {
+                    <form>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Ingrese el correo electrónico del usuario:</label>
+                                <input type="email" class="form-control" id="email" style="max-width:100%" name="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Ingrese el monto:</label>
+                                <input type="number" class="form-control" id="monto" style="max-width:100%" name="monto">
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Seleccione el tipo de nota de débito:</label>
+                                <select class="form-control" id="tipoNotaDebito" name="tipoNotaDebito">
+                                    <option value="0">Seleccione el motivo...</option>
+                                    <option value="1">Por aumento de precio del artículo/servicio</option>
+                                    <option value="2">Por cargos no incluidos en la factura original</option>
+                                    <option value="3">Por intereses o cargos por pagos atrasados</option>
+                                    <option value="4">Por impuestos o tasas adicionales</option>
+                                    <option value="5">Por otros motivos</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label">Ingrese un comentario:</label>
+                                <input type="text" class="form-control" id="motivo" style="max-width:100%" name="motivo">
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                        </div>
+                    </form>
+                }
+            </div>
+        </section>
+    </main>
+
+}

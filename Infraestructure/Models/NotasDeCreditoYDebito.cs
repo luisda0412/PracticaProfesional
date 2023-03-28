@@ -12,13 +12,16 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Reportes_Tecnicos
+    public partial class NotasDeCreditoYDebito
     {
         public int id { get; set; }
-        public Nullable<int> reparacion_id { get; set; }
-        public string reporte { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<int> idFactura { get; set; }
+        public string nombreCliente { get; set; }
+        public string motivo { get; set; }
+        public Nullable<double> monto { get; set; }
+        public Nullable<bool> tipoNota { get; set; }
+        public Nullable<bool> estado { get; set; }
     
-        public virtual Reparaciones Reparaciones { get; set; }
+        public virtual Facturas Facturas { get; set; }
     }
 }

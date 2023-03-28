@@ -34,6 +34,7 @@ namespace Infraestructure.Models
         public virtual DbSet<Empresa> Empresa { get; set; }
         public virtual DbSet<Facturas> Facturas { get; set; }
         public virtual DbSet<Ingreso> Ingreso { get; set; }
+        public virtual DbSet<NotasDeCreditoYDebito> NotasDeCreditoYDebito { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Reparaciones> Reparaciones { get; set; }
         public virtual DbSet<Reportes_Tecnicos> Reportes_Tecnicos { get; set; }

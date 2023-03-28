@@ -11,12 +11,15 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(FacturaMetadata))]
-
+    
     public partial class Facturas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Facturas()
+        {
+            this.NotasDeCreditoYDebito = new HashSet<NotasDeCreditoYDebito>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> venta_id { get; set; }
         public Nullable<int> empresa_id { get; set; }
@@ -24,5 +27,7 @@ namespace Infraestructure.Models
     
         public virtual Empresa Empresa { get; set; }
         public virtual Venta Venta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NotasDeCreditoYDebito> NotasDeCreditoYDebito { get; set; }
     }
 }

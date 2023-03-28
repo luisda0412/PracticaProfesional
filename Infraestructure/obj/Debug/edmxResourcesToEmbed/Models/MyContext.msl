@@ -99,6 +99,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="NotasDeCreditoYDebito">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.NotasDeCreditoYDebito">
+        <MappingFragment StoreEntitySet="NotasDeCreditoYDebito">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Proveedor">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Proveedor">
         <MappingFragment StoreEntitySet="Proveedor">

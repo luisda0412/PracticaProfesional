@@ -95,6 +95,18 @@
           <Property Name="monto_total" Type="float" />
           <Property Name="comentario" Type="nvarchar" MaxLength="60" />
         </EntityType>
+        <EntityType Name="NotasDeCreditoYDebito">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFactura" Type="int" />
+          <Property Name="nombreCliente" Type="nvarchar" MaxLength="50" />
+          <Property Name="motivo" Type="nvarchar(max)" />
+          <Property Name="monto" Type="float" />
+          <Property Name="tipoNota" Type="bit" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="id" />
@@ -316,6 +328,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Notas_FK">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="NotasDeCreditoYDebito" Type="Self.NotasDeCreditoYDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NotasDeCreditoYDebito">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Reparaciones_Articulo_FK">
           <End Role="Servicio_Reparacion" Type="Self.Servicio_Reparacion" Multiplicity="0..1" />
           <End Role="Reparaciones" Type="Self.Reparaciones" Multiplicity="*" />
@@ -398,6 +422,7 @@
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NotasDeCreditoYDebito" EntityType="Self.NotasDeCreditoYDebito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" Schema="dbo" store:Type="Tables" />
@@ -449,6 +474,10 @@
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="Notas_FK" Association="Self.Notas_FK">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="NotasDeCreditoYDebito" EntitySet="NotasDeCreditoYDebito" />
           </AssociationSet>
           <AssociationSet Name="Reparaciones_Articulo_FK" Association="Self.Reparaciones_Articulo_FK">
             <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
@@ -573,6 +602,7 @@
           <Property Name="tipoFactura" Type="Boolean" />
           <NavigationProperty Name="Empresa" Relationship="Self.Facturas_Empresa_FK" FromRole="Facturas" ToRole="Empresa" />
           <NavigationProperty Name="Venta" Relationship="Self.Facturas__Venta_FK" FromRole="Facturas" ToRole="Venta" />
+          <NavigationProperty Name="NotasDeCreditoYDebito" Relationship="Self.Notas_FK" FromRole="Facturas" ToRole="NotasDeCreditoYDebito" />
         </EntityType>
         <EntityType Name="Ingreso">
           <Key>
@@ -585,6 +615,19 @@
           <Property Name="comentario" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Detalle_Ingreso" Relationship="Self.Detalle_Ingreso_Ingreso_FK" FromRole="Ingreso" ToRole="Detalle_Ingreso" />
           <NavigationProperty Name="Usuario" Relationship="Self.Ingreso_Usuario_FK" FromRole="Ingreso" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="NotasDeCreditoYDebito">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFactura" Type="Int32" />
+          <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="monto" Type="Double" />
+          <Property Name="tipoNota" Type="Boolean" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="Facturas" Relationship="Self.Notas_FK" FromRole="NotasDeCreditoYDebito" ToRole="Facturas" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -813,6 +856,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Notas_FK">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="0..1" />
+          <End Role="NotasDeCreditoYDebito" Type="Self.NotasDeCreditoYDebito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NotasDeCreditoYDebito">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Ingreso_Usuario_FK">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -907,6 +962,7 @@
           <EntitySet Name="Empresa" EntityType="Self.Empresa" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
+          <EntitySet Name="NotasDeCreditoYDebito" EntityType="Self.NotasDeCreditoYDebito" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" />
           <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" />
@@ -954,6 +1010,10 @@
           <AssociationSet Name="Facturas__Venta_FK" Association="Self.Facturas__Venta_FK">
             <End Role="Venta" EntitySet="Venta" />
             <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="Notas_FK" Association="Self.Notas_FK">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="NotasDeCreditoYDebito" EntitySet="NotasDeCreditoYDebito" />
           </AssociationSet>
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1085,6 +1145,19 @@
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="monto_total" ColumnName="monto_total" />
                 <ScalarProperty Name="comentario" ColumnName="comentario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotasDeCreditoYDebito">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.NotasDeCreditoYDebito">
+              <MappingFragment StoreEntitySet="NotasDeCreditoYDebito">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="motivo" ColumnName="motivo" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

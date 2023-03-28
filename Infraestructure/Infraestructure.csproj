@@ -99,6 +99,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NotasDeCreditoYDebito.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Proveedor.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
@@ -159,11 +162,11 @@
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Models\MyContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Models\MyContext.edmx.diagram">
       <DependentUpon>MyContext.edmx</DependentUpon>
     </None>

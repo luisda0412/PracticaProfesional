@@ -11,9 +11,7 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(ArqueosCajaMetadata))]
+    
     public partial class Arqueos_Caja
     {
         public int id { get; set; }
