@@ -188,6 +188,18 @@ estado bit
 CONSTRAINT Caja_Arqueos_PK PRIMARY KEY (id)
 );
 
+CREATE TABLE NotasDeCreditoYDebito(
+id int Identity(1,1) NOT NULL,
+idFactura int,
+nombreCliente nvarchar(50),
+motivo nvarchar(max),
+monto float,
+tipoNota bit,
+estado bit
+
+CONSTRAINT Notas_PK PRIMARY KEY (id)
+);
+
 --CREACION DE LLAVES FORANEAS
 
 --DETALLE INGRESO
@@ -230,6 +242,9 @@ ALTER TABLE Articulo ADD CONSTRAINT Articulo_Proveedor_FK FOREIGN KEY (proveedor
 
 --Arqueos
 ALTER TABLE Arqueos_Caja ADD CONSTRAINT Caja_Usuario_FK FOREIGN KEY (usuario_id) REFERENCES Usuario (id)
+
+--Notas
+ALTER TABLE NotasDeCreditoYDebito ADD CONSTRAINT Notas_FK FOREIGN KEY (idFactura) REFERENCES Facturas (id)
 
 --INSERTS
 
@@ -393,3 +408,4 @@ SELECT * FROM Ingreso
 SELECT * FROM Reparaciones
 Select * From Facturas
 Select * From Venta
+Select * from NotasDeCreditoYDebito
