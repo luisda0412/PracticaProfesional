@@ -140,7 +140,7 @@
                                             <button class="boton2" data-toggle="modal" data-target="#exampleModal" data-id="@item.id" data-monto="@item.monto">
                                                 Liquidar Nota
                                             </button>
-                                           
+
                                         }
                                         else /*Para cuando la nota es de credito va directo al metodo LiquidarNota a rebajar la plata de la caja sin pedir datos*/
                                         {
@@ -148,6 +148,10 @@
                                         }
                                     </td>
                                 </tr>
+
+                                
+                                    TempData["IDNota"] = item.id;
+                                
 
                             }
                         </tbody>
@@ -165,22 +169,28 @@
                 <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Solicíte el medio de pago y monto</h1>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
             </div>
+            @{ 
+                Infraestructure.Models.NotasDeCreditoYDebito nota =null;
+                AplicationCore.Services.IServiceNotas notas = new AplicationCore.Services.ServiceNotas();
+                nota= notas.GetNotaByID(Convert.ToInt32(TempData["IDNota"]));
+             }
+           
+          
             @using (Html.BeginForm("LiquidarNotaDebito", "Notas"))
             {
                 <form>
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="factura" class="col-form-label">Factura</label>
-                            <input type="text" class="form-control" id="idFacturaModal" readonly>
+                            <label for="factura" class="col-form-label">Factura:</label>
+                            <label>@nota.idFactura</label>
                         </div>
                         <div class="mb-3">
-                            <label for="cobro" class="col-form-label">Monto a Cobrar</label>
-                            <input type="text" class="form-control" id="montoFacturaModal" readonly>
-
+                            <label for="cobro" class="col-form-label">Monto a Cobrar:</label>
+                            <label> @nota.monto</label>
                         </div>
                         <div class="mb-3">
                             <label for="monto" class="col-form-label">Monto Recibido</label>
-                            <input type="number" class="form-control" id="id" style="max-width:100%" name="monto">
+                            <input type="text" class="form-control" id="montoFacturaModal">
                         </div>
                         <div class="mb-3">
                             <label for="pago" class="col-form-label">Tipo de Pago:</label><br>
