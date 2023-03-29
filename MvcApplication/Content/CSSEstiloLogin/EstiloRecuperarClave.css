@@ -175,6 +175,43 @@ a.hero-image-container {
 }
 
 
+/*Estilo para el formulario de digitar la clave*/
+.containerclave {
+    margin: auto;
+    margin-bottom: 5%;
+    width: 20%;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 10px 19px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 19px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 19px 0px rgba(0,0,0,0.75);
+    background-color: #1d1d1d;
+    color: white;
+    font-family: 'Agency FB';
+}
+
+.containerclave h2{
+    font-size:30px;
+}
+
+.containerclave .col-md-2{
+    font-size:25px;
+}
+
+    .containerclave .btn-success {
+        font-size: 25px;
+    }
+
+    .containerclave .col{
+        display:flex;
+        justify-content:space-evenly;
+    }
+
+    .containerclave .form-control {
+        width: 60%;
+        font-size: 16px;
+        font-family:Arial;
+    }
+
 
 /*Para hacerle diseño Responsivo*/
 @media screen and (max-width: 425px) {

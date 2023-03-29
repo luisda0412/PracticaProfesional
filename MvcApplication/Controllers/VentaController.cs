@@ -6,7 +6,9 @@ using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
+using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using MvcApplication.Util;
@@ -276,12 +278,12 @@ namespace MvcApplication.Controllers
                         root.AppendChild(medioPago);
 
                         string descuento2="";
-                        
-                        
+                        int contador = 0;
+
                         foreach (var items in listaLinea)
                         {
                             Detalle_Venta linea = new Detalle_Venta();
-                            int contador= 0;
+                           
 
                             contador++;
                             
@@ -293,9 +295,6 @@ namespace MvcApplication.Controllers
                             linea.venta_id = venta.id;
                             linea.precio = items.precio;
                             venta.fecha = System.DateTime.Now;
-                            //DESCUENTO POR MAS DE 3 PRODUCTOS Y QUE EL TOTAL A PAGAR SEA MAYOR A 30000
-                            //linea.descuento= (listaLinea.Count() >= 3 || items.cantidad >=3) && (double?)Carrito.Instancia.GetTotal() > 30000? linea.descuento = (double?)Carrito.Instancia.GetTotal() * 0.10: linea.descuento=0;
-                            //descuento2 = Convert.ToString(linea.descuento);
                             linea.descuento = 0;
                             venta.monto_total = (double?)Carrito.Instancia.GetTotal();
                             venta.Detalle_Venta.Add(linea);
@@ -529,83 +528,191 @@ namespace MvcApplication.Controllers
                         {
                             try
                             {
-                               
+
                                 PdfWriter writer = new PdfWriter(ms);
                                 PdfDocument pdfDoc = new PdfDocument(writer);
                                 Document doc = new Document(pdfDoc, PageSize.A4, false);
 
-                                Paragraph header = new Paragraph("Factura Electrónica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(20);
 
-                                //Imagen de la empresa
-                                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
-                                logo = logo.SetHeight(50).SetWidth(120);
+                                // Fuente personalizada para el número de artículo
+                                PdfFont numeroArticuloFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
-                                Paragraph cadenanombre = new Paragraph("Atendido por: " + user.nombre).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
-                                Paragraph header2 = new Paragraph("2ndo Piso, City Mall").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                                Paragraph header3 = new Paragraph("Alajuela, Costa Rica").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12);
-                                Paragraph fecha = new Paragraph("Fecha de Compra: " + DateTime.Now.ToString()).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
-                                Paragraph header4 = new Paragraph("Cliente " + nombreForm).SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(12).SetFontColor(ColorConstants.BLACK);
-                                Paragraph header5 = new Paragraph("-------------------------").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(10).SetFontColor(ColorConstants.BLACK);
+                                // Fuente personalizada para la descripción del artículo
+                                PdfFont descripcionFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
+                                // Fuente personalizada para la cantidad y el precio unitario
+                                PdfFont cantidadPrecioFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_OBLIQUE);
+
+                                // Fuente personalizada para el subtotal, impuesto y total
+                                PdfFont totalFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLDOBLIQUE);
+
+                                // Encabezado
+                                Paragraph header = new Paragraph("Ticket Electrónico")
+                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                                    .SetFontSize(18)
+                                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
                                 doc.Add(header);
-                                doc.Add(fecha);
+
+                                // Logo y atendido por
+                                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                                    .SetHeight(50)
+                                    .SetWidth(120)
+                                    .SetHorizontalAlignment(HorizontalAlignment.CENTER);
+                                Paragraph cadenanombre = new Paragraph("Atendido por: " + user.nombre)
+                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                    .SetFontSize(12)
+                                    .SetFontColor(ColorConstants.BLACK)
+                                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                           
                                 doc.Add(logo);
                                 doc.Add(cadenanombre);
-                                doc.Add(header2);
-                                doc.Add(header3);
-                                doc.Add(header4);
 
-                                // Crear tabla con 4 columnas 
-                                Table table = new Table(4, true);
+                                // Información de la empresa
+                                Paragraph info1 = new Paragraph("Lugar: City Mall")
+                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                    .SetFontSize(10)
+                                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                                Paragraph info2 = new Paragraph("Ubicación: Montserrat, Alajuela, Costa Rica")
+                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                    .SetFontSize(10)
+                                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                                doc.Add(info1);
+                                doc.Add(info2);
 
-                                table.AddHeaderCell("#");
-                                table.AddHeaderCell("Descripción");
-                                table.AddHeaderCell("Unidades");
-                                table.AddHeaderCell("Precio Unidad");
+                                // Separador
+                                LineSeparator separator = new LineSeparator(new SolidLine(1));
+                                doc.Add(separator);
+
+                                // Información del cliente y fecha de compra
+                                Paragraph info3 = new Paragraph("Cliente: " + venta.nombre_cliente)
+                                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                    .SetFontSize(10)
+                                    .SetFontColor(ColorConstants.BLACK);
+                            
+                                doc.Add(info3);
+
+                                Paragraph info5 = new Paragraph("Lista de Artículos")
+                                  .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                  .SetFontSize(10)
+                                  .SetFontColor(ColorConstants.BLACK);
+
+                                doc.Add(info5);
+
+                                // Separador
+                                doc.Add(separator);
+
+                                // Crear tabla con 4 columnas
+                                Table table = new Table(new float[] { 5, 45, 15, 35 }).UseAllAvailableWidth();
+
+                             
+
+                                table.AddHeaderCell(new Cell().Add(new Paragraph("#").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                                table.AddHeaderCell(new Cell().Add(new Paragraph("DESCRIPCIÓN").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                                table.AddHeaderCell(new Cell().Add(new Paragraph("CANT.").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                                table.AddHeaderCell(new Cell().Add(new Paragraph("PRECIO EN COLONES").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+
 
                                 int x = 0;
                                 double subtotal = 0;
                                 foreach (var item in listaLinea)
                                 {
                                     x++;
-                                    table.AddCell(new Paragraph(x.ToString()));
                                     IServiceArticulo servicioArti = new ServiceArticulo();
                                     Articulo arti = servicioArti.GetArticuloByID((int)item.idArticulo);
-                                    table.AddCell(new Paragraph(arti.nombre));
-                                    table.AddCell(new Paragraph(item.cantidad.ToString()));
-
+                                    table.AddCell(new Cell().Add(new Paragraph(x.ToString()).SetFont(numeroArticuloFont)).SetTextAlignment(TextAlignment.CENTER));
+                                    table.AddCell(new Cell().Add(new Paragraph(arti.nombre).SetFont(descripcionFont)).SetTextAlignment(TextAlignment.CENTER));                   
+                                    table.AddCell(new Cell().Add(new Paragraph(item.cantidad.ToString()).SetFont(cantidadPrecioFont)).SetTextAlignment(TextAlignment.CENTER));
                                     string precio = (String.Format("{0:N2}", item.precio));
-                                    table.AddCell(new Paragraph("¢" + precio));
+                                    table.AddCell(new Cell().Add(new Paragraph("¢" + precio).SetFont(cantidadPrecioFont)))
+                                        .SetTextAlignment(TextAlignment.RIGHT);
                                     subtotal += (double)item.precio;
                                 }
                                 doc.Add(table);
+                                doc.Add(new Paragraph("").SetFontSize(14));
+                               
+                                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
 
+                                Table table2 = new Table(new float[] { 1f, 1f }).UseAllAvailableWidth();
 
-                                doc.Add(header5);
+                                Cell cell1 = new Cell().Add(new Paragraph("Subtotal:"));
+                                cell1.SetBorder(Border.NO_BORDER);
+                                cell1.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table2.AddCell(cell1);
 
+                                Cell cell2 = new Cell().Add(new Paragraph("¢" + Carrito.Instancia.tirarSubtotal()));
+                                cell2.SetBorder(Border.NO_BORDER);
+                                cell2.SetTextAlignment(TextAlignment.RIGHT);
+                                table2.AddCell(cell2);
 
+                                Cell cell3 = new Cell().Add(new Paragraph("Impuesto IVA:"));
+                                cell3.SetBorder(Border.NO_BORDER);
+                                cell3.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table2.AddCell(cell3);
 
-                                Table table2 = new Table(3, true);
+                                Cell cell4 = new Cell().Add(new Paragraph("¢" + Carrito.Instancia.tirarImpuesto()));
+                                cell4.SetBorder(Border.NO_BORDER);
+                                cell4.SetTextAlignment(TextAlignment.RIGHT);
+                                table2.AddCell(cell4);
 
-                                table2.AddHeaderCell("Subtotal");
-                                table2.AddHeaderCell("Impuesto IVA");
-                                table2.AddHeaderCell("Total en Colones");
+                                Cell cell5 = new Cell().Add(new Paragraph("Total:"));
+                                cell5.SetBorder(Border.NO_BORDER);
+                                cell5.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table2.AddCell(cell5);
 
-                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarSubtotal()));
-                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarImpuesto()));
-                                table2.AddCell(new Paragraph("¢" + Carrito.Instancia.tirarTotal()));
+                                Cell cell6 = new Cell().Add(new Paragraph("¢" + Carrito.Instancia.tirarTotal()));
+                                cell6.SetBorder(Border.NO_BORDER);
+                                cell6.SetTextAlignment(TextAlignment.RIGHT);
+                                table2.AddCell(cell6);
 
                                 doc.Add(table2);
 
-                                Paragraph header6 = new Paragraph("Gracias por comprar con VYCUZ!").SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14);
+                                doc.Add(new Paragraph("").SetFontSize(14));
+                                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
 
-                                doc.Add(header5);
-                                doc.Add(header6);
+                                Table table3 = new Table(new float[] { 1f, 1f }).UseAllAvailableWidth();
+
+                                Cell cell7 = new Cell().Add(new Paragraph("Su Pago:"));
+                                cell7.SetBorder(Border.NO_BORDER);
+                                cell7.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table3.AddCell(cell7);
+
+                                string pago = (String.Format("{0:N2}", cajaChica.entrada));
+                                Cell cell8 = new Cell().Add(new Paragraph("¢" + pago));
+                                cell8.SetBorder(Border.NO_BORDER);
+                                cell8.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table3.AddCell(cell8);
+
+                                Cell cell9 = new Cell().Add(new Paragraph("Su Cambio:"));
+                                cell9.SetBorder(Border.NO_BORDER);
+                                cell9.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table3.AddCell(cell9);
+
+                                string vuelto = (String.Format("{0:N2}", cajaChica.salida));
+                                Cell cell10 = new Cell().Add(new Paragraph("¢" + vuelto));
+                                cell10.SetBorder(Border.NO_BORDER);
+                                cell10.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                                table3.AddCell(cell10);
+
+                                doc.Add(table3);
+
+
+                                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
+
+                                Paragraph info4 = new Paragraph("Fecha y Hora de venta: " + DateTime.Now.ToString()).SetTextAlignment(TextAlignment.CENTER)
+                                .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
+
+                                doc.Add(info4);
+                                
+                                Paragraph footer = new Paragraph("¡Gracias por su compra!")
+                                    .SetTextAlignment(TextAlignment.CENTER)
+                                    .SetFontSize(17);
+
+                                doc.Add(footer);
 
                                 doc.Close();
 
                                
-                                FileFact = File(ms.ToArray(), "application/pdf", "FacturaElectrónica.pdf");
+                                FileFact = File(ms.ToArray(), "application/pdf", "Ticket Electrónico.pdf");
 
                             }
                             catch (Exception ex)

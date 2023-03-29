@@ -1,22 +1,44 @@
 ﻿@model Infraestructure.Models.Usuario
-
 @{
     ViewBag.Title = "Recuperación";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="~/Content/CSSEstiloLogin/EstiloRecuperarClave.css">
 
-<div class="container">
+<section class="section_header">
+    <div class="contenidoHeader">
+        <div class="izquieroHeader">
+            <br />
+            <div class="logo">
+                <img src="~/Imagenes/Logos/logo1.png" />
+            </div>
+            <br />
+            <h2>
+                Cambiar sus datos
+            </h2>
+        </div>
+        <div class="derechoHeader">
+            <img src="~/Imagenes/Visuals/wallpaper12.png" />
+        </div>
+    </div>
+    <div class="wave" style="height: 150px; overflow: hidden;">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none"
+             style="height: 100%; width: 100%;">
+            <path d="M-15.52,87.33 C142.49,-1.47 348.47,137.66 501.97,91.28 L500.00,150.00 L0.00,150.00 Z"
+                  style="stroke: none; fill: white;"></path>
+        </svg>
+    </div>
+</section>
+
+<div class="containerclave">
     <br />
-    <center><h2>Cambio de Contraseña</h2></center>
+    <center><h2>Digíte su nueva contraseña</h2></center>
     <hr style="border-color: #427AA1" />
     <div class="row">
         @if (TempData["Message"] != null)
         {
             string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
             @Html.Raw(mensaje);
-
         }
-
         @using (Html.BeginForm("Recuperacion", "Usuario", FormMethod.Post))
         {
             //@Html.AntiForgeryToken()
@@ -28,18 +50,22 @@
                     @Html.LabelFor(model => model.clave, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col">
                         @*Campo tipo password*@
-                        @Html.PasswordFor(model => model.clave, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(model => model.clave, new { @class = "form-control", placeholder = "Ingrese su contraseña", @type = "password", @id = "password-field" })
+                        <button class="btn btn-success" type="button" onclick="mostrarContrasena()">Ver</button>
                     </div>
+                    @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
                 </div>
 
+                <hr style="border-color: #427AA1" />
                 @*Para la confirmación de contraseña*@
                 <div class="form-group">
                     @Html.Label("Confirmar", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col">
-                        @Html.Password("Confirmar", "", new { @class = "form-control" })
-                        <label class="text-danger" id="mensaje"></label>
+                        @Html.Password("Confirmar", "", new { @class = "form-control", placeholder = "Confirme su contraseña", @type = "password", @id = "confirm-password-field" })
+                        <button class="btn btn-success" type="button" onclick="mostrarConfirm()">Ver</button>
+
                     </div>
+                    <label class="text-danger" id="mensaje"></label>
                 </div>
 
                 <div class="row">
@@ -48,73 +74,10 @@
                     </div>
                 </div>
             </div>
+            <br />
         }
     </div>
 </div>
-
-@*<h2 align="center">Cambio de contraseña</h2>
-
-    @if (TempData["Message"] != null)
-    {
-        string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-    <span aria-hidden='true'>&times;</span> </button><strong>Error!</strong> " + TempData["Message"] + " </div>";
-    @Html.Raw(mensaje);
-    }
-
-
-    @using (Html.BeginForm("Recuperacion", "Usuario", FormMethod.Post))
-    {
-        //@Html.AntiForgeryToken()
-
-
-        <div class="form-horizontal" id="formulario" align="center">
-            @Html.HiddenFor(model => model.TokenRecuperacion)
-
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.contrasena, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    Campo tipo password
-                    @Html.PasswordFor(model => model.contrasena, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.contrasena, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            Para la confirmación de contraseña
-            <div class="form-group">
-                @Html.Label("Confirmar", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.Password("Confirmar", "", new { @class = "form-control" })
-                    <label class="text-danger" id="mensaje"></label>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input onclick="passwordValidate()" type="submit" value="Entrar" class="btn btn-success" />
-                </div>
-            </div>
-        </div>
-
-
-    }*@
-
-<style>
-    body {
-        margin-top: 10%;
-    }
-
-    footer {
-        margin-top: 16.5%
-    }
-
-    .btn {
-        width: 60%
-    }
-</style>
-
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -127,7 +90,26 @@
             }
         }
     </script>
-
+    <script>
+        function mostrarContrasena() {
+            var campo = document.getElementById("password-field");
+            if (campo.type === "password") {
+                campo.type = "text";
+            } else {
+                campo.type = "password";
+            }
+        }
+    </script>
+    <script>
+        function mostrarConfirm() {
+            var campo = document.getElementById("confirm-password-field");
+            if (campo.type === "password") {
+                campo.type = "text";
+            } else {
+                campo.type = "password";
+            }
+        }
+    </script>
     <script>
         $(document).ready(function () {
             $('#mensaje').hide();
