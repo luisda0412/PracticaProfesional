@@ -289,12 +289,25 @@ namespace MvcApplication.Controllers
                 ViewBag.listaCategorias = _ServiceCategoria.GetCategoria();
                 if (TempData["mensaje"] != null)
                     ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+                
+                FileContentResult documento = TempData["archivo"] as FileContentResult;
+                if (documento != null)
+                {   
+                    ViewBag.File = documento;
+                }
             }
             catch (Exception e)
             {
                 Infraestructure.Util.Log.Error(e, MethodBase.GetCurrentMethod());
             }
             return View(lista);
+        }
+
+        public FileContentResult DownloadFile()
+        {         
+            FileContentResult file = TempData["file"] as FileContentResult;
+            TempData.Clear();
+            return File(file.FileContents, file.ContentType, file.FileDownloadName);
         }
 
         public PartialViewResult ArticulosxProveedor(long? id)
@@ -346,7 +359,7 @@ namespace MvcApplication.Controllers
 
             int cantidadLibros = Carrito.Instancia.Items.Count();
             string mensaje= Carrito.Instancia.AgregarItem((int)idArticulo);
-            TempData["mensaje"] = TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Carrito Actualizado", "artículos agregados a la orden!", SweetAlertMessageType.success); ;
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Carrito Actualizado", "artículos agregados a la orden!", SweetAlertMessageType.success); ;
 
             return PartialView("MovimientoCantidad");
 

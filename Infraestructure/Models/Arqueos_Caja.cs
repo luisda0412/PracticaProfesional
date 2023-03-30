@@ -13,7 +13,7 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(Detalle_VentaMetadata))]
+    [MetadataType(typeof(ArqueosCajaMetadata))]
     public partial class Arqueos_Caja
     {
         public int id { get; set; }

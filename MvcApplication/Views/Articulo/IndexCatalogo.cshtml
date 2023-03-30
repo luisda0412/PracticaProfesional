@@ -36,7 +36,7 @@
                 <div class="list-group">
                     @foreach (var proveedor in (List<Infraestructure.Models.Categoria>)ViewBag.listaCategorias)
                     {
-                        @Ajax.ActionLink(proveedor.nombre, "ArticulosxProveedor", new { id = proveedor.id},//Parámetros para la acción
+                        @Ajax.ActionLink(proveedor.nombre, "ArticulosxProveedor", new { id = proveedor.id },//Parámetros para la acción
                        new AjaxOptions
                        {
                            UpdateTargetId = "resultado",
@@ -86,7 +86,7 @@
 
                                             </button>
                                         </CENTER>
-                                       </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,6 +96,19 @@
         </div>
     </center>
 </section>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryajax")
+}
+
+@if (ViewBag.File != null)
+{
+    <a id="downloadLink" href="@Url.Action("DownloadFile", "Articulo")"></a>
+
+    TempData["file"] = ViewBag.File;
+
+    <script>
+        // Utilizar JavaScript para hacer clic en el enlace automáticamente
+        document.getElementById("downloadLink").click();
+    </script>
 }

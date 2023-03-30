@@ -119,7 +119,8 @@ namespace MvcApplication.Controllers
                     Caja_Chica cajaChica = new Caja_Chica();
                     Facturas factura= new Facturas();
                     Usuario user = serviceUsuario.GetUsuarioByID(Convert.ToInt32(TempData["idUser"]));
-                    //venta.nombre_cliente = user.nombre;
+ 
+                    //Aqui hay que validar que no vengan cosas vacias
                     if (venta.nombre_cliente != null)
                     {
                         IServiceArticulo serviceArticulo = new ServiceArticulo();
@@ -524,10 +525,8 @@ namespace MvcApplication.Controllers
                         //------------------------------------------------------------------------------------------------------------------------
                         MemoryStream ms = new MemoryStream();
                         FileContentResult FileFact = null;
-                        if (emailForm!= null)
+                        try
                         {
-                            try
-                            {
 
                                 PdfWriter writer = new PdfWriter(ms);
                                 PdfDocument pdfDoc = new PdfDocument(writer);
@@ -711,16 +710,15 @@ namespace MvcApplication.Controllers
 
                                 doc.Close();
 
+
                                
-                                FileFact = File(ms.ToArray(), "application/pdf", "Ticket Electrónico.pdf");
+                            FileFact = File(ms.ToArray(), "application/pdf", "Ticket Electrónico.pdf");
 
-                            }
-                            catch (Exception ex)
-                            {
-                                TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
-                            }
                         }
-
+                        catch (Exception ex)
+                        {
+                            TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
+                        }
 
                         //-------------------------------------------------------------------------
                         //ENVIAR EL CORREO---------------------------------------------------------
@@ -758,7 +756,10 @@ namespace MvcApplication.Controllers
                         }
 
                         Carrito.Instancia.eliminarCarrito();
+                        //Actualiza la variable de sesión con el resultado del formulario
+                        Session["Facturar"] = false;
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Venta generada!", "La venta se ha registrado en la base de datos!", SweetAlertMessageType.success);
+                        TempData["archivo"] = FileFact;
                         return RedirectToAction("IndexCatalogo", "Articulo");
                     }
                     return RedirectToAction("IndexCatalogo","Articulo");

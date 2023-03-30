@@ -129,12 +129,6 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                 }
 
-                //int numberOfPages = pdfDocument.GetNumberOfPages();
-                //for (int i = 1; i <= numberOfPages; i++)
-                //{
-                 //   doc.ShowTextAligned(new Paragraph(String.Format("pág {0} de {1}", i, numberOfPages)), 540, 100, i, TextAlignment.CENTER, VerticalAlignment.TOP, 0);
-                //}
-
                 doc.Add(_table);
 
                 Paragraph fin = new Paragraph("Fin del Reporte")
