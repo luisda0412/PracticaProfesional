@@ -44,11 +44,19 @@
                     </td>
 
                     <td style="text-align:center">
-                  
+
                         @Html.ActionLink("X", "eliminarProducto", "Cotizacion", new { id = item.idArticulo }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Enviar correo con cotización", "EnviarCorreo", "Cotizacion")
                     </td>
                 </tr>
             }
+            <form>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Email:</label>
+                        <input name="emailCotizacion" class="form-control" id="message-text" style="max-width:100%">
+                    </div>
+            </form>
         }
     </table>
 
