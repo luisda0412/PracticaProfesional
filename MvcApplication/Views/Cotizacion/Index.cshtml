@@ -6,7 +6,7 @@
 
 
 <section class="section_header">
-   
+
     <div class="contenidoHeader">
         <div class="izquieroHeader">
             <br />
@@ -38,45 +38,47 @@
                 <br />
                 <h2 id="titulo">Cotización</h2>
                 <br />
-                <strong>Seleccione los artículos y podrá ver el costo aproximado que tendría el obtenerlos</strong>
+                <strong style="font-size:28px; font-family:'Agency FB'" >Seleccione los artículos y podrá ver el costo aproximado que tendría obtenerlos</strong>
                 <br />
-                    <div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group3">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
+                <br />
+                <div class="enviar">
+                    <h5>Para enviar la cotización al correo seleccione el checkbox</h5>
+                    @Html.CheckBox("Facturar", new { @id = "facturarCheckBox", @class = "control-label col-md-2", @data_toggle = "modal", @data_target = "#exampleModal" })
+                </div>
+                <div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group3">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                        </div>
                     </div>
-                    <br />
-                    <hr />
-                    <span class="glyphicons glyphicons-hand-left"></span>
-                    <div id="resultadoCotizacion">
-                        @if (Web.ViewModel.Cotizacion.Instancia.Items.Count() > 0)
-                        {
-                            @Html.Partial("~/Views/Cotizacion/_PartialViewDetalle.cshtml", (List<Web.ViewModel.ViewModelDetalleIngreso>)ViewBag.DetalleIngreso)
-                        }
-                        else
-                        {
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                El detalle de la cotización no tiene artículos asignados
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        }
+                </div>
+                <br />
+                <hr />
+                <span class="glyphicons glyphicons-hand-left"></span>
+                <div id="resultadoCotizacion">
+                    @if (Web.ViewModel.Cotizacion.Instancia.Items.Count() > 0)
+                    {
+                        @Html.Partial("~/Views/Cotizacion/_PartialViewDetalle.cshtml", (List<Web.ViewModel.ViewModelDetalleIngreso>)ViewBag.DetalleIngreso)
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            El detalle de la cotización no tiene artículos asignados
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
 
-                    </div>
-                    <hr />
-
-                    <section class="abajo">
-                        <h5>Seleccione los artículos a cotizar en la sección de abajo</h5>
-                    </section>
-
+                </div>
+                <hr />
+                <section class="abajo">
+                    <h5>Seleccione los artículos a cotizar en la sección de abajo</h5>
+                </section>
             </center>
-            <br />
         </section>
         <section class="desarrollo">
             <div class="elementos1">
@@ -157,47 +159,84 @@
         </section>
     </center>
 </main>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Datos para enviar la cotización</h1>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            @using (Html.BeginForm("EnviarCorreo", "Cotizacion"))
+            {
+                <form>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Correo Electrónico:</label>
+                            <input name="emailCotizar" class="form-control" id="message-text" style="max-width:100%" placeholder="ejemplo@correo.com">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
+                    </div>
+                </form>
+            }
+
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryajax")
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        //Actualizar cantidad de articulos en la comprita
-        //Cambio de cantidad en caja de texto
-        function updateCantidadC(ctr) {
-            var txtCantidad = $(ctr);
-            var cantidad = txtCantidad.val();
-            var id = txtCantidad.data("productoid");
-            $.ajax({
-                type: "GET",
-                dataType: 'text',
-                url: "/Cotizacion/actualizarCantidad",
-                data: { "idArticulo": id, "cantidad": cantidad },
-                success: function (data) {
-                    $("#resultadoCotizacion").html('');
-                    $("#resultadoCotizacion").html(data);
-                }, error: function (xhr, status, error) {
-                    console.log("Error: " + error + ", No Error: " + xhr.status);
-                },
-            });
-        }
+    //Actualizar cantidad de articulos en la comprita
+    //Cambio de cantidad en caja de texto
+    function updateCantidadC(ctr) {
+        var txtCantidad = $(ctr);
+        var cantidad = txtCantidad.val();
+        var id = txtCantidad.data("productoid");
+        $.ajax({
+            type: "GET",
+            dataType: 'text',
+            url: "/Cotizacion/actualizarCantidad",
+            data: { "idArticulo": id, "cantidad": cantidad },
+            success: function (data) {
+                $("#resultadoCotizacion").html('');
+                $("#resultadoCotizacion").html(data);
+            }, error: function (xhr, status, error) {
+                console.log("Error: " + error + ", No Error: " + xhr.status);
+            },
+        });
+    }
 
 
-        //Actualizar cantidad de articulos que se seteen
-        function updateCantLibrosC() {
-            $.ajax({
-                type: "GET",
-                dataType: 'text',
-                url: "/Cotizacion/actualizarOrdenCantidad",
-                success: function (data) {
-                    $("#cantidadCompra").html('');
-                    $("#cantidadCompra").html(data);
-                }, error: function (xhr, status, error) {
-                    console.log("Error: " + error + ", No Error: " + xhr.status);
-                },
-            });
-        }
+    //Actualizar cantidad de articulos que se seteen
+    function updateCantLibrosC() {
+        $.ajax({
+            type: "GET",
+            dataType: 'text',
+            url: "/Cotizacion/actualizarOrdenCantidad",
+            success: function (data) {
+                $("#cantidadCompra").html('');
+                $("#cantidadCompra").html(data);
+            }, error: function (xhr, status, error) {
+                console.log("Error: " + error + ", No Error: " + xhr.status);
+            },
+        });
+    }
 
-    </script>
+   
+    //Desmarcar el checkbox cuando en el modal le den click en cancelar
+    $("button").click(function () {
+    // Desmarcar todas las checkboxes
+    $("input[type=checkbox]").prop("checked", false);
+    })
+
+   </script>
 }
 

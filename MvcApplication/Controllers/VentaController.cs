@@ -399,7 +399,7 @@ namespace MvcApplication.Controllers
                         //FACTURA
                         factura.venta_id = venta.id;
                         factura.empresa_id = 1;
-                        factura.tipoFactura = user.rol_id == 1 || user.rol_id == 2 ? factura.tipoFactura = true : factura.tipoFactura = false;
+                        factura.tipoFactura = venta.tipopago;
 
                         
                         //LLENAR DATOS DE CAJA CHICA
@@ -575,14 +575,20 @@ namespace MvcApplication.Controllers
                                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                     .SetFontSize(10)
                                     .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
-                                doc.Add(info1);
-                                doc.Add(info2);
+
+                                Paragraph info9 = new Paragraph("Número de Factura: #" + factura.id)
+                                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                                   .SetFontSize(12)
+                                   .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                            doc.Add(info1);
+                            doc.Add(info2);
+                            doc.Add(info9);
 
                                 // Separador
                                 LineSeparator separator = new LineSeparator(new SolidLine(1));
                                 doc.Add(separator);
 
-                                // Información del cliente y fecha de compra
+                                // Información del cliente
                                 Paragraph info3 = new Paragraph("Cliente: " + venta.nombre_cliente)
                                     .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
                                     .SetFontSize(10)

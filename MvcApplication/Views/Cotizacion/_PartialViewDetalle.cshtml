@@ -49,17 +49,6 @@
                     </td>
                 </tr>
             }
-            <div class="col-md-6">
-              <div class="form-group3">
-               <h5>Desea que la cotización sea enviada por correo?</h5>
-               @{
-               //Determina si el checkbox debe estar marcado
-               bool isChecked = ViewBag.Facturar ?? false;
-              }
-              @Html.CheckBox("Facturar", isChecked, new { @id = "facturarCheckBox", @class = "control-label col-md-2", @data_toggle = "modal", @data_target = "#exampleModal" })
-
-              </div>
-            </div>
         }
     </table>
 </div>
@@ -105,40 +94,5 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Solicite los datos para la factura electrónica</h1>
-                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-
-                @using (Html.BeginForm("EnviarCorreo", "Cotizacion"))
-                {
-                    <form>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label">Email:</label>
-                                <input name="emailCotizar" class="form-control" id="message-text" style="max-width:100%">
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
-                        </div>
-                    </form>
-                }
-
-            </div>
-        </div>
-    </div>
+    
 }
-
-<script>
-    //Desmarcar el checkbox cuando en el modal le den click en cancelar
-    $("button").click(function () {
-        // Desmarcar todas las checkboxes
-        $("input[type=checkbox]").prop("checked", false);
-    })
-</script>

@@ -387,7 +387,6 @@ namespace MvcApplication.Controllers
                         //Actualiza la variable de sesión con el resultado del formulario
                         Session["Facturar"] = false;
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Cotización generada!", "La cotización fue exitosa!", SweetAlertMessageType.success);
-                        TempData["archivo"] = FileFact;
                         return RedirectToAction("Index");
                     }
                     return RedirectToAction("Index");
