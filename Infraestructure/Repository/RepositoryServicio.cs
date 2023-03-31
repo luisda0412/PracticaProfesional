@@ -37,12 +37,6 @@ namespace Infraestructure.Repository
 
                 return service;
             }
-            catch (DbUpdateException dbEx)
-            {
-                string mensaje = "";
-                Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
-                throw new Exception(mensaje);
-            }
             catch (Exception ex)
             {
                 string mensaje = "";

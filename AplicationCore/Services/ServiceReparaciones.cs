@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceReparaciones : IServiceReparaciones
     {
+        public void Desabilitar(int id)
+        {
+            IRepositoryReparaciones repository = new RepositoryReparaciones();
+            repository.Desabilitar(id);
+        }
+
         public void Eliminar(int id)
         {
             IRepositoryReparaciones repository = new RepositoryReparaciones();

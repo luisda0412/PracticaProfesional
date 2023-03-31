@@ -23,6 +23,8 @@ using iText.Layout.Element;
 using iText.IO.Image;
 using iText.Layout.Properties;
 using System.Globalization;
+using iText.Kernel.Pdf.Canvas.Draw;
+using iText.Layout.Borders;
 
 namespace MvcApplication.Controllers
 {
@@ -416,6 +418,9 @@ namespace MvcApplication.Controllers
             IServiceReparaciones serviceRepa = new ServiceReparaciones();
             Reparaciones reparaciones = serviceRepa.GetReparacionByID(Convert.ToInt32(TempData["idReparacion"]));
 
+            //Cambia el estado de la reparacion
+            serviceRepa.Desabilitar(reparaciones.id);
+
             //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
             IServiceCajaChica servicio = new ServiceCajaChica();
             Caja_Chica ultimacaja = new Caja_Chica();
@@ -433,107 +438,200 @@ namespace MvcApplication.Controllers
             caja.Save(cajaChica);
 
             //------------------------------------------------------------------------------------------------------------------------
-            //Crear el pdf del Pago--------------------------------------------------------------------------------------
+            //Crear el pdf de la reparacion--------------------------------------------------------------------------------------
             //------------------------------------------------------------------------------------------------------------------------
             MemoryStream ms = new MemoryStream();
-            //FileContentResult FileFact = null;
-                try
-                {
+            FileContentResult FileFact = null;
+            try
+            {
 
-                    PdfWriter writer = new PdfWriter(ms);
-                    PdfDocument pdfDoc = new PdfDocument(writer);
-                    Document doc = new Document(pdfDoc, PageSize.A4, false);
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                Document doc = new Document(pdfDoc, PageSize.A4, false);
 
-                    // Definir los estilos a utilizar
-                    Style titleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(20);
 
-                    Style subtitleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(14);
+                // Fuente personalizada para el número de artículo
+                PdfFont numeroArticuloFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
-                    Style smallTextStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(10)
-                        .SetFontColor(ColorConstants.BLACK);
+                // Fuente personalizada para la descripción del artículo
+                PdfFont descripcionFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
-                    Style tableHeaderStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(11);
+                // Fuente personalizada para la cantidad y el precio unitario
+                PdfFont cantidadPrecioFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_OBLIQUE);
 
-                    Style tableCellStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(10)
-                        .SetFontColor(ColorConstants.BLACK);
+                // Fuente personalizada para el subtotal, impuesto y total
+                PdfFont totalFont = PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLDOBLIQUE);
 
-                    // Agregar el encabezado
-                    Paragraph header = new Paragraph("Factura de Reparación").AddStyle(titleStyle);
-                    doc.Add(header);
+                // Encabezado
+                Paragraph header = new Paragraph("Ticket Electrónico")
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                    .SetFontSize(18)
+                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                doc.Add(header);
 
-                    // Agregar la información de la empresa
-                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
-                        .SetHeight(50)
-                        .SetWidth(120);
-                    doc.Add(logo);
+                // Logo y atendido por
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                    .SetHeight(50)
+                    .SetWidth(120)
+                    .SetHorizontalAlignment(HorizontalAlignment.CENTER);
+                /*Paragraph cadenanombre = new Paragraph("Atendido por: " + user.nombre)
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(12)
+                    .SetFontColor(ColorConstants.BLACK)
+                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro*/
 
-                    Paragraph header2 = new Paragraph("Segundo Piso, City Mall").AddStyle(subtitleStyle);
-                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
-                    doc.Add(header2);
-                    doc.Add(header3);
+                doc.Add(logo);
+                //doc.Add(cadenanombre);
 
-                    // Agregar la información del cliente y la fecha
-                    Paragraph cliente = new Paragraph("Cédula Cliente: " + reparaciones.cliente_id).AddStyle(smallTextStyle);
-                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
-                    doc.Add(cliente);
-                    doc.Add(fecha);
+                // Información de la empresa
+                Paragraph info1 = new Paragraph("Lugar: City Mall")
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(10)
+                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                Paragraph info2 = new Paragraph("Ubicación: Montserrat, Alajuela, Costa Rica")
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(10)
+                    .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
 
-                        // Agregar la tabla con la información de la nota de crédito
-                        Table table = new Table(new float[] { 1, 2, 1, 1 })
-                        .SetWidth(UnitValue.CreatePercentValue(100)).SetHeight(UnitValue.CreatePercentValue(100));
+                Paragraph info9 = new Paragraph("Número de Reparación: #" + reparaciones.id)
+                   .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                   .SetFontSize(12)
+                   .SetTextAlignment(TextAlignment.CENTER); // Alinea el contenido al centro
+                doc.Add(info1);
+                doc.Add(info2);
+                doc.Add(info9);
 
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Número de Reparación")).AddStyle(tableHeaderStyle));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Comentario del Pago")).AddStyle(tableHeaderStyle));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
-                        table.AddHeaderCell(new Cell().Add(new Paragraph("Tipo de Pago")).AddStyle(tableHeaderStyle));
+                // Separador
+                LineSeparator separator = new LineSeparator(new SolidLine(1));
+                doc.Add(separator);
+
+                // Información del cliente
+                Paragraph info3 = new Paragraph("Cédula del Cliente: " + reparaciones.cliente_id)
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(10)
+                    .SetFontColor(ColorConstants.BLACK);
+
+                doc.Add(info3);
+
+                Paragraph info5 = new Paragraph("Detalle de la reparación")
+                  .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                  .SetFontSize(10)
+                  .SetFontColor(ColorConstants.BLACK);
+
+                doc.Add(info5);
+
+                // Separador
+                doc.Add(separator);
+
+                // Crear tabla con 4 columnas
+                Table table = new Table(new float[] { 1, 2, 1, 1 }).UseAllAvailableWidth();
+
+                table.AddHeaderCell(new Cell().Add(new Paragraph("Número de Reparación").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                table.AddHeaderCell(new Cell().Add(new Paragraph("Comentario").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                table.AddHeaderCell(new Cell().Add(new Paragraph("Tipo de Pago").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
+                table.AddHeaderCell(new Cell().Add(new Paragraph("Monto en Colones").SetFont(numeroArticuloFont).SetFontSize(12)).SetTextAlignment(TextAlignment.CENTER));
                 
-                    table.AddCell(new Paragraph(reparaciones.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
-                    table.AddCell(new Paragraph(comentario.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                table.AddCell(new Cell().Add(new Paragraph(reparaciones.id.ToString()).SetFont(numeroArticuloFont)).SetTextAlignment(TextAlignment.CENTER));
+                table.AddCell(new Cell().Add(new Paragraph(comentario.ToString()).SetFont(descripcionFont)).SetTextAlignment(TextAlignment.CENTER));
+                
+                table.AddCell(new Cell().Add(new Paragraph(tipopago.ToString()).SetFont(descripcionFont))).SetTextAlignment(TextAlignment.CENTER);
+                double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
+                string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
+                table.AddCell(new Cell().Add(new Paragraph(montoCantidad).SetFont(cantidadPrecioFont)).SetTextAlignment(TextAlignment.RIGHT));
 
 
-                    double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
-                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
-                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
+                doc.Add(table);
+                doc.Add(new Paragraph("").SetFontSize(14));
 
-                    table.AddCell(new Paragraph(tipopago.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
-                    doc.Add(table);
+                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
 
-                    doc.Close();
-                    byte[] bytesStream = ms.ToArray();
-                    ms = new MemoryStream();
-                    ms.Write(bytesStream, 0, bytesStream.Length);
+                Table table2 = new Table(new float[] { 1f, 1f }).UseAllAvailableWidth();
 
-                     byte[] pdfBytes = ms.ToArray();
+                Cell cell1 = new Cell().Add(new Paragraph("Monto Total:"));
+                cell1.SetBorder(Border.NO_BORDER);
+                cell1.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                table2.AddCell(cell1);
 
-                        // Limpiar el MemoryStream y reposicionar el cursor al inicio
-                        ms.Flush();
-                        ms.Position = 0;
+                Cell cell2 = new Cell().Add(new Paragraph("¢"+ montoCantidad));
+                cell2.SetBorder(Border.NO_BORDER);
+                cell2.SetTextAlignment(TextAlignment.RIGHT);
+                table2.AddCell(cell2);
 
-                        // Guardar el archivo PDF en TempData
-                        TempData["archivoPDF"] = pdfBytes;
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago realizado", "Se ha registrado el pago de la reparación efectivamente", SweetAlertMessageType.success);
+                doc.Add(table2);
 
-                nuevoMonto = null;
-                comentario = null;
-                tipopago = null;
+                doc.Add(new Paragraph("").SetFontSize(14));
+                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
+
+                Table table3 = new Table(new float[] { 1f, 1f }).UseAllAvailableWidth();
+
+                Cell cell7 = new Cell().Add(new Paragraph("Su Pago:"));
+                cell7.SetBorder(Border.NO_BORDER);
+                cell7.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                table3.AddCell(cell7);
+
+                string pago = (String.Format("{0:N2}", cajaChica.entrada));
+                Cell cell8 = new Cell().Add(new Paragraph("¢" + pago));
+                cell8.SetBorder(Border.NO_BORDER);
+                cell8.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                table3.AddCell(cell8);
+
+                Cell cell9 = new Cell().Add(new Paragraph("Su Cambio:"));
+                cell9.SetBorder(Border.NO_BORDER);
+                cell9.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                table3.AddCell(cell9);
+
+                string vuelto = (String.Format("{0:N2}", cajaChica.salida));
+                Cell cell10 = new Cell().Add(new Paragraph("¢" + vuelto));
+                cell10.SetBorder(Border.NO_BORDER);
+                cell10.SetTextAlignment(TextAlignment.RIGHT); // Alineación de la celda a la derecha
+                table3.AddCell(cell10);
+
+                doc.Add(table3);
+
+
+                doc.Add(new LineSeparator(new SolidLine(1f)).SetMarginTop(10f).SetMarginBottom(10f));
+
+                Paragraph info4 = new Paragraph("Fecha y Hora de venta: " + DateTime.Now.ToString()).SetTextAlignment(TextAlignment.CENTER)
+                .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA)).SetFontSize(14).SetFontColor(ColorConstants.BLACK);
+
+                doc.Add(info4);
+
+                Paragraph footer = new Paragraph("¡Gracias por su confianza!")
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetFontSize(17);
+
+                doc.Add(footer);
+
+                doc.Close();
+
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+
+                byte[] pdfBytes = ms.ToArray();
+
+                // Limpiar el MemoryStream y reposicionar el cursor al inicio
+                ms.Flush();
+                ms.Position = 0;
+
+                // Guardar el archivo PDF en TempData
+                TempData["archivoPDF"] = pdfBytes;
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago realizado", "Se ha registrado el pago de la reparación efectivamente", SweetAlertMessageType.success);
+
+                nuevoMonto = "";
+                comentario = "";
+                tipopago = "";
 
                 return RedirectToAction("IndexCobros");
 
-                }
-                catch (Exception ex)
-                {
-                    TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
-                }
+
+                // FileFact = File(ms.ToArray(), "application/pdf", "Ticket Electrónico.pdf");
+
+            }
+            catch (Exception ex)
+            {
+                TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
+            }
 
             TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Error en el pago", "No se ha realizado el pago correspondiente, intente de nuevo", SweetAlertMessageType.error);
             return RedirectToAction("IndexCobros");

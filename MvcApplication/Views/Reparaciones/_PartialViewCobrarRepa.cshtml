@@ -32,12 +32,19 @@
                 @Html.DisplayFor(modelItem => item.fecha)
             </td>
             <td>
-                @{ string isActive = item.estado == true ? "Activa" : "Inactiva";}
+                @{ string isActive = item.estado == true ? "Pendiente" : "Finalizada";}
                 @isActive
             </td>
-             <td class="columnabotones">
-            <button class="boton2">@Html.ActionLink("Registrar Pago", "IndexCrearCobros", new { id = item.id }, new { title = "Crear Cobro de Reparación" })</button>
-        </td>
+            <td class="columnabotones">
+                @if (item.estado == false)
+                {
+                    <button class="boton2" style="color:white; background-color:#c35c04;" disabled>Cobrada</button>
+                }
+                else
+                {
+                    <button class="boton2">@Html.ActionLink("Registrar Pago", "IndexCrearCobros", new { id = item.id }, new { title = "Crear Cobro de Reparación" })</button>
+                }
+            </td>
      </tr>
 
     }

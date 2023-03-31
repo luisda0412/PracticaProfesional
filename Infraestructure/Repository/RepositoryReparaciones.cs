@@ -12,7 +12,28 @@ namespace Infraestructure.Repository
 {
     public class RepositoryReparaciones : IRepositoryReparaciones
     {
-        public void Eliminar(int id)
+        public void Desabilitar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    Reparaciones repo = cdt.Reparaciones.Find(id);
+                    repo.estado = false;
+                    cdt.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
+    public void Eliminar(int id)
         {
             using (MyContext cdt = new MyContext())
             {
