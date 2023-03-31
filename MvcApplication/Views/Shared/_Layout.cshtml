@@ -102,9 +102,9 @@
                     @{
                         if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2)
                                     {
-                                        < li class="nav-item">
+                                        <li class="nav-item">
                                             @Html.ActionLink("Reparación", "IndexUsuario", "Reparaciones", new { title = "Ver sus reparaciónes" }, new { @class = "nav-link" })
-                                        </ li >
+                                        </li >
                                     }
                     }
                     <!--Para el Login VYCUZ-->

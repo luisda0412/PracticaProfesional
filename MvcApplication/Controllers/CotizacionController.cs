@@ -114,10 +114,24 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewVistaxNombre", lista);
         }
 
+        public JsonResult ActualizarCheckBoxCotizacion(bool isChecked)
+        {
+            //Actualiza la variable de sesión con el estado actual del CheckBox
+            Session["Cotizar"] = isChecked;
+
+            //Devuelve el nuevo estado del CheckBox al cliente
+            return Json(isChecked, JsonRequestBehavior.AllowGet);
+        }
+
+        public static string emailCotizacion { get; set; }
 
         public ActionResult EnviarCorreo(Venta venta)
         {
-            string emailCotizacion = "corderoluisdavid@gmail.com";
+            //Obtiene los datos del formulario y los guarda en variables
+            emailCotizacion = Request.Form["emailCotizar"];
+
+            //Actualiza la variable de sesión con el resultado del formulario
+            Session["Cotizar"] = true;
 
             IServiceUsuario serviceUsuario = new ServiceUsuario();
             try
@@ -346,7 +360,6 @@ namespace MvcApplication.Controllers
                             string urlDomain = "https://localhost:3000/";
                             string EmailOrigen = "soportevycuz@gmail.com";
                             string Contraseña = "ecfykdmojjjlpfcn";
-                            string url = urlDomain + "/Usuario/Recuperacion/?token=";
                             MailMessage oMailMessage = new MailMessage(EmailOrigen, emailCotizacion, "Cotización de productos",
                                 "<p>Estimado usuario,</br></br><hr/>Ha realizado una cotización en VYCUZ.</p>");
                             var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
@@ -375,9 +388,9 @@ namespace MvcApplication.Controllers
                         Session["Facturar"] = false;
                         TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Cotización generada!", "La cotización fue exitosa!", SweetAlertMessageType.success);
                         TempData["archivo"] = FileFact;
-                        return RedirectToAction("IndexCatalogo", "Articulo");
+                        return RedirectToAction("Index");
                     }
-                    return RedirectToAction("IndexCatalogo", "Articulo");
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)

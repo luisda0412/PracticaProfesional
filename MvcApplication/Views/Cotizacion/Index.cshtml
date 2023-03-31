@@ -40,11 +40,6 @@
                 <br />
                 <strong>Seleccione los artículos y podrá ver el costo aproximado que tendría el obtenerlos</strong>
                 <br />
-                @using (Html.BeginForm("Save", "Ingreso", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-
-
                     <div>
                         <div class="row">
                             <div class="col-lg-6">
@@ -80,7 +75,6 @@
                         <h5>Seleccione los artículos a cotizar en la sección de abajo</h5>
                     </section>
 
-                }
             </center>
             <br />
         </section>
