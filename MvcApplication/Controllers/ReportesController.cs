@@ -34,8 +34,8 @@ namespace MvcApplication.Controllers
         {
             return View();
         }
-       
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult CreatePdfPrueba()
         {
             Registro_Inventario_VYCUZEntities dbArticulos = new Registro_Inventario_VYCUZEntities();
@@ -158,7 +158,7 @@ namespace MvcApplication.Controllers
 
         }
 
-
+        [CustomAuthorize((int)Roles.Administrador)]
         //Reporte de compras/ingresos
         public ActionResult CreatePdfIngresos()
         {
@@ -270,6 +270,7 @@ namespace MvcApplication.Controllers
             }
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult CreatePdfArqueos()
         {
             string FONT = "c:/windows/fonts/arial.ttf";
@@ -381,6 +382,7 @@ namespace MvcApplication.Controllers
 
         }
 
+        [CustomAuthorize((int)Roles.Administrador)]
         // REPORTE DE VENTAS/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public ActionResult CreatePdfVentas()
         {
@@ -504,7 +506,9 @@ namespace MvcApplication.Controllers
             }
         }
 
+
         //Crear reporte de proveedores
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult CreatePdfProveedores()
         {
             Registro_Inventario_VYCUZEntities dbProveedores = new Registro_Inventario_VYCUZEntities();
@@ -619,6 +623,127 @@ namespace MvcApplication.Controllers
             }
 
         }
+
+        //Reporte de compras/ingresos
+        [CustomAuthorize((int)Roles.Administrador)]
+        public ActionResult CreatePdfReparaciones()
+        {
+            string FONT = "c:/windows/fonts/arial.ttf";
+            PdfFont fuente = PdfFontFactory.CreateFont(FONT);
+
+
+            Registro_Inventario_VYCUZEntities dbIngresos = new Registro_Inventario_VYCUZEntities();
+
+            IEnumerable<Reparaciones> lista = null;
+            Usuario user = null;
+            try
+            {
+                // Extraer informacion
+                IServiceReparaciones _ServiceRepa = new ServiceReparaciones();
+                lista = _ServiceRepa.GetReparacionesCobradas();
+
+                //Extraer Usuario
+                IServiceUsuario _ServiceUsuario = new ServiceUsuario();
+                Usuario usuario = (Infraestructure.Models.Usuario)Session["User"];
+                user = _ServiceUsuario.GetUsuarioByID(usuario.id);
+
+                // Crear stream para almacenar en memoria el reporte 
+                MemoryStream ms = new MemoryStream();
+                //Initialize writer
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDocument = new PdfDocument(writer);
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 35, 70, 35);
+
+                //Imagen de la empresa
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false));
+                logo = logo.SetHeight(50).SetWidth(120);
+
+
+
+                //Eventos de pie y encabezado de pagina
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler1(logo, user));
+                pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler1());
+
+                Table table = new Table(1).UseAllAvailableWidth();
+                Cell cell = new Cell().Add(new Paragraph("Reporte de Reparaciones entregadas").SetFontSize(14))
+                    .SetTextAlignment(TextAlignment.CENTER)
+                    .SetBorder(Border.NO_BORDER);
+                table.AddCell(cell);
+
+                cell = new Cell().Add(new Paragraph("Reparaciones finalizadas"))
+                      .SetTextAlignment(TextAlignment.CENTER)
+                      .SetBorder(Border.NO_BORDER); ;
+                table.AddCell(cell);
+
+                doc.Add(table);
+
+
+                Style styleCell = new Style()
+                    .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
+
+                Table _table = new Table(6).UseAllAvailableWidth();
+              
+                Cell _cell = new Cell().Add(new Paragraph("#"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Usuario"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Cédula Cliente"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Procedimiento"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Fecha Ingreso"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Monto Total(Colones)"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+
+             
+                int x = 0;
+                foreach (var item in lista)
+                {
+                    x++;
+                    _cell = new Cell().Add(new Paragraph(x.ToString()));
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.Usuario.nombre)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(Convert.ToString(item.cliente_id))).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.Servicio_Reparacion.descripcion)).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    string precio = (String.Format("{0:N2}", item.monto_total));
+                    _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
+
+                    _table.AddCell(_cell);
+                }
+                doc.Add(_table);
+                Paragraph fin = new Paragraph("Fin del Reporte")
+                 .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                 .SetFontSize(14)
+                 .SetFontColor(ColorConstants.BLACK);
+                doc.Add(fin);
+                doc.Close();
+                byte[] bytesStream = ms.ToArray();
+                ms = new MemoryStream();
+                ms.Write(bytesStream, 0, bytesStream.Length);
+                ms.Position = 0;
+
+
+                return File(ms.ToArray(), "application/pdf", "Reporte de Reparaciones.pdf");
+            }
+            catch (Exception ex)
+            {
+                // Salvar el error en un archivo 
+                Infraestructure.Util.Log.Error(ex, MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Util.SweetAlertHelper.Mensaje("Error en reporte", ex.Message, SweetAlertMessageType.warning);
+                // Redireccion a la captura del Error
+                return RedirectToAction("Default", "Error");
+            }
+        }
+
+
 
 
         // -----------------------------------------------------------------------------------------------------------------

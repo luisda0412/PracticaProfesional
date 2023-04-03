@@ -10,6 +10,8 @@ namespace Infraestructure.Repository
     public interface IRepositoryReparaciones
     {
         IEnumerable<Reparaciones> GetReparacion();
+
+        IEnumerable<Reparaciones> GetReparacionesCobradas();
         Reparaciones GetReparacionByID(int id);
         IEnumerable<Reparaciones> GetReparacionByNombre(String nombre);
         void Save(Reparaciones reparacion);

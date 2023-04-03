@@ -342,21 +342,22 @@ namespace MvcApplication.Controllers
             if (TempData["mensaje"] != null)
                 ViewBag.NotificationMessage = TempData["mensaje"].ToString();
             IEnumerable<Reparaciones> lista = null;
-            if (TempData["archivoPDF"] != null)
+          
+            FileContentResult documento = TempData["archivoPDF"] as FileContentResult;
+            if (documento != null)
             {
-                byte[] pdfBytes = (byte[])TempData["archivoPDF"];
-
-                // Limpiar el TempData
-                TempData["archivoPDF"] = null;
-
-                // Descargar el archivo PDF
-                return File(pdfBytes, "application/pdf", "Factura de Reparación.pdf");
+                ViewBag.File = documento;
             }
-
             // Si no hay un archivo PDF en TempData, simplemente se muestra la página "IndexCobros"
             return View(lista);
         }
 
+        public FileContentResult DownloadFile()
+        {
+            FileContentResult file = TempData["file"] as FileContentResult;
+            TempData.Clear();
+            return File(file.FileContents, file.ContentType, file.FileDownloadName);
+        }
 
         //Buscar la reparacion que se va a cobrar
         public ActionResult buscarReparacionxID(string filtro)
@@ -433,6 +434,16 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("IndexCrearCobros", new { id = reparaciones.id });
             }
 
+            //Mostrar Mensaje de abrir la caja si esta cerrada
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja cajita = new Arqueos_Caja();
+            cajita = _ServiceCaja.GetArqueoLast();
+
+            if (cajita.estado==false)
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Caja Cerrada", "la caja chica se encuentra cerrada, antes de efectuar el cobro debe abrir la caja!", SweetAlertMessageType.warning);
+                return RedirectToAction("IndexCrearCobros", new { id = reparaciones.id });
+            }
             //Cambia el estado de la reparacion
             serviceRepa.Desabilitar(reparaciones.id);
 
@@ -623,14 +634,14 @@ namespace MvcApplication.Controllers
                 ms = new MemoryStream();
                 ms.Write(bytesStream, 0, bytesStream.Length);
 
-                byte[] pdfBytes = ms.ToArray();
+                FileFact = File(ms.ToArray(), "application/pdf", "Ticket Reparación.pdf");
 
                 // Limpiar el MemoryStream y reposicionar el cursor al inicio
                 ms.Flush();
                 ms.Position = 0;
 
                 // Guardar el archivo PDF en TempData
-                TempData["archivoPDF"] = pdfBytes;
+                TempData["archivoPDF"] = FileFact;
                 TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago realizado", "Se ha registrado el pago de la reparación efectivamente", SweetAlertMessageType.success);
 
                 nuevoMonto = "";
@@ -640,7 +651,7 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("IndexCobros");
 
 
-                // FileFact = File(ms.ToArray(), "application/pdf", "Ticket Electrónico.pdf");
+               
 
             }
             catch (Exception ex)

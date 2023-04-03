@@ -75,12 +75,6 @@ namespace Infraestructure.Repository
                 Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
                 throw new Exception(mensaje);
             }
-            catch (Exception e)
-            {
-                string mensaje = "";
-                Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
-                throw new Exception(mensaje);
-            }
         }
 
         public Reparaciones GetReparacionByID(int id)
@@ -104,6 +98,26 @@ namespace Infraestructure.Repository
                     FindAll(l => l.cliente_id.Equals(Convert.ToInt32(nombre)));
             }
             return lista;
+        }
+
+        public IEnumerable<Reparaciones> GetReparacionesCobradas()
+        {
+            try
+            {
+                IEnumerable<Reparaciones> lista = null;
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.Reparaciones.Where(x => x.estado == false).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).ToList<Reparaciones>();
+                }
+                return lista;
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Infraestructure.Util.Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref (mensaje));
+                throw new Exception(mensaje);
+            }
         }
 
         public IEnumerable<Reparaciones> GetReparacionPorUsuario(int idUsuario)
