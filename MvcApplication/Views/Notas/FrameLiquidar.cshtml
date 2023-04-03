@@ -172,11 +172,11 @@
             @{ 
                 Infraestructure.Models.NotasDeCreditoYDebito nota =null;
                 AplicationCore.Services.IServiceNotas notas = new AplicationCore.Services.ServiceNotas();
-                nota= notas.GetNotaByID(Convert.ToInt32(TempData["IDNota"]));
+               // nota= notas.GetNotaByID(Convert.ToInt32(TempData["IDNota"]));
              }
            
           
-            @using (Html.BeginForm("LiquidarNotaDebito", "Notas"))
+            @*@using (Html.BeginForm("LiquidarNotaDebito", "Notas"))
             {
                 <form>
                     <div class="modal-body">
@@ -206,7 +206,7 @@
                         <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
                     </div>
                 </form>
-            }
+            }*@
 
         </div>
     </div>

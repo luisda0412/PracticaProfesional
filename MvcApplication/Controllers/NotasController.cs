@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -369,68 +370,6 @@ namespace MvcApplication.Controllers
                     string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
                     table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
 
-                    //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
-                    IServiceCajaChica servicio = new ServiceCajaChica();
-                    Caja_Chica ultimacaja = new Caja_Chica();
-                    ultimacaja = servicio.GetCajaChicaLast();
-
-                    Caja_Chica cajaChica = new Caja_Chica();
-                    cajaChica.fecha = DateTime.Now;
-                    cajaChica.entrada = Convert.ToDouble(nuevoMonto);
-                    cajaChica.salida = cajaChica.entrada - Convert.ToDouble(nuevoMonto);
-
-                    switch (tipoNotaDebitoValue)
-                    {
-                        case "1":
-
-                            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
-                            cajaChica.saldo = saldoActual;
-
-                            IServiceCajaChica caja = new ServiceCajaChica();
-                            caja.Save(cajaChica);
-
-                            break;
-                        case "2":
-
-                            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
-                            cajaChica.saldo = saldoActual;
-
-                            IServiceCajaChica caja2 = new ServiceCajaChica();
-                            caja2.Save(cajaChica);
-
-                            break;
-                        case "3":
-
-                            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
-                            cajaChica.saldo = saldoActual;
-
-                            IServiceCajaChica caja3 = new ServiceCajaChica();
-                            caja3.Save(cajaChica);
-
-                            break;
-                        case "4":
-
-                            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
-                            cajaChica.saldo = saldoActual;
-
-                            IServiceCajaChica caja4 = new ServiceCajaChica();
-                            caja4.Save(cajaChica);
-
-                            break;
-                        case "5":
-
-                            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
-                            cajaChica.saldo = saldoActual;
-
-                            IServiceCajaChica caja5 = new ServiceCajaChica();
-                            caja5.Save(cajaChica);
-
-                            break;
-                        default:
-                            // realizar acción para valor por defecto (si es necesario)
-                            break;
-                    }
-
                     doc.Add(table);
 
                     doc.Close();
@@ -536,7 +475,47 @@ namespace MvcApplication.Controllers
         //Metodo que cobra la de Credito, hace que salga plata de la caja chica 
         public ActionResult LiquidarNotaCredito(int? id)
         {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
 
+                try
+                {
+                    IServiceNotas ServiceNota = new ServiceNotas();
+                    NotasDeCreditoYDebito nota = ServiceNota.GetNotaByID((int)id);
+
+                    //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
+                    IServiceCajaChica servicio = new ServiceCajaChica();
+                    Caja_Chica ultimacaja = new Caja_Chica();
+                    ultimacaja = servicio.GetCajaChicaLast();
+
+                    Caja_Chica cajaChica = new Caja_Chica();
+                    cajaChica.fecha = DateTime.Now;
+                    cajaChica.entrada = Convert.ToDouble(nota.monto);
+                    cajaChica.salida = cajaChica.entrada - nota.monto;
+
+                    saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
+                    cajaChica.saldo = saldoActual;
+
+                    IServiceCajaChica caja = new ServiceCajaChica();
+                    caja.Save(cajaChica);
+
+                    NotasDeCreditoYDebito notaCredito = cdt.NotasDeCreditoYDebito.Where(x => x.id == id).Where(x => x.tipoNota == false).FirstOrDefault();
+                    notaCredito.estado = !notaCredito.estado;
+                    cdt.NotasDeCreditoYDebito.Add(notaCredito);
+
+                    cdt.Entry(notaCredito).State = EntityState.Modified;
+                    cdt.SaveChanges();
+
+
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
             return RedirectToAction("FrameLiquidar");
         }
 
