@@ -67,24 +67,29 @@
                                     <div class="card-body">
                                         <CENTER class="botonera">
                                             <button class="boton2">@Html.ActionLink("Ver", "DetailsCliente", new { id = item.id }, new { title = "Ver sus detalles" })</button>
-                                            <button style="margin-left: 5px" class="boton3" id="carrito">
-                                                @Ajax.ActionLink("+",//Texto para el usuario
-                                               "ordenarProducto",//Acción a llamar
-                                               "Articulo",
-                                               new
-                                               {
-                                                   idArticulo = item.id
-                                               },//Parámetros a enviar
-                                               new AjaxOptions
-                                               {
-                                                   UpdateTargetId = "cantidadLibros",
-                                                   InsertionMode = InsertionMode.Replace,
-                                                   HttpMethod = "GET",
-                                               }, new { }
-                                               )
+                                            @{
+                                                if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1 || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 3))
+                                                {
+                                                    <button style="margin-left: 5px" class="boton3" id="carrito">
+                                                        @Ajax.ActionLink("+",//Texto para el usuario
+                                                       "ordenarProducto",//Acción a llamar
+                                                       "Articulo",
+                                                       new
+                                                       {
+                                                           idArticulo = item.id
+                                                       },//Parámetros a enviar
+                                                       new AjaxOptions
+                                                       {
+                                                           UpdateTargetId = "cantidadLibros",
+                                                           InsertionMode = InsertionMode.Replace,
+                                                           HttpMethod = "GET",
+                                                       }, new { }
+                                                       )
 
 
-                                            </button>
+                                                    </button>
+                                                }
+                                             }
                                         </CENTER>
                                     </div>
                                 </div>

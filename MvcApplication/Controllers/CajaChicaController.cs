@@ -108,7 +108,6 @@ namespace MvcApplication.Controllers
         }
 
 
-
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult IndexArqueos()
         {
@@ -117,12 +116,12 @@ namespace MvcApplication.Controllers
             {
                 IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
                 lista = _ServiceCaja.GetArqueos();
-                if (TempData["mensaje"] != null)
-                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+                if (TempData["mensaje2"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje2"].ToString();
             }
             catch (Exception e)
             {
-                TempData["mensaje"] = "Error al procesar los datos! " + e.Message;
+                TempData["mensaje2"] = "Error al procesar los datos! " + e.Message;
             }
             return View(lista);
         }
@@ -139,7 +138,7 @@ namespace MvcApplication.Controllers
                 caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
                 caja.fecha = DateTime.Now;
                  _ServiceCaja.SaveArqueo(caja);
-                 TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Acción de Caja", "El estado de la caja ha cambiado", SweetAlertMessageType.info);
+                 TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción de Caja", "El estado de la caja ha cambiado", SweetAlertMessageType.info);
              }
              catch (Exception ex)
              {

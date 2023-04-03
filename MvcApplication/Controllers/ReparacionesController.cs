@@ -393,6 +393,8 @@ namespace MvcApplication.Controllers
                 {
                     return RedirectToAction("IndexCobros");
                 }
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
                 rep = _ServiceRep.GetReparacionByID(id.Value);
                 ViewBag.Reparacion = rep;
                 return View();
@@ -414,9 +416,22 @@ namespace MvcApplication.Controllers
             nuevoMonto = Request.Form["monto"];
             comentario = Request.Form["comentario"];
             tipopago = Request.Form["pago"];
-
+          
             IServiceReparaciones serviceRepa = new ServiceReparaciones();
             Reparaciones reparaciones = serviceRepa.GetReparacionByID(Convert.ToInt32(TempData["idReparacion"]));
+
+            if (string.IsNullOrEmpty(nuevoMonto) || string.IsNullOrEmpty(comentario) || string.IsNullOrEmpty(tipopago))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Formulario inválido", "Por favor verifíque el monto, comentario y la selección del tipo de pago", SweetAlertMessageType.warning);
+                return RedirectToAction("IndexCrearCobros", new { id = reparaciones.id});
+            }
+
+         
+            if (Convert.ToDouble(nuevoMonto) < reparaciones.monto_total)
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Monto inválido", "El monto ingresado es menor al cobro total de la reparación por favor verifíque!", SweetAlertMessageType.warning);
+                return RedirectToAction("IndexCrearCobros", new { id = reparaciones.id });
+            }
 
             //Cambia el estado de la reparacion
             serviceRepa.Desabilitar(reparaciones.id);
