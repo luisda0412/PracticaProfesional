@@ -180,7 +180,7 @@ namespace MvcApplication.Controllers
                             XmlNode nombreEmpresa = xml.CreateElement("Nombre");
                             nombreEmpresa.InnerText = "VYCUZ";
 
-                            XmlNode identificacionEmisor = xml.CreateElement("Identificaion");
+                            XmlNode identificacionEmisor = xml.CreateElement("Identificacion");
                             XmlNode tipo = xml.CreateElement("Tipo");
                             tipo.InnerText = "01";
                             XmlNode numeroIdentificacioEmisor = xml.CreateElement("Numero");
