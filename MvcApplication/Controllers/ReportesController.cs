@@ -217,13 +217,15 @@ namespace MvcApplication.Controllers
                     .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
                     .SetTextAlignment(TextAlignment.CENTER);
 
-                Table _table = new Table(4).UseAllAvailableWidth();
+                Table _table = new Table(5).UseAllAvailableWidth();
                 //2 filas y 1 celda
                 Cell _cell = new Cell().Add(new Paragraph("#"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Usuario"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Fecha"));
+                _table.AddHeaderCell(_cell.AddStyle(styleCell));
+                _cell = new Cell().Add(new Paragraph("Comentario"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
                 _cell = new Cell().Add(new Paragraph("Monto Total Colones"));
                 _table.AddHeaderCell(_cell.AddStyle(styleCell));
@@ -239,6 +241,8 @@ namespace MvcApplication.Controllers
                     _cell = new Cell().Add(new Paragraph(item.Usuario.nombre)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
                     _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
+                    _table.AddCell(_cell);
+                    _cell = new Cell().Add(new Paragraph(item.comentario)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
                     string precio = (String.Format("{0:N2}", item.monto_total));
                     _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);

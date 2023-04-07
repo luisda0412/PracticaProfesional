@@ -98,7 +98,7 @@ namespace MvcApplication.Controllers
                         Ingreso compra = _ServiceIngreso.Save(ingreso);
 
                         Comprita.Instancia.eliminarCarrito();
-                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Compra Registrada!", "El ingreso de inventario a la tienda se ha realizado con éxito!", SweetAlertMessageType.warning);
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Ingreso Registrado!", "El ingreso de inventario a la tienda se ha realizado con éxito!", SweetAlertMessageType.success);
                         return RedirectToAction("IndexIngreso");
                     }
                     else

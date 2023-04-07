@@ -142,6 +142,9 @@
                                     @Html.DisplayName("Disponibles")
                                 </th>
                                 <th>
+                                    @Html.DisplayName("Imagen")
+                                </th>
+                                <th>
                                     @Html.DisplayName("Opciones")
                                 </th>
                             </tr>
@@ -161,6 +164,9 @@
                                     </td>
                                     <td>
                                         @arti.stock
+                                    </td>
+                                    <td>
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(arti.imagen)" alt="Imagen de @arti.nombre" width="60" height="60"/>
                                     </td>
                                     <td class="columnabotones">
                                         <button class="boton2">@Html.ActionLink("Registrar", "Comprar", new { id = arti.id }, new { title = "Agregar a la compra" })</button>

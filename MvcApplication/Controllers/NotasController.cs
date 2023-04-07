@@ -184,8 +184,8 @@ namespace MvcApplication.Controllers
 
 
                     double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
-                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
-                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
+                    string montoCantidad = String.Format("{0:N2}", montoDouble); ; // formatear como moneda en colones (CRC)
+                    table.AddCell(new Paragraph("¢"+ montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
 
                     doc.Add(table);
 

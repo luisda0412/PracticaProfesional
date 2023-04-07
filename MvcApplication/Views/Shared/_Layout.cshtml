@@ -24,7 +24,7 @@
             <div class="collapse navbar-collapse" id="navbarColor03">
                 <ul class="navbar-nav me-auto">
                     @{
-                        if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2)
+                        if (Session["User"] == null || ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 2)
                         {
                             <li class="nav-item">
                                 @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "nav-link" })

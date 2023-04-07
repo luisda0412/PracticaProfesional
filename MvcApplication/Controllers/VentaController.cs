@@ -116,7 +116,9 @@ namespace MvcApplication.Controllers
             {
                 if (Carrito.Instancia.Items.Count() <= 0)//Valida si hay articulos
                 {
-                    return RedirectToAction("");
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje
+                           ("Carrito vacío", "No se puede crear una venta sin artículos, por favor verifíque!", SweetAlertMessageType.warning);
+                    return RedirectToAction("IndexVenta");
                 }
                 else
                 {
