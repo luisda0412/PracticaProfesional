@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(NotasMetadata))]
     public partial class NotasDeCreditoYDebito
     {
         public int id { get; set; }

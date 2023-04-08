@@ -87,7 +87,7 @@ namespace Infraestructure.Repository
                 {         
                     
                     cdt.Caja_Chica.Add(caja);
-                    Infraestructure.Util.Log.Info("Acción de Salvar Caja, entrada de efectivo: " + caja.entrada +"salida de efectivo: "+caja.salida);
+                    Infraestructure.Util.Log.Info("Acción de Salvar Caja, entrada de dinero: " + caja.entrada +"salida de dinero: "+caja.salida);
                     cdt.SaveChanges();
                 }
                 catch (Exception e)

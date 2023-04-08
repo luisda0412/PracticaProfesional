@@ -31,8 +31,6 @@
         </svg>
     </div>
 </section>
-@{ string idNota = "";}
-@{ double cobrar = 0;}
 <main>
     <center>
         <section class="desarrollo">
@@ -44,12 +42,12 @@
                     <div class="card my-4">
                         <h5 class="card-header">Buscar nota por fecha</h5>
                         @using (Ajax.BeginForm("buscarNotaxFecha", "Notas", new AjaxOptions
-                                    {
-                                        UpdateTargetId = "resultado",
-                                        InsertionMode = InsertionMode.Replace,
-                                        HttpMethod = "GET",
-                                        LoadingElementId = "ajaxLoader"
-                                    }))
+                        {
+                            UpdateTargetId = "resultado",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "GET",
+                            LoadingElementId = "ajaxLoader"
+                        }))
                         {
                             <div class="card-body">
                                 <div class="input-group">
@@ -112,6 +110,7 @@
                         <tbody id="resultado">
                             @foreach (var item in Model)
                             {
+
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.idFactura)
@@ -130,17 +129,65 @@
                                         @isTipo
                                     </td>
                                     <td>
-                                        @{ string isActive = item.estado == true ? "Cancelada" : "Pendiente"; }
+                                        @{ string isActive = item.estado == true ? "Liquidada" : "Pendiente"; }
                                         @isActive
                                     </td>
                                     <td class="columnabotones">
                                         @if (item.tipoNota == true)/*Para cuando la nota es de debito abre un formulario para pedir el medio de pago*/
                                         {
 
-                                            <button class="boton2" data-toggle="modal" data-target="#exampleModal" data-id="@item.id" data-monto="@item.monto">
+                                            <button class="boton2" id="my-button-id" data-toggle="modal" data-target="#exampleModal" data-id="@item.id" data-pago="@item.monto">
                                                 Liquidar Nota
                                             </button>
 
+                                            <div style="margin:auto" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div style="max-width: 400px;" class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Liquidar Nota de Débito número <span id="item-id"></span></h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form id="formLiquidarNota" action="#" method="post">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <input readonly type="hidden" id="notaId" name="notaId">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="monto">Monto a cancelar:</label>
+                                                                    <input style="max-width: 100%; text-align:right;" readonly type="number" class="form-control" id="pago" name="pago">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="monto">Monto recibido :</label>
+                                                                    <input style="max-width: 100%;  text-align:right;" type="number" class="form-control" id="monto" name="monto">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="pago">Tipo de pago:</label>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="pago" id="pago-efectivo" value="efectivo" checked>
+                                                                        <label class="form-check-label" for="pago-efectivo">
+                                                                            Efectivo
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="pago" id="pago-tarjeta" value="tarjeta">
+                                                                        <label class="form-check-label" for="pago-tarjeta">
+                                                                            Tarjeta
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                                <button type="submit" class="btn btn-primary">Liquidar</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         }
                                         else /*Para cuando la nota es de credito va directo al metodo LiquidarNota a rebajar la plata de la caja sin pedir datos*/
                                         {
@@ -148,83 +195,46 @@
                                         }
                                     </td>
                                 </tr>
-
-                                
-                                    TempData["IDNota"] = item.id;
-                                
-
                             }
                         </tbody>
                     </table>
-                    
+
                 </div>
             </center>
         </section>
     </center>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryajax")
+        <script>
+            $('#formLiquidarNota').submit(function (e) {
+                e.preventDefault();
+                var notaId = $('#notaId').val();
+                var monto = $('#monto').val();
+                var tipoPago = $('input[name=pago]:checked').val();
+                 $.post('@Url.Action("LiquidarNotaDebito", "Notas")', { notaId: notaId, monto: monto, tipoPago: tipoPago })
+                   .done(function(data) {
+                        $('#exampleModal').modal('hide'); // ocultar el modal
+                       location.reload(); // recargar la página
+                   })
+                   .fail(function() {
+                        alert("Ocurrió un error al procesar la solicitud");
+                        $('#formLiquidarNota')[0].reset(); // Reinicia el formulario del modal
+                 });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('.boton2').click(function () {
+                    var id = $(this).data('id');
+                    var monto = $(this).data('pago')
+                    document.getElementById("pago").value = monto;
+                    $('#item-id').text(id);
+                    $('#notaId').val(id);
+                });
+
+            });
+        </script>
+    }
+
 </main>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Solicíte el medio de pago y monto</h1>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            @{ 
-                Infraestructure.Models.NotasDeCreditoYDebito nota =null;
-                AplicationCore.Services.IServiceNotas notas = new AplicationCore.Services.ServiceNotas();
-               // nota= notas.GetNotaByID(Convert.ToInt32(TempData["IDNota"]));
-             }
-           
-          
-            @*@using (Html.BeginForm("LiquidarNotaDebito", "Notas"))
-            {
-                <form>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="factura" class="col-form-label">Factura:</label>
-                            <label>@nota.idFactura</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="cobro" class="col-form-label">Monto a Cobrar:</label>
-                            <label> @nota.monto</label>
-                        </div>
-                        <div class="mb-3">
-                            <label for="monto" class="col-form-label">Monto Recibido</label>
-                            <input type="text" class="form-control" id="montoFacturaModal">
-                        </div>
-                        <div class="mb-3">
-                            <label for="pago" class="col-form-label">Tipo de Pago:</label><br>
-                            <input type="radio" id="efectivo" name="pago" value="efectivo" checked>
-                            <label for="efectivo">Efectivo</label><br>
-                            <input type="radio" id="tarjeta" name="pago" value="tarjeta">
-                            <label for="tarjeta">Tarjeta</label><br>
-                        </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button style="background-color:#09f238; color:white" type="submit" class="btn">Aceptar</button>
-                    </div>
-                </form>
-            }*@
-
-        </div>
-    </div>
-</div>
-<!--Modal PARA MOSTRAR EL MONTO Y EL TIPO DE PAGO-->
-
-<script>
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // botón que abrió el modal
-        var id = button.data('id'); // extrae el id de la factura de los datos del botón
-        var monto = button.data('monto'); // extrae el monto de la factura de los datos del botón
-
-        // Llena los campos del modal correspondientes con los valores recuperados
-        $('#idFacturaModal').val(id);
-        $('#montoFacturaModal').val(monto);
-    });
-</script>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryajax")
-}

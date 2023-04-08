@@ -45,6 +45,7 @@ namespace MvcApplication.Controllers
                 lista = _ServiceNot.GetNota();
                 if (TempData["mensaje"] != null)
                     ViewBag.NotificationMessage = TempData["mensaje"].ToString();
+                
             }
             catch (Exception e)
             {
@@ -484,6 +485,20 @@ namespace MvcApplication.Controllers
                     IServiceNotas ServiceNota = new ServiceNotas();
                     NotasDeCreditoYDebito nota = ServiceNota.GetNotaByID((int)id);
 
+
+                    //Mostrar Mensaje de abrir la caja si esta cerrada
+                    IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+                    Arqueos_Caja cajita = new Arqueos_Caja();
+                    cajita = _ServiceCaja.GetArqueoLast();
+
+                    if (cajita.estado == false)//Valida si la caja chica esta cerrada
+                    {
+                        TempData["mensaje"] = Util.SweetAlertHelper.Mensaje
+                            ("Caja Cerrada", "No se pueden registrar movimientos de dinero con la caja chica cerrada, por favor verifíque!", SweetAlertMessageType.warning);
+                        return RedirectToAction("FrameLiquidar");
+                    }
+
+
                     //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
                     IServiceCajaChica servicio = new ServiceCajaChica();
                     Caja_Chica ultimacaja = new Caja_Chica();
@@ -506,6 +521,7 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(notaCredito).State = EntityState.Modified;
                     cdt.SaveChanges();
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Liquidada", "Se ha otorgado el monto de la nota de crédito", SweetAlertMessageType.success);
 
 
                 }
@@ -520,13 +536,55 @@ namespace MvcApplication.Controllers
         }
 
         //Metodo que cobra la de Debito, busca los datos del Modal y mete la plata y saca vuelto si fuese el caso
-        public ActionResult LiquidarNotaDebito()
+        public ActionResult LiquidarNotaDebito(int notaId, decimal monto, string tipoPago)
         {
-            string id = Request.Form["factura"];//Con este se tiene que ir a buscar a la BD la fatura correspondiente si fuese el caso
-            string montopago = Request.Form["monto"];
-            string tipopago = Request.Form["pago"];
+            IServiceNotas ServiceNota = new ServiceNotas();
+            NotasDeCreditoYDebito nota = ServiceNota.GetNotaByID(notaId);
 
-            return RedirectToAction("FrameLiquidar");
+            //Mostrar Mensaje de abrir la caja si esta cerrada
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja cajita = new Arqueos_Caja();
+            cajita = _ServiceCaja.GetArqueoLast();
+
+            if (Convert.ToDouble(monto) < nota.monto)
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje
+                          ("Monto Inválido", "El monto ingresado es menor al registrado en la nota de débito", SweetAlertMessageType.warning);
+                return new EmptyResult();
+            }
+
+            if (cajita.estado == false)//Valida si la caja chica esta cerrada
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje
+                    ("Caja Cerrada", "No se pueden registrar ingresos de dinero con la caja chica cerrada, por favor verifíque!", SweetAlertMessageType.warning);
+
+                return new EmptyResult();
+            }
+            ServiceNota.Desabilitar(notaId);
+
+
+            //SI TODO ESTA BIEN, REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
+            Caja_Chica ultimacaja = new Caja_Chica();
+            ultimacaja = _ServiceCaja.GetCajaChicaLast();
+
+            Caja_Chica cajaChica = new Caja_Chica();
+            cajaChica.fecha = DateTime.Now;
+            cajaChica.entrada = Convert.ToDouble(monto);
+            cajaChica.salida = cajaChica.entrada - nota.monto;
+           
+            saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
+            cajaChica.saldo = saldoActual;
+            string mensaje2 = " ";
+            if (cajaChica.salida != 0.0)
+            {
+                 mensaje2 = " El cambio para el cliente es de" + "   ₡" + cajaChica.salida;
+            }
+
+            IServiceCajaChica caja = new ServiceCajaChica();
+            caja.Save(cajaChica);
+
+            TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago registrado", "Se ha registrado el pago de la nota de débito efectivamente." + mensaje2, SweetAlertMessageType.success);
+            return new EmptyResult();
         }
     }
 }

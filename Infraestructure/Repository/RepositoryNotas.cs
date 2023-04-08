@@ -11,6 +11,27 @@ namespace Infraestructure.Repository
 {
     public class RepositoryNotas : IRepositoryNotas
     {
+        public void Desabilitar(int id)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+
+                try
+                {
+                    NotasDeCreditoYDebito  repo = cdt.NotasDeCreditoYDebito.Find(id);
+                    repo.estado = true;
+                    cdt.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "";
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
+
         public IEnumerable<NotasDeCreditoYDebito> GetListaNotasFecha(DateTime date)
         {
             IEnumerable<NotasDeCreditoYDebito> lista = null;
@@ -32,7 +53,7 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.NotasDeCreditoYDebito.Include(x => x.Facturas).OrderByDescending(x => x.fecha).ToList<NotasDeCreditoYDebito>();
+                lista = ctx.NotasDeCreditoYDebito.Where(x => x.estado == false).Include(x => x.Facturas).OrderByDescending(x => x.fecha).ToList<NotasDeCreditoYDebito>();
             }
             return lista;
         }

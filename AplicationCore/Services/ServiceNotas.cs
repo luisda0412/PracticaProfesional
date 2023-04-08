@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceNotas : IServiceNotas
     {
+        public void Desabilitar(int id)
+        {
+            IRepositoryNotas repository = new RepositoryNotas();
+            repository.Desabilitar(id);
+        }
+
         public IEnumerable<NotasDeCreditoYDebito> GetListaNotasByFecha(DateTime date )
         {
             IRepositoryNotas repository = new RepositoryNotas();

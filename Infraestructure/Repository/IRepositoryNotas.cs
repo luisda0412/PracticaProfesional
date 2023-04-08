@@ -13,5 +13,8 @@ namespace Infraestructure.Repository
         IEnumerable<NotasDeCreditoYDebito> GetListaNotasFecha(DateTime date);
         NotasDeCreditoYDebito GetNotaByID(int id);
         NotasDeCreditoYDebito Save(NotasDeCreditoYDebito nota);
+        
+        void Desabilitar(int id);
+
     }
 }
