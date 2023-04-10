@@ -6,9 +6,6 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            &cent;@Html.DisplayFor(modelItem => item.costo)
-        </td>
-        <td>
             @{ string isActive = item.estado == true ? "Habilitado" : "Deshabilitado"; }
             @isActive
         </td>

@@ -88,9 +88,6 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.descripcion)
                                 </th>
-                                <th style="text-align:right">
-                                    @Html.DisplayNameFor(model => model.costo)
-                                </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.estado)
                                 </th>
@@ -105,9 +102,6 @@
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.descripcion)
-                                    </td>
-                                    <td style="text-align:right">
-                                        ₡@Html.DisplayFor(modelItem => item.costo)
                                     </td>
                                     <td>
                                         @{ string isActive = item.estado == true ? "Habilitado" : "Deshabilitado"; }

@@ -188,7 +188,6 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="costo" Type="Double" />
     <Property Name="estado" Type="Boolean" />
     <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Servicio_Reparacion" ToRole="Reparaciones" />
   </EntityType>

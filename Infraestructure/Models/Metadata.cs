@@ -323,10 +323,7 @@ namespace Infraestructure.Models
         [Display(Name = "Descripción")]
         [Required(ErrorMessage = "*La descripción es un campo obligatorio")]
         public string descripcion { get; set; }
-        [Display(Name = "Costo")]
-        [DisplayFormat(DataFormatString = "{0:N2}")]
-        [Required(ErrorMessage = "*El costo es un campo obligatorio")]
-        public Nullable<double> costo { get; set; }
+      
         [Display(Name = "Estado")]
         public Nullable<bool> estado { get; set; }
         public virtual ICollection<Reparaciones> Reparaciones { get; set; }

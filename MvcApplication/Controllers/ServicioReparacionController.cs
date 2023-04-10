@@ -150,31 +150,6 @@ namespace MvcApplication.Controllers
             }
         }
 
-        /*
-        public ActionResult EliminarServicio(int? id)
-        {
-            MemoryStream target = new MemoryStream();
-            IServiceServicio _ServiceServicio = new ServiceServicio();
-            try
-            {
-
-                _ServiceServicio.Eliminar((int)id);
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
-                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
-                TempData["Redirect"] = "Servicio_Reparacion";
-                TempData["Redirect-Action"] = "Index";
-                // Redireccion a la captura del Error
-                return RedirectToAction("Default", "Error");
-            }
-        }
-
-        */
-
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult desabilitar(long id)
         {

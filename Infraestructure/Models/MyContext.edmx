@@ -167,7 +167,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
-          <Property Name="costo" Type="float" />
           <Property Name="estado" Type="bit" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -698,7 +697,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="costo" Type="Double" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Servicio_Reparacion" ToRole="Reparaciones" />
         </EntityType>
@@ -1227,7 +1225,6 @@
               <MappingFragment StoreEntitySet="Servicio_Reparacion">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="costo" ColumnName="costo" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>

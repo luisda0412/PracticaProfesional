@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="30e404069652408f8dea6a414c76e791" Name="Diagram1">
+      <Diagram DiagramId="192bffffa4154551ac2ff1fe4bb82236" Name="Diagram1">
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Arqueos_Caja" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Articulo" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Caja_Chica" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Reportes_Tecnicos" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Resena" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Rol" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Servicio_Reparacion" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Servicio_Reparacion" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Usuario" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Venta" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Caja_Usuario_FK" ManuallyRouted="false" />

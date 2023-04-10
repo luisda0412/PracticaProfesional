@@ -162,7 +162,6 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
-    <Property Name="costo" Type="float" />
     <Property Name="estado" Type="bit" />
   </EntityType>
   <EntityType Name="Usuario">
