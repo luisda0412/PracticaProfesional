@@ -6,6 +6,7 @@ using iText.Kernel.Colors;
 using iText.Kernel.Font;
 using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
@@ -86,6 +87,32 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewFactura", lista);
         }
 
+        private bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Usa una expresión regular para verificar el formato y el dominio de la dirección de correo electrónico
+                var regex = new System.Text.RegularExpressions.Regex(@"^[\w-\.]+@gmail\.com$");
+                return regex.IsMatch(email);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool EsValorSeleccionadoValido(string valorSeleccionado)
+        {
+            // Lista de valores válidos del select
+            string[] valoresValidos = { "1", "2", "3", "4" };
+
+            // Verificar si el valor seleccionado está en la lista de valores válidos
+            return valoresValidos.Contains(valorSeleccionado);
+        }
+
         public static double saldoActual { get; set; }
 
         public static string email { get; set; }
@@ -98,9 +125,58 @@ namespace MvcApplication.Controllers
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
+            string Value = Request.Form["tipoNota"];
+            int temporal = Convert.ToInt32(TempData["idFacturaCredito"]);
 
-       
+         
+            // Validar que el email no esté vacío y sea un correo válido
+            if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "El correo está vacío o no es válido, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaCredito", new { id = temporal });
+            }
 
+            // Validar que el nuevo monto no esté vacío
+            if (string.IsNullOrEmpty(nuevoMonto))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "El monto de la nota está vacío, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaCredito", new { id = temporal });
+            }
+
+            // Validar el tipo de nota
+            if (string.IsNullOrEmpty(Value) || !EsValorSeleccionadoValido(Value))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "No ha ingresado el tipo de nota de crédito, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaCredito", new { id = temporal });
+            }
+
+            // Validar que el motivo no esté vacío
+            if (string.IsNullOrEmpty(motivo))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "No ha ingresado un motivo, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaCredito", new { id = temporal });
+            }
+
+            string tipoNota = string.Empty;
+            switch (Value)
+            {
+                case "1":
+                    tipoNota = "Por devolución del producto";
+                    break;
+                case "2":
+                    tipoNota = "Por error en el monto";
+                    break;
+                case "3":
+                    tipoNota = "Por descuento en artículo";
+                    break;
+                case "4":
+                    tipoNota = "Por otros motivos";
+                    break;
+                default:
+                    tipoNota = "Sin tipo";
+                    break;
+            }
+        
             IServiceFactura serviceFactura = new ServiceFactura();
             NotasDeCreditoYDebito nota = new NotasDeCreditoYDebito();
 
@@ -115,101 +191,125 @@ namespace MvcApplication.Controllers
             nota.monto = Convert.ToDouble(nuevoMonto);
             nota.fecha = DateTime.Now;
 
+            IServiceEmpresa servicoEmpre = new ServiceEmpresa();
+            Empresa vycuz = servicoEmpre.GetEmpresaByID(1);
+         
             //------------------------------------------------------------------------------------------------------------------------
             //Crear el pdf de la Nota--------------------------------------------------------------------------------------
             //------------------------------------------------------------------------------------------------------------------------
             MemoryStream ms = new MemoryStream();
             FileContentResult FileFact = null;
-            if (email != null)
+
+            try
             {
-                try
-                {
+                PdfWriter writer = new PdfWriter(ms);
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                Document doc = new Document(pdfDoc, PageSize.A4);
 
-                    PdfWriter writer = new PdfWriter(ms);
-                    PdfDocument pdfDoc = new PdfDocument(writer);
-                    Document doc = new Document(pdfDoc, PageSize.A4, false);
+                // Definir los estilos a utilizar
+                Style titleStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                    .SetFontSize(20)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    // Definir los estilos a utilizar
-                    Style titleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(20);
+                Style subtitleStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(14)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    Style subtitleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(14);
+                Style smallTextStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(10)
+                    .SetFontColor(ColorConstants.BLACK);
 
-                    Style smallTextStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(10)
-                        .SetFontColor(ColorConstants.BLACK);
+                Style tableHeaderStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                    .SetFontSize(12)
+                    .SetFontColor(ColorConstants.WHITE)
+                    .SetBackgroundColor(ColorConstants.GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    Style tableHeaderStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(12);
+                Style tableCellStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(12)
+                    .SetFontColor(ColorConstants.BLACK);
 
-                    Style tableCellStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(12)
-                        .SetFontColor(ColorConstants.BLACK);
+                // Agregar el encabezado
+                Paragraph header = new Paragraph("Nota de Crédito").AddStyle(titleStyle);
+                doc.Add(header);
 
-                    // Agregar el encabezado
-                    Paragraph header = new Paragraph("Nota de Crédito").AddStyle(titleStyle);
-                    doc.Add(header);
+                // Agregar la información de la empresa
+                Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
+                    .SetHeight(50)
+                    .SetWidth(120)
+                    .SetHorizontalAlignment(HorizontalAlignment.CENTER);
+                doc.Add(logo);
 
-                    // Agregar la información de la empresa
-                    Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
-                        .SetHeight(50)
-                        .SetWidth(120);
-                    doc.Add(logo);
+                // Separador
+                LineSeparator separator = new LineSeparator(new SolidLine(1));
+        
 
-                    Paragraph header2 = new Paragraph("2ndo Piso, City Mall").AddStyle(subtitleStyle);
-                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
-                    doc.Add(header2);
-                    doc.Add(header3);
+                Paragraph header2 = new Paragraph("Lugar: " + vycuz.direccion).AddStyle(subtitleStyle);
+                Paragraph header3 = new Paragraph("Provincia: Alajuela, Costa Rica").AddStyle(subtitleStyle);
+                Paragraph header4 = new Paragraph("Número Telefónico: " + vycuz.telefono).AddStyle(subtitleStyle);
+                doc.Add(header2);
+                doc.Add(header3);
+                doc.Add(header4);
 
-                    // Agregar la información del cliente y la fecha
-                    Paragraph cliente = new Paragraph("Cliente: " + factura.Venta.nombre_cliente).AddStyle(smallTextStyle);
-                    Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
-                    doc.Add(cliente);
-                    doc.Add(fecha);
+               
+                doc.Add(separator);
 
-                    // Agregar la tabla con la información de la nota de crédito
-                    Table table = new Table(new float[] { 1, 3, 1 })
+                // Agregar la información del cliente y la fecha
+                Paragraph cliente = new Paragraph("Cliente: " + factura.Venta.nombre_cliente).AddStyle(smallTextStyle);
+                Paragraph fecha = new Paragraph("Fecha de Creación: " + DateTime.Now.ToString()).AddStyle(smallTextStyle);
+                doc.Add(cliente);
+                doc.Add(fecha);
+
+               
+                doc.Add(separator);
+
+                // Agregar la tabla con la información de la nota de crédito
+                Table table = new Table(new float[] { 1, 2, 2, 1 })
                     .SetWidth(UnitValue.CreatePercentValue(100))
+                    .SetMarginTop(20)
                     .AddHeaderCell(new Cell().Add(new Paragraph("Número de Factura")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Tipo de Nota")).AddStyle(tableHeaderStyle))
                     .AddHeaderCell(new Cell().Add(new Paragraph("Motivo de la nota")).AddStyle(tableHeaderStyle))
-                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en Colones")).AddStyle(tableHeaderStyle));
 
-                    table.AddCell(new Paragraph(factura.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
-                    table.AddCell(new Paragraph(motivo.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
+                table.AddCell(new Paragraph(factura.id.ToString()).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.CENTER));
+                table.AddCell(new Paragraph(tipoNota).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.CENTER));
+                table.AddCell(new Paragraph(motivo.ToString()).AddStyle(tableCellStyle));
+                double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
+                string montoCantidad = String.Format("{0:N2}", montoDouble); ; // formatear como moneda en colones (CRC)
+                table.AddCell(new Paragraph("¢" + montoCantidad).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.RIGHT));
+            
 
+                 doc.Add(table);
 
-                    double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
-                    string montoCantidad = String.Format("{0:N2}", montoDouble); ; // formatear como moneda en colones (CRC)
-                    table.AddCell(new Paragraph("¢"+ montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
+                Paragraph mensaje = new Paragraph("Le informamos que se ha creado su nota de crédito correspondiente a la factura número " +
+                       factura.id + ", por un monto total de ₡" + montoCantidad + "." +
+                      " Agradecemos su preferencia y quedamos a su disposición para cualquier consulta adicional. " +
+                      "Atentamente, VYCUZ").AddStyle(smallTextStyle);
+                doc.Add(mensaje);
 
-                    doc.Add(table);
+                doc.Close();
 
-                    doc.Close();
+                 _ServiceNota.Save(nota);
 
-                    _ServiceNota.Save(nota);
-
-                    FileFact = File(ms.ToArray(), "application/pdf", "NotaDeCredito.pdf");
+                 FileFact = File(ms.ToArray(), "application/pdf", "Nota de Crédito.pdf");
 
                 }
                 catch (Exception ex)
                 {
                     TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
                 }
-            }
+            
 
 
             //-------------------------------------------------------------------------
             //ENVIAR EL CORREO---------------------------------------------------------
             //-------------------------------------------------------------------------
-
-            if (email != null)
-            {
                 string urlDomain = "https://localhost:3000/";
                 string EmailOrigen = "soportevycuz@gmail.com";
                 string Contraseña = "ecfykdmojjjlpfcn";
@@ -236,7 +336,7 @@ namespace MvcApplication.Controllers
 
 
                 oSmtpClient.Dispose();
-            }
+            
 
             email = "";
             nuevoMonto = "";
@@ -254,10 +354,8 @@ namespace MvcApplication.Controllers
 
             try
             {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
                 fact = _ServiceFact.GetFacturaByID(id.Value);
                 ViewBag.Factura = fact;
                 return View();
@@ -279,9 +377,60 @@ namespace MvcApplication.Controllers
             email = Request.Form["email"];
             nuevoMonto = Request.Form["monto"];
             motivo = Request.Form["motivo"];
-            string tipoNotaDebitoValue = Request.Form["tipoNotaDebito"];
+            string Value = Request.Form["tipoNotaDebito"];
 
-          
+            int temporal = Convert.ToInt32(TempData["idFacturaDebito"]);
+
+            // Validar que el email no esté vacío y sea un correo válido
+            if (string.IsNullOrEmpty(email) || !IsValidEmail(email))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "El correo está vacío o no es válido, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaDebito", new { id = temporal });
+            }
+
+            // Validar que el nuevo monto no esté vacío
+            if (string.IsNullOrEmpty(nuevoMonto))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "El monto de la nota está vacío, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaDebito", new { id = temporal });
+            }
+
+            //Validar que el tipo de nota no este vaci
+            if (string.IsNullOrEmpty(Value) || !EsValorSeleccionadoValido(Value))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "No ha ingresado el tipo de nota de débito, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaDebito", new { id = temporal });
+            }
+
+            // Validar que el motivo no esté vacío
+            if (string.IsNullOrEmpty(motivo))
+            {
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Consulta no realizada", "No ha ingresado un motivo, por favor verifíque", SweetAlertMessageType.error);
+                return RedirectToAction("CrearNotaDebito", new { id = temporal });
+            }
+
+
+
+            string tipoNota = string.Empty;
+            switch (Value)
+            {
+                case "1":
+                    tipoNota = "Por aumento de precio del artículo/servicio";
+                    break;
+                case "2":
+                    tipoNota = "Por cargos no incluidos en la factura original";
+                    break;
+                case "3":
+                    tipoNota = "Por impuestos adicionales";
+                    break;
+                case "4":
+                    tipoNota = "Por otros motivos";
+                    break;
+                default:
+                    tipoNota = "Sin tipo";
+                    break;
+            }
+
 
             IServiceFactura serviceFactura = new ServiceFactura();
 
@@ -296,15 +445,15 @@ namespace MvcApplication.Controllers
             nota.monto = Convert.ToDouble(nuevoMonto);
             nota.fecha = DateTime.Now;
 
-
+            IServiceEmpresa servicoEmpre = new ServiceEmpresa();
+            Empresa vycuz = servicoEmpre.GetEmpresaByID(1);
 
             //------------------------------------------------------------------------------------------------------------------------
             //Crear el pdf de la factura--------------------------------------------------------------------------------------
             //------------------------------------------------------------------------------------------------------------------------
             MemoryStream ms = new MemoryStream();
             FileContentResult FileFact = null;
-            if (email != null)
-            {
+         
                 try
                 {
 
@@ -312,28 +461,33 @@ namespace MvcApplication.Controllers
                     PdfDocument pdfDoc = new PdfDocument(writer);
                     Document doc = new Document(pdfDoc, PageSize.A4, false);
 
-                    // Definir los estilos a utilizar
-                    Style titleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(20);
+                // Definir los estilos a utilizar
+                Style titleStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                    .SetFontSize(20)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    Style subtitleStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(14);
+                Style subtitleStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(14)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    Style smallTextStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(10)
-                        .SetFontColor(ColorConstants.BLACK);
+                Style smallTextStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(10)
+                    .SetFontColor(ColorConstants.BLACK);
 
-                    Style tableHeaderStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
-                        .SetFontSize(12);
+                Style tableHeaderStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD))
+                    .SetFontSize(12)
+                    .SetFontColor(ColorConstants.WHITE)
+                    .SetBackgroundColor(ColorConstants.GRAY)
+                    .SetTextAlignment(TextAlignment.CENTER);
 
-                    Style tableCellStyle = new Style()
-                        .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
-                        .SetFontSize(12)
-                        .SetFontColor(ColorConstants.BLACK);
+                Style tableCellStyle = new Style()
+                    .SetFont(PdfFontFactory.CreateFont(StandardFonts.HELVETICA))
+                    .SetFontSize(12)
+                    .SetFontColor(ColorConstants.BLACK);
 
                     // Agregar el encabezado
                     Paragraph header = new Paragraph("Nota de Débito").AddStyle(titleStyle);
@@ -342,13 +496,23 @@ namespace MvcApplication.Controllers
                     // Agregar la información de la empresa
                     Image logo = new Image(ImageDataFactory.Create("C:/logo1.png", false))
                         .SetHeight(50)
-                        .SetWidth(120);
+                        .SetWidth(120)
+                        .SetHorizontalAlignment(HorizontalAlignment.CENTER);
                     doc.Add(logo);
 
-                    Paragraph header2 = new Paragraph("2ndo Piso, City Mall").AddStyle(subtitleStyle);
-                    Paragraph header3 = new Paragraph("Alajuela, Costa Rica").AddStyle(subtitleStyle);
+                    // Separador
+                    LineSeparator separator = new LineSeparator(new SolidLine(1));
+    
+                
+                    Paragraph header2 = new Paragraph("Lugar: " + vycuz.direccion).AddStyle(subtitleStyle);
+                    Paragraph header3 = new Paragraph("Provincia: Alajuela, Costa Rica").AddStyle(subtitleStyle);
+                    Paragraph header4 = new Paragraph("Número Telefónico: " + vycuz.telefono).AddStyle(subtitleStyle);
                     doc.Add(header2);
                     doc.Add(header3);
+                    doc.Add(header4);
+
+             
+                    doc.Add(separator);
 
                     // Agregar la información del cliente y la fecha
                     Paragraph cliente = new Paragraph("Cliente: " + factura.Venta.nombre_cliente).AddStyle(smallTextStyle);
@@ -356,44 +520,52 @@ namespace MvcApplication.Controllers
                     doc.Add(cliente);
                     doc.Add(fecha);
 
+               
+                    doc.Add(separator);
+
+
                     // Agregar la tabla con la información de la nota de crédito
-                    Table table = new Table(new float[] { 1, 3, 1 })
+                    Table table = new Table(new float[] { 1, 2, 2, 1 })
                     .SetWidth(UnitValue.CreatePercentValue(100))
+                    .SetMarginTop(20)
                     .AddHeaderCell(new Cell().Add(new Paragraph("Número de Factura")).AddStyle(tableHeaderStyle))
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Tipo de Nota")).AddStyle(tableHeaderStyle))
                     .AddHeaderCell(new Cell().Add(new Paragraph("Motivo de la nota")).AddStyle(tableHeaderStyle))
-                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en colones")).AddStyle(tableHeaderStyle));
+                    .AddHeaderCell(new Cell().Add(new Paragraph("Monto en Colones")).AddStyle(tableHeaderStyle));
 
-                    table.AddCell(new Paragraph(factura.id.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
-                    table.AddCell(new Paragraph(motivo.ToString()).SetVerticalAlignment(VerticalAlignment.TOP));
-
-
+                    table.AddCell(new Paragraph(factura.id.ToString()).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.CENTER));
+                    table.AddCell(new Paragraph(tipoNota).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.CENTER));
+                    table.AddCell(new Paragraph(motivo.ToString()).AddStyle(tableCellStyle));
                     double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
-                    string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
-                    table.AddCell(new Paragraph(montoCantidad).SetVerticalAlignment(VerticalAlignment.TOP));
+                    string montoCantidad = String.Format("{0:N2}", montoDouble); ; // formatear como moneda en colones (CRC)
+                    table.AddCell(new Paragraph("¢" + montoCantidad).AddStyle(tableCellStyle).SetTextAlignment(TextAlignment.RIGHT));
 
                     doc.Add(table);
 
-                    doc.Close();
+                    Paragraph mensaje = new Paragraph("Le informamos que se ha creado su nota de débito correspondiente a la factura número " +
+                         factura.id + ", por un monto total de ₡" + montoCantidad + "."+
+                        " Agradecemos su preferencia y quedamos a su disposición para cualquier consulta adicional. " +
+                        "Atentamente, VYCUZ").AddStyle(smallTextStyle);
+                    doc.Add(mensaje);
+
+                doc.Close();
 
                     _ServiceNota.Save(nota);
 
 
-                    FileFact = File(ms.ToArray(), "application/pdf", "NotaDeDébito.pdf");
+                    FileFact = File(ms.ToArray(), "application/pdf", "Nota de Débito.pdf");
 
                 }
                 catch (Exception ex)
                 {
                     TempData["Mensaje"] = "Error al procesar los datos! " + ex.Message;
                 }
-            }
+            
 
 
             //-------------------------------------------------------------------------
             //ENVIAR EL CORREO---------------------------------------------------------
             //-------------------------------------------------------------------------
-
-            if (email != null)
-            {
                 string urlDomain = "https://localhost:3000/";
                 string EmailOrigen = "soportevycuz@gmail.com";
                 string Contraseña = "ecfykdmojjjlpfcn";
@@ -420,7 +592,7 @@ namespace MvcApplication.Controllers
 
 
                 oSmtpClient.Dispose();
-            }
+            
 
             email = "";
             nuevoMonto = "";
@@ -436,10 +608,8 @@ namespace MvcApplication.Controllers
 
             try
             {
-                if (id == null)
-                {
-                    return RedirectToAction("Index");
-                }
+                if (TempData["mensaje"] != null)
+                    ViewBag.NotificationMessage = TempData["mensaje"].ToString();
                 fact = _ServiceFact.GetFacturaByID(id.Value);
                 ViewBag.Factura = fact;
                 return View();
