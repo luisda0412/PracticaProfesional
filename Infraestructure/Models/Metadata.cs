@@ -276,11 +276,11 @@ namespace Infraestructure.Models
         public int id { get; set; }
         [Display(Name = "Reparación")]
         public Nullable<int> reparacion_id { get; set; }
-        [Display(Name = "Trabajo Realizado")]
-        [Required(ErrorMessage = "*La descripcion del trabajo es requerida")]
+        [Display(Name = "Nota")]
+        [Required(ErrorMessage = "*La nota de lo realizado es requerida")]
         public string reporte { get; set; }
         [Display(Name = "Fecha")]
-        [Required(ErrorMessage = "*La fecha del procedimiento es requerida")]
+        [Required(ErrorMessage = "*La fecha es requerida")]
         public Nullable<System.DateTime> fecha { get; set; }
 
         public virtual Reparaciones Reparaciones { get; set; }

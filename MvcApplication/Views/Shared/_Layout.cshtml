@@ -57,11 +57,12 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                @Html.ActionLink("Compras", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
+                                @Html.ActionLink("Ingresos", "IndexIngreso", "Ingreso", new { title = "Ir al catálogo de productos" }, new { @class = "nav-link" })
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" title="Ver reparaciones" aria-haspopup="true" aria-expanded="false">Reparaciones</a>
                                 <div class="dropdown-menu">
+                                    @Html.ActionLink("Ver reparaciones", "Index", "Reparaciones", new { title = "Ver reparaciones" }, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Registrar Nueva", "Create", "Reparaciones", new { title = "Crear una nueva reparación" }, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Registrar Pagos", "IndexCobros", "Reparaciones", new { title = "Cobrar las reparaciones" }, new { @class = "dropdown-item" })
                                 </div>

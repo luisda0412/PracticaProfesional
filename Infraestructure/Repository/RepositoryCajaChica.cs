@@ -87,7 +87,7 @@ namespace Infraestructure.Repository
                 {         
                     
                     cdt.Caja_Chica.Add(caja);
-                    Infraestructure.Util.Log.Info("Acción de Salvar Caja, entrada de dinero: " + caja.entrada +"salida de dinero: "+caja.salida);
+                    Infraestructure.Util.Log.Info("Acción en caja chica, entrada de dinero: ₡" + String.Format("{0:N2}", caja.entrada) + " salida de dinero: ₡" + String.Format("{0:N2}", caja.salida));
                     cdt.SaveChanges();
                 }
                 catch (Exception e)
@@ -153,7 +153,7 @@ namespace Infraestructure.Repository
                     caja.saldo = chica.saldo;
                     cdt.Arqueos_Caja.Add(caja);
 
-                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + ", Saldo: ₡" + caja.saldo);
+                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + ", Saldo: ₡" + String.Format("{0:N2}", caja.saldo));
                     cdt.SaveChanges();
                 }
                 catch (Exception e)

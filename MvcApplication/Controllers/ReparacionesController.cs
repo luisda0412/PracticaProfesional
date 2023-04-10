@@ -44,6 +44,7 @@ namespace MvcApplication.Controllers
 
 
         // GET: Reparaciones
+   
         public ActionResult Index()
         {
             IEnumerable<Reparaciones> lista = null;
@@ -95,8 +96,6 @@ namespace MvcApplication.Controllers
             return View(lista);
         }
 
-        [HttpPost]
-        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Save(Reparaciones repa)
         {
         
@@ -121,14 +120,14 @@ namespace MvcApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        [CustomAuthorize((int)Roles.Administrador)]
+     
         public ActionResult Create()
         {
             ViewBag.ServiciosLista = listaServicios();
             return View();
         }
 
-        [CustomAuthorize((int)Roles.Administrador)]
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
         public ActionResult Edit(int? id)
         {
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
@@ -168,7 +167,7 @@ namespace MvcApplication.Controllers
 
         }
 
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+ 
         public ActionResult Details(int? id)
         {
             IServiceReparaciones _ServiceReparaciones = new ServiceReparaciones();
@@ -250,6 +249,8 @@ namespace MvcApplication.Controllers
         //-------------------------------------------------------------------
 
         //VARIABLE QUE LLENA EL CODIGO DEL SERVICIO PARA EL REPORTE
+
+        
         public static int codigoSer { get; set; }
         public ActionResult ReportesTecnicos(int? id)
         {
@@ -275,6 +276,8 @@ namespace MvcApplication.Controllers
             return View();
         }
 
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+
         public ActionResult SaveReporte(Reportes_Tecnicos repo)
         {
             MemoryStream target = new MemoryStream();
@@ -290,7 +293,7 @@ namespace MvcApplication.Controllers
                     repo.fecha = DateTime.Now;
                     _ServiceRTecnico.Save(repo);
 
-                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte creado", "El trabajo realizado ha quedado registrado en la reparación", SweetAlertMessageType.success);
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte creado", "La nota se ha registrado en la reparación", SweetAlertMessageType.success);
                     return RedirectToAction("Index");
                 }
                 catch (Exception ex)
@@ -312,6 +315,7 @@ namespace MvcApplication.Controllers
             {
 
                 _ServiceRTecnico.Eliminar((long)id);
+                TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Reporte eliminado", "La nota se ha borrado efectivamente", SweetAlertMessageType.success);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -326,7 +330,7 @@ namespace MvcApplication.Controllers
             }
         }
 
-
+  
         //Para registrar los pagos de las reparaciones
         public ActionResult IndexCobros()
         {
@@ -382,6 +386,7 @@ namespace MvcApplication.Controllers
             return PartialView("_PartialViewCobrarRepa", lista);
         }
 
+  
         //Pagina de registrar los cobros 
         public ActionResult IndexCrearCobros(int? id)
         {
@@ -446,6 +451,9 @@ namespace MvcApplication.Controllers
             }
             //Cambia el estado de la reparacion
             serviceRepa.Desabilitar(reparaciones.id);
+
+            string msj = "Se ha cobrado una reparación por un monto de: ₡";
+            Infraestructure.Util.Log.Info(msj + String.Format("{0:N2}", reparaciones.monto_total));
 
             //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
             IServiceCajaChica servicio = new ServiceCajaChica();
@@ -562,8 +570,8 @@ namespace MvcApplication.Controllers
                 
                 table.AddCell(new Cell().Add(new Paragraph(tipopago.ToString()).SetFont(descripcionFont))).SetTextAlignment(TextAlignment.CENTER);
                 double montoDouble = Convert.ToDouble(nuevoMonto); // convertir a double y dividir entre 100 para obtener decimales
-                string montoCantidad = montoDouble.ToString("C2", CultureInfo.GetCultureInfo("es-CR")); // formatear como moneda en colones (CRC)
-                table.AddCell(new Cell().Add(new Paragraph(montoCantidad).SetFont(cantidadPrecioFont)).SetTextAlignment(TextAlignment.RIGHT));
+                string montoCantidad = (String.Format("{0:N2}", montoDouble)); // formatear como moneda en colones (CRC)
+                table.AddCell(new Cell().Add(new Paragraph("¢" + (String.Format("{0:N2}", reparaciones.monto_total))).SetFont(cantidadPrecioFont)).SetTextAlignment(TextAlignment.RIGHT));
 
 
                 doc.Add(table);
@@ -651,8 +659,7 @@ namespace MvcApplication.Controllers
                 return RedirectToAction("IndexCobros");
 
 
-               
-
+             
             }
             catch (Exception ex)
             {

@@ -288,7 +288,7 @@ namespace MvcApplication.Controllers
                  doc.Add(table);
 
                 Paragraph mensaje = new Paragraph("Le informamos que se ha creado su nota de crédito correspondiente a la factura número " +
-                       factura.id + ", por un monto total de ₡" + montoCantidad + "." +
+                       factura.id + ", por un monto total de ¢" + montoCantidad + "." +
                       " Agradecemos su preferencia y quedamos a su disposición para cualquier consulta adicional. " +
                       "Atentamente, VYCUZ").AddStyle(smallTextStyle);
                 doc.Add(mensaje);
@@ -543,7 +543,7 @@ namespace MvcApplication.Controllers
                     doc.Add(table);
 
                     Paragraph mensaje = new Paragraph("Le informamos que se ha creado su nota de débito correspondiente a la factura número " +
-                         factura.id + ", por un monto total de ₡" + montoCantidad + "."+
+                         factura.id + ", por un monto total de ¢" + montoCantidad + "."+
                         " Agradecemos su preferencia y quedamos a su disposición para cualquier consulta adicional. " +
                         "Atentamente, VYCUZ").AddStyle(smallTextStyle);
                     doc.Add(mensaje);
@@ -668,6 +668,8 @@ namespace MvcApplication.Controllers
                         return RedirectToAction("FrameLiquidar");
                     }
 
+                    string msj = "Se ha liquidado la nota Crédito número: " + nota.id + ", por un monto de: ₡";
+                    Infraestructure.Util.Log.Info(msj + String.Format("{0:N2}", nota.monto));
 
                     //REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
                     IServiceCajaChica servicio = new ServiceCajaChica();
@@ -676,10 +678,10 @@ namespace MvcApplication.Controllers
 
                     Caja_Chica cajaChica = new Caja_Chica();
                     cajaChica.fecha = DateTime.Now;
-                    cajaChica.entrada = Convert.ToDouble(nota.monto);
-                    cajaChica.salida = cajaChica.entrada - nota.monto;
+                    cajaChica.entrada = 0;
+                    cajaChica.salida = nota.monto;
 
-                    saldoActual = ((double)cajaChica.entrada - (double)cajaChica.salida) + (double)ultimacaja.saldo;
+                    saldoActual = ((double)cajaChica.salida - (double)cajaChica.entrada) + (double)ultimacaja.saldo;
                     cajaChica.saldo = saldoActual;
 
                     IServiceCajaChica caja = new ServiceCajaChica();
@@ -691,7 +693,8 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(notaCredito).State = EntityState.Modified;
                     cdt.SaveChanges();
-                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Liquidada", "Se ha otorgado el monto de la nota de crédito", SweetAlertMessageType.success);
+                   
+                    TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Liquidada", "Por favor otorgar los ₡" + cajaChica.salida +" "+ "del monto de la nota de Crédito al cliente.", SweetAlertMessageType.success);
 
 
                 }
@@ -732,6 +735,8 @@ namespace MvcApplication.Controllers
             }
             ServiceNota.Desabilitar(notaId);
 
+            string msj = "Se ha liquidado la nota Débito número: " + nota.id + ", por un monto de: ₡";
+            Infraestructure.Util.Log.Info(msj + String.Format("{0:N2}", nota.monto));
 
             //SI TODO ESTA BIEN, REGISTRAR LOS MONTOS EN LA CAJA CHICA----------------------------------------------------------------
             Caja_Chica ultimacaja = new Caja_Chica();

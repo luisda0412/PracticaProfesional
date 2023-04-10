@@ -94,8 +94,11 @@ namespace Infraestructure.Repository
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
-                lista = ctx.Reparaciones.Include(x => x.Reportes_Tecnicos).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).ToList().
-                    FindAll(l => l.cliente_id.Equals(Convert.ToInt32(nombre)));
+                lista = ctx.Reparaciones
+                            .Include(x => x.Reportes_Tecnicos)
+                            .Include(x => x.Servicio_Reparacion)
+                            .Include(x => x.Usuario).ToList()
+                            .FindAll(l => l.cliente_id == Convert.ToInt32(nombre) && l.estado == true);                  
             }
             return lista;
         }
@@ -164,7 +167,7 @@ namespace Infraestructure.Repository
                         reparacion.estado = true;
                         cdt.Reparaciones.Add(reparacion);
                         cdt.SaveChanges();
-                        string msj = "Se ha registrado una nueva reparación bajo la cédula:";
+                        string msj = "Se ha registrado una nueva reparación bajo la cédula: ";
                         Infraestructure.Util.Log.Info(msj + reparacion.cliente_id);
                     }
                     else

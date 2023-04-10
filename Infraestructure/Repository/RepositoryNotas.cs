@@ -99,6 +99,9 @@ namespace Infraestructure.Repository
                 if (oNotas == null)
                 {
                     ctx.NotasDeCreditoYDebito.Add(nota);
+                    string tipoNota = (bool)nota.tipoNota ? "Débito" : "Crédito";
+                    string msj = $"Se ha creado una nota {tipoNota} por un monto de ₡{nota.monto:N2}, a nombre de: {nota.nombreCliente}.";
+                    Infraestructure.Util.Log.Info(msj);
                     retorno = ctx.SaveChanges();
                 }
                 else

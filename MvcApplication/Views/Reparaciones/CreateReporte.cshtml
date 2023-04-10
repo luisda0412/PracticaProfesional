@@ -38,7 +38,7 @@
         {
             @Html.AntiForgeryToken()
 
-            <h4 id="titulo">Información del nuevo reporte</h4>
+            <h4 id="titulo">Pasos de la reparación</h4>
             <br />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -66,7 +66,7 @@
                 <div class="seccion2">
                     <div class="form-group2">
                         <input type="submit" value="Guardar Reporte" class="btn" title="Guardar el nuevo reporte" />
-                        <button class="btn">@Html.ActionLink("Volver Atrás", "ReportesTecnicos", new { title = "Regresar a la lista" })</button>
+                        <button class="btn" onclick="goBack()" title="Regresar">Volver Atrás</button>
                     </div>
                 </div>
                 <br />
@@ -79,6 +79,12 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 }
 
 
