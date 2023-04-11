@@ -191,6 +191,7 @@ CREATE TABLE NotasDeCreditoYDebito(
 id int Identity(1,1) NOT NULL,
 idFactura int,
 nombreCliente nvarchar(50),
+correo nvarchar(max),
 motivo nvarchar(max),
 monto float,
 tipoNota bit,
