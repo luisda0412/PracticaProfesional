@@ -703,7 +703,7 @@ namespace MvcApplication.Controllers
                     string EmailOrigen = "soportevycuz@gmail.com";
                     string Contraseña = "ecfykdmojjjlpfcn";
                     MailMessage oMailMessage = new MailMessage(EmailOrigen, nota.correo, "Nota de Crédito",
-                        "<p>Estimado usuario,</br></br><hr/>Se ha liquidado una nota de crédito por parte de VYCUZ.</p>");
+                        $"<p>Estimado usuario,</br></br><hr/>VYCUZ ha liquidado una nota de crédito por un monto de ₡{nota.monto} y un motivo de {nota.motivo}.</p>");
 
                     var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
 
@@ -792,7 +792,7 @@ namespace MvcApplication.Controllers
             string EmailOrigen = "soportevycuz@gmail.com";
             string Contraseña = "ecfykdmojjjlpfcn";
             MailMessage oMailMessage = new MailMessage(EmailOrigen, nota.correo, "Nota de Débito",
-                "<p>Estimado usuario,</br></br><hr/>Se ha liquidado una nota de débtio por parte de VYCUZ.</p>");
+                $"<p>Estimado usuario,</br></br><hr/>VYCUZ ha liquidado una nota de débtio por un monto de ₡{nota.monto} y un motivo de {nota.motivo}.</p>");
 
             var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
 
