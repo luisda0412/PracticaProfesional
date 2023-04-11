@@ -10,6 +10,12 @@ namespace AplicationCore.Services
 {
     public class ServiceCajaChica : IServiceCajaChica
     {
+        public void AbrirArqueo(Arqueos_Caja caja)
+        {
+            IRepositoryCajaChica repository = new RepositoryCajaChica();
+            repository.AbrirArqueo(caja);
+        }
+
         public void Eliminar(int id)
         {
             IRepositoryCajaChica repository = new RepositoryCajaChica();

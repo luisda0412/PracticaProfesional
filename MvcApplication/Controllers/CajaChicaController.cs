@@ -168,7 +168,7 @@ namespace MvcApplication.Controllers
                 caja.saldo = dinero;
                 caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
                 caja.fecha = DateTime.Now;
-                _ServiceCaja.SaveArqueo(caja);
+                _ServiceCaja.AbrirArqueo(caja);
                 TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción en Caja", "Caja chica abierta", SweetAlertMessageType.info);
             }
             catch (Exception ex)
