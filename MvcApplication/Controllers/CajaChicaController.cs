@@ -154,7 +154,8 @@ namespace MvcApplication.Controllers
         public ActionResult AbrirCaja(string monto)
         {
             IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
-            Arqueos_Caja caja = new Arqueos_Caja();
+            Arqueos_Caja arqueito = new Arqueos_Caja();
+            Caja_Chica cajaChica = new Caja_Chica();
 
             if (Convert.ToDouble(monto) == 0)
             {
@@ -165,11 +166,20 @@ namespace MvcApplication.Controllers
             try
             {
                 double dinero = Convert.ToDouble(monto);
-                caja.saldo = dinero;
-                caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
-                caja.fecha = DateTime.Now;
-                _ServiceCaja.AbrirArqueo(caja);
+                arqueito.saldo = dinero;
+                arqueito.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                arqueito.fecha = DateTime.Now;
+                _ServiceCaja.AbrirArqueo(arqueito);
                 TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción en Caja", "Caja chica abierta", SweetAlertMessageType.info);
+
+                cajaChica.fecha = DateTime.Now;
+                cajaChica.entrada = dinero;
+                cajaChica.salida = 0.0;
+                cajaChica.saldo = dinero;
+
+                IServiceCajaChica caja = new ServiceCajaChica();
+                caja.Save(cajaChica);
+
             }
             catch (Exception ex)
             {

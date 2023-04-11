@@ -88,7 +88,7 @@ main{
     }
 
 .form-group .col-md-2 {
-    width: 45%;
+    width: 55%;
     font-family: 'Agency FB';
     font-size: 32px;
 }
@@ -97,6 +97,21 @@ main{
     font-family: 'Times New Roman', Times, serif;
     font-size: 25px;
 }
+
+.form-group2 .col-md-2 {
+    width: 45%;
+    font-family: 'Agency FB';
+    font-size: 32px;
+}
+
+.form-group2 .col-md-10 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    display:flex;
+    justify-content:space-evenly;
+    width: 65%;
+}
+
 
 .btn-default {
     padding: 10px;
@@ -123,7 +138,20 @@ main{
     color: white;
 }
 
+.eye-btn {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
+    .eye-btn i {
+        font-size: 18px;
+        color:white;
+    }
 /*Para hacerle diseño Responsivo*/
 @media screen and (max-width: 425px) {
 

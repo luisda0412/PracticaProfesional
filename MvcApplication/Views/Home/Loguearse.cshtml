@@ -5,6 +5,7 @@
 }
 <link rel="stylesheet" href="~/Content/CSSEstiloLogin/EstiloLogin.css">
 
+
 <section class="section_header">
 
     <div class="contenidoHeader">
@@ -33,8 +34,6 @@
 <center>
     @using (Html.BeginForm("Login", "Home"))
     {
-        @Html.AntiForgeryToken()
-
         <main>
             <br />
             <center>
@@ -50,11 +49,12 @@
                         </div>
                     </div>
                     <br />
-                    <div class="form-group">
+                    <div class="form-group2">
                         <div class="col-md-10">
-                            @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Contraseña" })
-                            @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
+                            @Html.PasswordFor(model => model.clave, new { @class = "form-control", @placeholder = "Contraseña", @id = "password-field" })
+                            <button type="button" class="eye-btn"button" onclick="mostrarContrasena()">Ver</button>
                         </div>
+                        @Html.ValidationMessageFor(model => model.clave, "", new { @class = "text-danger" })
                     </div>
                     <br />
                     <div class="form-group">
@@ -84,5 +84,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function mostrarContrasena() {
+            var campo = document.getElementById("password-field");
+            if (campo.type === "password") {
+                campo.type = "text";
+            } else {
+                campo.type = "password";
+            }
+        }
+    </script>
 
 }
