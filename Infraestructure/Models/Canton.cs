@@ -12,19 +12,20 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Servicio_Reparacion
+    public partial class Canton
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Servicio_Reparacion()
+        public Canton()
         {
-            this.Reparaciones = new HashSet<Reparaciones>();
+            this.Distrito = new HashSet<Distrito>();
         }
     
-        public int id { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<bool> estado { get; set; }
+        public int IDCanton { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<int> IDProvincia { get; set; }
     
+        public virtual Provincia Provincia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reparaciones> Reparaciones { get; set; }
+        public virtual ICollection<Distrito> Distrito { get; set; }
     }
 }

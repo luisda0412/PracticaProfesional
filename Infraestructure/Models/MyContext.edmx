@@ -38,6 +38,14 @@
           <Property Name="entrada" Type="float" />
           <Property Name="salida" Type="float" />
         </EntityType>
+        <EntityType Name="Canton">
+          <Key>
+            <PropertyRef Name="IDCanton" />
+          </Key>
+          <Property Name="IDCanton" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="IDProvincia" Type="int" />
+        </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id" />
@@ -46,6 +54,23 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IDCurso" />
+          </Key>
+          <Property Name="IDCurso" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Creditos" Type="int" />
+          <Property Name="Cupo" Type="int" />
+        </EntityType>
+        <EntityType Name="CursoEstudiante">
+          <Key>
+            <PropertyRef Name="IDEstudiante" />
+            <PropertyRef Name="IDCurso" />
+          </Key>
+          <Property Name="IDEstudiante" Type="int" Nullable="false" />
+          <Property Name="IDCurso" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Detalle_Ingreso">
           <Key>
@@ -67,6 +92,24 @@
           <Property Name="descuento" Type="float" />
           <Property Name="cantidad" Type="int" />
         </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="IDDireccion" />
+          </Key>
+          <Property Name="IDDireccion" Type="int" Nullable="false" />
+          <Property Name="Provincia" Type="int" />
+          <Property Name="Canton" Type="int" />
+          <Property Name="Distrito" Type="int" />
+          <Property Name="Direccion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="IDDistrito" />
+          </Key>
+          <Property Name="IDDistrito" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Canton" Type="int" />
+        </EntityType>
         <EntityType Name="Empresa">
           <Key>
             <PropertyRef Name="id" />
@@ -75,6 +118,15 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="50" />
           <Property Name="direccion" Type="nvarchar" MaxLength="50" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="IDEstudiante" />
+          </Key>
+          <Property Name="IDEstudiante" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="int" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -102,11 +154,31 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idFactura" Type="int" />
           <Property Name="nombreCliente" Type="nvarchar" MaxLength="50" />
+          <Property Name="correo" Type="nvarchar(max)" />
           <Property Name="motivo" Type="nvarchar(max)" />
           <Property Name="monto" Type="float" />
           <Property Name="tipoNota" Type="bit" />
           <Property Name="fecha" Type="datetime" />
           <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="IDProfesor" />
+          </Key>
+          <Property Name="IDProfesor" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="int" />
+          <Property Name="Titulo" Type="int" />
+          <Property Name="FechaNacimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="ProfesorCurso">
+          <Key>
+            <PropertyRef Name="IDProfesor" />
+            <PropertyRef Name="IDCurso" />
+          </Key>
+          <Property Name="IDProfesor" Type="int" Nullable="false" />
+          <Property Name="IDCurso" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -117,6 +189,13 @@
           <Property Name="direccion" Type="nvarchar" MaxLength="50" />
           <Property Name="telefono" Type="nvarchar" MaxLength="50" />
           <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IDProvincia" />
+          </Key>
+          <Property Name="IDProvincia" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Reparaciones">
           <Key>
@@ -168,6 +247,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
           <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="IDTitulo" />
+          </Key>
+          <Property Name="IDTitulo" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -316,6 +402,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Canton__IDProvin__29572725">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IDProvincia" />
+            </Principal>
+            <Dependent Role="Canton">
+              <PropertyRef Name="IDProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CursoEstu__IDCur__31EC6D26">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="CursoEstudiante" Type="Self.CursoEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IDCurso" />
+            </Principal>
+            <Dependent Role="CursoEstudiante">
+              <PropertyRef Name="IDCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CursoEstu__IDEst__32E0915F">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="CursoEstudiante" Type="Self.CursoEstudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="IDEstudiante" />
+            </Principal>
+            <Dependent Role="CursoEstudiante">
+              <PropertyRef Name="IDEstudiante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Distrito__Canton__2C3393D0">
+          <End Role="Canton" Type="Self.Canton" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canton">
+              <PropertyRef Name="IDCanton" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="Canton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__Direc__2F10007B">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IDDireccion" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__Direcc__37A5467C">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IDDireccion" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__Titulo__38996AB5">
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulo">
+              <PropertyRef Name="IDTitulo" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="Titulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfesorC__IDCur__3C69FB99">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="1" />
+          <End Role="ProfesorCurso" Type="Self.ProfesorCurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Curso">
+              <PropertyRef Name="IDCurso" />
+            </Principal>
+            <Dependent Role="ProfesorCurso">
+              <PropertyRef Name="IDCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProfesorC__IDPro__3B75D760">
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="1" />
+          <End Role="ProfesorCurso" Type="Self.ProfesorCurso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesor">
+              <PropertyRef Name="IDProfesor" />
+            </Principal>
+            <Dependent Role="ProfesorCurso">
+              <PropertyRef Name="IDProfesor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Ingreso_Usuario_FK">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="*" />
@@ -416,19 +610,29 @@
           <EntitySet Name="Arqueos_Caja" EntityType="Self.Arqueos_Caja" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Canton" EntityType="Self.Canton" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CursoEstudiante" EntityType="Self.CursoEstudiante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Ingreso" EntityType="Self.Detalle_Ingreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ingreso" EntityType="Self.Ingreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotasDeCreditoYDebito" EntityType="Self.NotasDeCreditoYDebito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfesorCurso" EntityType="Self.ProfesorCurso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resena" EntityType="Self.Resena" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servicio_Reparacion" EntityType="Self.Servicio_Reparacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="Articulo_Categoria_FK" Association="Self.Articulo_Categoria_FK">
@@ -470,6 +674,42 @@
           <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Canton__IDProvin__29572725" Association="Self.FK__Canton__IDProvin__29572725">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Canton" EntitySet="Canton" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CursoEstu__IDCur__31EC6D26" Association="Self.FK__CursoEstu__IDCur__31EC6D26">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="CursoEstudiante" EntitySet="CursoEstudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CursoEstu__IDEst__32E0915F" Association="Self.FK__CursoEstu__IDEst__32E0915F">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="CursoEstudiante" EntitySet="CursoEstudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Distrito__Canton__2C3393D0" Association="Self.FK__Distrito__Canton__2C3393D0">
+            <End Role="Canton" EntitySet="Canton" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__Direc__2F10007B" Association="Self.FK__Estudiant__Direc__2F10007B">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__Direcc__37A5467C" Association="Self.FK__Profesor__Direcc__37A5467C">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Profesor" EntitySet="Profesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__Titulo__38996AB5" Association="Self.FK__Profesor__Titulo__38996AB5">
+            <End Role="Titulo" EntitySet="Titulo" />
+            <End Role="Profesor" EntitySet="Profesor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfesorC__IDCur__3C69FB99" Association="Self.FK__ProfesorC__IDCur__3C69FB99">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="ProfesorCurso" EntitySet="ProfesorCurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProfesorC__IDPro__3B75D760" Association="Self.FK__ProfesorC__IDPro__3B75D760">
+            <End Role="Profesor" EntitySet="Profesor" />
+            <End Role="ProfesorCurso" EntitySet="ProfesorCurso" />
           </AssociationSet>
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -548,6 +788,16 @@
           <Property Name="entrada" Type="Double" />
           <Property Name="salida" Type="Double" />
         </EntityType>
+        <EntityType Name="Canton">
+          <Key>
+            <PropertyRef Name="IDCanton" />
+          </Key>
+          <Property Name="IDCanton" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDProvincia" Type="Int32" />
+          <NavigationProperty Name="Provincia" Relationship="Self.FK__Canton__IDProvin__29572725" FromRole="Canton" ToRole="Provincia" />
+          <NavigationProperty Name="Distrito" Relationship="Self.FK__Distrito__Canton__2C3393D0" FromRole="Canton" ToRole="Distrito" />
+        </EntityType>
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="id" />
@@ -557,6 +807,17 @@
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Articulo" Relationship="Self.Articulo_Categoria_FK" FromRole="Categoria" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Curso">
+          <Key>
+            <PropertyRef Name="IDCurso" />
+          </Key>
+          <Property Name="IDCurso" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Creditos" Type="Int32" />
+          <Property Name="Cupo" Type="Int32" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.CursoEstudiante" FromRole="Curso" ToRole="Estudiante" />
+          <NavigationProperty Name="Profesor" Relationship="Self.ProfesorCurso" FromRole="Curso" ToRole="Profesor" />
         </EntityType>
         <EntityType Name="Detalle_Ingreso">
           <Key>
@@ -582,6 +843,27 @@
           <NavigationProperty Name="Articulo" Relationship="Self.Detalle_Venta_Producto_FK" FromRole="Detalle_Venta" ToRole="Articulo" />
           <NavigationProperty Name="Venta" Relationship="Self.Detalle_Venta_Venta_FK" FromRole="Detalle_Venta" ToRole="Venta" />
         </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="IDDireccion" />
+          </Key>
+          <Property Name="IDDireccion" Type="Int32" Nullable="false" />
+          <Property Name="Provincia" Type="Int32" />
+          <Property Name="Canton" Type="Int32" />
+          <Property Name="Distrito" Type="Int32" />
+          <Property Name="Direccion1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK__Estudiant__Direc__2F10007B" FromRole="Direccion" ToRole="Estudiante" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK__Profesor__Direcc__37A5467C" FromRole="Direccion" ToRole="Profesor" />
+        </EntityType>
+        <EntityType Name="Distrito">
+          <Key>
+            <PropertyRef Name="IDDistrito" />
+          </Key>
+          <Property Name="IDDistrito" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Canton" Type="Int32" />
+          <NavigationProperty Name="Canton1" Relationship="Self.FK__Distrito__Canton__2C3393D0" FromRole="Distrito" ToRole="Canton" />
+        </EntityType>
         <EntityType Name="Empresa">
           <Key>
             <PropertyRef Name="id" />
@@ -591,6 +873,17 @@
           <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Facturas" Relationship="Self.Facturas_Empresa_FK" FromRole="Empresa" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="IDEstudiante" />
+          </Key>
+          <Property Name="IDEstudiante" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="Int32" />
+          <NavigationProperty Name="Direccion1" Relationship="Self.FK__Estudiant__Direc__2F10007B" FromRole="Estudiante" ToRole="Direccion" />
+          <NavigationProperty Name="Curso" Relationship="Self.CursoEstudiante" FromRole="Estudiante" ToRole="Curso" />
         </EntityType>
         <EntityType Name="Facturas">
           <Key>
@@ -623,12 +916,27 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idFactura" Type="Int32" />
           <Property Name="nombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="motivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="monto" Type="Double" />
           <Property Name="tipoNota" Type="Boolean" />
           <Property Name="fecha" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Facturas" Relationship="Self.Notas_FK" FromRole="NotasDeCreditoYDebito" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="IDProfesor" />
+          </Key>
+          <Property Name="IDProfesor" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="Int32" />
+          <Property Name="Titulo" Type="Int32" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Direccion1" Relationship="Self.FK__Profesor__Direcc__37A5467C" FromRole="Profesor" ToRole="Direccion" />
+          <NavigationProperty Name="Titulo1" Relationship="Self.FK__Profesor__Titulo__38996AB5" FromRole="Profesor" ToRole="Titulo" />
+          <NavigationProperty Name="Curso" Relationship="Self.ProfesorCurso" FromRole="Profesor" ToRole="Curso" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -640,6 +948,14 @@
           <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Articulo" Relationship="Self.Articulo_Proveedor_FK" FromRole="Proveedor" ToRole="Articulo" />
+        </EntityType>
+        <EntityType Name="Provincia">
+          <Key>
+            <PropertyRef Name="IDProvincia" />
+          </Key>
+          <Property Name="IDProvincia" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Canton" Relationship="Self.FK__Canton__IDProvin__29572725" FromRole="Provincia" ToRole="Canton" />
         </EntityType>
         <EntityType Name="Reparaciones">
           <Key>
@@ -699,6 +1015,14 @@
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Boolean" />
           <NavigationProperty Name="Reparaciones" Relationship="Self.Reparaciones_Articulo_FK" FromRole="Servicio_Reparacion" ToRole="Reparaciones" />
+        </EntityType>
+        <EntityType Name="Titulo">
+          <Key>
+            <PropertyRef Name="IDTitulo" />
+          </Key>
+          <Property Name="IDTitulo" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Profesor" Relationship="Self.FK__Profesor__Titulo__38996AB5" FromRole="Titulo" ToRole="Profesor" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -808,6 +1132,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Canton__IDProvin__29572725">
+          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1" />
+          <End Role="Canton" Type="Self.Canton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provincia">
+              <PropertyRef Name="IDProvincia" />
+            </Principal>
+            <Dependent Role="Canton">
+              <PropertyRef Name="IDProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Distrito__Canton__2C3393D0">
+          <End Role="Canton" Type="Self.Canton" Multiplicity="0..1" />
+          <End Role="Distrito" Type="Self.Distrito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Canton">
+              <PropertyRef Name="IDCanton" />
+            </Principal>
+            <Dependent Role="Distrito">
+              <PropertyRef Name="Canton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Detalle_Ingreso_Ingreso_FK">
           <End Role="Ingreso" Type="Self.Ingreso" Multiplicity="0..1" />
           <End Role="Detalle_Ingreso" Type="Self.Detalle_Ingreso" Multiplicity="*" />
@@ -829,6 +1177,30 @@
             </Principal>
             <Dependent Role="Detalle_Venta">
               <PropertyRef Name="venta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Estudiant__Direc__2F10007B">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IDDireccion" />
+            </Principal>
+            <Dependent Role="Estudiante">
+              <PropertyRef Name="Direccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__Direcc__37A5467C">
+          <End Role="Direccion" Type="Self.Direccion" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Direccion">
+              <PropertyRef Name="IDDireccion" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="Direccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -877,6 +1249,18 @@
             </Principal>
             <Dependent Role="Ingreso">
               <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesor__Titulo__38996AB5">
+          <End Role="Titulo" Type="Self.Titulo" Multiplicity="0..1" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Titulo">
+              <PropertyRef Name="IDTitulo" />
+            </Principal>
+            <Dependent Role="Profesor">
+              <PropertyRef Name="Titulo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -952,23 +1336,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="CursoEstudiante">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="*" />
+        </Association>
+        <Association Name="ProfesorCurso">
+          <End Role="Curso" Type="Self.Curso" Multiplicity="*" />
+          <End Role="Profesor" Type="Self.Profesor" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="Registro_Inventario_VYCUZEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Arqueos_Caja" EntityType="Self.Arqueos_Caja" />
           <EntitySet Name="Articulo" EntityType="Self.Articulo" />
           <EntitySet Name="Caja_Chica" EntityType="Self.Caja_Chica" />
+          <EntitySet Name="Canton" EntityType="Self.Canton" />
           <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Curso" EntityType="Self.Curso" />
           <EntitySet Name="Detalle_Ingreso" EntityType="Self.Detalle_Ingreso" />
           <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
+          <EntitySet Name="Distrito" EntityType="Self.Distrito" />
           <EntitySet Name="Empresa" EntityType="Self.Empresa" />
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" />
           <EntitySet Name="Facturas" EntityType="Self.Facturas" />
           <EntitySet Name="Ingreso" EntityType="Self.Ingreso" />
           <EntitySet Name="NotasDeCreditoYDebito" EntityType="Self.NotasDeCreditoYDebito" />
+          <EntitySet Name="Profesor" EntityType="Self.Profesor" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="Reparaciones" EntityType="Self.Reparaciones" />
           <EntitySet Name="Reportes_Tecnicos" EntityType="Self.Reportes_Tecnicos" />
           <EntitySet Name="Resena" EntityType="Self.Resena" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="Servicio_Reparacion" EntityType="Self.Servicio_Reparacion" />
+          <EntitySet Name="Titulo" EntityType="Self.Titulo" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="Venta" EntityType="Self.Venta" />
           <AssociationSet Name="Caja_Usuario_FK" Association="Self.Caja_Usuario_FK">
@@ -995,6 +1395,14 @@
             <End Role="Articulo" EntitySet="Articulo" />
             <End Role="Resena" EntitySet="Resena" />
           </AssociationSet>
+          <AssociationSet Name="FK__Canton__IDProvin__29572725" Association="Self.FK__Canton__IDProvin__29572725">
+            <End Role="Provincia" EntitySet="Provincia" />
+            <End Role="Canton" EntitySet="Canton" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Distrito__Canton__2C3393D0" Association="Self.FK__Distrito__Canton__2C3393D0">
+            <End Role="Canton" EntitySet="Canton" />
+            <End Role="Distrito" EntitySet="Distrito" />
+          </AssociationSet>
           <AssociationSet Name="Detalle_Ingreso_Ingreso_FK" Association="Self.Detalle_Ingreso_Ingreso_FK">
             <End Role="Ingreso" EntitySet="Ingreso" />
             <End Role="Detalle_Ingreso" EntitySet="Detalle_Ingreso" />
@@ -1002,6 +1410,14 @@
           <AssociationSet Name="Detalle_Venta_Venta_FK" Association="Self.Detalle_Venta_Venta_FK">
             <End Role="Venta" EntitySet="Venta" />
             <End Role="Detalle_Venta" EntitySet="Detalle_Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Estudiant__Direc__2F10007B" Association="Self.FK__Estudiant__Direc__2F10007B">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__Direcc__37A5467C" Association="Self.FK__Profesor__Direcc__37A5467C">
+            <End Role="Direccion" EntitySet="Direccion" />
+            <End Role="Profesor" EntitySet="Profesor" />
           </AssociationSet>
           <AssociationSet Name="Facturas_Empresa_FK" Association="Self.Facturas_Empresa_FK">
             <End Role="Empresa" EntitySet="Empresa" />
@@ -1018,6 +1434,10 @@
           <AssociationSet Name="Ingreso_Usuario_FK" Association="Self.Ingreso_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Ingreso" EntitySet="Ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesor__Titulo__38996AB5" Association="Self.FK__Profesor__Titulo__38996AB5">
+            <End Role="Titulo" EntitySet="Titulo" />
+            <End Role="Profesor" EntitySet="Profesor" />
           </AssociationSet>
           <AssociationSet Name="Reparaciones_Articulo_FK" Association="Self.Reparaciones_Articulo_FK">
             <End Role="Servicio_Reparacion" EntitySet="Servicio_Reparacion" />
@@ -1042,6 +1462,14 @@
           <AssociationSet Name="Facturas_Fisica_Usuario_FK" Association="Self.Facturas_Fisica_Usuario_FK">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="CursoEstudiante" Association="Self.CursoEstudiante">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Estudiante" EntitySet="Estudiante" />
+          </AssociationSet>
+          <AssociationSet Name="ProfesorCurso" Association="Self.ProfesorCurso">
+            <End Role="Curso" EntitySet="Curso" />
+            <End Role="Profesor" EntitySet="Profesor" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1086,6 +1514,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Canton">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Canton">
+              <MappingFragment StoreEntitySet="Canton">
+                <ScalarProperty Name="IDCanton" ColumnName="IDCanton" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IDProvincia" ColumnName="IDProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Categoria">
             <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Categoria">
               <MappingFragment StoreEntitySet="Categoria">
@@ -1093,6 +1530,16 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Curso">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Curso">
+              <MappingFragment StoreEntitySet="Curso">
+                <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+                <ScalarProperty Name="Cupo" ColumnName="Cupo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1117,6 +1564,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="IDDireccion" ColumnName="IDDireccion" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+                <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+                <ScalarProperty Name="Direccion1" ColumnName="Direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Distrito">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Distrito">
+              <MappingFragment StoreEntitySet="Distrito">
+                <ScalarProperty Name="IDDistrito" ColumnName="IDDistrito" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Canton" ColumnName="Canton" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Empresa">
             <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Empresa">
               <MappingFragment StoreEntitySet="Empresa">
@@ -1124,6 +1591,16 @@
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estudiante">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Estudiante">
+              <MappingFragment StoreEntitySet="Estudiante">
+                <ScalarProperty Name="IDEstudiante" ColumnName="IDEstudiante" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1154,11 +1631,24 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idFactura" ColumnName="idFactura" />
                 <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
                 <ScalarProperty Name="motivo" ColumnName="motivo" />
                 <ScalarProperty Name="monto" ColumnName="monto" />
                 <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesor">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Profesor">
+              <MappingFragment StoreEntitySet="Profesor">
+                <ScalarProperty Name="IDProfesor" ColumnName="IDProfesor" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1170,6 +1660,14 @@
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="telefono" ColumnName="telefono" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provincia">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Provincia">
+              <MappingFragment StoreEntitySet="Provincia">
+                <ScalarProperty Name="IDProvincia" ColumnName="IDProvincia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1229,6 +1727,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Titulo">
+            <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Titulo">
+              <MappingFragment StoreEntitySet="Titulo">
+                <ScalarProperty Name="IDTitulo" ColumnName="IDTitulo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
@@ -1258,6 +1764,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="CursoEstudiante" TypeName="Registro_Inventario_VYCUZModel.CursoEstudiante" StoreEntitySet="CursoEstudiante">
+            <EndProperty Name="Curso">
+              <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+            </EndProperty>
+            <EndProperty Name="Estudiante">
+              <ScalarProperty Name="IDEstudiante" ColumnName="IDEstudiante" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ProfesorCurso" TypeName="Registro_Inventario_VYCUZModel.ProfesorCurso" StoreEntitySet="ProfesorCurso">
+            <EndProperty Name="Curso">
+              <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+            </EndProperty>
+            <EndProperty Name="Profesor">
+              <ScalarProperty Name="IDProfesor" ColumnName="IDProfesor" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

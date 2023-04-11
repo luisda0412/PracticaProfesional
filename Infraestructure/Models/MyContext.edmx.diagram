@@ -4,43 +4,58 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="192bffffa4154551ac2ff1fe4bb82236" Name="Diagram1">
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Arqueos_Caja" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Articulo" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Caja_Chica" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Categoria" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Detalle_Ingreso" Width="1.5" PointX="7.5" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Detalle_Venta" Width="1.5" PointX="7.5" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Empresa" Width="1.5" PointX="8.25" PointY="24.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Facturas" Width="1.5" PointX="10.5" PointY="21" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Ingreso" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.NotasDeCreditoYDebito" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Proveedor" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Reparaciones" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Reportes_Tecnicos" Width="1.5" PointX="7.5" PointY="16.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Resena" Width="1.5" PointX="8.25" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Rol" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Servicio_Reparacion" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Usuario" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Venta" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
+      <Diagram DiagramId="aa3bab0605a5475695eb27e55ab60db8" Name="Diagram1">
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Arqueos_Caja" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Articulo" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Caja_Chica" Width="1.5" PointX="9.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Canton" Width="1.5" PointX="12" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Categoria" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Curso" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Detalle_Ingreso" Width="1.5" PointX="7.5" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Detalle_Venta" Width="1.5" PointX="7.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Direccion" Width="1.5" PointX="7.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Distrito" Width="1.5" PointX="14.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Empresa" Width="1.5" PointX="8.25" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Estudiante" Width="1.5" PointX="10" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Facturas" Width="1.5" PointX="10.5" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Ingreso" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.NotasDeCreditoYDebito" Width="1.5" PointX="12.75" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Profesor" Width="1.5" PointX="13" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Proveedor" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Provincia" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Reparaciones" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Reportes_Tecnicos" Width="1.5" PointX="7.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Resena" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Rol" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Servicio_Reparacion" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Titulo" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Usuario" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Registro_Inventario_VYCUZModel.Venta" Width="1.5" PointX="5.25" PointY="21.25" IsExpanded="true" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Caja_Usuario_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Articulo_Categoria_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Articulo_Proveedor_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Detalle_Ingreso_Articulo_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Detalle_Venta_Producto_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Resena_Articulo_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.FK__Canton__IDProvin__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.FK__Distrito__Canton__2C3393D0" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Detalle_Ingreso_Ingreso_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Detalle_Venta_Venta_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.FK__Estudiant__Direc__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.FK__Profesor__Direcc__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Facturas_Empresa_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Facturas__Venta_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Notas_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Ingreso_Usuario_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.FK__Profesor__Titulo__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Reparaciones_Articulo_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Reparaciones_Usuario_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Reportes_Tecnicos_Reparacion_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Resena_Usuario_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Usuario_Rol_FK" ManuallyRouted="false" />
         <AssociationConnector Association="Registro_Inventario_VYCUZModel.Facturas_Fisica_Usuario_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.CursoEstudiante" ManuallyRouted="false" />
+        <AssociationConnector Association="Registro_Inventario_VYCUZModel.ProfesorCurso" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

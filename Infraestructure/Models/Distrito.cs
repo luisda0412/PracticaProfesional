@@ -12,13 +12,12 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Reportes_Tecnicos
+    public partial class Distrito
     {
-        public int id { get; set; }
-        public Nullable<int> reparacion_id { get; set; }
-        public string reporte { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
+        public int IDDistrito { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<int> Canton { get; set; }
     
-        public virtual Reparaciones Reparaciones { get; set; }
+        public virtual Canton Canton1 { get; set; }
     }
 }

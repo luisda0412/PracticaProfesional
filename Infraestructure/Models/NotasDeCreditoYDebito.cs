@@ -11,14 +11,13 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    [MetadataType(typeof(NotasMetadata))]
+    
     public partial class NotasDeCreditoYDebito
     {
         public int id { get; set; }
         public Nullable<int> idFactura { get; set; }
         public string nombreCliente { get; set; }
+        public string correo { get; set; }
         public string motivo { get; set; }
         public Nullable<double> monto { get; set; }
         public Nullable<bool> tipoNota { get; set; }

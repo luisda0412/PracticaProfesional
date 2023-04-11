@@ -186,6 +186,7 @@ namespace MvcApplication.Controllers
             nota.idFactura = factura.id;
             nota.tipoNota = false;
             nota.estado = false;
+            nota.correo = email;
             nota.nombreCliente = factura.Venta.nombre_cliente;
             nota.motivo = motivo;
             nota.monto = Convert.ToDouble(nuevoMonto);
@@ -440,6 +441,7 @@ namespace MvcApplication.Controllers
             nota.idFactura = factura.id;
             nota.tipoNota = true;
             nota.estado = false;
+            nota.correo = email;
             nota.nombreCliente = factura.Venta.nombre_cliente;
             nota.motivo = motivo;
             nota.monto = Convert.ToDouble(nuevoMonto);
@@ -693,7 +695,32 @@ namespace MvcApplication.Controllers
 
                     cdt.Entry(notaCredito).State = EntityState.Modified;
                     cdt.SaveChanges();
-                   
+
+                    //-------------------------------------------------------------------------
+                    //ENVIAR EL CORREO---------------------------------------------------------
+                    //-------------------------------------------------------------------------
+                    string urlDomain = "https://localhost:3000/";
+                    string EmailOrigen = "soportevycuz@gmail.com";
+                    string Contraseña = "ecfykdmojjjlpfcn";
+                    MailMessage oMailMessage = new MailMessage(EmailOrigen, nota.correo, "Nota de Crédito",
+                        "<p>Estimado usuario,</br></br><hr/>Se ha liquidado una nota de crédito por parte de VYCUZ.</p>");
+
+                    var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+
+                    oMailMessage.IsBodyHtml = true;
+
+                    SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+                    oSmtpClient.EnableSsl = true;
+                    oSmtpClient.UseDefaultCredentials = false;
+                    oSmtpClient.Port = 587;
+                    oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+
+                    oSmtpClient.Send(oMailMessage);
+
+
+                    oSmtpClient.Dispose();
+
                     TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Nota Liquidada", "Por favor otorgar los ₡" + cajaChica.salida +" "+ "del monto de la nota de Crédito al cliente.", SweetAlertMessageType.success);
 
 
@@ -757,6 +784,31 @@ namespace MvcApplication.Controllers
 
             IServiceCajaChica caja = new ServiceCajaChica();
             caja.Save(cajaChica);
+
+            //-------------------------------------------------------------------------
+            //ENVIAR EL CORREO---------------------------------------------------------
+            //-------------------------------------------------------------------------
+            string urlDomain = "https://localhost:3000/";
+            string EmailOrigen = "soportevycuz@gmail.com";
+            string Contraseña = "ecfykdmojjjlpfcn";
+            MailMessage oMailMessage = new MailMessage(EmailOrigen, nota.correo, "Nota de Débito",
+                "<p>Estimado usuario,</br></br><hr/>Se ha liquidado una nota de débtio por parte de VYCUZ.</p>");
+
+            var contentType = new System.Net.Mime.ContentType(System.Net.Mime.MediaTypeNames.Application.Pdf);
+
+
+            oMailMessage.IsBodyHtml = true;
+
+            SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+            oSmtpClient.EnableSsl = true;
+            oSmtpClient.UseDefaultCredentials = false;
+            oSmtpClient.Port = 587;
+            oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contraseña);
+
+            oSmtpClient.Send(oMailMessage);
+
+
+            oSmtpClient.Dispose();
 
             TempData["mensaje"] = Util.SweetAlertHelper.Mensaje("Pago registrado", "Se ha registrado el pago de la nota de débito efectivamente." + mensaje2, SweetAlertMessageType.success);
             return new EmptyResult();

@@ -12,19 +12,24 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Servicio_Reparacion
+    public partial class Direccion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Servicio_Reparacion()
+        public Direccion()
         {
-            this.Reparaciones = new HashSet<Reparaciones>();
+            this.Estudiante = new HashSet<Estudiante>();
+            this.Profesor = new HashSet<Profesor>();
         }
     
-        public int id { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<bool> estado { get; set; }
+        public int IDDireccion { get; set; }
+        public Nullable<int> Provincia { get; set; }
+        public Nullable<int> Canton { get; set; }
+        public Nullable<int> Distrito { get; set; }
+        public string Direccion1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reparaciones> Reparaciones { get; set; }
+        public virtual ICollection<Estudiante> Estudiante { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profesor> Profesor { get; set; }
     }
 }

@@ -64,7 +64,13 @@
     <Compile Include="Models\Caja_Chica.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Canton.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Categoria.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Curso.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Detalle_Ingreso.cs">
@@ -73,7 +79,16 @@
     <Compile Include="Models\Detalle_Venta.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Direccion.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Distrito.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Empresa.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estudiante.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Facturas.cs">
@@ -102,7 +117,13 @@
     <Compile Include="Models\NotasDeCreditoYDebito.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Profesor.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Proveedor.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Provincia.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reparaciones.cs">
@@ -118,6 +139,9 @@
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Servicio_Reparacion.cs">
+      <DependentUpon>MyContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Titulo.cs">
       <DependentUpon>MyContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
@@ -162,11 +186,11 @@
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
     <EntityDeploy Include="Models\MyContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MyContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="App.Config" />
     <None Include="Models\MyContext.edmx.diagram">
       <DependentUpon>MyContext.edmx</DependentUpon>
     </None>

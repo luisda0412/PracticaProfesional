@@ -37,6 +37,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Canton">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Canton">
+        <MappingFragment StoreEntitySet="Canton">
+          <ScalarProperty Name="IDCanton" ColumnName="IDCanton" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="IDProvincia" ColumnName="IDProvincia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Categoria">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Categoria">
         <MappingFragment StoreEntitySet="Categoria">
@@ -44,6 +53,16 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="descripcion" ColumnName="descripcion" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Curso">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Curso">
+        <MappingFragment StoreEntitySet="Curso">
+          <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Creditos" ColumnName="Creditos" />
+          <ScalarProperty Name="Cupo" ColumnName="Cupo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -68,6 +87,26 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Direccion">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Direccion">
+        <MappingFragment StoreEntitySet="Direccion">
+          <ScalarProperty Name="IDDireccion" ColumnName="IDDireccion" />
+          <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+          <ScalarProperty Name="Distrito" ColumnName="Distrito" />
+          <ScalarProperty Name="Direccion1" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distrito">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Distrito">
+        <MappingFragment StoreEntitySet="Distrito">
+          <ScalarProperty Name="IDDistrito" ColumnName="IDDistrito" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Canton" ColumnName="Canton" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Empresa">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Empresa">
         <MappingFragment StoreEntitySet="Empresa">
@@ -75,6 +114,16 @@
           <ScalarProperty Name="nombre" ColumnName="nombre" />
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estudiante">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Estudiante">
+        <MappingFragment StoreEntitySet="Estudiante">
+          <ScalarProperty Name="IDEstudiante" ColumnName="IDEstudiante" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -105,11 +154,24 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idFactura" ColumnName="idFactura" />
           <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+          <ScalarProperty Name="correo" ColumnName="correo" />
           <ScalarProperty Name="motivo" ColumnName="motivo" />
           <ScalarProperty Name="monto" ColumnName="monto" />
           <ScalarProperty Name="tipoNota" ColumnName="tipoNota" />
           <ScalarProperty Name="fecha" ColumnName="fecha" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profesor">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Profesor">
+        <MappingFragment StoreEntitySet="Profesor">
+          <ScalarProperty Name="IDProfesor" ColumnName="IDProfesor" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -121,6 +183,14 @@
           <ScalarProperty Name="direccion" ColumnName="direccion" />
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provincia">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Provincia">
+        <MappingFragment StoreEntitySet="Provincia">
+          <ScalarProperty Name="IDProvincia" ColumnName="IDProvincia" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -180,6 +250,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Titulo">
+      <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Titulo">
+        <MappingFragment StoreEntitySet="Titulo">
+          <ScalarProperty Name="IDTitulo" ColumnName="IDTitulo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="Registro_Inventario_VYCUZModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
@@ -209,5 +287,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="CursoEstudiante" TypeName="Registro_Inventario_VYCUZModel.CursoEstudiante" StoreEntitySet="CursoEstudiante">
+      <EndProperty Name="Curso">
+        <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+      </EndProperty>
+      <EndProperty Name="Estudiante">
+        <ScalarProperty Name="IDEstudiante" ColumnName="IDEstudiante" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ProfesorCurso" TypeName="Registro_Inventario_VYCUZModel.ProfesorCurso" StoreEntitySet="ProfesorCurso">
+      <EndProperty Name="Curso">
+        <ScalarProperty Name="IDCurso" ColumnName="IDCurso" />
+      </EndProperty>
+      <EndProperty Name="Profesor">
+        <ScalarProperty Name="IDProfesor" ColumnName="IDProfesor" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
