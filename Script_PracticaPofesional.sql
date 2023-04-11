@@ -370,14 +370,17 @@ INSERT INTO Venta VALUES(208130675,'Keneth', GETDATE() ,18080,2080,0,1)
 INSERT INTO Venta VALUES(208130675,'Keneth', GETDATE() ,19340,2340,0,1)
 
 
---INSERT A DETALLE VENTA
-INSERT INTO Detalle_Venta VALUES(1,1,20000,0,2)
-INSERT INTO Detalle_Venta VALUES(2,2,16000,0,2)
-INSERT INTO Detalle_Venta VALUES(3,1,10000,0,1)
-INSERT INTO Detalle_Venta VALUES(3,2,8000,0,1)
-
 --INSERT A RESENA
 INSERT INTO Resena VALUES('Estuche Perfecto', 'Muy buena relación calidad precio',2,208120070)
+INSERT INTO Resena VALUES('Perfecto', 'Muy buena relación calidad precio',1,208130675)
+INSERT INTO Resena VALUES('Excelente calidad', 'Muy buena relación calidad precio',1,208130675)
+INSERT INTO Resena VALUES('Encantado', 'Me encanta',2,208120070)
+INSERT INTO Resena VALUES('Perfecto', 'Exvelente calidad',2,208130675)
+INSERT INTO Resena VALUES('Justo lo que andaba buscando', 'Recomendado',3,208120070)
+INSERT INTO Resena VALUES('Satisfecha', 'Recomendado',4,208130675)
+INSERT INTO Resena VALUES('Muy bueno', 'Calidad-precio',5,208120070)
+INSERT INTO Resena VALUES('Recomendado', 'Lo que necesitaba',6,208130675)
+INSERT INTO Resena VALUES('Lo mejor', 'Recomendado',7,208120070)
 
 --INSERT A REPARACION
 INSERT INTO Reparaciones VALUES(1,208130675,24337955,3,'Telefono Huawei P20','Pantalla quebrada',GETDATE(),47000,GETDATE(),1)
