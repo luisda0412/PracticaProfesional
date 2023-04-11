@@ -140,20 +140,13 @@ namespace Infraestructure.Repository
                 string state;
                 try
                 {
-                    if(ultima.estado == true)
-                    {
-                        caja.estado = false;
-                        state = "Cerrada";
-                    }
-                    else
-                    {
-                        caja.estado = true;
-                        state = "Abierta";
-                    }
+              
+                    caja.estado = false;
+                    state = "Cerrada";
                     caja.saldo = chica.saldo;
                     cdt.Arqueos_Caja.Add(caja);
 
-                    Infraestructure.Util.Log.Info("Arqueo de caja, estado: " + state + ", Saldo: ₡" + String.Format("{0:N2}", caja.saldo));
+                    Infraestructure.Util.Log.Info("Caja cerrada, Saldo: ₡" + String.Format("{0:N2}", caja.saldo));
                     cdt.SaveChanges();
                 }
                 catch (Exception e)
@@ -165,6 +158,29 @@ namespace Infraestructure.Repository
             }
         }
 
+        public void AbrirArqueo(Arqueos_Caja arqueo)
+        {
+            using (MyContext cdt = new MyContext())
+            {
+                cdt.Configuration.LazyLoadingEnabled = false;
+                Caja_Chica chica = GetCajaChicaLast();
+                Arqueos_Caja ultima = GetArqueoLast();
+                string state;
+                try
+                {
+                    arqueo.estado = true;
+                    cdt.Arqueos_Caja.Add(arqueo);
+                    Infraestructure.Util.Log.Info("Caja Abierta, Saldo: ₡" + String.Format("{0:N2}", arqueo.saldo));
+                    cdt.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    string mensaje = "Error" + e.Message;
+                    Infraestructure.Util.Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                    throw;
+                }
+            }
+        }
     }
 
 

@@ -32,17 +32,17 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasFecha(DateTime date)
+        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasNombre(string filtro)
         {
             IEnumerable<NotasDeCreditoYDebito> lista = null;
             using (MyContext ctx = new MyContext())
             {
                 ctx.Configuration.LazyLoadingEnabled = false;
                 lista = ctx.NotasDeCreditoYDebito
-                           .ToList()
-                           .FindAll(l => l.fecha.Value.Date.Equals(date.Date))
-                           .OrderByDescending(l => l.fecha);
-
+                .Where(n => n.estado == false)
+                .ToList()
+                .FindAll(n => n.nombreCliente.ToLower().Contains(filtro.ToLower()))
+                .OrderByDescending(n => n.fecha);
             }
             return lista;
         }

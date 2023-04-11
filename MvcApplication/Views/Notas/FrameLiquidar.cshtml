@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-md-4">
                     <div class="card my-4">
-                        <h5 class="card-header">Buscar nota por fecha</h5>
-                        @using (Ajax.BeginForm("buscarNotaxFecha", "Notas", new AjaxOptions
+                        <h5 class="card-header">Buscar nota por nombre cliente</h5>
+                        @using (Ajax.BeginForm("buscarNotaxNombre", "Notas", new AjaxOptions
                         {
                             UpdateTargetId = "resultado",
                             InsertionMode = InsertionMode.Replace,
@@ -52,7 +52,7 @@
                             <div class="card-body">
                                 <div class="input-group">
 
-                                    @Html.TextBox("filtro", "", new { @class = "form-control", @type = "date", @placeholder = "02/01/2023" })
+                                    @Html.TextBox("filtro", "", new { @class = "form-control", @type = "text", @placeholder = "Un Nombre..." })
                                     <button type="submit" class="boton3" title="Buscar la nota en la lista">Buscar</button>
 
                                 </div>
@@ -162,7 +162,7 @@
 
                                                                 <div class="form-group">
                                                                     <label for="monto">Monto recibido :</label>
-                                                                    <input style="max-width: 100%;  text-align:right;" type="number" class="form-control" id="monto" name="monto">
+                                                                    <input style="max-width: 100%;  text-align:right;" type="number" class="form-control" value="0" id="monto" name="monto">
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="pago">Tipo de pago:</label>

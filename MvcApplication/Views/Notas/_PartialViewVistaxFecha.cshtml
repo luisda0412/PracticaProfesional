@@ -19,11 +19,70 @@
             @isTipo
         </td>
         <td>
-            @{ string isActive = item.estado == true ? "Cancelada" : "Pendiente"; }
+            @{ string isActive = item.estado == true ? "Liquidada" : "Pendiente"; }
             @isActive
         </td>
         <td class="columnabotones">
-            <button class="boton2">@Html.ActionLink("Liquidar Nota", "Edit", new { id = item.id }, new { title = "Cobrar la Nota" })</button>
+            @if (item.tipoNota == true)/*Para cuando la nota es de debito abre un formulario para pedir el medio de pago*/
+            {
+
+                <button class="boton2" id="my-button-id" data-toggle="modal" data-target="#exampleModal" data-id="@item.id" data-pago="@item.monto">
+                    Liquidar Nota
+                </button>
+
+                <div style="margin:auto" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div style="max-width: 400px;" class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Liquidar Nota de Débito número <span id="item-id"></span></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form id="formLiquidarNota" action="#" method="post">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input readonly type="hidden" id="notaId" name="notaId">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="monto">Monto a cancelar:</label>
+                                        <input style="max-width: 100%; text-align:right;" readonly type="number" class="form-control" id="pago" name="pago">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="monto">Monto recibido :</label>
+                                        <input style="max-width: 100%;  text-align:right;" type="number" class="form-control" value="0" id="monto" name="monto">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pago">Tipo de pago:</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pago" id="pago-efectivo" value="efectivo" checked>
+                                            <label class="form-check-label" for="pago-efectivo">
+                                                Efectivo
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pago" id="pago-tarjeta" value="tarjeta">
+                                            <label class="form-check-label" for="pago-tarjeta">
+                                                Tarjeta
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Liquidar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+            else /*Para cuando la nota es de credito va directo al metodo LiquidarNota a rebajar la plata de la caja sin pedir datos*/
+            {
+                <button class="boton2">@Html.ActionLink("Liquidar Nota", "LiquidarNotaCredito", new { id = item.id }, new { title = "Cobrar la Nota" })</button>
+            }
         </td>
     </tr>
 }

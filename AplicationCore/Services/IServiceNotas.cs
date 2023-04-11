@@ -10,7 +10,7 @@ namespace AplicationCore.Services
     public interface IServiceNotas
     {
         IEnumerable<NotasDeCreditoYDebito> GetNota();
-        IEnumerable<NotasDeCreditoYDebito> GetListaNotasByFecha(DateTime date);
+        IEnumerable<NotasDeCreditoYDebito> GetListaNotasByNombre(string filtro);
         NotasDeCreditoYDebito GetNotaByID(int id);
         NotasDeCreditoYDebito Save(NotasDeCreditoYDebito nota);
         void Desabilitar(int id);

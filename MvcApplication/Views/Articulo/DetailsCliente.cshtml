@@ -20,7 +20,7 @@
             </div>
             <br />
             <h2>
-                Detalles y reseñas del producto
+                Detalles y reseñas del artículo
             </h2>
         </div>
         <div class="derechoHeader">
@@ -59,33 +59,11 @@
         <br />
 
         <center>
-            <div class="botones_producto">
-                @{
-                    if (Session["User"] != null && ((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1)
-                    {
-                        <button class="boton1">
-                            @Ajax.ActionLink("Comprar",//Texto para el usuario
-                                "ordenarProducto",//Acción a llamar
-                                "Venta",
-                                new
-                                {
-                                    idArticulo = Model.id
-                                },//Parámetros a enviar
-                                new AjaxOptions
-                                {
-                                    UpdateTargetId = "cantidadLibros",
-                                    InsertionMode = InsertionMode.Replace,
-                                    HttpMethod = "GET",
-                                }, new { }
-                                )
-                            <img src="~/Imagenes/Iconos/shopping-cart.png" />
-
-                     
-                        </button>
-                        }
-                    }
-                    <button class="boton1">@Html.ActionLink("Volver a lista", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
-                </div>
+            <div class="atras">
+                <center>
+                    <button class="boton1">@Html.ActionLink("Volver al catálogo", "IndexCatalogo", "Articulo", new { title = "Regresar a la lista" })</button>
+                </center>
+            </div>
         </center>
     </section>
     <section class="partebaja" style=" overflow-y: hidden; overflow-x:hidden">

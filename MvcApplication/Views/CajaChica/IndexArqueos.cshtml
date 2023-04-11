@@ -38,11 +38,13 @@
         <section class="desarrollo">
             <div class="elementos1">
                 <div class="elementoizquierdo">
-                    <h2 class="titulo">Actualizaciónes de caja</h2>           
+                    <h2 class="titulo">Actualizaciónes de caja</h2>
                 </div>
-                <div class="col-md-4">
-                    <button class="boton1"><p>@Html.ActionLink("Abrir/Cerrar Caja", "ArquearCaja")</p></button>
-                   
+                <div class="col-md-5">
+                    <button class="boton1" data-toggle="modal" data-target="#exampleModal">Abrir Caja</button>
+
+                    <button class="boton1"><p>@Html.ActionLink("Cerrar Caja", "CerrarCaja")</p></button>
+
                 </div>
             </div>
             <br />
@@ -133,6 +135,29 @@
             </center>
         </section>
     </center>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="color:black;" class="modal-title fs-5" id="exampleModalLabel">Abrir la caja chica</h1>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                @using (Html.BeginForm("AbrirCaja", "Cajachica", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Dígite el monto actual de la caja</label>
+                            <input name="monto" type="number" class="form-control" value="0" id="recipient-name" style="max-width:100%" placeholder="40000...">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Abrir Caja</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </main>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryajax")

@@ -65,7 +65,12 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Reparaciones.Where(x => x.estado==true).Include(x => x.Servicio_Reparacion).Include(x => x.Usuario).ToList<Reparaciones>();
+                    lista = ctx.Reparaciones
+                    .Where(x => x.estado == true)
+                    .Include(x => x.Servicio_Reparacion)
+                    .Include(x => x.Usuario)
+                    .OrderByDescending(x => x.fecha)
+                    .ToList<Reparaciones>();
                 }
                 return lista;
             }

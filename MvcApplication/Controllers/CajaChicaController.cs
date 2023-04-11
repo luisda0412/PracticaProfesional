@@ -128,17 +128,18 @@ namespace MvcApplication.Controllers
 
 
         [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
-        public ActionResult ArquearCaja()
+        public ActionResult CerrarCaja()
         {
             IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
             Arqueos_Caja caja = new Arqueos_Caja();
-             try
+                    
+            try
              {
 
                 caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
                 caja.fecha = DateTime.Now;
                  _ServiceCaja.SaveArqueo(caja);
-                 TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción de Caja", "El estado de la caja ha cambiado", SweetAlertMessageType.info);
+                 TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción en Caja", "Caja Chica cerrada", SweetAlertMessageType.info);
              }
              catch (Exception ex)
              {
@@ -146,6 +147,36 @@ namespace MvcApplication.Controllers
                  return RedirectToAction("Default", "Error");
              }
             
+            return RedirectToAction("IndexArqueos");
+        }
+
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        public ActionResult AbrirCaja(string monto)
+        {
+            IServiceCajaChica _ServiceCaja = new ServiceCajaChica();
+            Arqueos_Caja caja = new Arqueos_Caja();
+
+            if (Convert.ToDouble(monto) == 0)
+            {
+                TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción inválida", "Digite un monto mayor a 0", SweetAlertMessageType.error);
+                return RedirectToAction("IndexArqueos");
+            }
+
+            try
+            {
+                double dinero = Convert.ToDouble(monto);
+                caja.saldo = dinero;
+                caja.usuario_id = Convert.ToInt32(TempData["idUser"]);
+                caja.fecha = DateTime.Now;
+                _ServiceCaja.SaveArqueo(caja);
+                TempData["mensaje2"] = Util.SweetAlertHelper.Mensaje("Acción en Caja", "Caja chica abierta", SweetAlertMessageType.info);
+            }
+            catch (Exception ex)
+            {
+                TempData["Message"] = "Error al procesar los datos! " + ex.Message;
+                return RedirectToAction("Default", "Error");
+            }
+
             return RedirectToAction("IndexArqueos");
         }
 

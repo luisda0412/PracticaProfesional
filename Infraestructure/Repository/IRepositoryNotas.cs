@@ -10,7 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoryNotas
     {
         IEnumerable<NotasDeCreditoYDebito> GetNota();
-        IEnumerable<NotasDeCreditoYDebito> GetListaNotasFecha(DateTime date);
+        IEnumerable<NotasDeCreditoYDebito> GetListaNotasNombre(string filtro);
         NotasDeCreditoYDebito GetNotaByID(int id);
         NotasDeCreditoYDebito Save(NotasDeCreditoYDebito nota);
         

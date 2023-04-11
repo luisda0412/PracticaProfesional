@@ -16,10 +16,10 @@ namespace AplicationCore.Services
             repository.Desabilitar(id);
         }
 
-        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasByFecha(DateTime date )
+        public IEnumerable<NotasDeCreditoYDebito> GetListaNotasByNombre(string filtro)
         {
             IRepositoryNotas repository = new RepositoryNotas();
-            return repository.GetListaNotasFecha(date);
+            return repository.GetListaNotasNombre(filtro);
         }
 
         public IEnumerable<NotasDeCreditoYDebito> GetNota()

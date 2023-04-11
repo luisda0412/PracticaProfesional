@@ -623,7 +623,7 @@ namespace MvcApplication.Controllers
         }
 
         //Buscar la nota por la fecha
-        public ActionResult buscarNotaxFecha(DateTime filtro)
+        public ActionResult buscarNotaxNombre(string filtro)
         {
             IEnumerable<NotasDeCreditoYDebito> lista = null;
             IServiceNotas _ServiceNota = new ServiceNotas();
@@ -635,7 +635,7 @@ namespace MvcApplication.Controllers
             }
             else
             {
-                lista = _ServiceNota.GetListaNotasByFecha(filtro);
+                lista = _ServiceNota.GetListaNotasByNombre(filtro);
             }
 
 
