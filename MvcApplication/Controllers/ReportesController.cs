@@ -117,7 +117,7 @@ namespace MvcApplication.Controllers
                     _cell = new Cell().Add(new Paragraph(item.nombre)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
 
-                    string precio =(String.Format("{0:N2}", item.precio));
+                    string precio =("¢" + String.Format("{0:N2}", item.precio));
                     _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);                   
                     Image image = new Image(ImageDataFactory.Create(item.imagen)).SetTextAlignment(TextAlignment.CENTER);
@@ -472,11 +472,11 @@ namespace MvcApplication.Controllers
                     _table.AddCell(_cell);
                     _cell = new Cell().Add(new Paragraph(item.fecha.ToString())).SetTextAlignment(TextAlignment.CENTER);
                     _table.AddCell(_cell);
-                    string impuesto = "\u20A1" + (String.Format("{0:N2}", item.impuesto));
+                    string impuesto = "¢" + (String.Format("{0:N2}", item.impuesto));
                     _cell = new Cell().Add(new Paragraph(impuesto)).SetTextAlignment(TextAlignment.CENTER);
                     _cell.SetFont(font);
                     _table.AddCell(_cell);
-                    string precio = "\u20A1" + (String.Format("{0:N2}", item.monto_total));
+                    string precio = "¢" + (String.Format("{0:N2}", item.monto_total));
                     _cell = new Cell().Add(new Paragraph(precio)).SetTextAlignment(TextAlignment.CENTER);
                     _cell.SetFont(font);
                     _table.AddCell(_cell);

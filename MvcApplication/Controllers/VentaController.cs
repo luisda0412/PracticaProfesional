@@ -436,6 +436,7 @@ namespace MvcApplication.Controllers
                                 IServiceCajaChica caja = new ServiceCajaChica();
                                 caja.Save(cajaChica);
 
+                                saldoActual = 0;
 
                                 IServiceFactura serviceFactura = new ServiceFactura();
                                 Facturas fac = serviceFactura.Save(factura);
@@ -645,7 +646,7 @@ namespace MvcApplication.Controllers
                                         table.AddCell(new Cell().Add(new Paragraph(x.ToString()).SetFont(numeroArticuloFont)).SetTextAlignment(TextAlignment.CENTER));
                                         table.AddCell(new Cell().Add(new Paragraph(arti.nombre).SetFont(descripcionFont)).SetTextAlignment(TextAlignment.CENTER));
                                         table.AddCell(new Cell().Add(new Paragraph(item.cantidad.ToString()).SetFont(cantidadPrecioFont)).SetTextAlignment(TextAlignment.CENTER));
-                                        string precio = (String.Format("{0:N2}", item.precio));
+                                        string precio = (String.Format("{0:N2}", (item.cantidad * item.precio)));
                                         table.AddCell(new Cell().Add(new Paragraph("¢" + precio).SetFont(cantidadPrecioFont)))
                                             .SetTextAlignment(TextAlignment.RIGHT);
                                         subtotal += (double)item.precio;
