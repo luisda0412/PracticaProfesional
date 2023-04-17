@@ -15,7 +15,7 @@ namespace MvcApplication.Controllers
     public class CajaChicaController: Controller
     {
         
-        [CustomAuthorize((int)Roles.Administrador, (int)Roles.Procesos)]
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Index()
         {
             IEnumerable<Caja_Chica> lista = null;

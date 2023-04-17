@@ -47,7 +47,7 @@
                                     @Html.ActionLink("Categorías", "Index", "Categoria", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Reparaciones", "Index", "Reparaciones", null, new { @class = "dropdown-item" })
                                     @Html.ActionLink("Proveedores", "Index", "Proveedor", null, new { @class = "dropdown-item" })
-                                    @Html.ActionLink("Caja Chica", "Index", "CajaChica", null, new { @class = "dropdown-item" })
+                                 
                                     @Html.ActionLink("Empresa", "Index", "Empresa", null, new { @class = "dropdown-item" })
 
                                     @{
@@ -69,9 +69,12 @@
                                     @Html.ActionLink("Registrar Pagos", "IndexCobros", "Reparaciones", new { title = "Cobrar las reparaciones" }, new { @class = "dropdown-item" })
                                 </div>
                             </li>
+                            if (Session["User"] != null && (((Infraestructure.Models.Usuario)Session["User"]).rol_id == 1))
+                            {
                             <li class="nav-item">
                                 @Html.ActionLink("Movimientos Caja", "Index", "CajaChica", new { title = "Ver movimientos de Caja Chica" }, new { @class = "nav-link" })
                             </li>
+                            }
                             <li class="nav-item">
                                 @Html.ActionLink("Arqueo Caja", "IndexArqueos", "CajaChica", new { title = "Crear una nueva reparación" }, new { @class = "nav-link" })
                             </li>
